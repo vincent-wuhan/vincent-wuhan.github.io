@@ -1,0 +1,1545 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Opendaylight 集群基础 架构 数据同步 分布式数据存储同步使用Raft，远程过程调用仓库同步使用Gossip
+分部署数据存储(Distributed Data Store)  HA   Replication  a) 按序复制(Journal replication) b) 快照型复制(Snapshot replication)  Durability/Recovery   数据存储流程  Startup
+向DistributedConfigDataProviderModule发起createInstance请求，创建实例并执行监听回调(waitTillReadyLatch)。由ShardManager向Shard中进行数据存储，当数据存储Ready后，waitTillReadyLatch收到ready完成create流程
+Recovery
+从硬盘读取最新状态反馈给ShardManager，全部完毕后，通知waitTillReadyLatch countDown
+Recovery的条件：
+a) Recovery必须是完整的
+b) 所有的Shard Leaders必须已知
+c) 三类消息被ShardManager监听
+   消息名 说明     Cluster.MemberStatusUp 用于说明集群member的地址   LeaderStateChanged 用于说明follower拥有不同的leader   ShardRoleChanged 用于说明一个Shard的角色发生变化        d) 默认90s超时，但可配置
+e) block config sub-system?"/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Opendaylight 集群基础 架构 数据同步 分布式数据存储同步使用Raft，远程过程调用仓库同步使用Gossip
+分部署数据存储(Distributed Data Store)  HA   Replication  a) 按序复制(Journal replication) b) 快照型复制(Snapshot replication)  Durability/Recovery   数据存储流程  Startup
+向DistributedConfigDataProviderModule发起createInstance请求，创建实例并执行监听回调(waitTillReadyLatch)。由ShardManager向Shard中进行数据存储，当数据存储Ready后，waitTillReadyLatch收到ready完成create流程
+Recovery
+从硬盘读取最新状态反馈给ShardManager，全部完毕后，通知waitTillReadyLatch countDown
+Recovery的条件：
+a) Recovery必须是完整的
+b) 所有的Shard Leaders必须已知
+c) 三类消息被ShardManager监听
+   消息名 说明     Cluster.MemberStatusUp 用于说明集群member的地址   LeaderStateChanged 用于说明follower拥有不同的leader   ShardRoleChanged 用于说明一个Shard的角色发生变化        d) 默认90s超时，但可配置
+e) block config sub-system?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/opendaylight/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          14 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="opendaylight">Opendaylight</h1>
+
+<h2 id="集群基础">集群基础</h2>
+
+<h3 id="架构">架构</h3>
+
+<p><img src="png/architecture.png" alt="Archecture" /></p>
+
+<h4 id="数据同步">数据同步</h4>
+
+<p>分布式数据存储同步使用Raft，远程过程调用仓库同步使用Gossip</p>
+
+<p><img src="png/data_synchronization.png" alt="DataSynchronization" /></p>
+
+<h4 id="分部署数据存储-distributed-data-store">分部署数据存储(Distributed Data Store)</h4>
+
+<p><img src="./png/distributed_data_store.png" alt="Distribute Data Store" /></p>
+
+<ul>
+<li>HA</li>
+</ul>
+
+<p><img src="./png/HA.png" alt="HA" /></p>
+
+<ul>
+<li>Replication</li>
+</ul>
+
+<p>a) 按序复制(Journal replication)
+<img src="png/journal_replication.png" alt="Journal replication" /></p>
+
+<p>b) 快照型复制(Snapshot replication)
+<img src="png/snapshot_replication.png" alt="Snapshot replication" /></p>
+
+<ul>
+<li>Durability/Recovery</li>
+</ul>
+
+<p><img src="png/Recovery.png" alt="Recovery" /></p>
+
+<ul>
+<li>数据存储流程</li>
+</ul>
+
+<p>Startup</p>
+
+<p><img src="png/startup_flow.png" alt="startup" />
+向DistributedConfigDataProviderModule发起createInstance请求，创建实例并执行监听回调(waitTillReadyLatch)。由ShardManager向Shard中进行数据存储，当数据存储Ready后，waitTillReadyLatch收到ready完成create流程</p>
+
+<p>Recovery</p>
+
+<p>从硬盘读取最新状态反馈给ShardManager，全部完毕后，通知waitTillReadyLatch countDown</p>
+
+<p><img src="png/recovery_flow.png" alt="RecoveryFlow" /></p>
+
+<p>Recovery的条件：</p>
+
+<p>a) Recovery必须是完整的</p>
+
+<p>b) 所有的Shard Leaders必须已知</p>
+
+<p>c) 三类消息被ShardManager监听</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">消息名</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Cluster.MemberStatusUp</td>
+<td align="left">用于说明集群member的地址</td>
+</tr>
+
+<tr>
+<td align="left">LeaderStateChanged</td>
+<td align="left">用于说明follower拥有不同的leader</td>
+</tr>
+
+<tr>
+<td align="left">ShardRoleChanged</td>
+<td align="left">用于说明一个Shard的角色发生变化</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<p>d) 默认90s超时，但可配置</p>
+
+<p>e) block config sub-system??</p>
+
+<h4 id="远程过程调用对接-remote-rpc-connector">远程过程调用对接(Remote RPC Connector)</h4>
+
+<p><img src="png/remote_rpc_connector.png" alt="Remote RPC Connector" /></p>
+
+<ul>
+<li><p>RPC Registry
+类似于一个RPC注册总线，Provider注册成功的RPC被加入到RPC仓库后，启动一个Listener对RPC调用事件执行监听
+<img src="png/rpc_registry.png" alt="RPC Registry" /></p></li>
+
+<li><p>RPC Registry Replication - 基于Gossip</p></li>
+</ul>
+
+<p>RPC仓库在分布式环境下，需要实施保持注册RPC版本的实时性，因此不同节点之间需要进行实时版本更新。不同节点RPC仓库版本更新机制如下：
+1）所有节点members之间RPC仓库版本透明
+2) 每一秒节点members都会相互之间推送已知版本status
+3) 收到其他节点推送的版本后，与本地版本对比，本地版本高于推送版本的，发送update指令升级其它节点
+4) 本地版本低于推送版本的，发送status给高版本推送者，启动升级
+<img src="png/RPC_Registry_Replication.png" alt="RPC Registry Replication" /></p>
+
+<h3 id="集群模块">集群模块</h3>
+
+<p><img src="png/cluster_modules.png" alt="Clustering Modules" /></p>
+
+<ul>
+<li>sal-akka-raft</li>
+</ul>
+
+<p>1) 在akka上实现了一套Raft算法
+2) 提供了一个基类RaftActor用于用户扩展replicate state
+3) 提供了一个对HashMap复制的简单demo，sal-akka-raft-example</p>
+
+<ul>
+<li>sal-distributed-datastore</li>
+</ul>
+
+<p>1) 并发DOMDataBroker
+2) 分布式数据存储
+3) DOMStore南向接口实现
+4) 基于Sharding策略创建Shards
+5) Shard Leader交互Client</p>
+
+<ul>
+<li>sal-remoterpc-connector</li>
+</ul>
+
+<p>1) RemoteRpcProvider(MD-SAL默认的远程过程调用的提供者)
+2) BucketStore(基于Gossip进行状态复制的框架)
+3) RpcBroker(回调远程rpc)</p>
+
+<h2 id="cluster-nodes">cluster nodes</h2>
+
+<ul>
+<li>建议三节点搭建集群
+OpenDaylight集群特性要求集群节点的大多数节点都是up的，而双节点集群1个节点不代表多数
+两节点搭建的集群当两个节点都宕机时，集群就失效</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">节点IP</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">10.190.49.26</td>
+<td align="left">leader, member-1</td>
+</tr>
+
+<tr>
+<td align="left">10.190.49.31</td>
+<td align="left">follower, member-2</td>
+</tr>
+
+<tr>
+<td align="left">10.190.49.32</td>
+<td align="left">follower, member-3</td>
+</tr>
+
+<tr>
+<td align="left">10.190.49.74</td>
+<td align="left">backup, member-4</td>
+</tr>
+
+<tr>
+<td align="left">10.190.49.80</td>
+<td align="left">backup, member-5</td>
+</tr>
+
+<tr>
+<td align="left">10.190.49.82</td>
+<td align="left">backup, member-6</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><p>Clustering scripts</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Note
+
+Scripts are stored in the OpenDaylight distribution/bin folder, and maintained in the distribution project repository in the folder distribution-karaf/src/main/assembly/bin/.</code></pre></div></li>
+</ul>
+
+<h2 id="集群搭建">集群搭建</h2>
+
+<h3 id="初始化集群配置脚本">初始化集群配置脚本</h3>
+
+<p>配置节点akka.conf和module-shards.conf配置</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/configure_cluster.sh &lt;index&gt; &lt;seed_nodes_list&gt;
+
+注：
+&lt;index&gt; <span style="color:#ff0;font-weight:bold">1</span>-N，代表seed_nodes_list中node的编号,表示生成节点列表中的某个节点配置
+&lt;seed_nodes_list&gt; 集群节点ip地址列表，使用”,“或者空格隔开</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@rancher-server:~/opendaylight-0.9.2/bin# ./configure_cluster.sh <span style="color:#ff0;font-weight:bold">1</span> <span style="color:#ff0;font-weight:bold">10</span>.190.49.26 <span style="color:#ff0;font-weight:bold">10</span>.190.49.31 <span style="color:#ff0;font-weight:bold">10</span>.190.49.32
+<span style="color:#007f7f">################################################</span>
+<span style="color:#007f7f">##             Configure Cluster              ##</span>
+<span style="color:#007f7f">################################################</span>
+ NOTE: Cluster configuration files not found. Copying from
+ /root/opendaylight-0.9.2/system/org/opendaylight/controller/sal-clustering-config/1.8.2
+Configuring unique name in akka.conf
+Configuring hostname in akka.conf
+Configuring data and rpc seed nodes in akka.conf
+modules = [
+        
+        {
+                name = <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>
+                namespace = <span style="color:#0ff;font-weight:bold">&#34;urn:opendaylight:inventory&#34;</span>
+                shard-strategy = <span style="color:#0ff;font-weight:bold">&#34;module&#34;</span>
+        },
+        {
+                name = <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>
+                namespace = <span style="color:#0ff;font-weight:bold">&#34;urn:TBD:params:xml:ns:yang:network-topology&#34;</span>
+                shard-strategy = <span style="color:#0ff;font-weight:bold">&#34;module&#34;</span>
+        },
+        {
+                name = <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>
+                namespace = <span style="color:#0ff;font-weight:bold">&#34;http://netconfcentral.org/ns/toaster&#34;</span>
+                shard-strategy = <span style="color:#0ff;font-weight:bold">&#34;module&#34;</span>
+        }
+]
+Configuring replication <span style="color:#fff;font-weight:bold">type</span> in module-shards.conf
+<span style="color:#007f7f">################################################</span>
+<span style="color:#007f7f">##   NOTE: Manually restart controller to     ##</span>
+<span style="color:#007f7f">##         apply configuration.               ##</span>
+<span style="color:#007f7f">################################################</span>
+root@rancher-server:~/opendaylight-0.9.2/bin# ll ../configuration/initial/
+total <span style="color:#ff0;font-weight:bold">20</span>
+drwxr-xr-x <span style="color:#ff0;font-weight:bold">2</span> root root <span style="color:#ff0;font-weight:bold">4096</span> Jun <span style="color:#ff0;font-weight:bold">13</span> <span style="color:#ff0;font-weight:bold">05</span>:44 ./
+drwxr-xr-x <span style="color:#ff0;font-weight:bold">3</span> mano mano <span style="color:#ff0;font-weight:bold">4096</span> Jun <span style="color:#ff0;font-weight:bold">13</span> <span style="color:#ff0;font-weight:bold">05</span>:44 ../
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> root root <span style="color:#ff0;font-weight:bold">1431</span> Jun <span style="color:#ff0;font-weight:bold">13</span> <span style="color:#ff0;font-weight:bold">05</span>:44 akka.conf
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> root root  <span style="color:#ff0;font-weight:bold">336</span> Jun <span style="color:#ff0;font-weight:bold">13</span> <span style="color:#ff0;font-weight:bold">05</span>:44 modules.conf
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> root root  <span style="color:#ff0;font-weight:bold">555</span> Jun <span style="color:#ff0;font-weight:bold">13</span> <span style="color:#ff0;font-weight:bold">05</span>:44 module-shards.conf</code></pre></div>
+<p>同样，在其余节点上执行集群配置命令, seed_nodes_list保持一致，index根据节点对应的ip进行修改</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># node 10.190.49.31 opendaylight文件夹根目录</span>
+bin/configure_cluster.sh <span style="color:#ff0;font-weight:bold">2</span> <span style="color:#ff0;font-weight:bold">10</span>.190.49.26 <span style="color:#ff0;font-weight:bold">10</span>.190.49.31 <span style="color:#ff0;font-weight:bold">10</span>.190.49.32
+
+<span style="color:#007f7f"># node 10.190.49.32 opendaylight文件夹根目录</span>
+bin/configure_cluster.sh <span style="color:#ff0;font-weight:bold">3</span> <span style="color:#ff0;font-weight:bold">10</span>.190.49.26 <span style="color:#ff0;font-weight:bold">10</span>.190.49.31 <span style="color:#ff0;font-weight:bold">10</span>.190.49.32</code></pre></div>
+<p>执行完毕后，生成的配置文件路径 opendaylight/configuration/initial/ 下</p>
+
+<ul>
+<li><p>akka.conf</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">odl-cluster-data {
+akka {
+# 定义节点ip
+remote {
+  artery {
+    enabled = off
+    canonical.hostname = &#34;10.190.49.26&#34;
+    canonical.port = 2550
+  }
+  netty.tcp {
+    hostname = &#34;10.190.49.26&#34;
+    port = 2550
+  }
+  # when under load we might trip a false positive on the failure detector
+  # transport-failure-detector {
+    # heartbeat-interval = 4 s
+    # acceptable-heartbeat-pause = 16s
+  # }
+}
+
+# 集群节点列表，seed_nodes_list
+cluster {
+  # Remove &#34;.tcp&#34; when using artery.
+  seed-nodes = [&#34;akka.tcp://opendaylight-cluster-data@10.190.49.26:2550&#34;,
+                &#34;akka.tcp://opendaylight-cluster-data@10.190.49.31:2550&#34;,
+                &#34;akka.tcp://opendaylight-cluster-data@10.190.49.32:2550&#34;]
+
+  # index, opendaylight用roles的值作为节点索引
+  roles = [&#34;member-1&#34;]
+
+}
+
+# 持久化存储，journal定义存储数据库
+persistence {
+  # By default the snapshots/journal directories live in KARAF_HOME. You can choose to put it somewhere else by
+  # modifying the following two properties. The directory location specified may be a relative or absolute path. 
+  # The relative path is always relative to KARAF_HOME.
+
+  # snapshot-store.local.dir = &#34;target/snapshots&#34;
+  # journal.leveldb.dir = &#34;target/journal&#34;
+
+  journal {
+    leveldb {
+      # Set native = off to use a Java-only implementation of leveldb.
+      # Note that the Java-only version is not currently considered by Akka to be production quality.
+
+      # native = off
+    }
+  }
+}
+}
+}</code></pre></div></li>
+
+<li><p>modules.conf</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">定义modules的配置，包括module名称、namespace和shard-strategy(目前只支持module这种策略)
+与yang模型相关, toaster模型是opendaylight的一个demo
+
+modules = [
+        
+    {
+            name = &#34;inventory&#34;
+            namespace = &#34;urn:opendaylight:inventory&#34;
+            shard-strategy = &#34;module&#34;
+    },
+    {
+            name = &#34;topology&#34;
+            namespace = &#34;urn:TBD:params:xml:ns:yang:network-topology&#34;
+            shard-strategy = &#34;module&#34;
+    },
+    {
+            name = &#34;toaster&#34;
+            namespace = &#34;http://netconfcentral.org/ns/toaster&#34;
+            shard-strategy = &#34;module&#34;
+    }
+]</code></pre></div></li>
+
+<li><p>fmodules-shards.con</p></li>
+</ul>
+
+<p>该文件定义了module和shards的映射存储关系
+shards的定义的replicas即节点副本，将module的数据分片存储到replicas列表的节点集群中,类似于Elasticsearch集群数据分片副本的概念</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">module-shards = [
+        {
+                name = &#34;default&#34;
+                shards = [
+                        {
+                                name = &#34;default&#34;
+                                replicas = [&#34;member-1&#34;,
+                                &#34;member-2&#34;,
+                                &#34;member-3&#34;]
+                        }
+                ]
+        },
+        {
+                name = &#34;inventory&#34;
+                shards = [
+                        {
+                                name=&#34;inventory&#34;
+                                replicas = [&#34;member-1&#34;,
+                                &#34;member-2&#34;,
+                                &#34;member-3&#34;]
+                        }
+                ]
+        },
+        {
+                name = &#34;topology&#34;
+                shards = [
+                        {
+                                name=&#34;topology&#34;
+                                replicas = [&#34;member-1&#34;,
+                                &#34;member-2&#34;,
+                                &#34;member-3&#34;]
+                        }
+                ]
+        },
+        {
+                name = &#34;toaster&#34;
+                shards = [
+                        {
+                                name=&#34;toaster&#34;
+                                replicas = [&#34;member-1&#34;,
+                                &#34;member-2&#34;,
+                                &#34;member-3&#34;]
+                        }
+                ]
+        }
+]</code></pre></div>
+<h3 id="karaf部署集群feature">karaf部署集群feature</h3>
+
+<p>在opendaylight/bin目录下运行karaf.sh脚本,该脚本依赖系统的java环境</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">JAVA_MAX_MEM=4G JAVA_MAX_PERM_MEM=512m ./karaf</code></pre></div>
+<p>执行后的结果如下, 进入karaf的命令行，安装odl-mdsal-clustering feature</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@rancher-server:~/opendaylight-0.9.2/bin# JAVA_MAX_MEM=4G JAVA_MAX_PERM_MEM=512m ./karaf
+karaf: JAVA_HOME not set; results may vary
+Apache Karaf starting up. Press Enter to open the shell now...
+<span style="color:#ff0;font-weight:bold">100</span>% [========================================================================]
+
+Karaf started in 0s. Bundle stats: <span style="color:#ff0;font-weight:bold">10</span> active, <span style="color:#ff0;font-weight:bold">10</span> total
+                                                                                           
+    ________                       ________                .__  .__       .__     __       
+    <span style="color:#0ff;font-weight:bold">\_</span>____  <span style="color:#0ff;font-weight:bold">\ </span>______   ____   ____ <span style="color:#0ff;font-weight:bold">\_</span>_____ <span style="color:#0ff;font-weight:bold">\ </span>_____  ___.__.|  | |__| ____ |  |___/  |_     
+     /   |   <span style="color:#0ff;font-weight:bold">\\</span>____ <span style="color:#0ff;font-weight:bold">\_</span>/ __ <span style="color:#0ff;font-weight:bold">\ </span>/    <span style="color:#0ff;font-weight:bold">\ </span>|    |  <span style="color:#0ff;font-weight:bold">\\</span>__  <span style="color:#0ff;font-weight:bold">\&lt;</span>   |  ||  | |  |/ ___<span style="color:#0ff;font-weight:bold">\|</span>  |  <span style="color:#0ff;font-weight:bold">\ </span>  __<span style="color:#0ff;font-weight:bold">\ </span>   
+    /    |    <span style="color:#0ff;font-weight:bold">\ </span> |_&gt; &gt;  ___/|   |  <span style="color:#0ff;font-weight:bold">\|</span>    <span style="color:#0ff;font-weight:bold">`</span>   <span style="color:#0ff;font-weight:bold">\/</span> __ <span style="color:#0ff;font-weight:bold">\\</span>___  ||  |_|  / /_/  &gt;   Y  <span style="color:#0ff;font-weight:bold">\ </span> |      
+    <span style="color:#0ff;font-weight:bold">\_</span>______  /   __/ <span style="color:#0ff;font-weight:bold">\_</span>__  &gt;___|  /_______  (____  / ____||____/__<span style="color:#0ff;font-weight:bold">\_</span>__  /|___|  /__|      
+            <span style="color:#0ff;font-weight:bold">\/</span>|__|        <span style="color:#0ff;font-weight:bold">\/</span>     <span style="color:#0ff;font-weight:bold">\/</span>        <span style="color:#0ff;font-weight:bold">\/</span>     <span style="color:#0ff;font-weight:bold">\/\/</span>            /_____/      <span style="color:#0ff;font-weight:bold">\/</span>          
+                                                                                           
+
+Hit <span style="color:#0ff;font-weight:bold">&#39;&lt;tab&gt;&#39;</span> <span style="color:#fff;font-weight:bold">for</span> a list of available commands
+and <span style="color:#0ff;font-weight:bold">&#39;[cmd] --help&#39;</span> <span style="color:#fff;font-weight:bold">for</span> <span style="color:#fff;font-weight:bold">help</span> on a specific command.
+Hit <span style="color:#0ff;font-weight:bold">&#39;&lt;ctrl-d&gt;&#39;</span> or <span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold">&#39;system:shutdown&#39;</span> or <span style="color:#0ff;font-weight:bold">&#39;logout&#39;</span> to shutdown OpenDaylight.
+
+opendaylight-user@root&gt;feature:install odl-mdsal-clustering</code></pre></div>
+<ul>
+<li>karaf
+<br /></li>
+</ul>
+
+<p>Karaf是Apache旗下的一个基于OSGi的运行环境，提供一个轻量级的OSGi容器用于部署各种组件和应用程序。</p>
+
+<p>Karaf的安装目录机构如下，从中可以看出，整个Opendaylight的release安装包就是采用的这种安装结构，可以说Opendaylight正式通过Karaf完成部署的。</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">目录</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">/bin</td>
+<td align="left">启动脚本</td>
+</tr>
+
+<tr>
+<td align="left">/etc</td>
+<td align="left">初始化文件</td>
+</tr>
+
+<tr>
+<td align="left">/data</td>
+<td align="left">工作目录</td>
+</tr>
+
+<tr>
+<td align="left">/cache</td>
+<td align="left">OSGi框架包缓存</td>
+</tr>
+
+<tr>
+<td align="left">/generated-bundles</td>
+<td align="left">部署使用的临时文件夹</td>
+</tr>
+
+<tr>
+<td align="left">/log</td>
+<td align="left">日志文件</td>
+</tr>
+
+<tr>
+<td align="left">/deploy</td>
+<td align="left">热部署目录</td>
+</tr>
+
+<tr>
+<td align="left">/instances</td>
+<td align="left">含有子实例的目录</td>
+</tr>
+
+<tr>
+<td align="left">/lib</td>
+<td align="left">包含引导库</td>
+</tr>
+
+<tr>
+<td align="left">/lib/ext</td>
+<td align="left">JRE扩展目录</td>
+</tr>
+
+<tr>
+<td align="left">/lib/endorsed</td>
+<td align="left">赞同库目录</td>
+</tr>
+
+<tr>
+<td align="left">/system</td>
+<td align="left">OSGi包库，作为一个Maven2存储库</td>
+</tr>
+</tbody>
+</table>
+
+<p>Karaf特性：</p>
+
+<ol>
+<li>热部署
+支持OSGI bundles热部署，监测[home]/deploy目录下jar包，变化时实时做出响应</li>
+<li>动态配置
+[home]/etc目录下的配置文件更新实时生效</li>
+<li>日志系统
+Log4J日志集中管理</li>
+<li>供应(Provisioning)
+库或应用支持本地下载、安装和启动？</li>
+<li>原生OS整合
+以服务的形式运行与操作系统OS中</li>
+<li>扩展的内核控制台
+Karaf的内核控制台可管理服务、应用或库,并且通过部署新命令已扩展新功能</li>
+<li>远程访问
+SSH连接Karaf进行远程控制台操作</li>
+<li>基于JAAS的安全框架</li>
+<li>管理实例
+多实例管理，通过控制台创建、删除、启动、终止Karaf的实例</li>
+</ol>
+
+<p>常用命令行</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">system:shutdown/logout/<ctrl-d></td>
+<td align="left">关闭OpenDaylight</td>
+</tr>
+
+<tr>
+<td align="left">feature:install</td>
+<td align="left">安装特性</td>
+</tr>
+
+<tr>
+<td align="left">feature:list</td>
+<td align="left">查看特性列表</td>
+</tr>
+
+<tr>
+<td align="left">feature:info</td>
+<td align="left">查看特性</td>
+</tr>
+
+<tr>
+<td align="left">feature:start</td>
+<td align="left">启动特性</td>
+</tr>
+
+<tr>
+<td align="left">feature:stop</td>
+<td align="left">关闭特性</td>
+</tr>
+
+<tr>
+<td align="left">feature:uninstall</td>
+<td align="left">卸载特性</td>
+</tr>
+</tbody>
+</table>
+
+<p>举例：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 安装Opendaylight集群feature</span>
+opendaylight-user@root&gt;feature:install odl-mdsal-clustering
+
+<span style="color:#007f7f"># 查看feature列表，使用grep进行筛选</span>
+opendaylight-user@root&gt;feature:list|grep clustering
+odl-mdsal-clustering                                            │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │ x        │ Started     │ odl-mdsal-clustering                                            │ odl-mdsal-clustering
+odl-clustering-test-app                                         │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │          │ Started     │ odl-clustering-test-app                                         │ odl-clustering-test-app
+odl-akka-clustering-2.5                                         │ <span style="color:#ff0;font-weight:bold">3</span>.1.6            │          │ Started     │ odl-akka-clustering-2.5                                         │ Akka Clustering
+odl-mdsal-clustering-commons                                    │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │          │ Started     │ odl-controller-1.8.2                                            │ odl-mdsal-clustering-commons
+
+<span style="color:#007f7f"># 查看feature info</span>
+opendaylight-user@root&gt;feature:info odl-mdsal-clustering
+Feature odl-mdsal-clustering <span style="color:#ff0;font-weight:bold">1</span>.8.2
+Description:
+  odl-mdsal-clustering
+Details:
+  OpenDaylight is leading the transformation to Open Software Defined Networking (SDN). For more information, please see https://www.opendaylight.org
+Feature has no configuration
+Feature has no configuration files
+Feature depends on:
+  odl-mdsal-broker <span style="color:#ff0;font-weight:bold">1</span>.8.2
+Feature has no bundles.
+Feature has no conditionals.
+
+<span style="color:#007f7f"># 关闭feature, 状态由Started变为了Resolved</span>
+opendaylight-user@root&gt;feature:stop odl-mdsal-clustering
+opendaylight-user@root&gt;feature:list|grep odl-mdsal-clustering
+odl-mdsal-clustering                                            │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │ x        │ Resolved    │ odl-mdsal-clustering                                            │ odl-mdsal-clustering
+odl-mdsal-clustering-commons                                    │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │          │ Started     │ odl-controller-1.8.2                                            │ odl-mdsal-clustering-commons
+
+<span style="color:#007f7f"># 启动feature, 状态重新变为Started</span>
+opendaylight-user@root&gt;feature:start odl-mdsal-clustering
+opendaylight-user@root&gt;feature:list|grep odl-mdsal-clustering
+odl-mdsal-clustering                                            │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │ x        │ Started     │ odl-mdsal-clustering                                            │ odl-mdsal-clustering
+odl-mdsal-clustering-commons                                    │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │          │ Started     │ odl-controller-1.8.2                                            │ odl-mdsal-clustering-commons
+
+<span style="color:#007f7f"># 卸载feature(貌似此处有个bug，unistall odl-mdsal-clustering后，该feature的状态仍然是Started,正常的应该是Uninstalled)</span>
+opendaylight-user@root&gt;feature:list|grep odl-mdsal-clustering
+odl-mdsal-clustering                                            │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │          │ Started     │ odl-mdsal-clustering                                            │ odl-mdsal-clustering
+odl-mdsal-clustering-commons                                    │ <span style="color:#ff0;font-weight:bold">1</span>.8.2            │          │ Started     │ odl-controller-1.8.2                                            │ odl-mdsal-clustering-commons
+opendaylight-user@root&gt;feature:uninstall odl-mdsal-clustering  
+Error executing command: Feature named <span style="color:#0ff;font-weight:bold">&#39;odl-mdsal-clustering/0.0.0&#39;</span> is not installed</code></pre></div>
+<h3 id="数据持久化和备份">数据持久化和备份</h3>
+
+<ul>
+<li>配置开关脚本</li>
+</ul>
+
+<p>集群默认是开启数据持久化存储的，特殊情况下需要修改配置，可执行如下脚本。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/set_persistence.sh &lt;on/off&gt;</code></pre></div>
+<p>该脚本可在任意时刻执行生效，无论控制器是否启动.</p>
+
+<ul>
+<li>备份恢复存储数据</li>
+</ul>
+
+<p>在单个节点上调用RPC进行本地数据备份，RPC入参为一个文件名.调用的API为backup-datastore，详情见下方API说明。</p>
+
+<h3 id="odl-mdsal-clustering-feature的依赖">odl-mdsal-clustering feature的依赖</h3>
+
+<h4 id="如何理解feature-bundles的关系">如何理解feature、bundles的关系</h4>
+
+<p>一个bundles理解为具体的功能实现，类似于container
+一个feature类似于一个分组，该分组可以纯粹是其他分组(feature)的聚合，即不包含任何bundles, 而是仅仅描述多个features的聚合关系，类似于oom的top chart.一个feature也可以包含有具体的bundles，类似于子charts</p>
+
+<h4 id="odl-mdsal-clustering-依赖">odl-mdsal-clustering 依赖</h4>
+
+<p>odl-mdsal-clustering feature的唯一依賴 odl-mdsal-broker, 前面使用configure_cluster.sh腳本生成的inital/akka.conf,factory/akka.conf,modules.conf, module-shards.conf等配置文件就是为odl-mdsal-broker feature的配置文件</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">feature</th>
+<th align="left">depends</th>
+<th align="left">bunldles</th>
+<th align="left">config</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">odl-mdsal-clustering</td>
+<td align="left">odl-mdsal-broker</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">odl-mdsal-broker</td>
+<td align="left">odl-mdsal-remoterpc-connector 1.8.2<br> odl-mdsal-distributed-datasotre 1.8.2<br></td>
+<td align="left"></td>
+<td align="left">configuration/initial/akka.conf<br> configuration/factory/akka.conf<br> configuration/initial/module-shards.conf<br> configuration/initial/modules.conf<br> etc/org.opendaylight.controller.cluster.datastore.cfg</td>
+</tr>
+
+<tr>
+<td align="left">odl-mdsal-remoterpc-connector</td>
+<td align="left">odl-akka-leveldb-0.7[3.1.0,4]<br> odl-mdsal-broker-local 1.8.2<br> odl-mdsal-clustering-commons 1.8.2<br></td>
+<td align="left">mvn:org.opendaylight.controller/sal-remoterpc-connector/1.8.2</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">odl-mdsal-distributed-datastore</td>
+<td align="left">odl-mdsal-broker-local 1.8.2<br> odl-mdsal-clustering-commons 1.8.2<br> wrap 0.0.0<br></td>
+<td align="left">mvn:org.opendaylight.controller/cds-access-api/1.4.2<br>mvn:org.opendaylight.controller/cds-access-client/1.4.2<br>mvn:org.opendaylight.controller/cds-dom-api/1.4.2<br>mvn:org.opendaylight.controller/sal-distributed-datastore/1.8.2<br>wrap:mvn:net.java.dev.stax-utils/stax-utils/20070216<br> wrap:mvn:com.bea.xml/jsr173-ri/1.0<br>mvn:org.apache.commons/commons-text/1.1<br> mvn:org.opendaylight.controller/sal-cluster-admin-api/1.8.2<br> mvn:org.opendaylight.controller/sal-cluster-admin-impl/1.8.2<br></td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">odl-mdsal-broker-local</td>
+<td align="left">odl-lmax-3 [3.1.0,4)<br> odl-yangtools-codec [2.0.3,3)<br> odl-mdsal-binding-dom-adapter 2.5.2<br> odl-config-netty 0.9.2<br> odl-controller-mdsal-common 1.8.2<br> odl-mdsal-dom 2.5.2<br> odl-mdsal-eos-dom 2.5.2<br> odl-mdsal-eos-binding 2.5.2<br> odl-mdsal-singleton-dom 2.5.2<br> wrap 0.0.0<br></td>
+<td align="left">mvn:org.opendaylight.controller/blueprint/0.9.2 start-level=40<br> mvn:org.opendaylight.controller/sal-core-api/1.8.2<br> mvn:org.opendaylight.controller/sal-core-spi/1.8.2<br> mvn:org.opendaylight.controller/sal-broker-impl/1.8.2<br> mvn:org.opendaylight.controller/sal-binding-api/1.8.2<br> mvn:org.opendaylight.controller/sal-binding-broker-impl/1.8.2<br> mvn:org.opendaylight.controller/sal-binding-util/1.8.2<br> mvn:org.opendaylight.controller/sal-connector-api/1.8.2<br> mvn:org.opendaylight.controller/sal-inmemory-datastore/1.8.2<br> mvn:org.opendaylight.controller/sal-core-compat/1.8.2<br> mvn:org.apache.aries/org.apache.aries.util/1.1.3<br> mvn:org.osgi/org.osgi.service.event/1.3.1<br></td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">odl-mdsal-clustering-commons</td>
+<td align="left">odl-akka-system-2.5 [3.1.0,4)<br> odl-akka-persistence-2.5 [3.1.0,4)<br> odl-akka-clustering-2.5 [3.1.0,4)<br> odl-mdsal-broker-local 1.8.2<br></td>
+<td align="left">mvn:org.opendaylight.controller/sal-clustering-commons/1.8.2<br> mvn:commons-lang/commons-lang/2.6<br> mvn:javax.servlet/javax.servlet-api/3.1.0<br> mvn:io.dropwizard.metrics/metrics-graphite/3.1.2<br> mvn:org.opendaylight.controller/sal-akka-raft/1.8.2<br> mvn:commons-io/commons-io/2.6<br> mvn:io.dropwizard.metrics/metrics-core/3.1.2<br></td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">odl-akka-leveldb-0.7</td>
+<td align="left">odl-guava-23 3.1.6<br> wrap 0.0.0<br></td>
+<td align="left">wrap:mvn:org.iq80.leveldb/leveldb/0.7<br> mvn:org.fusesource.leveldbjni/leveldbjni-all/1.8-odl<br></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="osgi-todo">OSGi (TODO)</h3>
+
+<h3 id="yang">YANG</h3>
+
+<p>YANG的语法类似C和C++</p>
+
+<h4 id="语法规则">语法规则</h4>
+
+<ul>
+<li>注释</li>
+</ul>
+
+<ol>
+<li>单行使用&rdquo;//&rdquo;</li>
+<li>块注释&rdquo;/* */&rdquo;</li>
+</ol>
+
+<ul>
+<li>Tokens</li>
+</ul>
+
+<ol>
+<li>大小写敏感</li>
+<li>文档中自定义的关键字</li>
+<li>前缀标识符+ &ldquo;:&ldquo;+一个语言扩展关键字)、一个字符串、一个分号(&rdquo;:&ldquo;)和括弧(&rdquo;{&ldquo;或&rdquo;}&ldquo;)</li>
+</ol>
+
+<ul>
+<li>标识符
+通过名称来识别不同类型的YANG项目。</li>
+</ul>
+
+<ol>
+<li>由一个大写或小写ASCII字符或下划线打头，后跟0个或多个ASCII字符、数字、下划线、连字符和点</li>
+<li>大小写敏感</li>
+<li>最长64个字符</li>
+<li>可以是字符串，带引号或不带引号皆可</li>
+<li>在依赖被定义的YANG项目的类型的命名空间内有效</li>
+<li>在同一个命名空间内具有唯一性</li>
+</ol>
+
+<ul>
+<li>声明</li>
+</ul>
+
+<p>每个声明由一个关键字打头，随后是0或1个参数(argument), 再随后是一个分号(&ldquo;;&rdquo;)或括号(&ldquo;{}&rdquo;)封装的子声明块。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">statement = keyword[argument](&#34;;&#34;/&#34;{&#34;*statement&#34;})
+// argument是一个字符串</code></pre></div>
+<ul>
+<li>扩展extension</li>
+</ul>
+
+<ol>
+<li>一个模块可使用extension关键字引入YANG扩展</li>
+<li>扩展可由其他带有import声明的模块导入</li>
+<li>扩展的关键字前必须使用扩展模块导入的前缀进行限定(扩展的关键字前必须加上定义该关键字的模块前缀)</li>
+<li>子模块无法包括父模块，因此一个模块中需要向子模块暴露细节的扩展，必须在子模块中定义</li>
+<li>对于未知生命，YANG编译器会忽视</li>
+</ol>
+
+<h3 id="api">API</h3>
+
+<h4 id="cluster-admin-api">cluster-admin API</h4>
+
+<h5 id="yang-sal-cluster-admin-api">YANG (sal-cluster-admin-api)</h5>
+
+<p>cluster-admin API的yang模型定义，模型定义文件cluster-admin.yang</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yang" data-lang="yang">// module 声明模块
+module cluster-admin {
+
+    /* 可选的模块开发所用的YANG版本声明,包括YANG版本声明、命名空间声明和前缀声明*/
+    /* namespace所有标识符命名空间的定义，是命名空间的URI */
+    /* prefix, 用以访问一个模块，前缀:待引用对象,所有的前缀在此模块或子模块中必须唯一 */
+    yang-version 1;
+    namespace &#34;urn:opendaylight:params:xml:ns:yang:controller:md:sal:cluster:admin&#34;;
+    prefix &#34;cluster-admin&#34;;
+
+    description
+        &#34;This module contains YANG RPC definitions for administering a cluster.&#34;;
+
+    // 修订历史，包括修订声明，以revision加YYYY-MM-DD的格式，后接一段子声明
+    revision &#34;2015-10-13&#34; {
+        description &#34;Initial revision.&#34;;
+    }
+
+    // typedef 自定义类型声明
+    // 数据存储树，config和operational
+    typedef data-store-type {
+        // type 类型声明
+        type enumeration {
+            enum config {
+                value 1;
+            }
+            enum operational {
+                value 2;
+            }
+        }
+    }
+
+    // grouping组声明，定义一块可复用的节点。可在模块中本地使用、在包含其的模块中使用、在其他导入它的模块中使用
+    grouping shard-operation-result {
+        // leaf 叶子节点声明
+        leaf shard-name {
+            type string;
+        }
+
+        leaf data-store-type {
+            type data-store-type;
+        }
+
+        leaf succeeded {
+            type boolean;
+        }
+
+        leaf error-message {
+            type string;
+        }
+    }
+
+    grouping shard-result-output {
+        // list 列表声明, 定义在概要树的一个内部数据节点。一个列表节点可能存在于数据树的多个实例中
+        list shard-result {
+            // key声明， 若列表代表配置，则key声明必须出现，其他情况可选
+            key &#34;shard-name data-store-type&#34;;
+
+            // uses 使用声明, 用以引入一个grouping定义，使用组名作为参数
+            uses shard-operation-result;
+
+            description &#34;The list of results, one per shard&#34;;
+        }
+    }
+
+    grouping member-voting-states-input {
+        list member-voting-state {
+            leaf member-name {
+                type string;
+            }
+
+            leaf voting {
+                type boolean;
+            }
+
+            description &#34;The list of member voting states&#34;;
+        }
+    }
+
+    // rpc 远程过程调用声明
+    rpc add-shard-replica {
+        // input可选项，用以定义RPC操作的输入参数
+        input {
+            // leaf定义入参名称 shard-name
+            leaf shard-name {
+                /* mandatory定义该参数属性，true为强制必选，false为参数可选*/
+                /* type为参类型 */
+                /* description为参数说明 */
+                mandatory true;
+                type string;
+                description &#34;The name of the shard for which to create a replica.&#34;;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                // 该参数类型为一个枚举类型
+                type data-store-type;
+                description &#34;The type of the data store to which the replica belongs&#34;;
+            }
+        }
+
+        // rpc函数说明
+        description &#34;Adds a replica of a shard to this node and joins it to an existing cluster. The shard must
+            already have a module configuration defined for it and there must already be a shard existing on
+            another node with a leader. This RPC first contacts peer member seed nodes searching for a shard.
+            When found, an AddServer message is sent to the shard leader and applied as described in the Raft
+            paper.&#34;;
+    }
+
+    rpc remove-shard-replica {
+        input {
+            leaf shard-name {
+                mandatory true;
+                type string;
+                description &#34;The name of the shard for which to remove the replica.&#34;;
+            }
+
+            leaf member-name {
+                mandatory true;
+                type string;
+                description &#34;The cluster member from which the shard replica should be removed&#34;;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the replica belongs&#34;;
+            }
+        }
+
+        description &#34;Removes an existing replica of a shard from this node via the RemoveServer mechanism as
+            described in the Raft paper.&#34;;
+    }
+
+    rpc make-leader-local {
+        input {
+            leaf shard-name {
+                mandatory true;
+                type string;
+                description &#34;The name of the shard for which to move the leader to the local node&#34;;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the shard belongs&#34;;
+            }
+        }
+
+        description &#34;Attempts to move the shard leader of the given module based shard to the local node.
+                The rpc returns a response after handling of the underlying MakeLeaderLocal message completes.
+                This operation fails if there is no current shard leader due to lack of network connectivity or
+                a cluster majority. In addition, if the local node is not up to date with the current leader,
+                an attempt is made to first sync the local node with the leader. If this cannot be achieved
+                within two election timeout periods the operation fails.&#34;;
+    }
+
+    rpc add-prefix-shard-replica {
+        input {
+            leaf shard-prefix {
+                mandatory true;
+                type instance-identifier;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the replica belongs&#34;;
+            }
+        }
+
+        description &#34;Adds a replica of a shard to this node and joins it to an existing cluster. There must already be
+                    a shard existing on another node with a leader. This RPC first contacts peer member seed nodes
+                    searching for a shard. When found, an AddServer message is sent to the shard leader and applied as
+                    described in the Raft paper.&#34;;
+    }
+
+    rpc remove-prefix-shard-replica {
+        input {
+            leaf shard-prefix {
+                mandatory true;
+                type instance-identifier;
+            }
+            leaf member-name {
+                mandatory true;
+                type string;
+                description &#34;The cluster member from which the shard replica should be removed&#34;;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the replica belongs&#34;;
+            }
+        }
+
+        description &#34;Removes an existing replica of a prefix shard from this node via the RemoveServer mechanism as
+                    described in the Raft paper.&#34;;
+    }
+
+    rpc add-replicas-for-all-shards {
+        // output 可选项，用以定义RPC操作的输出参数
+        output {
+            uses shard-result-output;
+        }
+
+        description &#34;Adds replicas on this node for all currently defined shards. This is equivalent to issuing
+            an add-shard-replica RPC for all shards.&#34;;
+    }
+
+    rpc remove-all-shard-replicas {
+        input {
+            leaf member-name {
+                mandatory true;
+                type string;
+                description &#34;The cluster member from which the shard replicas should be removed&#34;;
+            }
+        }
+
+        output {
+            uses shard-result-output;
+        }
+
+        description &#34;Removes replicas for all shards on this node. This is equivalent to issuing
+            a remove-shard-replica for all shards and essentially removes this node from a cluster.&#34;;
+    }
+
+    rpc change-member-voting-states-for-shard {
+        input {
+            leaf shard-name {
+                mandatory true;
+                type string;
+                description &#34;The name of the shard for which to change voting state.&#34;;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the shard belongs&#34;;
+            }
+
+            uses member-voting-states-input;
+        }
+
+        description &#34;Changes the voting states, either voting or non-voting, of cluster members for a shard.
+            Non-voting members will no longer participate in leader elections and consensus but will be
+            replicated. This is useful for having a set of members serve as a backup cluster in case the
+            primary voting cluster suffers catastrophic failure. This RPC can be issued to any cluster member
+            and will be forwarded to the leader.&#34;;
+    }
+
+    rpc change-member-voting-states-for-all-shards {
+        input {
+            uses member-voting-states-input;
+        }
+
+        output {
+            uses shard-result-output;
+        }
+
+        description &#34;Changes the voting states, either voting or non-voting, of cluster members for all shards.
+            Non-voting members will no longer participate in leader elections and consensus but will be
+            replicated. This is useful for having a set of members serve as a backup cluster in case the
+            primary voting cluster suffers catastrophic failure. This RPC can be issued to any cluster member
+            and will be forwarded to the leader.&#34;;
+    }
+
+    rpc flip-member-voting-states-for-all-shards {
+        output {
+            uses shard-result-output;
+        }
+
+        description &#34;Flips the voting states of all cluster members for all shards, such that if a member
+            was voting it becomes non-voting and vice versa.&#34;;
+    }
+
+    rpc backup-datastore {
+        input {
+            leaf file-path {
+              type string;
+              description &#34;The path and name of the file in which to store the backup.&#34;;
+            }
+        }
+
+        description &#34;Creates a backup file of the datastore state&#34;;
+    }
+
+    // 获取当前请求的module-shard角色
+    rpc get-shard-role {
+        input {
+            leaf shard-name {
+                mandatory true;
+                type string;
+                description &#34;The name of the shard for which to create a replica.&#34;;
+            }
+
+            // 填写&#34;operational&#34;
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the replica belongs&#34;;
+            }
+        }
+
+        output {
+            // 主节点返回&#34;Leader&#34;,从节点返回&#34;Follower&#34;
+            leaf role {
+                type string;
+                description &#34;Current role for the given shard, if not present the shard currently doesn&#39;t have a role&#34;;
+            }
+        }
+
+        description &#34;Returns the current role for the requested module shard.&#34;;
+    }
+
+    rpc get-prefix-shard-role {
+        input {
+            leaf shard-prefix {
+                mandatory true;
+                type instance-identifier;
+            }
+
+            leaf data-store-type {
+                mandatory true;
+                type data-store-type;
+                description &#34;The type of the data store to which the replica belongs&#34;;
+            }
+        }
+
+        output {
+            leaf role {
+                type string;
+                description &#34;Current role for the given shard, if not present the shard currently doesn&#39;t have a role&#34;;
+            }
+        }
+
+        description &#34;Returns the current role for the requested module shard.&#34;;
+    }
+}</code></pre></div>
+<h5 id="impl-sal-cluster-admin-impl">IMPL (sal-cluster-admin-impl)</h5>
+
+<h5 id="api测试">API测试</h5>
+
+<ul>
+<li>get-shard-role</li>
+</ul>
+
+<p>功能：获取shard角色</p>
+
+<p>说明：角色分为Leader和Follower, 因Shard所处的Node IP地址而异。</p>
+
+<p>URI: /restconf/operations/cluster-admin:get-shard-role</p>
+
+<p>NodeIP: 10.190.49.26 （主节点)
+Request Body:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+         <span style="font-weight:bold">&#34;input&#34;</span>: {
+             <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+             <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>
+         }
+}</code></pre></div>
+<p>主节点Response:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;output&#34;</span>: {
+    <span style="font-weight:bold">&#34;role&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Leader&#34;</span>
+  }
+}</code></pre></div>
+<p>从节点Response：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;output&#34;</span>: {
+    <span style="font-weight:bold">&#34;role&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Follower&#34;</span>
+  }
+}</code></pre></div>
+<ul>
+<li>change-voting-states-for-all-shards</li>
+</ul>
+
+<p>功能: 改变一组shard的voting状态。</p>
+
+<p>说明: 状态置为false时，shard不参与Leader的选举, 默认为true，参与voting。</p>
+
+<p>URI: /restconf/operations/cluster-admin:change-member-voting-states-for-all-shards</p>
+
+<p>Request Body</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#f00">#</span> <span style="color:#f00">设置</span><span style="color:#ff0;font-weight:bold">4</span><span style="color:#f00">、</span><span style="color:#ff0;font-weight:bold">5</span><span style="color:#f00">、</span><span style="color:#ff0;font-weight:bold">6</span><span style="color:#f00">节点的shard</span> <span style="color:#f00">voting为</span><span style="color:#fff;font-weight:bold">false</span>
+{
+  <span style="font-weight:bold">&#34;input&#34;</span>: {
+    <span style="font-weight:bold">&#34;member-voting-state&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;member-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;member-4&#34;</span>,
+        <span style="font-weight:bold">&#34;voting&#34;</span>: <span style="color:#fff;font-weight:bold">false</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;member-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;member-5&#34;</span>,
+        <span style="font-weight:bold">&#34;voting&#34;</span>: <span style="color:#fff;font-weight:bold">false</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;member-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;member-6&#34;</span>,
+        <span style="font-weight:bold">&#34;voting&#34;</span>: <span style="color:#fff;font-weight:bold">false</span>
+      }
+    ]
+  }
+}</code></pre></div>
+<p>Response
+更细了分布式存储数据库中两棵存储树Operational和config上的数据信息, succeeded标识更新结果</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;output&#34;</span>: {
+    <span style="font-weight:bold">&#34;shard-result&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;prefix-configuration-shard&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;prefix-configuration-shard&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;entity-ownership&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      }
+    ]
+  }
+}</code></pre></div>
+<ul>
+<li>flip-member-voting-states-for-all-shards</li>
+</ul>
+
+<p>功能： 反转所有shards的voting状态</p>
+
+<p>说明： 在一个active/backup集群环境中，在需要反转backup节点上shards的non-voting状态为voting和反转active节点上shards的voting状态为non-voting时使用。简言之类似主备倒换</p>
+
+<p>在执行flip这个RPC请求时，由于有本地自选机制存在，需要防止集群分裂的情况，说明如下：</p>
+
+<p>本地自选机制</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">当异常断电导致所有主站voting节点宕机，flip RPC请求不得不发送给备站non-voting节点时，这种情况下因为没有shard leaders执行voting变化，收到RPC请求的节点会将non-voting状态变为voting并且自己成为leader，并保存voting变化并将变化数据复制到幸存的其他从节点。</code></pre></div>
+<p>防止集群分裂</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">当主站断电故障清除，准备恢复上电时，由于在主站宕机期间，voting状态沦为备，原主站数据库不存储断电期间的数据变化。当原来的主站拉起时，原主站集群内的voting节点仍处于voting状态，理想情况下，这些新启的节点可以连接备站，从而follow备站的leader以及同步leader的数据。但是一旦主站备战间follow建立失败，可能导致原来的单集群主备用保护模式分裂为两个独立集群。
+结论：主站恢复前，要么清除主站所有数据，要么从备站上恢复最近的一次数据备份，从而防止主用恢复时集群分裂。</code></pre></div>
+<ul>
+<li>remove-all-shard-replicas</li>
+</ul>
+
+<p>功能：将一个节点从集群中移除</p>
+
+<p>URI: /restconf/operations/cluster-admin:remove-all-shard-replicas</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;input&#34;</span>: {
+    <span style="font-weight:bold">&#34;member-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;member-6&#34;</span>
+  }
+}</code></pre></div>
+<p>移除了节点6上的所有分片存储数据
+Response:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;output&#34;</span>: {
+    <span style="font-weight:bold">&#34;shard-result&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;prefix-configuration-shard&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;prefix-configuration-shard&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;entity-ownership&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      }
+    ]
+  }
+}</code></pre></div>
+<ul>
+<li>remove-shard-replica</li>
+</ul>
+
+<p>功能: 将特定分片(shard)移除</p>
+
+<p>说明: 例如将节点member-2上的default shard的config从节点移除</p>
+
+<p>Request Body:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;input&#34;</span>: {
+    <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+    <span style="font-weight:bold">&#34;member-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;member-6&#34;</span>,
+    <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>
+  }
+}</code></pre></div>
+<ul>
+<li>add-replicas-for-all-shards</li>
+</ul>
+
+<p>功能: 动态添加节点到集群</p>
+
+<p>说明: 动态，实时新增节点入集群，无需修改健康节点的配置。不需要任何输入参数，但是该RPC请求需要向新增节点发起，触发该节点向集群中所有节点复制shards</p>
+
+<p>注意: Cluster Admin API动态添加和移除shards时，并不会改变节点初始化module-shard.conf和modules.conf配置文件，而是改变的joural(数据库?)</p>
+
+<p>向节点6执行该RPC请求，将节点6重新加入回集群，从下列执行结果来看，在节点6上重新生成了shard备份</p>
+
+<p>Response Body</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;output&#34;</span>: {
+    <span style="font-weight:bold">&#34;shard-result&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;prefix-configuration-shard&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;inventory&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;prefix-configuration-shard&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;toaster&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;entity-ownership&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;topology&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operational&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      },
+      {
+        <span style="font-weight:bold">&#34;shard-name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;default&#34;</span>,
+        <span style="font-weight:bold">&#34;data-store-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;config&#34;</span>,
+        <span style="font-weight:bold">&#34;succeeded&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>
+      }
+    ]
+  }
+}</code></pre></div>
+<ul>
+<li>backup-datastore</li>
+</ul>
+
+<p>功能: 对节点数据进行备份
+说明: 在当前节点上进行数据备份
+URI: /restconf/operations/cluster-admin:backup-datastore</p>
+
+<p>Request Body</p>
+
+<p>备份文件参考官网说明需要放在$KARAF_HOME/clustered-datastore-restore目录下，文件名称任意
+首次安装是，目录和文件都不存在，需要自己手动创建
+clustered-datastore-restore目录与journal和snapshots平级
+由于备份文件是每个节点独立的，为了保证各个节点数据在恢复时都不会出现数据缺失的情况，最好每个节点都能进行数据备份比较保险</p>
+
+<p>备份文件准备完毕后，向每一个节点发起RPC请求创建持久化存储</p>
+
+<p>Request</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;input&#34;</span>: {
+    <span style="font-weight:bold">&#34;file-path&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;/root/opendaylight-0.9.2/clustered-datastore-restore/datastore_backup&#34;</span>
+  }
+}</code></pre></div>
+<p>Response</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;output&#34;</span>: {}
+}</code></pre></div>
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

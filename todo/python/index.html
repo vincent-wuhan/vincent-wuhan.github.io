@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Python学习笔记 pip安装包所在路径查看 有时候pip安装后，不知道python包被安装到何处，可以调用如下命令查看python系统路径帮助排查
+pip -m site Python标识符命名规则 标识符：用于变量、函数、类、模块等的名称。 一般有如下规则：
+1. 区分大小写 2. 第一个字符必须是字母、下划线，其余字符是字母、数字、下划线 3. 不能使用关键字，关键字查询IDLE-&gt;help()-&gt;keywords 4. 以双下划线开头和结尾的名称通常含有特殊含义，尽量避免，如__init__ 如下是约定俗称的命名规则：
+   类型 规则 例子     模块和包名 全小写字母，尽量简单，若多个单词之间用下划线 math,os,sys   函数名 全小写，多个单词之间用下划线隔开 phone, my_name   类名 首字母大写，采用驼峰原则，多个单词之间每个单词第一个字母大写，其余部分小写 MyPhone, MyClass, Phone   常量名 全大写字母，多个单词使用下划线隔开 SPEED, MAX_SPEED    Python运算符    运算符 说明 例子 结果     &#43; 加法 3&#43;2 5   - 减法 3-2 1   * 乘法 3*2 6   / 除法 3&frasl;2 1."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Python学习笔记 pip安装包所在路径查看 有时候pip安装后，不知道python包被安装到何处，可以调用如下命令查看python系统路径帮助排查
+pip -m site Python标识符命名规则 标识符：用于变量、函数、类、模块等的名称。 一般有如下规则：
+1. 区分大小写 2. 第一个字符必须是字母、下划线，其余字符是字母、数字、下划线 3. 不能使用关键字，关键字查询IDLE-&gt;help()-&gt;keywords 4. 以双下划线开头和结尾的名称通常含有特殊含义，尽量避免，如__init__ 如下是约定俗称的命名规则：
+   类型 规则 例子     模块和包名 全小写字母，尽量简单，若多个单词之间用下划线 math,os,sys   函数名 全小写，多个单词之间用下划线隔开 phone, my_name   类名 首字母大写，采用驼峰原则，多个单词之间每个单词第一个字母大写，其余部分小写 MyPhone, MyClass, Phone   常量名 全大写字母，多个单词使用下划线隔开 SPEED, MAX_SPEED    Python运算符    运算符 说明 例子 结果     &#43; 加法 3&#43;2 5   - 减法 3-2 1   * 乘法 3*2 6   / 除法 3&frasl;2 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/python/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="python学习笔记">Python学习笔记</h1>
+
+<h2 id="pip安装包所在路径查看">pip安装包所在路径查看</h2>
+
+<p>有时候pip安装后，不知道python包被安装到何处，可以调用如下命令查看python系统路径帮助排查</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip -m site</code></pre></div>
+<h2 id="python标识符命名规则">Python标识符命名规则</h2>
+
+<p>标识符：用于变量、函数、类、模块等的名称。
+一般有如下规则：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">1. 区分大小写
+2. 第一个字符必须是字母、下划线，其余字符是字母、数字、下划线
+3. 不能使用关键字，关键字查询IDLE-&gt;help()-&gt;keywords
+4. 以双下划线开头和结尾的名称通常含有特殊含义，尽量避免，如__init__</code></pre></div>
+<p>如下是约定俗称的命名规则：</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">规则</th>
+<th align="left">例子</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">模块和包名</td>
+<td align="left">全小写字母，尽量简单，若多个单词之间用下划线</td>
+<td align="left">math,os,sys</td>
+</tr>
+
+<tr>
+<td align="left">函数名</td>
+<td align="left">全小写，多个单词之间用下划线隔开</td>
+<td align="left">phone, my_name</td>
+</tr>
+
+<tr>
+<td align="left">类名</td>
+<td align="left">首字母大写，采用驼峰原则，多个单词之间每个单词第一个字母大写，其余部分小写</td>
+<td align="left">MyPhone, MyClass, Phone</td>
+</tr>
+
+<tr>
+<td align="left">常量名</td>
+<td align="left">全大写字母，多个单词使用下划线隔开</td>
+<td align="left">SPEED, MAX_SPEED</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="python运算符">Python运算符</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">说明</th>
+<th align="left">例子</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">+</td>
+<td align="left">加法</td>
+<td align="left">3+2</td>
+<td align="left">5</td>
+</tr>
+
+<tr>
+<td align="left">-</td>
+<td align="left">减法</td>
+<td align="left">3-2</td>
+<td align="left">1</td>
+</tr>
+
+<tr>
+<td align="left">*</td>
+<td align="left">乘法</td>
+<td align="left">3*2</td>
+<td align="left">6</td>
+</tr>
+
+<tr>
+<td align="left">/</td>
+<td align="left">除法</td>
+<td align="left"><sup>3</sup>&frasl;<sub>2</sub></td>
+<td align="left">1.5</td>
+</tr>
+
+<tr>
+<td align="left">//</td>
+<td align="left">整数除法</td>
+<td align="left">3//2</td>
+<td align="left">1</td>
+</tr>
+
+<tr>
+<td align="left">%</td>
+<td align="left">模(取余)</td>
+<td align="left">3%2</td>
+<td align="left">1</td>
+</tr>
+
+<tr>
+<td align="left">**</td>
+<td align="left">幂</td>
+<td align="left">3**2</td>
+<td align="left">9</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="python进制">Python进制</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">进制</th>
+<th align="left">符号</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">0b/0B</td>
+<td align="left">二进制</td>
+<td align="left">0 1</td>
+</tr>
+
+<tr>
+<td align="left">0o/0O</td>
+<td align="left">八进制</td>
+<td align="left">0 1 2 3 4 5 6 7</td>
+</tr>
+
+<tr>
+<td align="left">0x/0X</td>
+<td align="left">十六进制</td>
+<td align="left">0 1 2 3 4 5 6 7 8 9 a b c d e f</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="练习">练习</h2>
+
+<h3 id="迭代计划制作工具">迭代计划制作工具</h3>
+
+<h4 id="依赖包">依赖包</h4>
+
+<p>requirements.txt</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Cython==0.29.10
+et-xmlfile==1.0.1
+jdcal==1.4.1
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+numpy==1.16.4
+openpyxl==2.6.2
+pandas==0.24.2
+python-dateutil==2.8.0
+pytz==2019.1
+QtPy==1.7.1
+six==1.12.0
+xarray==0.11.3
+xlrd==1.2.0
+XlsxWriter==1.1.8
+xlwt==1.3.0</code></pre></div>
+<h4 id="sheet表要求">sheet表要求</h4>
+
+<ul>
+<li>新迭代开始时，新建新的sheet页</li>
+<li>sheet名称与迭代开始截止日期一致，&rsquo;6.1-6.15&rsquo;</li>
+<li>一个迭代周期是双周，14天</li>
+</ul>
+
+<h4 id="更新指定列">更新指定列</h4>
+
+<p>因为公司计划表中第一行做了标题合并，因此采用A：B序列进行定位获取
+一般迭代计划经常需要修改的几列对应如下
+&ldquo;新计划&rdquo;指新生成的下双周sheet页
+&ldquo;老计划&rdquo;指上双周sheet页</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">序列</th>
+<th align="left">说明</th>
+<th align="left">老计划</th>
+<th align="left">新计划</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">迭代任务</td>
+<td align="left">B</td>
+<td align="left">具体迭代内容</td>
+<td align="left">一致</td>
+<td align="left">一致</td>
+</tr>
+
+<tr>
+<td align="left">输出物</td>
+<td align="left">F</td>
+<td align="left">迭代交付物，代码交付/文档交付</td>
+<td align="left">一致</td>
+<td align="left">一致</td>
+</tr>
+
+<tr>
+<td align="left">状态</td>
+<td align="left">G</td>
+<td align="left">任务状态</td>
+<td align="left">&ldquo;关闭&rdquo;</td>
+<td align="left">N/A</td>
+</tr>
+
+<tr>
+<td align="left">备注</td>
+<td align="left">H</td>
+<td align="left">工时情况</td>
+<td align="left">&ldquo;实际工作量:x小时&rdquo;</td>
+<td align="left">&ldquo;预计工作量:48小时&rdquo;，实际工作量:N/A</td>
+</tr>
+
+<tr>
+<td align="left">验收标准</td>
+<td align="left">I</td>
+<td align="left">验收考核标准</td>
+<td align="left">一致</td>
+<td align="left">一致</td>
+</tr>
+
+<tr>
+<td align="left">验收评价</td>
+<td align="left">J</td>
+<td align="left">评价</td>
+<td align="left">&ldquo;正常&rdquo;</td>
+<td align="left">N/A</td>
+</tr>
+
+<tr>
+<td align="left">评价说明</td>
+<td align="left">K</td>
+<td align="left">说明</td>
+<td align="left">评语</td>
+<td align="left">N/A</td>
+</tr>
+</tbody>
+</table>
+
+<p>对象定义</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">row_range = (<span style="color:#0ff;font-weight:bold">&#39;3&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;14&#39;</span>)
+team = {
+    <span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;G&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;关闭&#39;</span>
+        },
+    <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;J&#39;</span>
+        },
+    <span style="color:#0ff;font-weight:bold">&#39;workingHour&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;H&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;预计工作量：48小时</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">实际工作量：{workingHours}小时&#39;</span>
+        },
+    <span style="color:#0ff;font-weight:bold">&#39;staff&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;E&#39;</span>
+        },
+    <span style="color:#0ff;font-weight:bold">&#39;nextTask&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;workflow&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;B&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;F&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;I&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;deadline&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;Q&#39;</span>
+        }
+    }
+
+project = {
+    <span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;R&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;正常&#39;</span>
+        },
+    <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;S&#39;</span>
+        }
+    }</code></pre></div>
+<h4 id="语法定义">语法定义</h4>
+
+<p>根据日常计划的编写制定迭代计划语法填写规则</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">迭代任务</th>
+<th align="left">输出物</th>
+<th align="left">验收标准</th>
+<th align="left">评价说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">xxx功能开发</td>
+<td align="left">代码交付</td>
+<td align="left">提供xxx功能自测报告</td>
+<td align="left">代码已提交</td>
+</tr>
+
+<tr>
+<td align="left">xxx方案设计</td>
+<td align="left">文档交付</td>
+<td align="left">xxx方案评审定稿</td>
+<td align="left">方案已通过评审</td>
+</tr>
+
+<tr>
+<td align="left">xxx功能优化</td>
+<td align="left">代码交付</td>
+<td align="left">提供xxx功能自测报告</td>
+<td align="left">代码已提交</td>
+</tr>
+
+<tr>
+<td align="left">xxx问题跟踪</td>
+<td align="left">文档交付</td>
+<td align="left">跟踪xxx问题，进展无阻塞</td>
+<td align="left">进度顺利</td>
+</tr>
+
+<tr>
+<td align="left">xxx模块支持</td>
+<td align="left">代码交付</td>
+<td align="left">解决xxx模块问题，保障进度</td>
+<td align="left">模块问题无阻塞</td>
+</tr>
+</tbody>
+</table>
+
+<p>定义语法规则枚举数据结构</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">output = [<span style="color:#0ff;font-weight:bold">&#39;代码交付&#39;</span>,<span style="color:#0ff;font-weight:bold">&#39;文档交付&#39;</span>]
+
+fmt = {
+    <span style="color:#0ff;font-weight:bold">&#39;develop&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;workflow&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;{task}功能开发&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: output[<span style="color:#ff0;font-weight:bold">0</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;提供{task}功能自测报告&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;代码已提交&#39;</span>
+    },
+    <span style="color:#0ff;font-weight:bold">&#39;design&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;workflow&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;{task}方案设计&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: output[<span style="color:#ff0;font-weight:bold">1</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;{task}方案评审定稿&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;方案已通过评审&#39;</span>
+    },
+    <span style="color:#0ff;font-weight:bold">&#39;optimize&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;workflow&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;{task}功能优化&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: output[<span style="color:#ff0;font-weight:bold">0</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;提供{task}功能自测报告&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;代码已提交&#39;</span>
+    },
+    <span style="color:#0ff;font-weight:bold">&#39;trace&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;workflow&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;{task}问题跟踪&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: output[<span style="color:#ff0;font-weight:bold">1</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;跟踪{task}问题，进展无阻塞&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;进度顺利&#39;</span>
+    }
+    <span style="color:#0ff;font-weight:bold">&#39;support&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;workflow&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;{task}模块支持&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: output[<span style="color:#ff0;font-weight:bold">0</span>],
+        <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;解决{task}模块问题，保障进度&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;模块问题无阻塞&#39;</span>
+    }
+}</code></pre></div>
+<h4 id="任务输入">任务输入</h4>
+
+<p>从rdm中爬取工时记录和任务记录生成json格式的输入文件</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;蒋幸&#34;</span>: {
+    <span style="font-weight:bold">&#34;1&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;optimize&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;扩缩容特性数据库移植&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    },
+    <span style="font-weight:bold">&#34;2&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;design&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;扩缩容方案&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    }
+  },
+  <span style="font-weight:bold">&#34;毛君宇&#34;</span>: {
+    <span style="font-weight:bold">&#34;1&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;develop&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;SDC前端VDU属性设置&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    },
+    <span style="font-weight:bold">&#34;2&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;optimize&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;SDC前端&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    }
+  },
+  <span style="font-weight:bold">&#34;郭子敏&#34;</span>: {
+    <span style="font-weight:bold">&#34;1&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;develop&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;License虚拟机控制&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    },
+    <span style="font-weight:bold">&#34;2&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;optimize&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;License管理&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    }
+  },
+  <span style="font-weight:bold">&#34;彭昊&#34;</span>: {
+    <span style="font-weight:bold">&#34;1&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;develop&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;扩缩容状态机&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    },
+    <span style="font-weight:bold">&#34;2&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;optimize&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GitLab自动化&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    }
+  },
+  <span style="font-weight:bold">&#34;程科文&#34;</span>: {
+    <span style="font-weight:bold">&#34;1&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;trace&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;CICD MANO平台&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    },
+    <span style="font-weight:bold">&#34;2&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;develop&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;联通北向接口&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    }
+  },
+  <span style="font-weight:bold">&#34;裴伦&#34;</span>: {
+    <span style="font-weight:bold">&#34;1&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;optimize&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;日志管理&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    },
+    <span style="font-weight:bold">&#34;2&#34;</span>: {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;develop&#34;</span>,
+      <span style="font-weight:bold">&#34;task&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;电信北向接口&#34;</span>,
+      <span style="font-weight:bold">&#34;workingHours&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>
+    }
+  }
+}</code></pre></div>
+<h4 id="excel操作包">EXCEL操作包</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> openpyxl</code></pre></div>
+<h4 id="excel-处理">EXCEL 处理</h4>
+
+<ul>
+<li><p>读取Excel</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 读取excel文件</span>
+wb = openpyxl.load_workbook(excel_file_path)</code></pre></div></li>
+
+<li><p>sheet标题日期管理</p></li>
+</ul>
+
+<p>使用datetime模块管理</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> datetime</code></pre></div>
+<p>从上一迭代的sheet页截取本次迭代开始日期</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 6.1-6.15</span>
+<span style="color:#007f7f"># 使用&#39;-&#39;切片后，截取上一迭代结束的日期，再使用&#39;.&#39;切片</span>
+<span style="color:#007f7f"># 获得月份和天</span>
+last_deadline = wb.worksheets[-<span style="color:#ff0;font-weight:bold">1</span>].title.split(<span style="color:#0ff;font-weight:bold">&#39;-&#39;</span>)[-<span style="color:#ff0;font-weight:bold">1</span>].split(<span style="color:#0ff;font-weight:bold">&#39;.&#39;</span>)
+month = last_deadline[<span style="color:#ff0;font-weight:bold">0</span>]
+day = last_deadline[<span style="color:#ff0;font-weight:bold">1</span>]
+
+<span style="color:#007f7f"># 转换成日期</span>
+last_time_str = <span style="color:#0ff;font-weight:bold">&#39;2019-</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">-</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">&#39;</span> % (month,day)
+last_time = datetime.datetime.strptime(last_time_str, <span style="color:#0ff;font-weight:bold">&#39;%Y-%m-</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold">&#39;</span>)
+
+<span style="color:#007f7f"># 加一天获得当前迭代开始日期</span>
+delta=datetime.timedelta(days=<span style="color:#ff0;font-weight:bold">1</span>)
+start_time = last_time + delta
+
+<span style="color:#007f7f"># 加14天获得迭代截止日期</span>
+delta=datetime.timedelta(days=<span style="color:#ff0;font-weight:bold">14</span>)
+end_time = start_time + delta
+
+<span style="color:#007f7f"># 获得新迭代其实日期</span>
+day_fmt = <span style="color:#0ff;font-weight:bold">&#39;%m.</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold">&#39;</span>
+
+<span style="color:#007f7f"># month和day从上一迭代的sheet名称中截取</span>
+start_time_str = start_time.strftime(day_fmt)
+end_time_str = end_time.strftime(day_fmt)
+sheet_name = <span style="color:#0ff;font-weight:bold">&#39;{start}-{end}&#39;</span>.format(start=start_time_str, end=end_time_str)</code></pre></div>
+<ul>
+<li><p>拷贝复制sheet页</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 拷贝excel文件sheet最后一个sheet页，按照公司的模板，倒数第1个为上一迭代的计划</span>
+target_sheet = wb.copy_worksheet(wb.worksheets[-<span style="color:#ff0;font-weight:bold">1</span>])
+
+<span style="color:#007f7f"># 更新本次迭代的sheet名称,以新的迭代周期来命名</span>
+target_sheet.title = sheet_name
+
+<span style="color:#007f7f"># 保存excel</span>
+wb.save(excel_file_path)</code></pre></div></li>
+
+<li><p>更新sheet页</p></li>
+</ul>
+
+<p>更新旧sheet页</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wb = openpyxl.load_workbook(excel_file_path)
+old_ws = wb.worksheets[-<span style="color:#ff0;font-weight:bold">2</span>]
+
+<span style="color:#fff;font-weight:bold">def</span> get_row_range(task_dict=None, rows=()):
+    start = <span style="color:#0ff;font-weight:bold">&#39;{column}{number}&#39;</span>.format(column=task_dict[<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>], number=rows[<span style="color:#ff0;font-weight:bold">0</span>])
+    end = <span style="color:#0ff;font-weight:bold">&#39;{column}{number}&#39;</span>.format(column=task_dict[<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>], number=rows[<span style="color:#ff0;font-weight:bold">1</span>])
+    <span style="color:#fff;font-weight:bold">return</span> start, end
+
+<span style="color:#007f7f"># 根据备注中类型更新验收评价</span>
+(project_comment_start, project_comment_end) = get_row_range(project[<span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>], row_range)
+<span style="color:#fff;font-weight:bold">for</span> project_comment in old_ws[project_comment_start: project_comment_end]:
+    <span style="color:#007f7f"># 获取行号, task状态索引 project task状态索引</span>
+    row_number = project_comment[<span style="color:#ff0;font-weight:bold">0</span>].row
+
+    <span style="color:#007f7f"># 更新任务验收评价</span>
+    task_comment = fmt[project_comment[<span style="color:#ff0;font-weight:bold">0</span>].value][<span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>]
+    old_ws.cell(row=row_number,
+                column=utils.column_index_from_string(team[<span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+                value=task_comment)
+
+    <span style="color:#007f7f"># 更新任务状态</span>
+    old_ws.cell(row=row_number,
+                column=utils.column_index_from_string(team[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+                value=team[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>])
+
+    <span style="color:#007f7f"># 更新项目任务状态</span>
+    old_ws.cell(row=row_number,
+                column=utils.column_index_from_string(project[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+                value=project[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>])
+
+    <span style="color:#007f7f"># 更新工时</span>
+    <span style="color:#007f7f"># 获取负责人名称，提取json字典中的工时字段</span>
+    staff_name = old_ws.cell(row=row_number,
+                             column=utils.column_index_from_string(team[<span style="color:#0ff;font-weight:bold">&#39;staff&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>])).value
+    week_index = <span style="color:#fff;font-weight:bold">str</span>(row_number % <span style="color:#ff0;font-weight:bold">2</span> + <span style="color:#ff0;font-weight:bold">1</span>)
+    hours = input_dict[staff_name][week_index][<span style="color:#0ff;font-weight:bold">&#39;workingHours&#39;</span>]
+    working_hour = team[<span style="color:#0ff;font-weight:bold">&#39;workingHour&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>].format(workingHours=hours)
+    old_ws.cell(row=row_number,
+                column=utils.column_index_from_string(team[<span style="color:#0ff;font-weight:bold">&#39;workingHour&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+                value=working_hour)
+
+<span style="color:#007f7f"># 保存excel</span>
+wb.save(excel_file_path)</code></pre></div>
+<ul>
+<li><p>更新新sheet页</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> update_new_sheet(sheet, row, key, value):
+info = {
+    <span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;B&#39;</span>,
+    <span style="color:#0ff;font-weight:bold">&#39;developer&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;E&#39;</span>,
+    <span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;F&#39;</span>,
+    <span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;S&#39;</span>,
+    <span style="color:#0ff;font-weight:bold">&#39;workingHours&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;H&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;hours&#39;</span>: team[<span style="color:#0ff;font-weight:bold">&#39;workingHour&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;value&#39;</span>].format(workingHours=<span style="color:#0ff;font-weight:bold">&#39;&#39;</span>)
+    },
+    <span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;I&#39;</span>,
+    <span style="color:#0ff;font-weight:bold">&#39;assigner&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;P&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;王成龙&#39;</span>
+    },
+    <span style="color:#0ff;font-weight:bold">&#39;deadLine&#39;</span>: {
+        <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;Q&#39;</span>,
+        <span style="color:#0ff;font-weight:bold">&#39;time&#39;</span>: end_time_str
+    }
+}
+
+_type = value[<span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>]
+_task = value[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>]
+_work_flow = general_workflow(_type, _task)
+_output = general_output(_type)
+_acceptance = general_acceptance(_type, _task)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>]),
+           value=_work_flow)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;developer&#39;</span>]),
+           value=key)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;output&#39;</span>]),
+           value=_output)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;workingHours&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+           value=info[<span style="color:#0ff;font-weight:bold">&#39;workingHours&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;hours&#39;</span>])
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;acceptance&#39;</span>]),
+           value=_acceptance)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;assigner&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+           value=info[<span style="color:#0ff;font-weight:bold">&#39;assigner&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>])
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;deadLine&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+           value=info[<span style="color:#0ff;font-weight:bold">&#39;deadLine&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;time&#39;</span>])
+sheet.cell(row=row,
+           column=utils.column_index_from_string(info[<span style="color:#0ff;font-weight:bold">&#39;comment&#39;</span>]),
+           value=_type)
+
+wb = openpyxl.load_workbook(excel_file_path)
+new_ws = wb.worksheets[-<span style="color:#ff0;font-weight:bold">1</span>]
+
+<span style="color:#007f7f"># 根据备注中类型更新验收评价</span>
+row_start = <span style="color:#ff0;font-weight:bold">3</span>
+
+<span style="color:#fff;font-weight:bold">for</span> name,tasks in input_dict.items():
+<span style="color:#fff;font-weight:bold">for</span> <span style="color:#fff;font-weight:bold">id</span>,task in tasks.items():
+    update_new_sheet(new_ws, row_start, name, task)
+
+<span style="color:#007f7f"># 保存excel</span>
+wb.save(excel_file_path)</code></pre></div></li>
+
+<li><p>生成rdm上传的任务发布模板</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> fill_rdm_row(sheet, row, key, value):
+rdm = {
+   <span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;B&#39;</span>,
+   <span style="color:#0ff;font-weight:bold">&#39;start&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;E&#39;</span>,
+   <span style="color:#0ff;font-weight:bold">&#39;end&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;F&#39;</span>,
+   <span style="color:#0ff;font-weight:bold">&#39;teammate&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;H&#39;</span>,
+   <span style="color:#0ff;font-weight:bold">&#39;leader&#39;</span>: {
+       <span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;J&#39;</span>,
+       <span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;蒋幸&#39;</span>
+   }
+}
+_type = value[<span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>]
+_name = value[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>]
+_task = general_workflow(_type, _name)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(rdm[<span style="color:#0ff;font-weight:bold">&#39;task&#39;</span>]),
+           value=_task)
+<span style="color:#007f7f"># 获得新迭代其实日期</span>
+_time_fmt = <span style="color:#0ff;font-weight:bold">&#39;%Y-%m-</span><span style="color:#0ff;font-weight:bold">%d</span><span style="color:#0ff;font-weight:bold">&#39;</span>
+
+<span style="color:#007f7f"># month和day从上一迭代的sheet名称中截取</span>
+_start_time = start_time.strftime(_time_fmt)
+_end_time = end_time.strftime(_time_fmt)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(rdm[<span style="color:#0ff;font-weight:bold">&#39;start&#39;</span>]),
+           value=_start_time)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(rdm[<span style="color:#0ff;font-weight:bold">&#39;end&#39;</span>]),
+           value=_end_time)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(rdm[<span style="color:#0ff;font-weight:bold">&#39;teammate&#39;</span>]),
+           value=key)
+sheet.cell(row=row,
+           column=utils.column_index_from_string(rdm[<span style="color:#0ff;font-weight:bold">&#39;leader&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;column&#39;</span>]),
+           value=rdm[<span style="color:#0ff;font-weight:bold">&#39;leader&#39;</span>][<span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>])
+
+wb = openpyxl.load_workbook(rdm_file_path)
+ws = wb.worksheets[<span style="color:#ff0;font-weight:bold">0</span>]
+
+row_start = <span style="color:#ff0;font-weight:bold">2</span>
+
+<span style="color:#fff;font-weight:bold">for</span> name, tasks in input_dict.items():
+<span style="color:#fff;font-weight:bold">for</span> <span style="color:#fff;font-weight:bold">id</span>,task in tasks.items():
+    fill_rdm_row(ws, row_start, name, task)
+    row_start = row_start + <span style="color:#ff0;font-weight:bold">1</span></code></pre></div></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

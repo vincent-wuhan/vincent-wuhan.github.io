@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="GitLab学习笔记 docker安装  ubuntu系统软件源  手动编辑 /etc/apt/sources.list 文件
+14.04
+deb http://10.190.48.88/ubuntu/ trusty main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-updates main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-security main universe multiverse 16.04
+deb http://10.190.48.88/ubuntu/ xenial main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-updates main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-security main universe multiverse 18.04
+deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse  安装
+apt-get install docker."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="GitLab学习笔记 docker安装  ubuntu系统软件源  手动编辑 /etc/apt/sources.list 文件
+14.04
+deb http://10.190.48.88/ubuntu/ trusty main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-updates main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-security main universe multiverse 16.04
+deb http://10.190.48.88/ubuntu/ xenial main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-updates main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-security main universe multiverse 18.04
+deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse  安装
+apt-get install docker." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/gitlab/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="gitlab学习笔记">GitLab学习笔记</h1>
+
+<h2 id="docker安装">docker安装</h2>
+
+<ul>
+<li>ubuntu系统软件源</li>
+</ul>
+
+<p>手动编辑 <strong>/etc/apt/sources.list</strong> 文件</p>
+
+<p>14.04</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">    deb http://10.190.48.88/ubuntu/ trusty main universe multiverse
+    deb http://10.190.48.88/ubuntu/ trusty-updates main universe multiverse
+    deb http://10.190.48.88/ubuntu/ trusty-security main universe multiverse</code></pre></div>
+<p>16.04</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">    deb http://10.190.48.88/ubuntu/ xenial main universe multiverse
+    deb http://10.190.48.88/ubuntu/ xenial-updates main universe multiverse
+    deb http://10.190.48.88/ubuntu/ xenial-security main universe multiverse</code></pre></div>
+<p>18.04</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">    deb http://10.190.48.88/ubuntu/ bionic main universe multiverse
+    deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse
+    deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse</code></pre></div>
+<ul>
+<li><p>安装</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt-get install docker.io</code></pre></div></li>
+</ul>
+
+<h2 id="gitlab中文版安装">gitlab中文版安装</h2>
+
+<ul>
+<li>修改内网代理</li>
+</ul>
+
+<p>编辑\/etc/docker/daemon.json</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="font-weight:bold">&#34;registry-mirrors&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;http://10.190.48.88:5000&#34;</span>],
+    <span style="font-weight:bold">&#34;insecure-registries&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;http://10.190.48.88:10081&#34;</span>]
+}</code></pre></div>
+<ul>
+<li>image</li>
+</ul>
+
+<blockquote>
+<p>docker pull beginor/gitlab-ce:11.3.0-ce.0</p>
+</blockquote>
+
+<ul>
+<li>pre-run</li>
+</ul>
+
+<p>gitlab外挂卷，用于保存gitlab平台的持久化存储配置(etc),日志(log),数据(data)</p>
+
+<blockquote>
+<p>sudo mkdir -p  /mnt/sda1/gitlab/etc
+sudo mkdir -p  /mnt/sda1/gitlab/log
+sudo mkdir -p  /mnt/sda1/gitlab/data</p>
+</blockquote>
+
+<ul>
+<li><p>run</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--detach <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--publish <span style="color:#ff0;font-weight:bold">8443</span>:443 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--publish <span style="color:#ff0;font-weight:bold">8080</span>:80 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--name gitlab <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--restart unless-stopped <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--volume /mnt/sda1/gitlab/etc:/etc/gitlab <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--volume /mnt/sda1/gitlab/log:/var/log/gitlab <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--volume /mnt/sda1/gitlab/data:/var/opt/gitlab <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>beginor/gitlab-ce:11.3.0-ce.0</code></pre></div></li>
+
+<li><p>升级维护</p></li>
+</ul>
+
+<blockquote>
+<ol>
+<li>docker stop gitlab</li>
+<li>docker rm gitlab</li>
+<li>docker pull beginor/gitlab-ce:latest</li>
+<li>docker run &hellip;</li>
+<li>docker exec -it gitlab bash</li>
+<li>gitlab-ctl reconfigure</li>
+<li>gitlab-ctl restart</li>
+</ol>
+</blockquote>
+
+<h2 id="gitlab-runner">gitlab-runner</h2>
+
+<ul>
+<li>image</li>
+</ul>
+
+<blockquote>
+<p>docker pull gitlab/gitlab-runner</p>
+</blockquote>
+
+<ul>
+<li>pre-run</li>
+</ul>
+
+<blockquote>
+<p>sudo mkdir -p /srv/gitlab-runner/config</p>
+</blockquote>
+
+<ul>
+<li><p>run</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run -d --name gitlab-runner --restart always <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>-v /srv/gitlab-runner/config:/etc/gitlab-runner <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>-v /var/run/docker.sock:/var/run/docker.sock <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>gitlab/gitlab-runner:latest</code></pre></div></li>
+</ul>
+
+<h2 id="配置gitlab-runner-支持dind">配置gitlab runner(支持dind)</h2>
+
+<ul>
+<li><p>注册gitlab runner到gitlab中</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo docker <span style="color:#fff;font-weight:bold">exec</span> -it gitlab-runner gitlab-ci-multi-runner register</code></pre></div></li>
+
+<li><p>配置
+执行上述注册命令后，命令行交互需要填入一些参数，说明如下：</p></li>
+</ul>
+
+<ol>
+<li>gitlab-ci coordinator 和gitlab-ci token获取</li>
+</ol>
+
+<blockquote>
+<p>从项目设置-&gt;CI/CD-&gt;Runner-&gt;专用Runner-&gt;Setup a specific Runner manually
+URL和注册令牌分别对应URL和token</p>
+</blockquote>
+
+<ol>
+<li>tags，如果是使用dind，填写docker</li>
+<li>executor，选择docker</li>
+<li>image填写docker:stable</li>
+</ol>
+
+<p>执行结果如下：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Runtime platform                                    arch=amd64 os=linux pid=<span style="color:#ff0;font-weight:bold">13</span> revision=0e5417a3 version=<span style="color:#ff0;font-weight:bold">12</span>.0.1
+Running in system-mode.                            
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+http://10.190.49.80:8080/
+Please enter the gitlab-ci token <span style="color:#fff;font-weight:bold">for</span> this runner:
+s_WdBjhM23Xv1P4d16mC
+Please enter the gitlab-ci description <span style="color:#fff;font-weight:bold">for</span> this runner:
+[336923b1823e]: docker
+Please enter the gitlab-ci tags <span style="color:#fff;font-weight:bold">for</span> this runner (comma separated):
+docker
+Registering runner... succeeded                     runner=s_WdBjhM
+Please enter the executor: docker, parallels, shell, docker+machine, docker-ssh+machine, docker-ssh, ssh, virtualbox, kubernetes:
+docker
+Please enter the default Docker image (e.g. ruby:2.6):
+docker:stable
+Runner registered successfully. Feel free to start it, but <span style="color:#fff;font-weight:bold">if</span> it<span style="color:#f00">&#39;</span>s running already the config should be automatically reloaded!</code></pre></div>
+<h2 id="gitlab-ci-dind">gitlab-ci dind</h2>
+
+<ul>
+<li>CICD中添加变量</li>
+</ul>
+
+<p>为了保障gitlab-ci runner能够从私有仓库获取镜像，需要在GITLAB页面每个项目的settings-&gt;CI-&gt;CI/CD settings-&gt;Variables中添加变量DOCKER_AUTH_CONFIG,值设置内容如下：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="font-weight:bold">&#34;auths&#34;</span>: {
+            <span style="font-weight:bold">&#34;10.190.48.88:10081&#34;</span>: {
+                    <span style="font-weight:bold">&#34;auth&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;amlhbmd4OkZIamlhbmd4MjAxOQ==&#34;</span>
+            }
+    }
+}  </code></pre></div>
+<p>在runner的config.toml中添加envrionment字段并设置DOCKER_AUTH_CONFIG</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[[runners]]
+  executor = &#34;docker&#34;
+  environment = [&#34;DOCKER_AUTH_CONFIG={\&#34;auths\&#34;:{\&#34;10.190.48.88:10081\&#34;:{\&#34;auth\&#34;:\&#34;amlhbmd4OkZIamlhbmd4MjAxOQ==\&#34;}}}&#34;]</code></pre></div>
+<p>内容获取可以从两种途径获得：</p>
+
+<ol>
+<li>echo -n username:password | base64</li>
+<li>cat ~/.docker/cofnig.json</li>
+</ol>
+
+<ul>
+<li>docker私有仓库登陆</li>
+</ul>
+
+<p>编辑gitlab-ci中在script时执行前登陆私有仓库, 其中变量名称与DOCKER_AUT_CONFIG的设置方式相同,在Gitlab的页面设置</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">script:
+   - docker login $DOCKER_REPO -u$DOCKER_USERNAME -p$DOCKER_PASSWORD</code></pre></div>
+<ul>
+<li>dind中使用启动maven镜像进行编译</li>
+</ul>
+
+<p>由于dind中使用的maven配置需要带入到docker in docker的容器中，因此，在运行docker run之前准备存储卷下载maven配置后，使用-v进行存储卷的映射带入容器中
+同时，为了保证该job能在配置了dind的gitlab-runner上运行，在job的选项中指定tags将job固定到配置好的runner上运行，完整的gitlab-ci的脚本如下</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">variables:
+  <span style="color:#007f7f"># when running from the dind line.</span>
+  MAVEN_DIND_IMAGE: <span style="color:#0ff;font-weight:bold">&#34;10.190.48.88:10081/deployment/maven:3.6.0-jdk-8&#34;</span>
+  MAVEN_DIND_DEPLOY: <span style="color:#0ff;font-weight:bold">&#34;-f /usr/src/fitdc-aggregator/pom.xml -s /usr/src/.m2/settings.xml clean deploy -DskipTests -Pkar -Pdocker&#34;</span>
+
+docker:
+  stage: deploy
+  script:
+    - docker login -u <span style="color:#0ff;font-weight:bold">&#34;$DOCKER_USER_NAME&#34;</span> -p <span style="color:#0ff;font-weight:bold">&#34;$DOCKER_PASSWD&#34;</span> $DOCKER_REPO
+    - mkdir -p $root_folder/.m2/
+    - if [ ! -f $root_folder/.m2/settings.xml ]; then wget http://<span style="color:#ff0;font-weight:bold">10.190.16.240</span>/common/raoxing/settings.xml -O $root_folder/.m2/settings.xml; fi
+    - docker run --privileged --rm -v $root_folder:/usr/src/ -v /var/run/docker.sock:/var/run/docker.sock $MAVEN_DIND_IMAGE mvn $MAVEN_CLI_OPTS $MAVEN_DIND_DEPLOY
+  only:
+    - master
+  tags:
+    - docker</code></pre></div>
+<ul>
+<li>gitlab-runner共享daemon.json配置</li>
+</ul>
+
+<p>在公司往往需要使用私有仓库，此时如果gitlab runner的image没有从host机获取docker的deamon配置，往往出现类似如下的错误提示
+&gt; Error response from daemon: Get <a href="https://10.190.48.88:10081/v2/:">https://10.190.48.88:10081/v2/:</a> http: server gave HTTP response to HTTPS client
+大概意思是指私服docker仓库没有加入到docker的非安全仓库中，在gitlab-runner中的解决方法为，修改runner配置中的volumes选项，将host机中的daemon.json共享到runner的容器内,添加外部daemon.json到内层的映射共享存储卷</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[[runners]]
+  name = &#34;tar&#34;
+  output_limit = 8192
+  url = &#34;http://10.190.49.80:8080/&#34;
+  token = &#34;23dbbb421d16d3f3e340f51231d02b&#34;
+  executor = &#34;docker&#34;
+  environment = [&#34;DOCKER_AUTH_CONFIG={\&#34;auths\&#34;:{\&#34;10.190.48.88:10081\&#34;:{\&#34;auth\&#34;:\&#34;ZG9ja2VyOkRvY2tlcjIwMTk=\&#34;}}}&#34;]
+  [runners.custom_build_dir]
+  [runners.docker]
+    tls_verify = false
+    image = &#34;docker:stable&#34;
+    privileged = true
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    disable_cache = false
+    volumes = [&#34;/cache&#34;, &#34;/etc/docker/daemon.json:/etc/docker/daemon.json&#34;]
+    shm_size = 0
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]</code></pre></div>
+<h2 id="gitlab常用配置">gitlab常用配置</h2>
+
+<ul>
+<li>修改项目ip</li>
+</ul>
+
+<p>在gitlab中创建项目后，项目的ssh和http的ip地址和端口为一堆乱码或者为127.0.0.1，并不是node的ip地址。如果是前者，无法从外部下载项目代码。此时需要修改配置，修改方法如下:</p>
+
+<ol>
+<li>进入gitlab容器</li>
+
+<li><p>gitlab配置中修改gitlab.yml</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+
+production: &amp;base
+gitlab:
+    host: NODEIP
+    port: NODEPORT
+    https: false</code></pre></div></li>
+
+<li><p>重启服务
+gitlab-ctl restart</p></li>
+</ol>
+
+<ul>
+<li>gitlab-runner docker:dind启动权限提示非root</li>
+</ul>
+
+<p>这种情况原因往往是host机上无root权限，此时修改gitlab-runner配置 <strong>/etc/gitlab-runner/config/config.toml</strong> 找到runner的privileged为true</p>
+
+<ul>
+<li>流水线配置
+<br /></li>
+</ul>
+
+<p>场景: 假设两个项目A和B，项目A的CI Job执行完毕，触发项目B的CI Job
+流水线搭建：</p>
+
+<ol>
+<li>项目B设置流水线触发器</li>
+</ol>
+
+<blockquote>
+<p>设置-&gt;CI/CD-&gt;流水线触发器-&gt;增加触发器
+获得TOKEN</p>
+</blockquote>
+
+<ol>
+<li><p>项目A的gitlab-ci.yml添加触发条件</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">trigger_build:
+stage: deploy
+script:
+- <span style="color:#0ff;font-weight:bold">&#34;curl -X POST -F token=TOKEN -F ref=REF_NAME http://10.190.48.88:10080/api/v4/projects/88/trigger/pipeline&#34;</span></code></pre></div></li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">TOKEN</td>
+<td align="left">项目B中触发器的TOKCN</td>
+</tr>
+
+<tr>
+<td align="left">REF_NAME</td>
+<td align="left">启动触发器的分支名称</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li>定时启动触发器</li>
+</ol>
+
+<p>00:30定时启动</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff0;font-weight:bold">30</span> <span style="color:#ff0;font-weight:bold">0</span> * * * curl --request POST --form token=TOKEN --form ref=master https://gitlab.example.com/api/v4/projects/9/trigger/pipeline</code></pre></div>
+<h2 id="gitlab集成kubernetes">gitlab集成kubernetes</h2>
+
+<ul>
+<li>配置</li>
+</ul>
+
+<p>运维-&gt;kubernetes-&gt;新增kubernetes</p>
+
+<ul>
+<li><p>获取API地址</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl cluster-info | grep <span style="color:#0ff;font-weight:bold">&#39;Kubernetes master&#39;</span> | awk <span style="color:#0ff;font-weight:bold">&#39;/http/ {print $NF}&#39;</span></code></pre></div></li>
+</ul>
+
+<blockquote>
+<p><a href="https://10.190.49.31:8080/r/projects/1a7/kubernetes:6443">https://10.190.49.31:8080/r/projects/1a7/kubernetes:6443</a></p>
+</blockquote>
+
+<ul>
+<li><p>获取TOKEN</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl -n kube-system describe secret <span style="color:#fff;font-weight:bold">$(</span>kubectl -n kube-system get secret | grep gitlab-admin | awk <span style="color:#0ff;font-weight:bold">&#39;{print $1}&#39;</span><span style="color:#fff;font-weight:bold">)</span></code></pre></div></li>
+
+<li><p>获取CA证书</p></li>
+</ul>
+
+<p>获取secret列表</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get secrets</code></pre></div>
+<blockquote>
+<p>NAME                  TYPE                                  DATA      AGE
+default-token-87p6z   kubernetes.io/service-account-token   3         5h</p>
+</blockquote>
+
+<p>获取CA</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get secret &lt;secret name&gt; -o jsonpath=<span style="color:#0ff;font-weight:bold">&#34;{[&#39;data&#39;][&#39;ca\.crt&#39;]}&#34;</span></code></pre></div>
+<h2 id="gitlab-ci-中docker命令失败问题处理">gitlab-ci 中docker命令失败问题处理</h2>
+
+<ul>
+<li>现象</li>
+</ul>
+
+<p>gitlab ci runner容器中运行docker命令时提示, Cannot connect to Docker daemon at tcp://docker:2375. Is the docker daemon running?</p>
+
+<ul>
+<li>定位过程
+<br /></li>
+</ul>
+
+<blockquote>
+<p>查看gitlab-ci.yml配置，service docker:dind已经启动
+查看gitlab-runner配置中，环境变量Auths已经添加
+查看gitlab-runner配置中，privileged=true，支持root权限
+查看gitlab-runner配置中，daemon.json已经挂载
+查看gitlab-runner配置，docker.sock未挂载进容器</p>
+</blockquote>
+
+<ul>
+<li>解决方法：
+<br /></li>
+</ul>
+
+<p>gitlab-runner配置config.toml中，volumes中添加docker.socke的挂载</p>
+
+<blockquote>
+<p>&rdquo;/var/run/docker.sock:/var/run/docker.sock&rdquo;</p>
+</blockquote>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

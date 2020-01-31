@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="git 常用命令    命令 说明     git config &ndash;global core.editor vim 设置全局编辑器为vim   git config &ndash;global user.name &ldquo;jiangx&rdquo; 设置用户名   git config &ndash;global user.email &ldquo;jiangx@fiberhome.com&rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.190.49.99:8080/a/project.git 设置远程gerrit        日志修改  修改最近一次   git commit &ndash;amend
+  修改历史中的某个记录    当前版本之前的倒数第三次的日志 git rebase -i head~3 输出结果中选择需要修改的那一条，将pick改为edit   pick f9173fc Fix wrong name &#39;path_filename&#39; pick 3fddde0 Change versiton to 0."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="git 常用命令    命令 说明     git config &ndash;global core.editor vim 设置全局编辑器为vim   git config &ndash;global user.name &ldquo;jiangx&rdquo; 设置用户名   git config &ndash;global user.email &ldquo;jiangx@fiberhome.com&rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.190.49.99:8080/a/project.git 设置远程gerrit        日志修改  修改最近一次   git commit &ndash;amend
+  修改历史中的某个记录    当前版本之前的倒数第三次的日志 git rebase -i head~3 输出结果中选择需要修改的那一条，将pick改为edit   pick f9173fc Fix wrong name &#39;path_filename&#39; pick 3fddde0 Change versiton to 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/git/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="git">git</h1>
+
+<h2 id="常用命令">常用命令</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">git config &ndash;global core.editor vim</td>
+<td align="left">设置全局编辑器为vim</td>
+</tr>
+
+<tr>
+<td align="left">git config &ndash;global user.name &ldquo;jiangx&rdquo;</td>
+<td align="left">设置用户名</td>
+</tr>
+
+<tr>
+<td align="left">git config &ndash;global user.email &ldquo;jiangx@fiberhome.com&rdquo;</td>
+<td align="left">设置用户邮箱</td>
+</tr>
+
+<tr>
+<td align="left">git remote add gerrit <a href="http://user:password@10.190.49.99:8080/a/project.git">http://user:password@10.190.49.99:8080/a/project.git</a></td>
+<td align="left">设置远程gerrit</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="日志修改">日志修改</h2>
+
+<ul>
+<li>修改最近一次</li>
+</ul>
+
+<blockquote>
+<p>git commit &ndash;amend</p>
+</blockquote>
+
+<ul>
+<li>修改历史中的某个记录</li>
+</ul>
+
+<blockquote>
+<ol>
+<li>当前版本之前的倒数第三次的日志
+git rebase -i head~3</li>
+<li>输出结果中选择需要修改的那一条，将pick改为edit</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">pick f9173fc Fix wrong name &#39;path_filename&#39;
+pick 3fddde0 Change versiton to 0.2:   Add share option
+pick 5962845 Change platform section name from [arch-platform-name] to [name:platform]
+...</code></pre></div>
+<blockquote>
+<ol>
+<li>修改commit
+git commit &ndash;amend</li>
+<li>提交
+git rebase &ndash;continue</li>
+</ol>
+</blockquote>
+
+<ul>
+<li>修改远程服务器上修改</li>
+</ul>
+
+<blockquote>
+<p>git push -f origin master</p>
+</blockquote>
+
+<h2 id="git-review配置">Git review配置</h2>
+
+<ul>
+<li>change-id生成</li>
+</ul>
+
+<p>存放路径
+&gt;.git/hooks/</p>
+
+<p>添加如下shell脚本</p>
+
+<p><details>
+<summary>commit-msg</summary></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/bin/sh
+</span><span style="color:#0f0;font-weight:bold"></span><span style="color:#007f7f"># From Gerrit Code Review 2.10</span>
+#
+<span style="color:#007f7f"># Part of Gerrit Code Review (http://code.google.com/p/gerrit/)</span>
+#
+<span style="color:#007f7f"># Copyright (C) 2009 The Android Open Source Project</span>
+#
+<span style="color:#007f7f"># Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span>
+<span style="color:#007f7f"># you may not use this file except in compliance with the License.</span>
+<span style="color:#007f7f"># You may obtain a copy of the License at</span>
+#
+<span style="color:#007f7f"># http://www.apache.org/licenses/LICENSE-2.0</span>
+#
+<span style="color:#007f7f"># Unless required by applicable law or agreed to in writing, software</span>
+<span style="color:#007f7f"># distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span>
+<span style="color:#007f7f"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span style="color:#007f7f"># See the License for the specific language governing permissions and</span>
+<span style="color:#007f7f"># limitations under the License.</span>
+#
+
+<span style="color:#fff;font-weight:bold">unset</span> GREP_OPTIONS
+
+CHANGE_ID_AFTER=<span style="color:#0ff;font-weight:bold">&#34;Bug|Issue&#34;</span>
+MSG=<span style="color:#0ff;font-weight:bold">&#34;</span>$1<span style="color:#0ff;font-weight:bold">&#34;</span>
+
+<span style="color:#007f7f"># Check for, and add if missing, a unique Change-Id</span>
+#
+add_ChangeId() {
+    clean_message=<span style="color:#0ff;font-weight:bold">`</span>sed -e <span style="color:#0ff;font-weight:bold">&#39;
+</span><span style="color:#0ff;font-weight:bold">        /^diff --git .*/{
+</span><span style="color:#0ff;font-weight:bold">            s///
+</span><span style="color:#0ff;font-weight:bold">            q
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">        /^Signed-off-by:/d
+</span><span style="color:#0ff;font-weight:bold">        /^#/d
+</span><span style="color:#0ff;font-weight:bold">    &#39;</span> <span style="color:#0ff;font-weight:bold">&#34;</span>$MSG<span style="color:#0ff;font-weight:bold">&#34;</span> | git stripspace<span style="color:#0ff;font-weight:bold">`</span>
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">test</span> -z <span style="color:#0ff;font-weight:bold">&#34;</span>$clean_message<span style="color:#0ff;font-weight:bold">&#34;</span>
+    <span style="color:#fff;font-weight:bold">then</span>
+        <span style="color:#fff;font-weight:bold">return</span>
+    <span style="color:#fff;font-weight:bold">fi</span>
+
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">test</span> <span style="color:#0ff;font-weight:bold">&#34;false&#34;</span> = <span style="color:#0ff;font-weight:bold">&#34;`git config --bool --get gerrit.createChangeId`&#34;</span>
+    <span style="color:#fff;font-weight:bold">then</span>
+        <span style="color:#fff;font-weight:bold">return</span>
+    <span style="color:#fff;font-weight:bold">fi</span>
+
+    <span style="color:#007f7f"># Does Change-Id: already exist? if so, exit (no change).</span>
+    <span style="color:#007f7f">###grep参数-i, --ignore-case 忽略大小写方式查找以“Change-Id:”开头字符串###</span>
+    <span style="color:#fff;font-weight:bold">if</span> grep -i <span style="color:#0ff;font-weight:bold">&#39;^Change-Id:&#39;</span> <span style="color:#0ff;font-weight:bold">&#34;</span>$MSG<span style="color:#0ff;font-weight:bold">&#34;</span> &gt;/dev/null
+    <span style="color:#fff;font-weight:bold">then</span>
+        <span style="color:#fff;font-weight:bold">return</span>
+    <span style="color:#fff;font-weight:bold">fi</span>
+
+    id=<span style="color:#0ff;font-weight:bold">`</span>_gen_ChangeId<span style="color:#0ff;font-weight:bold">`</span>
+
+    <span style="color:#007f7f">###$$：Shell本身的PID（ProcessID）###</span>
+    T=<span style="color:#0ff;font-weight:bold">&#34;</span>$MSG<span style="color:#0ff;font-weight:bold">.tmp.</span>$$<span style="color:#0ff;font-weight:bold">&#34;</span>
+    AWK=awk
+    <span style="color:#fff;font-weight:bold">if</span> [ -x /usr/xpg4/bin/awk ]; <span style="color:#fff;font-weight:bold">then</span>
+        <span style="color:#007f7f"># Solaris AWK is just too broken</span>
+        AWK=/usr/xpg4/bin/awk
+    <span style="color:#fff;font-weight:bold">fi</span>
+
+    <span style="color:#007f7f"># How this works:</span>
+    <span style="color:#007f7f"># - parse the commit message as (textLine+ blankLine*)*</span>
+    <span style="color:#007f7f"># - assume textLine+ to be a footer until proven otherwise</span>
+    <span style="color:#007f7f"># - exception: the first block is not footer (as it is the title)</span>
+    <span style="color:#007f7f"># - read textLine+ into a variable</span>
+    <span style="color:#007f7f"># - then count blankLines</span>
+    <span style="color:#007f7f"># - once the next textLine appears, print textLine+ blankLine* as these</span>
+    <span style="color:#007f7f">#   aren&#39;t footer</span>
+    <span style="color:#007f7f"># - in END, the last textLine+ block is available for footer parsing</span>
+    $AWK <span style="color:#0ff;font-weight:bold">&#39;
+</span><span style="color:#0ff;font-weight:bold">    BEGIN {
+</span><span style="color:#0ff;font-weight:bold">        # while we start with the assumption that textLine+
+</span><span style="color:#0ff;font-weight:bold">        # is a footer, the first block is not.
+</span><span style="color:#0ff;font-weight:bold">        isFooter = 0
+</span><span style="color:#0ff;font-weight:bold">        footerComment = 0
+</span><span style="color:#0ff;font-weight:bold">        blankLines = 0
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # Skip lines starting with &#34;#&#34; without any spaces before it.
+</span><span style="color:#0ff;font-weight:bold">    ###awk的next用法在处理逐行读取文本方面很强大，next逐行读取文本###
+</span><span style="color:#0ff;font-weight:bold">    /^#/ { next }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # Skip the line starting with the diff command and everything after it,
+</span><span style="color:#0ff;font-weight:bold">    # up to the end of the file, assuming it is only patch data.
+</span><span style="color:#0ff;font-weight:bold">    # If more than one line before the diff was empty, strip all but one.
+</span><span style="color:#0ff;font-weight:bold">    /^diff --git / {
+</span><span style="color:#0ff;font-weight:bold">        blankLines = 0
+</span><span style="color:#0ff;font-weight:bold">        while (getline) { }
+</span><span style="color:#0ff;font-weight:bold">        next
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # Count blank lines outside footer comments
+</span><span style="color:#0ff;font-weight:bold">    /^$/ &amp;&amp; (footerComment == 0) {
+</span><span style="color:#0ff;font-weight:bold">        blankLines++
+</span><span style="color:#0ff;font-weight:bold">        next
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # Catch footer comment
+</span><span style="color:#0ff;font-weight:bold">    /^\[[a-zA-Z0-9-]+:/ &amp;&amp; (isFooter == 1) {
+</span><span style="color:#0ff;font-weight:bold">        footerComment = 1
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    /]$/ &amp;&amp; (footerComment == 1) {
+</span><span style="color:#0ff;font-weight:bold">        footerComment = 2
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # We have a non-blank line after blank lines. Handle this.
+</span><span style="color:#0ff;font-weight:bold">    (blankLines &gt; 0) {
+</span><span style="color:#0ff;font-weight:bold">        print lines
+</span><span style="color:#0ff;font-weight:bold">        for (i = 0; i &lt; blankLines; i++) {
+</span><span style="color:#0ff;font-weight:bold">            print &#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">        lines = &#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">        blankLines = 0
+</span><span style="color:#0ff;font-weight:bold">        isFooter = 1
+</span><span style="color:#0ff;font-weight:bold">        footerComment = 0
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # Detect that the current block is not the footer
+</span><span style="color:#0ff;font-weight:bold">    (footerComment == 0) &amp;&amp; (!/^\[?[a-zA-Z0-9-]+:/ || /^[a-zA-Z0-9-]+:\/\//) {
+</span><span style="color:#0ff;font-weight:bold">        isFooter = 0
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    {
+</span><span style="color:#0ff;font-weight:bold">        # We need this information about the current last comment line
+</span><span style="color:#0ff;font-weight:bold">        if (footerComment == 2) {
+</span><span style="color:#0ff;font-weight:bold">            footerComment = 0
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">        if (lines != &#34;&#34;) {
+</span><span style="color:#0ff;font-weight:bold">            lines = lines &#34;\n&#34;;
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">        lines = lines $0
+</span><span style="color:#0ff;font-weight:bold">    }
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    # Footer handling:
+</span><span style="color:#0ff;font-weight:bold">    # If the last block is considered a footer, splice in the Change-Id at the
+</span><span style="color:#0ff;font-weight:bold">    # right place.
+</span><span style="color:#0ff;font-weight:bold">    # Look for the right place to inject Change-Id by considering
+</span><span style="color:#0ff;font-weight:bold">    # CHANGE_ID_AFTER. Keys listed in it (case insensitive) come first,
+</span><span style="color:#0ff;font-weight:bold">    # then Change-Id, then everything else (eg. Signed-off-by:).
+</span><span style="color:#0ff;font-weight:bold">    #
+</span><span style="color:#0ff;font-weight:bold">    # Otherwise just print the last block, a new line and the Change-Id as a
+</span><span style="color:#0ff;font-weight:bold">    # block of its own.
+</span><span style="color:#0ff;font-weight:bold">    END {
+</span><span style="color:#0ff;font-weight:bold">        unprinted = 1
+</span><span style="color:#0ff;font-weight:bold">        if (isFooter == 0) {
+</span><span style="color:#0ff;font-weight:bold">            print lines &#34;\n&#34;
+</span><span style="color:#0ff;font-weight:bold">            lines = &#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">        changeIdAfter = &#34;^(&#34; tolower(&#34;&#39;</span><span style="color:#0ff;font-weight:bold">&#34;</span>$CHANGE_ID_AFTER<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">&#39;&#34;) &#34;):&#34;
+</span><span style="color:#0ff;font-weight:bold">        numlines = split(lines, footer, &#34;\n&#34;)
+</span><span style="color:#0ff;font-weight:bold">        for (line = 1; line &lt;= numlines; line++) {
+</span><span style="color:#0ff;font-weight:bold">            if (unprinted &amp;&amp; match(tolower(footer[line]), changeIdAfter) != 1) {
+</span><span style="color:#0ff;font-weight:bold">                unprinted = 0
+</span><span style="color:#0ff;font-weight:bold">                print &#34;Change-Id: I&#39;</span><span style="color:#0ff;font-weight:bold">&#34;</span>$id<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">&#39;&#34;
+</span><span style="color:#0ff;font-weight:bold">            }
+</span><span style="color:#0ff;font-weight:bold">            print footer[line]
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">        if (unprinted) {
+</span><span style="color:#0ff;font-weight:bold">            print &#34;Change-Id: I&#39;</span><span style="color:#0ff;font-weight:bold">&#34;</span>$id<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">&#39;&#34;
+</span><span style="color:#0ff;font-weight:bold">        }
+</span><span style="color:#0ff;font-weight:bold">    }&#39;</span> <span style="color:#0ff;font-weight:bold">&#34;</span>$MSG<span style="color:#0ff;font-weight:bold">&#34;</span> &gt; <span style="color:#0ff;font-weight:bold">&#34;</span>$T<span style="color:#0ff;font-weight:bold">&#34;</span> &amp;&amp; mv <span style="color:#0ff;font-weight:bold">&#34;</span>$T<span style="color:#0ff;font-weight:bold">&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;</span>$MSG<span style="color:#0ff;font-weight:bold">&#34;</span> || rm -f <span style="color:#0ff;font-weight:bold">&#34;</span>$T<span style="color:#0ff;font-weight:bold">&#34;</span>
+}
+_gen_ChangeIdInput() {
+    <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;tree `git write-tree`&#34;</span>
+    <span style="color:#fff;font-weight:bold">if</span> parent=<span style="color:#0ff;font-weight:bold">`</span>git rev-parse <span style="color:#0ff;font-weight:bold">&#34;HEAD^0&#34;</span> <span style="color:#ff0;font-weight:bold">2</span>&gt;/dev/null<span style="color:#0ff;font-weight:bold">`</span>
+    <span style="color:#fff;font-weight:bold">then</span>
+        <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;parent </span>$parent<span style="color:#0ff;font-weight:bold">&#34;</span>
+    <span style="color:#fff;font-weight:bold">fi</span>
+    <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;author `git var GIT_AUTHOR_IDENT`&#34;</span>
+    <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;committer `git var GIT_COMMITTER_IDENT`&#34;</span>
+    <span style="color:#fff;font-weight:bold">echo</span>
+    <span style="color:#fff;font-weight:bold">printf</span> <span style="color:#0ff;font-weight:bold">&#39;%s&#39;</span> <span style="color:#0ff;font-weight:bold">&#34;</span>$clean_message<span style="color:#0ff;font-weight:bold">&#34;</span>
+}
+_gen_ChangeId() {
+    _gen_ChangeIdInput |
+    git hash-object -t commit --stdin
+}
+
+
+add_ChangeId</code></pre></div>
+<p></details></p>
+
+<h2 id="常见问题">常见问题</h2>
+
+<ul>
+<li><p>git review提交失败，提示找不到gerrit
+错误信息类似如下内容：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ubuntu@ubuntu:~/file/MANO_GIT/vfc_nslcm$ git review
+Could not connect to gerrit.
+Enter your gerrit username: fengl
+Trying again with ssh://fengl@10.190.49.99:29418/vfc_nslcm.git
+&lt;traceback object at 0x7f6d21311ef0&gt;
+We don<span style="color:#0ff;font-weight:bold">&#39;t know where your gerrit is. Please manually create a remote
+</span><span style="color:#0ff;font-weight:bold">named &#34;gerrit&#34; and try again.
+</span><span style="color:#0ff;font-weight:bold">Could not connect to gerrit at ssh://fengl@10.190.49.99:29418/vfc_nslcm.git
+</span><span style="color:#0ff;font-weight:bold">Traceback (most recent call last):
+</span><span style="color:#0ff;font-weight:bold">File &#34;/usr/bin/git-review&#34;, line 10, in &lt;module&gt;
+</span><span style="color:#0ff;font-weight:bold">sys.exit(main())
+</span><span style="color:#0ff;font-weight:bold">File &#34;/usr/lib/python2.7/dist-packages/git_review/cmd.py&#34;, line 1534, in main
+</span><span style="color:#0ff;font-weight:bold">sys.exit(e.EXIT_CODE)
+</span><span style="color:#0ff;font-weight:bold">AttributeError: &#39;</span>GitReviewException<span style="color:#0ff;font-weight:bold">&#39; object has no attribute &#39;</span>EXIT_CODE<span style="color:#f00">&#39;</span></code></pre></div></li>
+</ul>
+
+<p>解决办法：提示远程gerrit未设置，参考使用如下命令添加远程gerrit设置重新git review问题解决</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git remote add gerrit http://fengl:fengl@10.190.49.99:8080/a/vfc_nslcm.git</code></pre></div>
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

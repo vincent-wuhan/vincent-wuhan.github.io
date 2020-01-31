@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="License制作及简介 license制作依赖openssl服务
+License制作步骤  1.登陆license服务器
+ssh mano@10.190.49.60 password: 12 2.切换到license制作目录
+cd /home/licenseFactory/  注: 该目录下的公钥文件rsa_public_key.pem 不要动
+ 3.创建license输入文件  根据实际需求，将license管理对象填写到输入文件plain.txt
+以制作vnfm license为例:
+echo &#39;{&#34;productId&#34;: &#34;fh_2019_nfvo&#34;,&#34;vimThreshold&#34;:&#34;20&#34;,&#34;vnfmThreshold&#34;:&#34;20&#34;,&#34;licenseType&#34;:&#34;NFVO&#34;}&#39; &gt; plain.txt  4.生成license文件
+openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out license.lsn  参数说明:
+ plain.txt 为欲加密文件 inkey 指定公钥文件 pubin -out 指定加密后文件  License输入文件 下列license的输入文件通过替换上一章License制作步骤的第3步中plain.txt文件中的内容，从而达到生成控制不同对象的license输出
+控制网元数目及类型的控制 参数说明： | 参数| 说明| |:&mdash;&mdash;&mdash;&mdash;|:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;| |productId | productId为预导入license系统的vnfmId或nfvoId，如系统id与license中productId不一致将导入失败.licenseType为NFVO时，填nfvoId, licenseType为VNFM时，填vnfmId| |vnfThreshold | vnf阈值，控制实例化的vnf最大数 | |licenseType | license类型, NFVO类型填NFVO, VNFM类型填VNFM."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="License制作及简介 license制作依赖openssl服务
+License制作步骤  1.登陆license服务器
+ssh mano@10.190.49.60 password: 12 2.切换到license制作目录
+cd /home/licenseFactory/  注: 该目录下的公钥文件rsa_public_key.pem 不要动
+ 3.创建license输入文件  根据实际需求，将license管理对象填写到输入文件plain.txt
+以制作vnfm license为例:
+echo &#39;{&#34;productId&#34;: &#34;fh_2019_nfvo&#34;,&#34;vimThreshold&#34;:&#34;20&#34;,&#34;vnfmThreshold&#34;:&#34;20&#34;,&#34;licenseType&#34;:&#34;NFVO&#34;}&#39; &gt; plain.txt  4.生成license文件
+openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out license.lsn  参数说明:
+ plain.txt 为欲加密文件 inkey 指定公钥文件 pubin -out 指定加密后文件  License输入文件 下列license的输入文件通过替换上一章License制作步骤的第3步中plain.txt文件中的内容，从而达到生成控制不同对象的license输出
+控制网元数目及类型的控制 参数说明： | 参数| 说明| |:&mdash;&mdash;&mdash;&mdash;|:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;| |productId | productId为预导入license系统的vnfmId或nfvoId，如系统id与license中productId不一致将导入失败.licenseType为NFVO时，填nfvoId, licenseType为VNFM时，填vnfmId| |vnfThreshold | vnf阈值，控制实例化的vnf最大数 | |licenseType | license类型, NFVO类型填NFVO, VNFM类型填VNFM." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/license/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="license制作及简介">License制作及简介</h1>
+
+<p>license制作依赖openssl服务</p>
+
+<h2 id="license制作步骤">License制作步骤</h2>
+
+<ul>
+<li><p>1.登陆license服务器</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh mano@10.190.49.60
+password: <span style="color:#ff0;font-weight:bold">12</span></code></pre></div></li>
+
+<li><p>2.切换到license制作目录</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">cd</span> /home/licenseFactory/</code></pre></div></li>
+</ul>
+
+<p>注: 该目录下的公钥文件rsa_public_key.pem 不要动</p>
+
+<ul>
+<li>3.创建license输入文件</li>
+</ul>
+
+<p>根据实际需求，将license管理对象填写到输入文件plain.txt</p>
+
+<p>以制作vnfm license为例:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#39;{&#34;productId&#34;: &#34;fh_2019_nfvo&#34;,&#34;vimThreshold&#34;:&#34;20&#34;,&#34;vnfmThreshold&#34;:&#34;20&#34;,&#34;licenseType&#34;:&#34;NFVO&#34;}&#39;</span> &gt; plain.txt</code></pre></div>
+<ul>
+<li><p>4.生成license文件</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out license.lsn</code></pre></div></li>
+</ul>
+
+<p>参数说明:</p>
+
+<ul>
+<li>plain.txt 为欲加密文件</li>
+<li>inkey 指定公钥文件</li>
+<li>pubin -out 指定加密后文件</li>
+</ul>
+
+<h2 id="license输入文件">License输入文件</h2>
+
+<p>下列license的输入文件通过替换上一章License制作步骤的第3步中plain.txt文件中的内容，从而达到生成控制不同对象的license输出</p>
+
+<h3 id="控制网元数目及类型的控制">控制网元数目及类型的控制</h3>
+
+<p>参数说明：
+| 参数| 说明|
+|:&mdash;&mdash;&mdash;&mdash;|:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;|
+|productId    | productId为预导入license系统的vnfmId或nfvoId，如系统id与license中productId不一致将导入失败.licenseType为NFVO时，填nfvoId, licenseType为VNFM时，填vnfmId|
+|vnfThreshold | vnf阈值，控制实例化的vnf最大数 |
+|licenseType  | license类型, NFVO类型填NFVO, VNFM类型填VNFM.vnfm/vim控制类型填NFVO；网元的类型和数目控制类型填VNFM|
+|attribute    | vdu数量控制，vCER和vlb_vcer为产品固定类型，不允许修改，此处只改动数字|
+|||</p>
+
+<p>多类型网元控制：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="font-weight:bold">&#34;productId&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;fh_2018_01&#34;</span>,<span style="font-weight:bold">&#34;vnfThreshold&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;20&#34;</span>,<span style="font-weight:bold">&#34;attribute&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;{\&#34;vCER\&#34;:\&#34;5\&#34;,\&#34;vlb_vcer\&#34;:\&#34;5\&#34;}&#34;</span>,<span style="font-weight:bold">&#34;licenseType&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;VNFM&#34;</span>}</code></pre></div>
+<p>单类型网元控制：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="font-weight:bold">&#34;productId&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;fh_2018_01&#34;</span>,<span style="font-weight:bold">&#34;vnfThreshold&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;20&#34;</span>,<span style="font-weight:bold">&#34;attribute&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;{\&#34;vCER\&#34;:\&#34;5\&#34;}&#34;</span>,<span style="font-weight:bold">&#34;licenseType&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;VNFM&#34;</span>}</code></pre></div>
+<p>注：
+网元类型(vCER/vlb_vcer)后面的数字用于控制可实例化的个数，该功能暂未实现(2019/5/16)</p>
+
+<p><strong>重要:</strong> 由于采用非对称加密的方式，对于加密文件本身的字节长度会受限于秘钥本身。目前上述提供的文本已经接近秘钥长度上限，尽量控制网元类型字节长度避免license文件制作失败</p>
+
+<h3 id="vnfm-vim控制">vnfm、vim控制</h3>
+
+<p>参数说明：
+| 参数| 说明|
+|:&mdash;&mdash;&mdash;&mdash;|:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;|
+|productId    | productId为预导入license系统的vnfmId或nfvoId，如系统id与license中productId不一致将导入失败.licenseType为NFVO时，填nfvoId, licenseType为VNFM时，填vnfmId|
+|vimThreshold | vim阈值，控制注册的vim最大数 |
+|vnfmThreshold | vnfm阈值，控制注册的vnfm最大数 |
+|licenseType  | license类型, NFVO类型填NFVO, VNFM类型填VNFM.vnfm/vim控制类型填NFVO；网元的类型和数目控制类型填VNFM|
+|||</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="font-weight:bold">&#34;productId&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;fh_2019_nfvo&#34;</span>,<span style="font-weight:bold">&#34;vimThreshold&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;20&#34;</span>,<span style="font-weight:bold">&#34;vnfmThreshold&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;20&#34;</span>,<span style="font-weight:bold">&#34;licenseType&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;NFVO&#34;</span>}</code></pre></div>
+<h2 id="email">Email</h2>
+
+<p>zmguo5884@fiberhome.com</p>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

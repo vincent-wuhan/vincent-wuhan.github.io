@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="集群测试问题集合 集群环境删节点只剩下一个集群节点时，请求流表时报错，提示没有leader { &#34;errors&#34;: { &#34;error&#34;: [ { &#34;error-type&#34;: &#34;application&#34;, &#34;error-tag&#34;: &#34;operation-failed&#34;, &#34;error-message&#34;: &#34;Error executeRead ReadData for path /(urn:opendaylight:inventory?revision=2013-08-19)nodes/node/node[{(urn:opendaylight:inventory?revision=2013-08-19)id=openflow:1}]/AugmentationIdentifier{childNames=[(urn:opendaylight:flow:inventory?revision=2013-08-19)supported-match-types, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-instructions, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-actions, (urn:opendaylight:flow:inventory?revision=2013-08-19)switch-features, (urn:opendaylight:flow:inventory?revision=2013-08-19)manufacturer, (urn:opendaylight:flow:inventory?revision=2013-08-19)hardware, (urn:opendaylight:flow:inventory?revision=2013-08-19)software, (urn:opendaylight:flow:inventory?revision=2013-08-19)serial-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)description, (urn:opendaylight:flow:inventory?revision=2013-08-19)port-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)ip-address, (urn:opendaylight:flow:inventory?revision=2013-08-19)group, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-group, (urn:opendaylight:flow:inventory?revision=2013-08-19)table, (urn:opendaylight:flow:inventory?revision=2013-08-19)table-features]}/(urn:opendaylight:flow:inventory?revision=2013-08-19)table/table[{(urn:opendaylight:flow:inventory?revision=2013-08-19)id=0}]&#34;, &#34;error-info&#34;: &#34;org.opendaylight.mdsal.common.api.DataStoreUnavailableException: Shard member-2-shard-inventory-operational currently has no leader. Try again later.\n\tat org.opendaylight.controller.cluster.datastore.NoOpTransactionContext.executeRead(NoOpTransactionContext.java:66)\n\tat org.opendaylight.controller.cluster.datastore.TransactionProxy$1.invoke(TransactionProxy.java:95)\n\tat org.opendaylight.controller.cluster.datastore.TransactionContextWrapper.executePriorTransactionOperations(TransactionContextWrapper.java:194)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.onFindPrimaryShardFailure(AbstractTransactionContextFactory.java:109)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.access$100(AbstractTransactionContextFactory.java:37)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:136)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:130)\n\tat akka.dispatch.OnComplete.internal(Future.scala:260)\n\tat akka.dispatch.OnComplete.internal(Future.scala:258)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:188)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:185)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)\n\tat akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:91)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:91)\n\tat akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)\n\tat akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: org."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="集群测试问题集合 集群环境删节点只剩下一个集群节点时，请求流表时报错，提示没有leader { &#34;errors&#34;: { &#34;error&#34;: [ { &#34;error-type&#34;: &#34;application&#34;, &#34;error-tag&#34;: &#34;operation-failed&#34;, &#34;error-message&#34;: &#34;Error executeRead ReadData for path /(urn:opendaylight:inventory?revision=2013-08-19)nodes/node/node[{(urn:opendaylight:inventory?revision=2013-08-19)id=openflow:1}]/AugmentationIdentifier{childNames=[(urn:opendaylight:flow:inventory?revision=2013-08-19)supported-match-types, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-instructions, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-actions, (urn:opendaylight:flow:inventory?revision=2013-08-19)switch-features, (urn:opendaylight:flow:inventory?revision=2013-08-19)manufacturer, (urn:opendaylight:flow:inventory?revision=2013-08-19)hardware, (urn:opendaylight:flow:inventory?revision=2013-08-19)software, (urn:opendaylight:flow:inventory?revision=2013-08-19)serial-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)description, (urn:opendaylight:flow:inventory?revision=2013-08-19)port-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)ip-address, (urn:opendaylight:flow:inventory?revision=2013-08-19)group, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-group, (urn:opendaylight:flow:inventory?revision=2013-08-19)table, (urn:opendaylight:flow:inventory?revision=2013-08-19)table-features]}/(urn:opendaylight:flow:inventory?revision=2013-08-19)table/table[{(urn:opendaylight:flow:inventory?revision=2013-08-19)id=0}]&#34;, &#34;error-info&#34;: &#34;org.opendaylight.mdsal.common.api.DataStoreUnavailableException: Shard member-2-shard-inventory-operational currently has no leader. Try again later.\n\tat org.opendaylight.controller.cluster.datastore.NoOpTransactionContext.executeRead(NoOpTransactionContext.java:66)\n\tat org.opendaylight.controller.cluster.datastore.TransactionProxy$1.invoke(TransactionProxy.java:95)\n\tat org.opendaylight.controller.cluster.datastore.TransactionContextWrapper.executePriorTransactionOperations(TransactionContextWrapper.java:194)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.onFindPrimaryShardFailure(AbstractTransactionContextFactory.java:109)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.access$100(AbstractTransactionContextFactory.java:37)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:136)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:130)\n\tat akka.dispatch.OnComplete.internal(Future.scala:260)\n\tat akka.dispatch.OnComplete.internal(Future.scala:258)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:188)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:185)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)\n\tat akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:91)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:91)\n\tat akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)\n\tat akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: org." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/cluster_bugs/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="集群测试问题集合">集群测试问题集合</h1>
+
+<h2 id="集群环境删节点只剩下一个集群节点时-请求流表时报错-提示没有leader">集群环境删节点只剩下一个集群节点时，请求流表时报错，提示没有leader</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="font-weight:bold">&#34;errors&#34;</span>: {
+        <span style="font-weight:bold">&#34;error&#34;</span>: [
+            {
+                <span style="font-weight:bold">&#34;error-type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;application&#34;</span>,
+                <span style="font-weight:bold">&#34;error-tag&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;operation-failed&#34;</span>,
+                <span style="font-weight:bold">&#34;error-message&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Error executeRead ReadData for path /(urn:opendaylight:inventory?revision=2013-08-19)nodes/node/node[{(urn:opendaylight:inventory?revision=2013-08-19)id=openflow:1}]/AugmentationIdentifier{childNames=[(urn:opendaylight:flow:inventory?revision=2013-08-19)supported-match-types, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-instructions, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-actions, (urn:opendaylight:flow:inventory?revision=2013-08-19)switch-features, (urn:opendaylight:flow:inventory?revision=2013-08-19)manufacturer, (urn:opendaylight:flow:inventory?revision=2013-08-19)hardware, (urn:opendaylight:flow:inventory?revision=2013-08-19)software, (urn:opendaylight:flow:inventory?revision=2013-08-19)serial-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)description, (urn:opendaylight:flow:inventory?revision=2013-08-19)port-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)ip-address, (urn:opendaylight:flow:inventory?revision=2013-08-19)group, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-group, (urn:opendaylight:flow:inventory?revision=2013-08-19)table, (urn:opendaylight:flow:inventory?revision=2013-08-19)table-features]}/(urn:opendaylight:flow:inventory?revision=2013-08-19)table/table[{(urn:opendaylight:flow:inventory?revision=2013-08-19)id=0}]&#34;</span>,
+                <span style="font-weight:bold">&#34;error-info&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;org.opendaylight.mdsal.common.api.DataStoreUnavailableException: Shard member-2-shard-inventory-operational currently has no leader. Try again later.\n\tat org.opendaylight.controller.cluster.datastore.NoOpTransactionContext.executeRead(NoOpTransactionContext.java:66)\n\tat org.opendaylight.controller.cluster.datastore.TransactionProxy$1.invoke(TransactionProxy.java:95)\n\tat org.opendaylight.controller.cluster.datastore.TransactionContextWrapper.executePriorTransactionOperations(TransactionContextWrapper.java:194)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.onFindPrimaryShardFailure(AbstractTransactionContextFactory.java:109)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.access$100(AbstractTransactionContextFactory.java:37)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:136)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:130)\n\tat akka.dispatch.OnComplete.internal(Future.scala:260)\n\tat akka.dispatch.OnComplete.internal(Future.scala:258)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:188)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:185)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)\n\tat akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:91)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:91)\n\tat akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)\n\tat akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: org.opendaylight.controller.cluster.datastore.exceptions.NoShardLeaderException: Shard member-2-shard-inventory-operational currently has no leader. Try again later.\n\tat org.opendaylight.controller.cluster.datastore.shardmanager.ShardManager.createNoShardLeaderException(ShardManager.java:976)\n\tat org.opendaylight.controller.cluster.datastore.shardmanager.ShardManager.onShardNotInitializedTimeout(ShardManager.java:807)\n\tat org.opendaylight.controller.cluster.datastore.shardmanager.ShardManager.handleCommand(ShardManager.java:256)\n\tat org.opendaylight.controller.cluster.common.actor.AbstractUntypedPersistentActor.onReceiveCommand(AbstractUntypedPersistentActor.java:44)\n\tat akka.persistence.UntypedPersistentActor.onReceive(PersistentActor.scala:275)\n\tat org.opendaylight.controller.cluster.common.actor.MeteringBehavior.apply(MeteringBehavior.java:104)\n\tat akka.actor.ActorCell$$anonfun$become$1.applyOrElse(ActorCell.scala:608)\n\tat akka.actor.Actor.aroundReceive(Actor.scala:517)\n\tat akka.actor.Actor.aroundReceive$(Actor.scala:515)\n\tat akka.persistence.UntypedPersistentActor.akka$persistence$Eventsourced$$super$aroundReceive(PersistentActor.scala:273)\n\tat akka.persistence.Eventsourced$$anon$1.stateReceive(Eventsourced.scala:691)\n\tat akka.persistence.Eventsourced.aroundReceive(Eventsourced.scala:192)\n\tat akka.persistence.Eventsourced.aroundReceive$(Eventsourced.scala:191)\n\tat akka.persistence.UntypedPersistentActor.aroundReceive(PersistentActor.scala:273)\n\tat akka.actor.ActorCell.receiveMessage(ActorCell.scala:590)\n\tat akka.actor.ActorCell.invoke(ActorCell.scala:559)\n\tat akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)\n\tat akka.dispatch.Mailbox.run(Mailbox.scala:224)\n\tat akka.dispatch.Mailbox.exec(Mailbox.scala:234)\n\t... 4 more\n&#34;</span>
+            }
+        ]
+    }
+}</code></pre></div>
+<p>查询集群选举role，返回状态为candidate,当三个集群节点全部恢复后，查询功能恢复。</p>
+
+<ol>
+<li>关闭集群节点中的一个节点，集群shard-role从leader-&gt;Candiate</li>
+</ol>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

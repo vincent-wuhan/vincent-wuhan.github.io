@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>有效提升Python代码质量的技巧 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="有效提升Python代码质量的技巧"/>
+<meta name="twitter:description" content="有效提升Python代码质量的20个技巧 推导式 推导式是构建列表、字典、集合和生成器便捷方式
+ 格式
+[表达式 for 迭代变量 in 可迭代对象 if 条件] 举例
+# 列表推导式 mylist = [i**2 for i in range(1,11) if i &gt; 5] # 字典推导式 mydict = {i: i*i for i in range(1,6)} # 集合推导式 myset = {i for i in &#39;HarryPotter&#39; if i not in &#39;er&#39;} # 元组推导式要显示使用tuple()，不能直接使用() # ()被生成器占用了 # 生成器 mygenerator = (i for i in range(0,11)) print(mygenerator) print(list(mygenerator)) # 嵌套循环 mylist = [str(i) &#43; j for i in range(1,6) for j in &#39;ABCDE&#39;] # 字典转列表 mydict = {&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;} mylist = [key &#43; &#39;:&#39; &#43; value for key, value in mydict."/>
+
+    <meta property="og:title" content="有效提升Python代码质量的技巧" />
+<meta property="og:description" content="有效提升Python代码质量的20个技巧 推导式 推导式是构建列表、字典、集合和生成器便捷方式
+ 格式
+[表达式 for 迭代变量 in 可迭代对象 if 条件] 举例
+# 列表推导式 mylist = [i**2 for i in range(1,11) if i &gt; 5] # 字典推导式 mydict = {i: i*i for i in range(1,6)} # 集合推导式 myset = {i for i in &#39;HarryPotter&#39; if i not in &#39;er&#39;} # 元组推导式要显示使用tuple()，不能直接使用() # ()被生成器占用了 # 生成器 mygenerator = (i for i in range(0,11)) print(mygenerator) print(list(mygenerator)) # 嵌套循环 mylist = [str(i) &#43; j for i in range(1,6) for j in &#39;ABCDE&#39;] # 字典转列表 mydict = {&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;} mylist = [key &#43; &#39;:&#39; &#43; value for key, value in mydict." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/python/%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84%E6%8A%80%E5%B7%A7/" />
+<meta property="article:published_time" content="2020-01-31T19:40:27+08:00" />
+<meta property="article:modified_time" content="2020-01-31T19:40:27+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">有效提升Python代码质量的技巧</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 31, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="有效提升python代码质量的20个技巧">有效提升Python代码质量的20个技巧</h1>
+
+<h2 id="推导式">推导式</h2>
+
+<p>推导式是构建列表、字典、集合和生成器便捷方式</p>
+
+<ul>
+<li><p>格式</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[表达式 for 迭代变量 in 可迭代对象 if 条件]</code></pre></div></li>
+
+<li><p>举例</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 列表推导式</span>
+mylist = [i**<span style="color:#ff0;font-weight:bold">2</span> <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">11</span>) <span style="color:#fff;font-weight:bold">if</span> i &gt; <span style="color:#ff0;font-weight:bold">5</span>]
+
+<span style="color:#007f7f"># 字典推导式</span>
+mydict = {i: i*i <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">6</span>)}
+
+<span style="color:#007f7f"># 集合推导式</span>
+myset = {i <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#0ff;font-weight:bold">&#39;HarryPotter&#39;</span> <span style="color:#fff;font-weight:bold">if</span> i not in <span style="color:#0ff;font-weight:bold">&#39;er&#39;</span>}
+
+<span style="color:#007f7f"># 元组推导式要显示使用tuple()，不能直接使用()</span>
+<span style="color:#007f7f"># ()被生成器占用了</span>
+<span style="color:#007f7f"># 生成器</span>
+mygenerator = (i <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">11</span>))
+<span style="color:#fff;font-weight:bold">print</span>(mygenerator)
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#fff;font-weight:bold">list</span>(mygenerator))
+
+<span style="color:#007f7f"># 嵌套循环</span>
+mylist = [<span style="color:#fff;font-weight:bold">str</span>(i) + j <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">1</span>,<span style="color:#ff0;font-weight:bold">6</span>) <span style="color:#fff;font-weight:bold">for</span> j in <span style="color:#0ff;font-weight:bold">&#39;ABCDE&#39;</span>]
+
+<span style="color:#007f7f"># 字典转列表</span>
+mydict = {<span style="color:#0ff;font-weight:bold">&#39;key1&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;value1&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;key2&#39;</span>: <span style="color:#0ff;font-weight:bold">&#39;value2&#39;</span>}
+mylist = [key + <span style="color:#0ff;font-weight:bold">&#39;:&#39;</span> + value <span style="color:#fff;font-weight:bold">for</span> key, value in mydict.items()]
+
+<span style="color:#007f7f"># 字段key和value互换</span>
+{value: key <span style="color:#fff;font-weight:bold">for</span> key, value in mydict.items()}</code></pre></div></li>
+</ul>
+
+<h2 id="字符串">字符串</h2>
+
+<ul>
+<li><p>字符串连接</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#0ff;font-weight:bold">&#39;time&#39;</span> + <span style="color:#0ff;font-weight:bold">&#39;geekbang&#39;</span> + <span style="color:#0ff;font-weight:bold">&#39;org&#39;</span>
+<span style="color:#0ff;font-weight:bold">&#39;</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold"> </span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold"> </span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">&#39;</span> % (<span style="color:#0ff;font-weight:bold">&#39;time&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;geekbang&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;org&#39;</span>)
+mylist = [<span style="color:#0ff;font-weight:bold">&#39;time&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;geekbang&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;org&#39;</span>]
+<span style="color:#0ff;font-weight:bold">&#39;.&#39;</span>.join(mylist)</code></pre></div></li>
+
+<li><p>字符串拆分</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mystring = <span style="color:#0ff;font-weight:bold">&#39;time.geekbang.org&#39;</span>
+<span style="color:#fff;font-weight:bold">print</span>(mystring.split(<span style="color:#0ff;font-weight:bold">&#39;.&#39;</span>)[<span style="color:#ff0;font-weight:bold">0</span>])
+
+var1,var2 = mystring.split(<span style="color:#0ff;font-weight:bold">&#39;.&#39;</span>)[<span style="color:#ff0;font-weight:bold">1</span>:<span style="color:#ff0;font-weight:bold">3</span>]
+<span style="color:#fff;font-weight:bold">print</span>(var1, var2)</code></pre></div></li>
+
+<li><p>格式化字符串</p></li>
+</ul>
+
+<p>三种常用的格式化字符串方式</p>
+
+<blockquote>
+<p>%操作符 &ndash; printf风格的字符串格式化</p>
+</blockquote>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> math
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;Pi is </span><span style="color:#0ff;font-weight:bold">%5.3f</span><span style="color:#0ff;font-weight:bold">.&#39;</span> % math.pi)</code></pre></div>
+<p>好处: 格式定义清晰
+坏处: 参数多的时候比较混乱</p>
+
+<blockquote>
+<p>.format &ndash; 更加灵活</p>
+</blockquote>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;{1} and {0}&#39;</span>.format(<span style="color:#0ff;font-weight:bold">&#39;spam&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;eggs&#39;</span>))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;{value1} and {value2}&#39;</span>.format(value1=<span style="color:#0ff;font-weight:bold">&#39;tom&#39;</span>, value2=<span style="color:#0ff;font-weight:bold">&#39;jerry&#39;</span>))</code></pre></div>
+<blockquote>
+<p>f-string: Python3.6引入，该方法源于PEP498，唯一区别就是在字符串前面加了个&rsquo;f&rsquo;</p>
+</blockquote>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 三种比较</span>
+
+firstname = <span style="color:#0ff;font-weight:bold">&#39;yin&#39;</span>
+lastname = <span style="color:#0ff;font-weight:bold">&#39;wilson&#39;</span>
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;Hello, </span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold"> </span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">.&#39;</span>%(lastname, firstname))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;Hello, {name1} {name2}&#39;</span>.format(name1=lastname, name2=firstname))
+<span style="color:#fff;font-weight:bold">print</span>(f<span style="color:#0ff;font-weight:bold">&#39;Hello, {lastname} {firstname}.&#39;</span>)</code></pre></div>
+<p>优点: 性能更好，易读性好</p>
+
+<blockquote>
+<p>f-sting还可以做的事情，支持类的格式化，前提是类中实现了string的方法</p>
+</blockquote>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 表达式</span>
+f<span style="color:#0ff;font-weight:bold">&#39;{2*5}&#39;</span>
+<span style="color:#007f7f"># 类格式化</span>
+<span style="color:#fff;font-weight:bold">class</span> Persion:
+    <span style="color:#fff;font-weight:bold">def</span> __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    <span style="color:#fff;font-weight:bold">def</span> __str__(self):
+        <span style="color:#fff;font-weight:bold">return</span> f<span style="color:#0ff;font-weight:bold">&#39;hello, {self.first_name} {slef.last_name}.&#39;</span>
+
+    <span style="color:#fff;font-weight:bold">def</span> __repr__(self):
+        <span style="color:#fff;font-weight:bold">return</span> f<span style="color:#0ff;font-weight:bold">&#39;hello, {self.first_name} {slef.last_name}.&#39;</span>
+
+me = Person(<span style="color:#0ff;font-weight:bold">&#39;yin&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;wilson&#39;</span>)
+<span style="color:#fff;font-weight:bold">print</span>(f<span style="color:#0ff;font-weight:bold">&#39;{me}&#39;</span>)</code></pre></div>
+<h2 id="colloections扩展内置数据类型">Colloections扩展内置数据类型</h2>
+
+<p><strong><a href="https://docs.python.org/zh-cn/3.6/library/collections.html">https://docs.python.org/zh-cn/3.6/library/collections.html</a></strong></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># namedtuple -- 带命名的元组</span>
+<span style="color:#fff;font-weight:bold">import</span> collections
+Point = collections.namedtuple(<span style="color:#0ff;font-weight:bold">&#39;Point&#39;</span>, [<span style="color:#0ff;font-weight:bold">&#39;x&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;y&#39;</span>])
+p = Point(<span style="color:#ff0;font-weight:bold">11</span>, y=<span style="color:#ff0;font-weight:bold">22</span>)
+<span style="color:#fff;font-weight:bold">print</span>(p[<span style="color:#ff0;font-weight:bold">0</span>] + p[<span style="color:#ff0;font-weight:bold">1</span>])
+x,y = p
+<span style="color:#fff;font-weight:bold">print</span>(p.x + p.y)
+<span style="color:#fff;font-weight:bold">print</span>(p)
+
+<span style="color:#007f7f"># deque 双向队列</span>
+<span style="color:#007f7f"># Counter 计数器</span></code></pre></div>
+<h2 id="函数的可变长参数">函数的可变长参数</h2>
+
+<p>一般可变长参数</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">def func(*args, **kargs)
+    pass
+
+kargs 获取关键字参数
+args 获取其他参数
+
+示例：
+def func(*args, **kargs)
+    print(f&#39;args: {args}&#39;)
+    print(f&#39;kargs: {kargs}&#39;)
+
+func(123, &#39;xyz&#39;, name=&#39;xvalue&#39;)
+
+结果：
+args: (123, &#39;xyz&#39;)
+kargs: {&#39;name&#39;: &#39;xvalue&#39;}</code></pre></div>
+<h2 id="lambda表达式">Lambda表达式</h2>
+
+<p>Lambda知识表达式，不是所有的函数逻辑都能封装进去</p>
+
+<p>k = lambda x:x+1
+print(k(1))</p>
+
+<ul>
+<li>Lambda表达式后面只能有一个表达式</li>
+<li>实现简单函数的时候可以使用Lambda表达式替代</li>
+<li>使用高阶函数的时候一般使用Lambda表达式</li>
+</ul>
+
+<h2 id="高阶函数">高阶函数</h2>
+
+<p>高阶：参数是函数、返回值是函数</p>
+
+<p>常见的高阶函数： map、reduce、filter、apply
+apply在python2.3被移除，reduce被放到functools包中
+推导式和生成器表达式可以代替map和filter函数</p>
+
+<h3 id="map-filter-函数-序列">map/filter(函数, 序列)</h3>
+
+<p>map(函数, 序列)将序列中每个值传入函数，处理完成返回为map对象</p>
+
+<p>filter(函数，序列)将序列中每个值传入函数，符合函数条件的返回为filter对象</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">number = <span style="color:#fff;font-weight:bold">list</span>(<span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">11</span>))
+<span style="color:#fff;font-weight:bold">def</span> square(x):
+    <span style="color:#fff;font-weight:bold">return</span> x**<span style="color:#ff0;font-weight:bold">2</span>
+
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#fff;font-weight:bold">list</span>(<span style="color:#fff;font-weight:bold">map</span>(square, number)))
+
+<span style="color:#007f7f"># 推导式</span>
+
+[i**<span style="color:#ff0;font-weight:bold">2</span> <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">11</span>)]</code></pre></div>
+<p>如果square函数比较长，使用高阶函数会更好,如果square函数比较短，用推导式更方便</p>
+
+<h2 id="生成器">生成器</h2>
+
+<ol>
+<li>yield关键字在函数中使用，可以实现生成器</li>
+<li>yield和return不同，return返回后，函数状态终止，yield保持函数的执行状态，返回后，函数回到之前保存的状态继续执行</li>
+<li>函数被yield会暂停，局部变量也会被保存</li>
+<li>迭代器终止时，会抛出Stoplteration异常</li>
+</ol>
+
+<h2 id="装饰器">装饰器</h2>
+
+<ol>
+<li>装饰器函数的参数是被装饰函数</li>
+<li>装饰器函数处理被装饰函数，处理完成后返回被装饰函数或替换为另一个函数</li>
+<li>装饰器不用入侵函数内部</li>
+
+<li><p>装饰器强调定义态，而非运行态</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> decorate(func):
+<span style="color:#fff;font-weight:bold">def</span> inner()
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;in decorate)</span>
+    func()
+<span style="color:#fff;font-weight:bold">return</span> inner
+
+@decorate
+<span style="color:#fff;font-weight:bold">def</span> target():
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;do somethimg&#39;</span>)
+
+target()</code></pre></div></li>
+</ol>
+
+<h2 id="魔术方法">魔术方法</h2>
+
+<p>系统提供的，系统提供了多少就只能用多少。</p>
+
+<ol>
+<li>魔术方法以2个下划线开头，2个下划线结束</li>
+<li>魔术方法类似其他语言的接口</li>
+<li>自定义类实现自带的数据类型</li>
+
+<li><p>如：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">__call__() 允许类的实例称为可调用对象
+__str__() 被str()调用时的行为
+__getitem__()使用[key]调用时的行为
+__iter__()被迭代时的行为</code></pre></div></li>
+
+<li><p>鸭子类型</p></li>
+</ol>
+
+<h3 id="属性描述符property">属性描述符property</h3>
+
+<p>描述符： 实现特定协议的类
+property类需要实现<strong>get</strong>、<strong>set</strong>、<strong>delete</strong>方法</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">class</span> Teacher:
+    <span style="color:#fff;font-weight:bold">def</span> __init__(self, name):
+        self.name = name
+    
+    <span style="color:#fff;font-weight:bold">def</span> __get__(self):
+        <span style="color:#fff;font-weight:bold">return</span> self.name
+
+    <span style="color:#fff;font-weight:bold">def</span> __set__(self, value):
+        self.name = value
+
+pythonteacher = Teacher(<span style="color:#0ff;font-weight:bold">&#39;yin&#39;</span>)
+pythonteacher.name = <span style="color:#0ff;font-weight:bold">&#39;wilson&#39;</span>
+<span style="color:#fff;font-weight:bold">print</span>(pythonteacher.name)</code></pre></div>
+<h2 id="抽象基类">抽象基类</h2>
+
+<ul>
+<li>抽象基类(Abstract Base Class, ABC)</li>
+<li>抽象基类提供逻辑和实现解耦的能力</li>
+<li>父类可以定义，不用实现</li>
+<li>子类必须实现，否则保存</li>
+</ul>
+
+<p>类似于java中的接口</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">from</span> abc <span style="color:#fff;font-weight:bold">import</span> ABC
+
+<span style="color:#fff;font-weight:bold">class</span> MyABC(ABC):
+    <span style="color:#fff;font-weight:bold">pass</span>
+
+MyABC.register(<span style="color:#fff;font-weight:bold">tuple</span>)
+
+<span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">issubclass</span>(<span style="color:#fff;font-weight:bold">tuple</span>, MyABC)
+<span style="color:#fff;font-weight:bold">assert</span> isinstane((), MyABC)</code></pre></div>
+<h2 id="orm">ORM</h2>
+
+<p>ORM是把数据库实例化
+ORM让Python不用写原生SQL语句
+使用sqlalchemy定义模型，扩展pymysql的功能</p>
+
+<p>依赖:</p>
+
+<blockquote>
+<p>pip install SQLAlchemy</p>
+</blockquote>
+
+<h2 id="运行性能">运行性能</h2>
+
+<ul>
+<li>python代码由Python虚拟机运行</li>
+<li>Python虚拟机执行的是字节码</li>
+<li>Python代码运行前会被编译成字节码</li>
+
+<li><p>dis模块可以对Python代码进行生成字节码操作</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> dis
+
+<span style="color:#fff;font-weight:bold">def</span> func():
+a = <span style="color:#fff;font-weight:bold">list</span>(<span style="color:#0ff;font-weight:bold">&#39;123&#39;</span>)
+b = [<span style="color:#0ff;font-weight:bold">&#39;123&#39;</span>]
+
+<span style="color:#fff;font-weight:bold">print</span>(dis.dis(func))
+
+<span style="color:#007f7f"># 生成函数的字节码打印</span></code></pre></div></li>
+</ul>
+
+<h2 id="异常捕获">异常捕获</h2>
+
+<p>参考 <strong><a href="https://docs.python.org/zh-cn/3.6/library/exceptions.html">https://docs.python.org/zh-cn/3.6/library/exceptions.html</a></strong></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">gennumber = (i <span style="color:#fff;font-weight:bold">for</span> i <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">0</span>,<span style="color:#ff0;font-weight:bold">2</span>))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#fff;font-weight:bold">next</span>(gennumber))
+<span style="color:#fff;font-weight:bold">print</span>(<span style="color:#fff;font-weight:bold">next</span>(gennumber))
+
+<span style="color:#fff;font-weight:bold">try</span>:
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#fff;font-weight:bold">next</span>(gennumber))
+<span style="color:#fff;font-weight:bold">except</span> StopIteration:
+    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">&#39;The Last&#39;</span>)</code></pre></div>
+<h2 id="上下文管理器">上下文管理器</h2>
+
+<ul>
+<li>with语句从Python2.5引入</li>
+<li>with语句实现上下文管理协议，实现了<strong>enter</strong>()和<strong>exit</strong>()方法</li>
+
+<li><p>支持上下文管理协议对象，实现上下文管理器</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f"># 不用上下文</span>
+file1 = <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold">&#39;a.txt&#39;</span>, encoding=<span style="color:#0ff;font-weight:bold">&#39;utf8&#39;</span>)
+<span style="color:#fff;font-weight:bold">try</span>:
+data = file1.read()
+<span style="color:#fff;font-weight:bold">finally</span>:
+file1.close()
+
+<span style="color:#007f7f"># 用上下文</span>
+<span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold">&#39;a.txt&#39;</span>, encoding=<span style="color:#0ff;font-weight:bold">&#39;utf8&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> file2:
+data = file2.read()</code></pre></div></li>
+</ul>
+
+<h2 id="代码风格">代码风格</h2>
+
+<ul>
+<li><p>pylint是python代码分析工具，分析python代码中错误和代码风格</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">pip install pylint</code></pre></div></li>
+
+<li><p>pep8和autopep8</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">pip install autopep8</code></pre></div></li>
+</ul>
+
+<p>vscode默认使用pylint检查python代码</p>
+
+<h2 id="设计模式">设计模式</h2>
+
+<ul>
+<li>单例模式是设计模式的一种</li>
+<li>单例模式确保类只有一个对象被创建</li>
+<li>提供一个全局访问该对象的方式</li>
+
+<li><p>扩展共享资源的并行访问</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">class</span> Singleton(<span style="color:#fff;font-weight:bold">object</span>):
+<span style="color:#fff;font-weight:bold">def</span> __new__(cls):
+    <span style="color:#fff;font-weight:bold">if</span> not <span style="color:#fff;font-weight:bold">hasattr</span>(cls, <span style="color:#0ff;font-weight:bold">&#39;instance&#39;</span>):
+        cls.instance = <span style="color:#fff;font-weight:bold">super</span>(Singleton, cls).__new__(cls)
+        <span style="color:#fff;font-weight:bold">return</span> cls.instance
+
+s1 = Singleton()
+<span style="color:#fff;font-weight:bold">print</span>(s1)
+
+s2 = Singleton()
+<span style="color:#fff;font-weight:bold">print</span>(s2)</code></pre></div></li>
+</ul>
+
+<h2 id="venv">venv</h2>
+
+<p>Python3.3自带ven，PEP-405
+venv解决版本冲突问题</p>
+
+<p>用法:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">python3 -m venv myvenv
+<span style="color:#fff;font-weight:bold">source</span> ./myvenv/bin/activate
+deactivate</code></pre></div>
+<h2 id="pip安装加速">pip安装加速</h2>
+
+<p>pypi python模块包管理</p>
+
+<p>国内源：</p>
+
+<ul>
+<li>豆瓣: <a href="http://pypi.doubanio.com/simple/">http://pypi.doubanio.com/simple/</a></li>
+<li>清华: <a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">https://mirrors.tuna.tsinghua.edu.cn/help/pypi/</a></li>
+</ul>
+
+<p>升级pip大于10.0.0</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U</code></pre></div>
+<p>临时设置</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip config <span style="color:#fff;font-weight:bold">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></pre></div>
+<p>永久设置</p>
+
+<ul>
+<li>windws: C:\Users\xxx\pip\pip.ini</li>
+<li>Linux: ~/.pip/pip.conf</li>
+</ul>
+
+<p>配置文件格式</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#fff;font-weight:bold">[global]</span>
+<span style="color:#007f7f">index-url</span> = <span style="color:#0ff;font-weight:bold">https://pypi.tuna.tsinghua.edu.cn/simple</span></code></pre></div>
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割
+Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问   NodePort Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过:访问服务   LoadBalancer Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service        回滚设置 默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。"/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割
+Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问   NodePort Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过:访问服务   LoadBalancer Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service        回滚设置 默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/kubernetes/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="kubernetes">Kubernetes</h1>
+
+<h2 id="kubectl常用命令">kubectl常用命令</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f">#异常pod捕获命令</span>
+kubectl get pods -n kube-system | grep -v Running 
+<span style="color:#007f7f"># 查看目前所有的pod</span>
+kubectl get po 
+<span style="color:#007f7f"># 查看目前所有的replica set</span>
+kubectl get rs 
+<span style="color:#007f7f"># 查看目前所有的deployment</span>
+kubectl get deployment 
+<span style="color:#007f7f"># 查看my-nginx pod的详细状态</span>
+kubectl describe po my-nginx 
+<span style="color:#007f7f"># 查看my-nginx replica set的详细状态</span>
+kubectl describe rs my-nginx 
+<span style="color:#007f7f"># 查看my-nginx deployment的详细状态</span>
+kubectl describe deployment my-nginx 
+<span style="color:#007f7f"># 查看相关事件</span>
+kubectl get eventskubectl get events
+kubectl delete deployment my-nginx</code></pre></div>
+<h2 id="的作用">“&mdash;”的作用</h2>
+
+<p>一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割</p>
+
+<h2 id="service类型">Service类型</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">ClusterIP</td>
+<td align="left">Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问</td>
+</tr>
+
+<tr>
+<td align="left">NodePort</td>
+<td align="left">Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过<NodeIP>:<NodePort>访问服务</td>
+</tr>
+
+<tr>
+<td align="left">LoadBalancer</td>
+<td align="left">Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="回滚设置">回滚设置</h2>
+
+<p>默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。</p>
+
+<h2 id="health-check">Health Check</h2>
+
+<h3 id="容器默认健康检查">容器默认健康检查</h3>
+
+<p>每个容器启动时由CMD/ENTRYPOINT指定执行一个进程，进程退出返回码非0则认为容器发生故障。容器发生故障，Kubernetes则重启容器</p>
+
+<h3 id="liveness探测">Liveness探测</h3>
+
+<p>对于一些容器发生故障默认进程不退出的情况，比如WEB服务500错误、系统超载和资源死锁等，则需要采用Liveness探测的方式帮助Kubernetes感知容器状态。</p>
+
+<p>Liveness探测可以让用户自定义判断容器是否健康的条件，如果探测失败，Kubernetes就会重启容器。</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">initialDelaySeconds</td>
+<td align="left">设置容器启动后多久开始执行Liveness探测</td>
+</tr>
+
+<tr>
+<td align="left">periodSeconds</td>
+<td align="left">Liveness探测的周期</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="readiness探测">Readiness探测</h3>
+
+<p>用户通过Liveness探测告诉Kubernetes通过重启容器实现自愈;Readiness则告诉Kubernetes什么时候可以将容器加入到Service负载均衡池中，对外提供服务。</p>
+
+<h2 id="数据管理">数据管理</h2>
+
+<h3 id="emptydir">emptyDir</h3>
+
+<p>emptyDir Volume与Pod的生命周期是一致的。</p>
+
+<h3 id="hostpath">hostPath</h3>
+
+<p>hostPath Volume的作用是将Docker Host文件系统中已经存在的目录mount给Pod容器。因为这种方式会增加Pod与节点的耦合，所有一般不会使用hostPath。
+尽管hostPath的持久性比emptyDir强，不过一旦Host崩溃，hostPath也就无法访问了。</p>
+
+<h3 id="pv-pvc-persistentvolume-persistentvolumeclaim">PV &amp; PVC （PersistentVolume &amp; PersistentVolumeClaim）</h3>
+
+<blockquote>
+<p>· PV 是外部系统的一块存储空间，由管理员创建和维护，与Volume一样，PV具有持久性，生命周期独立于Pod
+· PVC 是对PV的申请(Claim)。PVC通常由普通用户创建和维护。需要为Pod分配存储资源时，指明存储资源的容量大小和访问模式等信息，Kubernetes会查找并提供满足条件的PV。</p>
+</blockquote>
+
+<h3 id="secret">Secret</h3>
+
+<h4 id="作用">作用</h4>
+
+<p>以密文的形式存储数据，避免直接在配置文件中保存敏感信息</p>
+
+<h4 id="创建secret">创建Secret</h4>
+
+<p>&ndash;from-literal</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create secret generic mysecret --from-literal=username=admin --from-liternam=password=<span style="color:#ff0;font-weight:bold">123456</span></code></pre></div>
+<p>&ndash;from-file</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">echo</span> -n admin &gt; ./username
+<span style="color:#fff;font-weight:bold">echo</span> -n <span style="color:#ff0;font-weight:bold">123456</span> &gt; ./password
+kubectl create secret generic mysecret --from-file=./username --from-file=./password</code></pre></div>
+<p>&ndash;from-env-file</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat <span style="color:#0ff;font-weight:bold">&lt;&lt; EOF &gt; env.txt
+</span><span style="color:#0ff;font-weight:bold">username=admin
+</span><span style="color:#0ff;font-weight:bold">password=123456
+</span><span style="color:#0ff;font-weight:bold">EOF</span>
+kubectl create secret generic mysecret --from-env-file=env.txt</code></pre></div>
+<p>通过YAML配置</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+kind: Secret
+metadata: 
+    name: mysecret
+data:
+    username: YWRtaW4=
+    password: MTIzNDU2</code></pre></div>
+<p>注意：文件中的敏感数据必须是通过base64编码后的结果</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">echo</span> -n admin | base64
+YWRtaW4
+$ <span style="color:#fff;font-weight:bold">echo</span> -n <span style="color:#ff0;font-weight:bold">123456</span> | base64
+MTIzNDU2</code></pre></div>
+<h4 id="查看secret">查看Secret</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 查看secret</span>
+kubectl get secret mysecret
+
+<span style="color:#007f7f"># 查看secret详情</span>
+kubectl describe secret mysecret</code></pre></div>
+<h4 id="secret的使用">Secret的使用</h4>
+
+<p>在Pod中可以通过Volume或环境变量的方式使用Secret
+环境变量的方式虽然方便，但是无法支撑Secret的动态变化。</p>
+
+<h3 id="configmap">ConfigMap</h3>
+
+<p>对于一些非敏感信息，比如应用配置信息，可以用ConfigMap。ConfigMap以明文的形式存放。</p>
+
+<h2 id="常见问题">常见问题</h2>
+
+<h3 id="手动删除pods的步骤">手动删除pods的步骤</h3>
+
+<p>有时候删除pods发现pod重启了，这种情况需要使用kubectl get deployments检查一下是否存在部署，先使用kubectl delete deployment $name删除部署后再删除pods往往能够成功并且不再重启pod</p>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

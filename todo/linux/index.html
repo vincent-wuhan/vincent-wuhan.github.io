@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Linux技巧 Ubuntu common 查看磁盘大文件 du -sh /* 修改网卡名字（如eth0） /etc/udev/rules.d/70-persistent-net.rules Root远程登录设置 #!/bin/bash # setup root access - default login: oom/oom - comment out to restrict access too ssh key only sed -i &#39;s/PermitRootLogin.*/PermitRootLogin yes/&#39; /etc/ssh/sshd_config sed -i &#39;s/PasswordAuthentication.*/PasswordAuthentication yes/&#39; /etc/ssh/sshd_config service sshd restart echo -e &#34;mano2018\nmano2018&#34; | passwd root Root用户密码设置 sudo passwd root 查看apt-get依赖包 cd /var/cache/apt/archives
+添加用户到docker组 root@mano:~# gpasswd -a sdc docker Adding user sdc to group docker root@mano:~# newgrp docker"/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Linux技巧 Ubuntu common 查看磁盘大文件 du -sh /* 修改网卡名字（如eth0） /etc/udev/rules.d/70-persistent-net.rules Root远程登录设置 #!/bin/bash # setup root access - default login: oom/oom - comment out to restrict access too ssh key only sed -i &#39;s/PermitRootLogin.*/PermitRootLogin yes/&#39; /etc/ssh/sshd_config sed -i &#39;s/PasswordAuthentication.*/PasswordAuthentication yes/&#39; /etc/ssh/sshd_config service sshd restart echo -e &#34;mano2018\nmano2018&#34; | passwd root Root用户密码设置 sudo passwd root 查看apt-get依赖包 cd /var/cache/apt/archives
+添加用户到docker组 root@mano:~# gpasswd -a sdc docker Adding user sdc to group docker root@mano:~# newgrp docker" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/linux/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="linux技巧">Linux技巧</h1>
+
+<h2 id="ubuntu">Ubuntu</h2>
+
+<h3 id="common">common</h3>
+
+<h4 id="查看磁盘大文件">查看磁盘大文件</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">du -sh /*</code></pre></div>
+<h4 id="修改网卡名字-如eth0">修改网卡名字（如eth0）</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/etc/udev/rules.d/70-persistent-net.rules</code></pre></div>
+<h4 id="root远程登录设置">Root远程登录设置</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/bin/bash
+</span><span style="color:#0f0;font-weight:bold"></span><span style="color:#007f7f"># setup root access - default login: oom/oom - comment out to restrict access too ssh key only</span>
+sed -i <span style="color:#0ff;font-weight:bold">&#39;s/PermitRootLogin.*/PermitRootLogin yes/&#39;</span> /etc/ssh/sshd_config
+sed -i <span style="color:#0ff;font-weight:bold">&#39;s/PasswordAuthentication.*/PasswordAuthentication yes/&#39;</span> /etc/ssh/sshd_config
+service sshd restart
+<span style="color:#fff;font-weight:bold">echo</span> -e <span style="color:#0ff;font-weight:bold">&#34;mano2018\nmano2018&#34;</span> | passwd root</code></pre></div>
+<h4 id="root用户密码设置">Root用户密码设置</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo passwd root</code></pre></div>
+<h4 id="查看apt-get依赖包">查看apt-get依赖包</h4>
+
+<p>cd /var/cache/apt/archives</p>
+
+<h4 id="添加用户到docker组">添加用户到docker组</h4>
+
+<p>root@mano:~# gpasswd -a sdc docker
+Adding user sdc to group docker
+root@mano:~# newgrp docker</p>
+
+<h4 id="ip设置">IP设置</h4>
+
+<p>16.04不介绍了，这里主要说明18.04后的差异。
+18.04后，ubuntu的IP设置修改/etc/network/interfaces不再生效，需要参考如下方式修改IP</p>
+
+<p>配置IP</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo vi /etc/netplan/*.yaml</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">network:
+    ethernetes:
+        ens160:
+            address: [<span style="color:#ff0;font-weight:bold">10.190.49.26</span>/<span style="color:#ff0;font-weight:bold">22</span>]
+            gateway4: <span style="color:#ff0;font-weight:bold">10.190.48.1</span>
+            dhcp4: <span style="color:#fff;font-weight:bold">false</span>
+            optional: <span style="color:#fff;font-weight:bold">true</span>
+    version: <span style="color:#ff0;font-weight:bold">2</span></code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo netplan apply</code></pre></div>
+<p>DNS配置</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo vi /etc/resolv.conf</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">nameservice <span style="color:#ff0;font-weight:bold">10.19.8.15</span></code></pre></div>
+<h4 id="系统软件源镜像">系统软件源镜像</h4>
+
+<p>公司搭建的18.04的官方仓库源镜像，需要手动编辑/etc/apt/sources.list
+注释或删除其中与以下配置相似的，替换为镜像站地址</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">deb http://cn.archive.ubuntu.com/ubuntu/ bionic main universe multiverse restricted
+deb http://cn.archive.ubuntu.com/ubuntu/ bionic-updates main universe multiverse restricted
+deb http://security.ubuntu.com/ubuntu/ bionic-security main universe multiverse restricted
+deb http://security.ubuntu.com/ubuntu/ bionic-backports main universe multiverse restricted</code></pre></div>
+<p>完整的私服包地址</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"> deb http://10.190.48.88/ubuntu/ bionic main universe multiverse restricted
+ deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse restricted
+ deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse restricted
+ deb http://10.190.48.88/ubuntu/ bionic-backports main universe multiverse restricted</code></pre></div>
+<p>不过一般只要其中部分源，没有特别需求时，不需要backports类型更新和restricted渠道(设备专用驱动，如显卡驱动)</p>
+
+<p>18.04 TLS版本的软件源路径</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">deb http://10.190.48.88/ubuntu/ bionic main universe multiverse
+deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse
+deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse</code></pre></div>
+<p>记录一下16.04的源以备不时之需</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">deb http://10.190.48.88/ubuntu/ xenial main universe multiverse
+deb http://10.190.48.88/ubuntu/ xenial-updates main universe multiverse
+deb http://10.190.48.88/ubuntu/ xenial-security main universe multiverse</code></pre></div>
+<h4 id="目录下查找文件">目录下查找文件</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">find DIR_PATH -name <span style="color:#0ff;font-weight:bold">&#34;FILE_NAME&#34;</span></code></pre></div>
+<h4 id="软链接">软链接</h4>
+
+<p>ln -s 源目录 目的目录</p>
+
+<p>例如: 将/home/mano/installRel的快捷方式放到/opt/file/installRel中</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ln -s /home/mano/installRel /opt/file/installRel</code></pre></div>
+<h4 id="代理设置">代理设置</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">export</span> http_proxy=<span style="color:#0ff;font-weight:bold">&#34;http://10.190.51.201:7788&#34;</span>  <span style="color:#fff;font-weight:bold">export</span> https_proxy=<span style="color:#0ff;font-weight:bold">&#34;http://10.190.51.201:7788&#34;</span></code></pre></div>
+<h4 id="查看tar包目录结构">查看tar包目录结构</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gzip -dc *.tar.gz |tar tvf -</code></pre></div>
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

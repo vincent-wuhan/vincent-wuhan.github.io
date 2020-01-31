@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="一键部署脚本维护说明 环境准备 硬件环境    RAM HD vCores Ports     128G 160G 32 0.0.0.0/0          软件条件    Release Kubernetes Helm kubectl Docker     amsterdam 1.7.x 2.3.x 1.7.x 1.12.x   beijing/master 1.8.10 2.8.2 1.8.10 17.03.x           安装目录结构 install | |___ env | |___ file."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="一键部署脚本维护说明 环境准备 硬件环境    RAM HD vCores Ports     128G 160G 32 0.0.0.0/0          软件条件    Release Kubernetes Helm kubectl Docker     amsterdam 1.7.x 2.3.x 1.7.x 1.12.x   beijing/master 1.8.10 2.8.2 1.8.10 17.03.x           安装目录结构 install | |___ env | |___ file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/onap_offline_install/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="一键部署脚本维护说明">一键部署脚本维护说明</h1>
+
+<h2 id="环境准备">环境准备</h2>
+
+<h3 id="硬件环境">硬件环境</h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">RAM</th>
+<th align="left">HD</th>
+<th align="left">vCores</th>
+<th align="left">Ports</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">128G</td>
+<td align="left">160G</td>
+<td align="left">32</td>
+<td align="left">0.0.0.0/0</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="软件条件">软件条件</h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">Release</th>
+<th align="left">Kubernetes</th>
+<th align="left">Helm</th>
+<th align="left">kubectl</th>
+<th align="left">Docker</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">amsterdam</td>
+<td align="left">1.7.x</td>
+<td align="left">2.3.x</td>
+<td align="left">1.7.x</td>
+<td align="left">1.12.x</td>
+</tr>
+
+<tr>
+<td align="left">beijing/master</td>
+<td align="left">1.8.10</td>
+<td align="left">2.8.2</td>
+<td align="left">1.8.10</td>
+<td align="left">17.03.x</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="安装目录结构">安装目录结构</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tree" data-lang="tree">install
+|
+|___ env
+|     |___ file.conf
+|     |___ create_file_server.sh
+|     |___ install_docker.sh
+|     |___ create_docker_registry.sh
+|     |___ repo
+|     |     |___ helm chart packages
+|     |___ dockers
+|     |     |___ docker images cache
+|     |___ data
+|           |___ scripts
+|           |       |___ rancher.sh
+|           |       |___ k8s-node.sh
+|           |       |___ helm.sh
+|           |       |___ ...  
+|           |___ softwares
+|                   |___ libltdl7_2.4.6-0.1_amd64.deb
+|                   |___ docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
+|                   |___ ...
+|___ start.py
+|___ readme.md</code></pre></div>
+<h2 id="安装前提">安装前提</h2>
+
+<p>管理员权限运行安装</p>
+
+<h2 id="docker安装">docker安装</h2>
+
+<p>install_docker.sh</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/usr/bin/env bash
+</span><span style="color:#0f0;font-weight:bold"></span><span style="color:#fff;font-weight:bold">cd</span> ./data/softwares
+sudo dpkg -i libltdl7_2.4.6-0.1_amd64.deb
+sudo dpkg -i docker-ce_17.03.0~ce-0~ubuntu-xenial_amd64.deb
+
+<span style="color:#fff;font-weight:bold">echo</span> -e  <span style="color:#0ff;font-weight:bold">&#34;{\n\&#34;registry-mirrors\&#34;: [\n\&#34;https://registry.docker-cn.com\&#34;\n],\n\&#34;insecure-registries\&#34;: [\&#34;</span>$DOCKER_SERVER<span style="color:#0ff;font-weight:bold">\&#34;,\&#34;nexus3.onap.org:10001\&#34;,\&#34;nexus3.onap.org\&#34;]\n}&#34;</span> &gt;&gt; /etc/docker/daemon.json
+
+service docker restart</code></pre></div>
+<h2 id="文件服务器">文件服务器</h2>
+
+<h3 id="nginx配置">nginx配置</h3>
+
+<p>file.conf</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-conf" data-lang="conf">log_format  p_access.log  &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;
+             &#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;
+             &#39;&#34;$http_user_agent&#34; $http_x_forwarded_for&#39;;
+server
+    {
+        listen       8000;  # 监听 8000 端口，按需求也可以配置一个前台服务器作子域名转发
+        index index.html default.html; # 默认首页文件
+        root  /var/www/file;   #文件服务器的根路径
+        autoindex on;
+        autoindex_exact_size off;
+        autoindex_localtime on;
+        charset utf-8;
+                # 这里配置拒绝访问的目录或文件
+        location ~ (repos)
+        {
+            deny all;
+        }
+
+                # 静态文件的过期时间，可以不需要此配置
+        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+            {
+                expires      30d;
+            }
+                # 静态文件的过期时间，可以不需要此配置
+        location ~ .*\.(js|css)?$
+            {
+                expires      12h;
+            }
+                 # 这里很重要! 将日志转发到 /dev/stdout ，可以通过 docker logs -f  来查看容器日志
+        access_log  /dev/stdout;
+    }</code></pre></div>
+<h3 id="文件服务器启动脚本">文件服务器启动脚本</h3>
+
+<p>create_file_server.sh</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/usr/bin/env bash
+</span><span style="color:#0f0;font-weight:bold"></span>
+<span style="color:#fff;font-weight:bold">if</span> [ ! -d <span style="color:#0ff;font-weight:bold">&#39;./data&#39;</span> ]
+<span style="color:#fff;font-weight:bold">then</span>
+    mkdir data
+<span style="color:#fff;font-weight:bold">fi</span>
+
+<span style="color:#007f7f"># 重点解释这里吧</span>
+docker run -dit --name files0 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>--restart always <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>-p <span style="color:#ff0;font-weight:bold">3002</span>:8000 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>-v $PWD/file.conf:/etc/nginx/conf.d/file.conf <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>-v $PWD/data:/var/www/file <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>-w /var/www/file <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>nginx</code></pre></div>
+<h2 id="安装说明">安装说明</h2>
+
+<ol>
+<li><p>任意一个地方建立独立目录</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir documents
+<span style="color:#fff;font-weight:bold">cd</span> documents</code></pre></div></li>
+
+<li><p>拷贝file.conf和create_file_server.sh到目录中</p></li>
+
+<li><p>执行create_file_server.sh</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./create_file_server.sh</code></pre></div></li>
+</ol>
+
+<h2 id="docker镜像仓库">docker镜像仓库</h2>
+
+<h3 id="镜像仓库启动脚本">镜像仓库启动脚本</h3>
+
+<p>create_docker_registry.sh</p>
+
+<p>在线安装</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/user/bin/env bash
+</span><span style="color:#0f0;font-weight:bold"></span> docker run -d <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> --restart=unless-stopped <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> --name registry <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> -e REGISTRY_HTTP_ADDR=<span style="color:#ff0;font-weight:bold">0</span>.0.0.0:5000 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> -e REGISTRY_PROXY_REMOTEURL=https://nexus3.onap.org:10001 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> -p <span style="color:#ff0;font-weight:bold">5000</span>:5000 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> registry:2</code></pre></div>
+<p>离线安装</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/usr/bin/env bash
+</span><span style="color:#0f0;font-weight:bold"></span> docker run -d <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> --restart=unless-stopped <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> --name registry <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> -e REGISTRY_HTTP_ADDR=<span style="color:#ff0;font-weight:bold">0</span>.0.0.0:5000 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> -p <span style="color:#ff0;font-weight:bold">5000</span>:5000 <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span> registry:2</code></pre></div>
+<h3 id="启动-仓库">启动仓库</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./create_docker_registry.sh</code></pre></div>
+<h2 id="rancher安装">rancher安装</h2>
+
+<h2 id="下载rancher-sh">下载rancher.sh</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">export</span> HTTP_SERVER=localhost:3002
+curl -O http://$HTTP_SERVER/scripts/rancher.sh</code></pre></div>
+<h3 id="安装rancher">安装rancher</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./rancher.sh</code></pre></div>
+<h2 id="k8s安装">k8s安装</h2>
+
+<h3 id="下载k8s-node-sh">下载k8s-node.sh</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">export</span> HTTP_SERVER=localhost:3002
+curl -O http://$HTTP_SERVER/scripts/k8s-node.sh</code></pre></div>
+<h3 id="安装k8s">安装k8s</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./k8s-node.sh</code></pre></div>
+<h2 id="rancher-kubernetes-api">rancher&amp;Kubernetes API</h2>
+
+<h3 id="kubernetes-template获取">kubernetes template获取</h3>
+
+<p>RESTful API
+GET http://{rancher-server}:{rancher-port}/v2-beta/projecttemplates</p>
+
+<p>Body中遍历data获得name为Kubernetes的id属性</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    <span style="color:#0ff;font-weight:bold">&#34;data&#34;</span><span style="color:#f00">:</span> [
+        {
+            <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;1pt1&#34;</span>,
+            <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;projectTemplate&#34;</span>,
+            <span style="font-weight:bold">&#34;links&#34;</span>: {
+                <span style="font-weight:bold">&#34;self&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;http://10.190.49.74:8080/v2-beta/projecttemplates/1pt1&#34;</span>,
+                <span style="font-weight:bold">&#34;accounts&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;http://10.190.49.74:8080/v2-beta/projecttemplates/1pt1/accounts&#34;</span>
+            },
+            <span style="font-weight:bold">&#34;actions&#34;</span>: {
+                <span style="font-weight:bold">&#34;remove&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;http://10.190.49.74:8080/v2-beta/projecttemplates/1pt1/?action=remove&#34;</span>
+            },
+            <span style="font-weight:bold">&#34;baseType&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;projectTemplate&#34;</span>,
+            <span style="font-weight:bold">&#34;name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Kubernetes&#34;</span>,
+            <span style="font-weight:bold">&#34;state&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;active&#34;</span>,
+            <span style="font-weight:bold">&#34;accountId&#34;</span>: <span style="color:#fff;font-weight:bold">null</span>,</code></pre></div>
+<h3 id="rancher-env添加">rancher env添加</h3>
+
+<p>RESTful API</p>
+
+<p>POST http://{rancher-server}:{rancher-port}/v2-beta/projects</p>
+
+<p>Body:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<span style="font-weight:bold">&#34;description&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;description context&#34;</span>,
+<span style="font-weight:bold">&#34;name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;env name&#34;</span>,
+<span style="font-weight:bold">&#34;projectTemplateId&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;template id&#34;</span>,
+<span style="font-weight:bold">&#34;hostRemoveDelaySeconds&#34;</span>: <span style="color:#ff0;font-weight:bold">60</span>,
+<span style="font-weight:bold">&#34;allowSystemRole&#34;</span>: <span style="color:#fff;font-weight:bold">false</span>,
+<span style="font-weight:bold">&#34;members&#34;</span>: [ ],
+<span style="font-weight:bold">&#34;virtualMachine&#34;</span>: <span style="color:#fff;font-weight:bold">true</span>,
+<span style="font-weight:bold">&#34;servicesPortRange&#34;</span>: <span style="color:#fff;font-weight:bold">null</span>,
+<span style="font-weight:bold">&#34;projectLinks&#34;</span>: []
+}</code></pre></div>
+<h3 id="rancher-host添加">rancher host添加</h3>
+
+<p>RESTful API
+GET http://{rancher-server}:{rancher-port}/v2-beta/projects/{project-id}/registrationtokens?state=active&amp;limit=-1&amp;sort=name</p>
+
+<p>Body中，data.command的加上 -e CATTLE_AGENT_IP=&ldquo;{K8s-node-ip}&rdquo;</p>
+
+<p>举例：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo docker run -e CATTLE_AGENT_IP=<span style="color:#0ff;font-weight:bold">&#34;10.0.0.12&#34;</span>  --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/rancher:/var/lib/rancher rancher/agent:v1.2.9 http://10.190.49.74:8080/v1/scripts/BB74B483F2F4CD897835:1546214400000:VVdh7rQkkjDLZIkNpvtTa4cC3Y</code></pre></div>
+<p>在{K8s-node-ip}对应的节点上运行command安装host</p>
+
+<h3 id="kubectl-token获取">kubectl token获取</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#fff;font-weight:bold">const</span> NEW_CONFIG_TPL = <span style="color:#0ff;font-weight:bold">`apiVersion: v1
+</span><span style="color:#0ff;font-weight:bold">kind: Config
+</span><span style="color:#0ff;font-weight:bold">clusters:
+</span><span style="color:#0ff;font-weight:bold">- cluster:
+</span><span style="color:#0ff;font-weight:bold">    api-version: v1%maybeInsecure%
+</span><span style="color:#0ff;font-weight:bold">    server: &#34;%baseUrl%/r/projects/%projectId%/kubernetes:6443&#34;
+</span><span style="color:#0ff;font-weight:bold">  name: &#34;%projectName%&#34;
+</span><span style="color:#0ff;font-weight:bold">contexts:
+</span><span style="color:#0ff;font-weight:bold">- context:
+</span><span style="color:#0ff;font-weight:bold">    cluster: &#34;%projectName%&#34;
+</span><span style="color:#0ff;font-weight:bold">    user: &#34;%projectName%&#34;
+</span><span style="color:#0ff;font-weight:bold">  name: &#34;%projectName%&#34;
+</span><span style="color:#0ff;font-weight:bold">current-context: &#34;%projectName%&#34;
+</span><span style="color:#0ff;font-weight:bold">users:
+</span><span style="color:#0ff;font-weight:bold">- name: &#34;%projectName%&#34;
+</span><span style="color:#0ff;font-weight:bold">  user:
+</span><span style="color:#0ff;font-weight:bold">    token: &#34;%token%&#34;`</span>;
+</code></pre></div>
+<p>使用base64加密publicValue和secretValue获取token，以下是从kubenetes dashboard开源项目中截取的token生成的js代码片段</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#fff;font-weight:bold">let</span> token = btoa(<span style="color:#0ff;font-weight:bold">&#39;Basic &#39;</span> + btoa(key.get(<span style="color:#0ff;font-weight:bold">&#39;publicValue&#39;</span>) + <span style="color:#0ff;font-weight:bold">&#39;:&#39;</span> + key.get(<span style="color:#0ff;font-weight:bold">&#39;secretValue&#39;</span>)));
+
+        <span style="color:#fff;font-weight:bold">var</span> config = tpl
+          .replace(<span style="color:#0ff;font-weight:bold">/%baseUrl%/g</span>,     base)
+          .replace(<span style="color:#0ff;font-weight:bold">/%maybeInsecure%/g</span>,(insecure ? <span style="color:#0ff;font-weight:bold">&#39;\n    insecure-skip-tls-verify: true&#39;</span> : <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>))
+          .replace(<span style="color:#0ff;font-weight:bold">/%projectName%/g</span>, <span style="color:#fff;font-weight:bold">this</span>.get(<span style="color:#0ff;font-weight:bold">&#39;projects.current.displayName&#39;</span>))
+          .replace(<span style="color:#0ff;font-weight:bold">/%projectId%/g</span>,   <span style="color:#fff;font-weight:bold">this</span>.get(<span style="color:#0ff;font-weight:bold">&#39;projects.current.id&#39;</span>))
+          .replace(<span style="color:#0ff;font-weight:bold">/%publicValue%/g</span>, key.get(<span style="color:#0ff;font-weight:bold">&#39;publicValue&#39;</span>))
+          .replace(<span style="color:#0ff;font-weight:bold">/%secretValue%/g</span>, key.get(<span style="color:#0ff;font-weight:bold">&#39;secretValue&#39;</span>))
+          .replace(<span style="color:#0ff;font-weight:bold">/%token%/g</span>, token);
+</code></pre></div>
+<p>改用python实现</p>
+
+<p>id: 1c85
+publicValue: B141C7D4EB8E21373C17
+secretValue: AwYjBpcvsFsht24AYPNAyr4exjdbRmppagbno9Yo</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> base64
+base64.b64encode(<span style="color:#0ff;font-weight:bold">&#39;Basic &#39;</span> + base64.b64encode(<span style="color:#0ff;font-weight:bold">&#39;B141C7D4EB8E21373C17&#39;</span> + <span style="color:#0ff;font-weight:bold">&#39;:&#39;</span> + <span style="color:#0ff;font-weight:bold">&#39;AwYjBpcvsFsht24AYPNAyr4exjdbRmppagbno9Yo&#39;</span>))</code></pre></div>
+<p>输出</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">QmFzaWMgUWpFME1VTTNSRFJGUWpoRk1qRXpOek5ETVRjNlFYZFpha0p3WTNaelJuTm9kREkwUVZsUVRrRjVjalJsZUdwa1lsSnRjSEJoWjJKdWJ6bFpidz09</code></pre></div>
+<h2 id="helm私有仓库http服务器搭建">helm私有仓库http服务器搭建</h2>
+
+<p><a href="https://wiki.shileizcc.com/confluence/display/KUB/Kubernetes+Helm">https://wiki.shileizcc.com/confluence/display/KUB/Kubernetes+Helm</a></p>
+
+<p>搜索: &ldquo;搭建私有 Repository&rdquo;</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">搭建私有 Repository
+自建 Chart 之后，自然需要搭建私有仓库。下面使用 Apache 来搭建一个简单的 Chart 私有仓库，并将刚才新建的 mymariadb Chart 保存到私有仓库中。相关文档：https://docs.helm.sh/developing_charts/#the-chart-repository-guide
+
+Chart 仓库主要由前面提到的 Chart 压缩包和索引文件构成，通过 HTTP/HTTPS 对外提供服务。这里使用一个 Apache 应用来提供仓库服务。Apache 的设置如下。
+
+Apache 使用 /var/web/repo 目录进行仓库的存储。
+使用 http://127.0.0.1/repo 网址提供访问服务。
+将前面生成的 mymariadb-0.1.1.tgz 文件复制到仓库的 /var/web/repo 目录中。
+
+接下来使用 helm repo index /var/web/repo --url http://127.0.0.1/repo 命令，Helm 将自动根据目录中的内容创建索引。命令执行完成后，可以看到目录下多出来了一个 index.yaml 文件。
+
+最后启动 Web Server。
+
+为了能够使用这个私有仓库，需要将这个新的仓库地址加入到 Helm 配置中：
+
+$ helm repo add localhost http://127.0.0.1/repo
+再次运行 helm search mysql 命令，就会看到 Chart 列表中多出来的 localhost/mymariadb 项目了，也就是新仓库中的  Chart。
+
+可以使用 install 命令进行安装。</code></pre></div>
+<h2 id="chart仓库管理基础环境安装">Chart仓库管理基础环境安装</h2>
+
+<h3 id="helm安装helm-push插件">helm安装helm-push插件</h3>
+
+<p>网络环境代理：
+export http_proxy=&ldquo;<a href="http://10.190.51.201:7788&quot;">http://10.190.51.201:7788&quot;</a>  export https_proxy=&ldquo;<a href="http://10.190.51.201:7788&quot;">http://10.190.51.201:7788&quot;</a></p>
+
+<p>export http_proxy=&ldquo;<a href="http://10.190.49.200:8118&quot;">http://10.190.49.200:8118&quot;</a>  export https_proxy=&ldquo;<a href="http://10.190.49.200:8118&quot;">http://10.190.49.200:8118&quot;</a></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm plugin install https://github.com/chartmuseum/helm-push</code></pre></div>
+<p>增加harbor仓库</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm repo add {REPONAME} {HABOR_REPO_URL}
+例如：
+helm repo add mano http://10.190.49.74/chartrepo/onap</code></pre></div>
+<p>push helm的tgz包到远程仓库</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm push --username=admin --password=Harbor12345 kubeapps-123.tgz mano</code></pre></div>
+<p>在推送完毕后，远程仓库可以查看到已经更新，但是本地仓库需要执行helm update才会更新显示出来</p>
+
+<p>helm安装包指定docker镜像仓库</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install mano/kubeapps --version <span style="color:#ff0;font-weight:bold">0</span>.9.7 -n kubeapps --namespace kubeapps --set global.repository=<span style="color:#ff0;font-weight:bold">1</span>.1.1.11:10001</code></pre></div>
+<h3 id="kubeapps要求">kubeapps要求</h3>
+
+<p>helm 2.9.1</p>
+
+<h4 id="安装脚本">安装脚本</h4>
+
+<p>tar -zxvf helm-v2.9.1-linux-amd64.tar.gz)
+mv linux-amd64/helm /usr/local/bin/helm
+helm init &ndash;upgrade</p>
+
+<p>kubeapps 0.9.7版本</p>
+
+<p>&ndash;version 0.9.7</p>
+
+<h4 id="tiller需要获取超级权限">tiller需要获取超级权限</h4>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl -n kube-system create sa tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller</code></pre></div>
+<p>helm install mano/kubeapps &ndash;version 0.9.7 -n kubeapps &ndash;namespace kubeapps &ndash;set global.repository=1.1.1.11:10001
+kubectl create serviceaccount kubeapps-operator
+kubectl create clusterrolebinding kubeapps-operator &ndash;clusterrole=cluster-admin &ndash;serviceaccount=default:kubeapps-operator</p>
+
+<p>使用chart仓库安装
+helm install mano/kubeapps &ndash;version 0.9.7 &ndash;name kubeapps &ndash;namespace kubeapps &ndash;set rbac.create=false,global.repository=1.1.1.15:10001</p>
+
+<p>使用安装包安装
+helm install ./kubeapps-0.9.7.tgz -n kubeapps &ndash;namespace kubeapps &ndash;set rbac.create=false,global.repository=1.1.1.11:10001</p>
+
+<h4 id="token获取">token获取</h4>
+
+<p>kubeapp登陆界面端口，根据kubernetes中服务kubeapps映射的nodeport进行访问，访问时，登陆界面需要token使用如下命令在kubectl界面获得token</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl -n kube-system describe secret <span style="color:#fff;font-weight:bold">$(</span>kubectl -n kube-system get secret | grep admin-user | awk <span style="color:#0ff;font-weight:bold">&#39;{print $1}&#39;</span><span style="color:#fff;font-weight:bold">)</span></code></pre></div>
+<h2 id="主动重启">主动重启</h2>
+
+<h3 id="重启前删除所有部署">重启前删除所有部署</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm delete --purge <span style="color:#fff;font-weight:bold">$(</span>helm list|grep <span style="color:#0ff;font-weight:bold">&#34;dev&#34;</span>|awk <span style="color:#f00">&#39;</span>{print $1}’<span style="color:#fff;font-weight:bold">)</span></code></pre></div>
+<h3 id="启动后重新安装部署">启动后重新安装部署</h3>
+
+<p>在K8s节点根据需求重启部署</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">启动fitmano：
+python onap.py onap all
+或
+bash /root/onap.sh all &amp;
+
+启动nfvo
+python onap.py onap nfvo
+或
+bash /root/onap.sh nfvo &amp;
+
+启动vnfm
+python onap.py onap vnfm
+或
+bash /root/onap.sh vnfm &amp;</code></pre></div>
+<h2 id="q-a">Q&amp;A</h2>
+
+<p>如何判断rancher和k8s都已经安装完毕？</p>
+
+<p>如何判断Host已经添加完毕？</p>
+
+<h2 id="todo">TODO</h2>
+
+<p>IP 探测 &amp;&amp; 虚拟机安装
+ 一键部署自动化(IP创建后返回、环境探测)
+ 一键部署界</p>
+
+<h2 id="email">Email</h2>
+
+<p>jiangx@fiberhome.com</p>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

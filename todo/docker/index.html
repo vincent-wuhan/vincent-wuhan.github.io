@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Docker 常用命令  镜像导出   docker save 镜像:TAG &gt; tar包名称
+  镜像导入   docker load &lt; tar包名称
+  删除镜像    删除所有容器 docker rm docker ps -a -q 删除所有镜像 docker rmi docker images -q 删除没有打标签的镜像 docker rmi docker images -q | awk &#39;/^&lt;none&gt;/ { print $3 }&#39; 删除包含关键词的镜像 docker rmi &ndash;force docker images | grep 关键词 | awk &#39;{print $3}&#39; 5.删除镜像名为none的镜像 docker ps -a | grep &ldquo;Exited&rdquo; | awk &lsquo;{print $1 }&rsquo;|xargs docker stop docker ps -a | grep &ldquo;Exited&rdquo; | awk &lsquo;{print $1 }&rsquo;|xargs docker rm docker images|grep none|awk &lsquo;{print $3 }&rsquo;|xargs docker rmi   Dockerfile ADD路径说明  1、如果源路径是个文件，且目标路径是以 / 结尾， 则docker会把目标路径当作一个目录，会把源文件拷贝到该目录下。 如果目标路径不存在，则会自动创建目标路径。 2、如果源路径是个文件，且目标路径是不是以 / 结尾，则docker会把目标路径当作一个文件。 如果目标路径不存在，会以目标路径为名创建一个文件，内容同源文件； 如果目标文件是个存在的文件，会用源文件覆盖它，当然只是内容覆盖，文件名还是目标文件名。 如果目标文件实际是个存在的目录，则会源文件拷贝到该目录下。 注意，这种情况下，最好显示的以 / 结尾，以避免混淆。 3、如果源路径是个目录，且目标路径不存在，则docker会自动以目标路径创建一个目录，把源路径目录下的文件拷贝进来。 如果目标路径是个已经存在的目录，则docker会把源路径目录下的文件拷贝到该目录下。 4、如果源文件是个归档文件（压缩文件），则docker会自动帮解压。"/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Docker 常用命令  镜像导出   docker save 镜像:TAG &gt; tar包名称
+  镜像导入   docker load &lt; tar包名称
+  删除镜像    删除所有容器 docker rm docker ps -a -q 删除所有镜像 docker rmi docker images -q 删除没有打标签的镜像 docker rmi docker images -q | awk &#39;/^&lt;none&gt;/ { print $3 }&#39; 删除包含关键词的镜像 docker rmi &ndash;force docker images | grep 关键词 | awk &#39;{print $3}&#39; 5.删除镜像名为none的镜像 docker ps -a | grep &ldquo;Exited&rdquo; | awk &lsquo;{print $1 }&rsquo;|xargs docker stop docker ps -a | grep &ldquo;Exited&rdquo; | awk &lsquo;{print $1 }&rsquo;|xargs docker rm docker images|grep none|awk &lsquo;{print $3 }&rsquo;|xargs docker rmi   Dockerfile ADD路径说明  1、如果源路径是个文件，且目标路径是以 / 结尾， 则docker会把目标路径当作一个目录，会把源文件拷贝到该目录下。 如果目标路径不存在，则会自动创建目标路径。 2、如果源路径是个文件，且目标路径是不是以 / 结尾，则docker会把目标路径当作一个文件。 如果目标路径不存在，会以目标路径为名创建一个文件，内容同源文件； 如果目标文件是个存在的文件，会用源文件覆盖它，当然只是内容覆盖，文件名还是目标文件名。 如果目标文件实际是个存在的目录，则会源文件拷贝到该目录下。 注意，这种情况下，最好显示的以 / 结尾，以避免混淆。 3、如果源路径是个目录，且目标路径不存在，则docker会自动以目标路径创建一个目录，把源路径目录下的文件拷贝进来。 如果目标路径是个已经存在的目录，则docker会把源路径目录下的文件拷贝到该目录下。 4、如果源文件是个归档文件（压缩文件），则docker会自动帮解压。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/docker/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="docker">Docker</h1>
+
+<h2 id="常用命令">常用命令</h2>
+
+<ul>
+<li>镜像导出</li>
+</ul>
+
+<blockquote>
+<p>docker save 镜像:TAG &gt; tar包名称</p>
+</blockquote>
+
+<ul>
+<li>镜像导入</li>
+</ul>
+
+<blockquote>
+<p>docker load &lt; tar包名称</p>
+</blockquote>
+
+<ul>
+<li>删除镜像</li>
+</ul>
+
+<blockquote>
+<ol>
+<li>删除所有容器
+docker rm <code>docker ps -a -q</code></li>
+<li>删除所有镜像
+docker rmi <code>docker images -q</code></li>
+<li>删除没有打标签的镜像
+docker rmi <code>docker images -q | awk '/^&lt;none&gt;/ { print $3 }'</code></li>
+<li>删除包含关键词的镜像
+docker rmi &ndash;force <code>docker images | grep 关键词 | awk '{print $3}'</code>
+5.删除镜像名为none的镜像
+docker ps -a | grep &ldquo;Exited&rdquo; | awk &lsquo;{print $1 }&rsquo;|xargs docker stop
+docker ps -a | grep &ldquo;Exited&rdquo; | awk &lsquo;{print $1 }&rsquo;|xargs docker rm
+docker images|grep none|awk &lsquo;{print $3 }&rsquo;|xargs docker rmi</li>
+</ol>
+</blockquote>
+
+<h2 id="dockerfile">Dockerfile</h2>
+
+<h3 id="add路径说明">ADD路径说明</h3>
+
+<blockquote>
+<p>1、如果源路径是个文件，且目标路径是以 / 结尾， 则docker会把目标路径当作一个目录，会把源文件拷贝到该目录下。
+如果目标路径不存在，则会自动创建目标路径。
+2、如果源路径是个文件，且目标路径是不是以 / 结尾，则docker会把目标路径当作一个文件。
+如果目标路径不存在，会以目标路径为名创建一个文件，内容同源文件；
+如果目标文件是个存在的文件，会用源文件覆盖它，当然只是内容覆盖，文件名还是目标文件名。
+如果目标文件实际是个存在的目录，则会源文件拷贝到该目录下。 注意，这种情况下，最好显示的以 / 结尾，以避免混淆。
+3、如果源路径是个目录，且目标路径不存在，则docker会自动以目标路径创建一个目录，把源路径目录下的文件拷贝进来。
+如果目标路径是个已经存在的目录，则docker会把源路径目录下的文件拷贝到该目录下。
+4、如果源文件是个归档文件（压缩文件），则docker会自动帮解压。</p>
+</blockquote>
+
+<h3 id="copy路径说明">COPY路径说明</h3>
+
+<p>与ADD路径基本相似，但是缺少自动解压功能。会比ADD镜像多一层。</p>
+
+<h2 id="常见问题">常见问题</h2>
+
+<ul>
+<li>not support swap limit capabilities</li>
+</ul>
+
+<p>Adjust memory and swap accounting
+When users run Docker, they may see these messages when working with an image:</p>
+
+<p>WARNING: Your kernel does not support cgroup swap limit. WARNING: Your
+kernel does not support swap limit capabilities. Limitation discarded.
+To prevent these messages, enable memory and swap accounting on your system. To enable these on system using GNU GRUB (GNU GRand Unified Bootloader), do the following.</p>
+
+<p>Log into Ubuntu as a user with sudo privileges.</p>
+
+<p>Edit the /etc/default/grub file.</p>
+
+<p>Set the GRUB_CMDLINE_LINUX value as follows:</p>
+
+<p>GRUB_CMDLINE_LINUX=&ldquo;cgroup_enable=memory swapaccount=1&rdquo;
+Save and close the file.</p>
+
+<p>Update GRUB.</p>
+
+<p>$ sudo update-grub
+Reboot your system.</p>
+
+<ul>
+<li>容器存储位置如何修改</li>
+</ul>
+
+<ol>
+<li><p>查询默认位置，一般在/var/lib/docker
+sudo docker info | grep &ldquo;Docker Root Dir&rdquo;</p></li>
+
+<li><p>软链接方式
+service docker stop //关掉服务
+mv /var/lib/docker /root/data/docker //移动数据
+ln -s /root/data/docker /var/lib/docker //建立软链接
+service docker start //启动服务</p></li>
+</ol>
+
+<ul>
+<li><p>普通用户添加docker权限</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo gpasswd -a $USER docker
+newgrp docker</code></pre></div></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

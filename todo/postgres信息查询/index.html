@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Ansible部署系统监控功能 Ansible postgresql管理模块 postgresql_copy – Copy data between a file/program and a PostgreSQL table postgresql_db – Add or remove PostgreSQL databases from a remote host postgresql_ext – Add or remove PostgreSQL extensions from a database postgresql_idx – Create or drop indexes from a PostgreSQL database postgresql_info – Gather information about PostgreSQL servers postgresql_lang – Adds, removes or changes procedural languages with a PostgreSQL database postgresql_membership – Add or remove PostgreSQL roles from groups postgresql_owner – Change an owner of PostgreSQL database object postgresql_ping – Check remote PostgreSQL server availability postgresql_privs – Grant or revoke privileges on PostgreSQL database objects postgresql_publication – Add, update, or remove PostgreSQL publication postgresql_query – Run PostgreSQL queries postgresql_schema – Add or remove PostgreSQL schema postgresql_sequence – Create, drop, or alter a PostgreSQL sequence postgresql_set – Change a PostgreSQL server configuration parameter postgresql_slot – Add or remove replication slots from a PostgreSQL database postgresql_table – Create, drop, or modify a PostgreSQL table postgresql_tablespace – Add or remove PostgreSQL tablespaces from remote hosts postgresql_user – Add or remove a user (role) from a PostgreSQL server instance"/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Ansible部署系统监控功能 Ansible postgresql管理模块 postgresql_copy – Copy data between a file/program and a PostgreSQL table postgresql_db – Add or remove PostgreSQL databases from a remote host postgresql_ext – Add or remove PostgreSQL extensions from a database postgresql_idx – Create or drop indexes from a PostgreSQL database postgresql_info – Gather information about PostgreSQL servers postgresql_lang – Adds, removes or changes procedural languages with a PostgreSQL database postgresql_membership – Add or remove PostgreSQL roles from groups postgresql_owner – Change an owner of PostgreSQL database object postgresql_ping – Check remote PostgreSQL server availability postgresql_privs – Grant or revoke privileges on PostgreSQL database objects postgresql_publication – Add, update, or remove PostgreSQL publication postgresql_query – Run PostgreSQL queries postgresql_schema – Add or remove PostgreSQL schema postgresql_sequence – Create, drop, or alter a PostgreSQL sequence postgresql_set – Change a PostgreSQL server configuration parameter postgresql_slot – Add or remove replication slots from a PostgreSQL database postgresql_table – Create, drop, or modify a PostgreSQL table postgresql_tablespace – Add or remove PostgreSQL tablespaces from remote hosts postgresql_user – Add or remove a user (role) from a PostgreSQL server instance" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/postgres%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="ansible部署系统监控功能">Ansible部署系统监控功能</h1>
+
+<h2 id="ansible-postgresql管理模块">Ansible postgresql管理模块</h2>
+
+<p>postgresql_copy – Copy data between a file/program and a PostgreSQL table
+postgresql_db – Add or remove PostgreSQL databases from a remote host
+postgresql_ext – Add or remove PostgreSQL extensions from a database
+postgresql_idx – Create or drop indexes from a PostgreSQL database
+postgresql_info – Gather information about PostgreSQL servers
+postgresql_lang – Adds, removes or changes procedural languages with a PostgreSQL database
+postgresql_membership – Add or remove PostgreSQL roles from groups
+postgresql_owner – Change an owner of PostgreSQL database object
+postgresql_ping – Check remote PostgreSQL server availability
+postgresql_privs – Grant or revoke privileges on PostgreSQL database objects
+postgresql_publication – Add, update, or remove PostgreSQL publication
+postgresql_query – Run PostgreSQL queries
+postgresql_schema – Add or remove PostgreSQL schema
+postgresql_sequence – Create, drop, or alter a PostgreSQL sequence
+postgresql_set – Change a PostgreSQL server configuration parameter
+postgresql_slot – Add or remove replication slots from a PostgreSQL database
+postgresql_table – Create, drop, or modify a PostgreSQL table
+postgresql_tablespace – Add or remove PostgreSQL tablespaces from remote hosts
+postgresql_user – Add or remove a user (role) from a PostgreSQL server instance</p>
+
+<h2 id="ansible-tower-postgres信息查询语句">Ansible Tower Postgres信息查询语句</h2>
+
+<h3 id="获取客户机ip地址列表">获取客户机IP地址列表</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+  ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> ipv4
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span> <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+  ) ANSIBLE_FACTS;</code></pre></div>
+<h3 id="获取部署仓库代码列表">获取部署仓库代码列表</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  scm_type <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">类型</span>,
+  scm_url <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">仓库地址</span>,
+  scm_branch <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">分支</span>,
+  <span style="color:#fff;font-weight:bold">substring</span>(scm_revision, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">11</span>) <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">版本</span>,
+  playbook_files <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">部署脚本列表</span>
+<span style="color:#fff;font-weight:bold">from</span>
+  main_project</code></pre></div>
+<h3 id="获取仓库版本列表">获取仓库版本列表</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+    <span style="color:#fff;font-weight:bold">substring</span>(scm_revision, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">11</span>) <span style="color:#fff;font-weight:bold">as</span> revision 
+<span style="color:#fff;font-weight:bold">from</span>  
+    main_project
+<span style="color:#fff;font-weight:bold">where</span>
+    <span style="color:#fff;font-weight:bold">not</span> scm_revision = <span style="color:#0ff;font-weight:bold">&#39;&#39;</span> <span style="color:#fff;font-weight:bold">and</span> scm_url <span style="color:#fff;font-weight:bold">like</span> <span style="color:#0ff;font-weight:bold">&#39;%$project%&#39;</span></code></pre></div>
+<h3 id="获取仓库地址">获取仓库地址</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  scm_url <span style="color:#fff;font-weight:bold">as</span> url
+<span style="color:#fff;font-weight:bold">from</span>
+  main_project
+<span style="color:#fff;font-weight:bold">where</span>
+  scm_revision <span style="color:#fff;font-weight:bold">like</span> <span style="color:#0ff;font-weight:bold">&#39;%$revision%&#39;</span>
+<span style="color:#fff;font-weight:bold">and</span>
+  scm_url <span style="color:#fff;font-weight:bold">like</span> <span style="color:#0ff;font-weight:bold">&#39;%$project%&#39;</span></code></pre></div>
+<h3 id="获取仓库分支">获取仓库分支</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  scm_url <span style="color:#fff;font-weight:bold">as</span> url
+<span style="color:#fff;font-weight:bold">from</span>
+  main_project
+<span style="color:#fff;font-weight:bold">where</span>
+  scm_revision <span style="color:#fff;font-weight:bold">like</span> <span style="color:#0ff;font-weight:bold">&#39;%$revision%&#39;</span>
+<span style="color:#fff;font-weight:bold">and</span>
+  scm_url <span style="color:#fff;font-weight:bold">like</span> <span style="color:#0ff;font-weight:bold">&#39;%$project%&#39;</span></code></pre></div>
+<h3 id="获取客户机cpu信息">获取客户机CPU信息</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  regexp_split_to_table(
+    regexp_replace(
+          regexp_replace(<span style="color:#fff;font-weight:bold">trim</span>(<span style="color:#fff;font-weight:bold">both</span> E<span style="color:#0ff;font-weight:bold">&#39;[\]\]&#34;,]&#39;</span> <span style="color:#fff;font-weight:bold">from</span> ansible_facts-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_processor&#39;</span>), E<span style="color:#0ff;font-weight:bold">&#39;(&#34;\\d+)&#34;,\\s+&#34;&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;~@~\1 &#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;g&#39;</span>),
+    E<span style="color:#0ff;font-weight:bold">&#39;[&#34;,\\s+&#34;,]&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39; &#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;g&#39;</span>),
+  E<span style="color:#0ff;font-weight:bold">&#39;~@~&#39;</span>)  
+  <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">处理器</span>
+<span style="color:#fff;font-weight:bold">from</span>
+  (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span>
+      main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+      ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span>  = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span>
+      <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS</code></pre></div>
+<h3 id="获取内存地址">获取内存地址</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  mem_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;key&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">类型</span>,
+  mem_info#&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, free}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">剩余</span>,
+  mem_info#&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, used}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">已使用</span>,
+  mem_info#&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, total}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">总量</span>
+<span style="color:#fff;font-weight:bold">from</span>
+(<span style="color:#fff;font-weight:bold">select</span>
+  row_to_json(jsonb_each(ansible_facts-&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_memory_mb&#39;</span>)) <span style="color:#fff;font-weight:bold">as</span> mem_info
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span> 
+      ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span> = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span>
+      <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES</code></pre></div>
+<h3 id="获取客户机ip地址列表-1">获取客户机IP地址列表</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+  regexp_split_to_table(regexp_replace(<span style="color:#fff;font-weight:bold">trim</span>(<span style="color:#fff;font-weight:bold">both</span> E<span style="color:#0ff;font-weight:bold">&#39;[]&#39;</span> <span style="color:#fff;font-weight:bold">from</span> ansible_facts-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_all_ipv4_addresses&#39;</span>), E<span style="color:#0ff;font-weight:bold">&#39;&#34;&#39;</span>,<span style="color:#0ff;font-weight:bold">&#39;&#39;</span>,<span style="color:#0ff;font-weight:bold">&#39;g&#39;</span>), E<span style="color:#0ff;font-weight:bold">&#39;,&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> ip地址列表
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+      ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span>  = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span>
+      <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS;</code></pre></div>
+<h3 id="获取客户机磁盘信息列表">获取客户机磁盘信息列表</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  disk_info::jsonb-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;device&#39;</span> <span style="color:#fff;font-weight:bold">as</span> device,
+  disk_info::jsonb-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;fstype&#39;</span> <span style="color:#fff;font-weight:bold">as</span> fstype,
+  disk_info::jsonb-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;size_total&#39;</span> <span style="color:#fff;font-weight:bold">as</span> total_size,
+  disk_info::jsonb-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;size_available&#39;</span> <span style="color:#fff;font-weight:bold">as</span> available_size
+<span style="color:#fff;font-weight:bold">from</span>
+(<span style="color:#fff;font-weight:bold">select</span>
+  jsonb_array_elements(ansible_facts-&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_mounts&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> disk_info
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+        ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span>  = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span>
+        <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS)ANSIBLE_DISKS</code></pre></div>
+<h3 id="获取客户机设备信息">获取客户机设备信息</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  disk_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;key&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">设备名</span>,
+  disk_info#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, size}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">大小</span>,
+  disk_info#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, model}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">类型</span>,
+  disk_info#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, host}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">信息</span>
+<span style="color:#fff;font-weight:bold">from</span>
+(<span style="color:#fff;font-weight:bold">select</span>
+  row_to_json(jsonb_each(ansible_facts-&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_devices&#39;</span>)) <span style="color:#fff;font-weight:bold">as</span> disk_info
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+        ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span>  = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span>  <span style="color:#fff;font-weight:bold">and</span>
+        <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES</code></pre></div>
+<h3 id="获取硬盘大小">获取硬盘大小</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  disk_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;key&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">设备名</span>,
+  disk_info#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, size}&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">大小</span>
+<span style="color:#fff;font-weight:bold">from</span>
+(<span style="color:#fff;font-weight:bold">select</span>
+  row_to_json(jsonb_each(ansible_facts-&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_devices&#39;</span>)) <span style="color:#fff;font-weight:bold">as</span> disk_info
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+        ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span> = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span> 
+        <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES
+<span style="color:#fff;font-weight:bold">where</span>
+  (disk_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;key&#39;</span>) ~ <span style="color:#0ff;font-weight:bold">&#39;sd&#39;</span>
+<span style="color:#fff;font-weight:bold">and</span>
+  disk_info#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{value, model}&#39;</span> &lt;&gt; <span style="color:#0ff;font-weight:bold">&#39;&#39;</span></code></pre></div>
+<h3 id="获取默认ipv4详情">获取默认IPV4详情</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span> 
+  ip_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;key&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">属性</span>,
+  ip_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;value&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">值</span>
+<span style="color:#fff;font-weight:bold">from</span>
+(<span style="color:#fff;font-weight:bold">select</span>
+  row_to_json(jsonb_each(ansible_facts-&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_default_ipv4&#39;</span>)) <span style="color:#fff;font-weight:bold">as</span> ip_info
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+        ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span> = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span>
+        <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES</code></pre></div>
+<h3 id="获取默认ipv6详情">获取默认IPV6详情</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#fff;font-weight:bold">select</span>
+  ip_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;key&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">属性</span>,
+  ip_info-&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;value&#39;</span> <span style="color:#fff;font-weight:bold">as</span> <span style="color:#f00">值</span>
+<span style="color:#fff;font-weight:bold">from</span>
+(<span style="color:#fff;font-weight:bold">select</span>
+  row_to_json(jsonb_each(ansible_facts-&gt;<span style="color:#0ff;font-weight:bold">&#39;ansible_default_ipv6&#39;</span>)) <span style="color:#fff;font-weight:bold">as</span> ip_info
+<span style="color:#fff;font-weight:bold">from</span> (
+    <span style="color:#fff;font-weight:bold">select</span> <span style="color:#fff;font-weight:bold">distinct</span>
+      ansible_facts,
+      modified
+    <span style="color:#fff;font-weight:bold">from</span> main_host
+    <span style="color:#fff;font-weight:bold">where</span>
+        ansible_facts#&gt;&gt;<span style="color:#0ff;font-weight:bold">&#39;{ansible_default_ipv4, address}&#39;</span> = <span style="color:#0ff;font-weight:bold">&#39;$ip&#39;</span> <span style="color:#fff;font-weight:bold">and</span>
+        <span style="color:#fff;font-weight:bold">not</span> ansible_facts = <span style="color:#0ff;font-weight:bold">&#39;{}&#39;</span>
+    <span style="color:#fff;font-weight:bold">order</span> <span style="color:#fff;font-weight:bold">by</span> modified <span style="color:#fff;font-weight:bold">desc</span>
+    <span style="color:#fff;font-weight:bold">limit</span> <span style="color:#ff0;font-weight:bold">1</span>
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES</code></pre></div>
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

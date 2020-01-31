@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="ODL集群测试报告 测试1 - 全连接模式 拓扑 C1(10.190.49.72:6653) C2(10.190.49.72:6654) C3(10.190.49.72:6655) | (3C:1S) | (3C:1S) S1 Openflow:1 - S2 Openflow:2 / \ / \ H1(10.0.0.1) H2(10.0.0.2) H3(10.0.0.3) H4(10.0.0.4) 说明 &gt; C1、C2、C3为同一宿主机上部署的控制器集群，分别使用6653、6654、6655进行流表配置 &gt; S1和S2为两台OVS虚拟交换机，与集群内所有控制器直接建立全链接 &gt; S1、S2下分别下挂有2台宿主机
+在mininet环境，mininet/custom目录下，运行以上topo部署脚本,完成本地ovs与控制器集群的对接
+ 点击查看mininet部署脚本  
+#!/user/bin/env python # -*- coding:utf-8 -*- # Author: jiangx from mininet.net import Mininet from mininet.node import Controller, OVSKernelSwitch, RemoteController from mininet.cli import CLI from mininet.log import setLogLevel, info # TOPO # C1(10.190.49.72:6653) C2(10."/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="ODL集群测试报告 测试1 - 全连接模式 拓扑 C1(10.190.49.72:6653) C2(10.190.49.72:6654) C3(10.190.49.72:6655) | (3C:1S) | (3C:1S) S1 Openflow:1 - S2 Openflow:2 / \ / \ H1(10.0.0.1) H2(10.0.0.2) H3(10.0.0.3) H4(10.0.0.4) 说明 &gt; C1、C2、C3为同一宿主机上部署的控制器集群，分别使用6653、6654、6655进行流表配置 &gt; S1和S2为两台OVS虚拟交换机，与集群内所有控制器直接建立全链接 &gt; S1、S2下分别下挂有2台宿主机
+在mininet环境，mininet/custom目录下，运行以上topo部署脚本,完成本地ovs与控制器集群的对接
+ 点击查看mininet部署脚本  
+#!/user/bin/env python # -*- coding:utf-8 -*- # Author: jiangx from mininet.net import Mininet from mininet.node import Controller, OVSKernelSwitch, RemoteController from mininet.cli import CLI from mininet.log import setLogLevel, info # TOPO # C1(10.190.49.72:6653) C2(10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/todo/cluster_test/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="odl集群测试报告">ODL集群测试报告</h1>
+
+<h2 id="测试1-全连接模式">测试1 - 全连接模式</h2>
+
+<h3 id="拓扑">拓扑</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"> C1(10.190.49.72:6653) C2(10.190.49.72:6654) C3(10.190.49.72:6655)
+            | (3C:1S)                     | (3C:1S)
+       S1 Openflow:1        -       S2 Openflow:2
+          /     \                       /        \
+ H1(10.0.0.1)  H2(10.0.0.2)      H3(10.0.0.3)    H4(10.0.0.4)</code></pre></div>
+<p>说明
+&gt; C1、C2、C3为同一宿主机上部署的控制器集群，分别使用6653、6654、6655进行流表配置
+&gt; S1和S2为两台OVS虚拟交换机，与集群内所有控制器直接建立全链接
+&gt; S1、S2下分别下挂有2台宿主机</p>
+
+<p>在mininet环境，mininet/custom目录下，运行以上topo部署脚本,完成本地ovs与控制器集群的对接</p>
+
+<p><details>
+  <summary><mark><font color=darkred>点击查看mininet部署脚本</font></mark></summary>
+  <p> </p>
+  <pre><code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007f7f">#!/user/bin/env python</span>
+<span style="color:#007f7f"># -*- coding:utf-8 -*-</span>
+<span style="color:#007f7f"># Author: jiangx</span>
+
+<span style="color:#fff;font-weight:bold">from</span> mininet.net <span style="color:#fff;font-weight:bold">import</span> Mininet
+<span style="color:#fff;font-weight:bold">from</span> mininet.node <span style="color:#fff;font-weight:bold">import</span> Controller, OVSKernelSwitch, RemoteController
+<span style="color:#fff;font-weight:bold">from</span> mininet.cli <span style="color:#fff;font-weight:bold">import</span> CLI
+<span style="color:#fff;font-weight:bold">from</span> mininet.log <span style="color:#fff;font-weight:bold">import</span> setLogLevel, info
+
+<span style="color:#007f7f"># TOPO</span>
+<span style="color:#007f7f"># C1(10.190.49.72:6653) C2(10.190.49.72:6654) C3(10.190.49.72:6655)</span>
+<span style="color:#007f7f">#            | (3C:1S)                     | (3C:1S)</span>
+<span style="color:#007f7f">#       S1 Openflow:1        -       S2 Openflow:2</span>
+<span style="color:#007f7f">#          /     \                       /        \</span>
+<span style="color:#007f7f"># H1(10.0.0.1)  H2(10.0.0.2)      H3(10.0.0.3)    H4(10.0.0.4)</span>
+
+<span style="color:#fff;font-weight:bold">def</span> emptyNet():
+    net = Mininet(controller=RemoteController, switch=OVSKernelSwitch)
+
+    c1 = net.addController(<span style="color:#0ff;font-weight:bold">&#39;c1&#39;</span>, controller=RemoteController, ip=<span style="color:#0ff;font-weight:bold">&#34;10.190.49.72&#34;</span>, port=<span style="color:#ff0;font-weight:bold">6653</span>)
+    c2 = net.addController(<span style="color:#0ff;font-weight:bold">&#39;c2&#39;</span>, controller=RemoteController, ip=<span style="color:#0ff;font-weight:bold">&#34;10.190.49.72&#34;</span>, port=<span style="color:#ff0;font-weight:bold">6654</span>)
+    c3 = net.addController(<span style="color:#0ff;font-weight:bold">&#39;c3&#39;</span>, controller=RemoteController, ip=<span style="color:#0ff;font-weight:bold">&#34;10.190.49.72&#34;</span>, port=<span style="color:#ff0;font-weight:bold">6655</span>)
+
+    h1 = net.addHost(<span style="color:#0ff;font-weight:bold">&#39;h1&#39;</span>, ip=<span style="color:#0ff;font-weight:bold">&#39;10.0.0.1&#39;</span>)
+    h2 = net.addHost(<span style="color:#0ff;font-weight:bold">&#39;h2&#39;</span>, ip=<span style="color:#0ff;font-weight:bold">&#39;10.0.0.2&#39;</span>)
+    h3 = net.addHost(<span style="color:#0ff;font-weight:bold">&#39;h3&#39;</span>, ip=<span style="color:#0ff;font-weight:bold">&#39;10.0.0.3&#39;</span>)
+    h4 = net.addHost(<span style="color:#0ff;font-weight:bold">&#39;h4&#39;</span>, ip=<span style="color:#0ff;font-weight:bold">&#39;10.0.0.4&#39;</span>)
+
+    s1 = net.addSwitch(<span style="color:#0ff;font-weight:bold">&#39;s1&#39;</span>)
+    s2 = net.addSwitch(<span style="color:#0ff;font-weight:bold">&#39;s2&#39;</span>)
+
+    s1.linkTo(h1)
+    s1.linkTo(h2)
+    s1.linkTo(s2)
+    s2.linkTo(h3)
+    s2.linkTo(h4)
+
+    net.build()
+    c1.start()
+    c2.start()
+    c3.start()
+    s1.start([c1,c2,c3])
+    s2.start([c1,c2,c3])
+
+    net.start()
+    net.staticArp()
+    CLI(net)
+    net.stop()
+
+<span style="color:#fff;font-weight:bold">if</span> __name__==<span style="color:#0ff;font-weight:bold">&#39;__main__&#39;</span>:
+    setLogLevel(<span style="color:#0ff;font-weight:bold">&#39;info&#39;</span>)
+    emptyNet()</code></pre></div>
+<p></code></pre>
+</details></p>
+
+<h3 id="测试步骤">测试步骤</h3>
+
+<h4 id="主控制器获取">主控制器获取</h4>
+
+<ul>
+<li>思路</li>
+</ul>
+
+<blockquote>
+<ol>
+<li>启动3节点控制器集群</li>
+<li>使用postman发起请求，查看控制器配置，找出主控制器(master)</li>
+</ol>
+</blockquote>
+
+<ul>
+<li>postman请求</li>
+</ul>
+
+<p>|关键字| 值| 说明|
+|:&mdash;&ndash;|:&mdash;&ndash;|:&mdash;&ndash;|
+|Authorization|BaseAuth,admin/admin|授权|
+|Method| GET|方法|
+|URI| http://{{controller-ip}}:8181/jolokia/read/org.opendaylight.controller:Category=Shards,name=member-1-shard-inventory-config,type=DistributedConfigDatastore|member-1控制器请求|</p>
+
+<ul>
+<li>步骤</li>
+</ul>
+
+<p>member-1
+<img src="https://vincent-wuhan.github.io/png/cluster_test/cluster_master_get_1.png" alt="cluster master get1" /></p>
+
+<p>member-2
+<img src="https://vincent-wuhan.github.io/png/cluster_test/cluster_master_get_2.png" alt="cluster master get2" /></p>
+
+<p>member-3
+<img src="https://vincent-wuhan.github.io/png/cluster_test/cluster_master_get_3.png" alt="cluster master get3" /></p>
+
+<h4 id="控制器集群验证">控制器集群验证</h4>
+
+<ul>
+<li>思路</li>
+</ul>
+
+<blockquote>
+<ol>
+<li>关闭从控制器(follower), 下发添加流表配置，看是否生效</li>
+<li>重新启动该从控制器(follower), 向重启的从控制器获取流表配置，看是否同步</li>
+<li>关闭主控制器(master), 下发添加流表配置，看是否生效</li>
+<li>启动主控制器(master), 向重启的主控制器获取流表配置，看是否同步</li>
+</ol>
+</blockquote>
+
+<ul>
+<li>postman</li>
+</ul>
+
+<ol>
+<li>流表添加</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th align="left">关键字</th>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Authorization</td>
+<td align="left">BaseAuth, admin/admin</td>
+<td align="left">授权</td>
+</tr>
+
+<tr>
+<td align="left">Method</td>
+<td align="left">POST</td>
+<td align="left">方法</td>
+</tr>
+
+<tr>
+<td align="left">Accept</td>
+<td align="left">application/xml</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">Content-Type</td>
+<td align="left">application/xml</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">URI1</td>
+<td align="left">http://{{controller-ip}}:8181/restconf/operations/sal-flow:add-flow</td>
+<td align="left">向主节点下发</td>
+</tr>
+
+<tr>
+<td align="left">URI2</td>
+<td align="left">http://{{controller-ip}}:8182/restconf/operations/sal-flow:add-flow</td>
+<td align="left">向从节点下发</td>
+</tr>
+</tbody>
+</table>
+
+<p><details>
+  <summary><mark><font color=darkred>点击查看Body</font></mark></summary>
+  <p> - xml body</p>
+  <pre><code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#0f0;font-weight:bold">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; standalone=&#34;no&#34;?&gt;</span>
+<span style="font-weight:bold">&lt;input</span> <span style="color:#007f7f">xmlns=</span><span style="color:#0ff;font-weight:bold">&#34;urn:opendaylight:flow:service&#34;</span><span style="font-weight:bold">&gt;</span>
+	<span style="font-weight:bold">&lt;node</span> <span style="color:#007f7f">xmlns:inv=</span><span style="color:#0ff;font-weight:bold">&#34;urn:opendaylight:inventory&#34;</span><span style="font-weight:bold">&gt;</span>/inv:nodes/inv:node[inv:id=&#34;openflow:1&#34;]<span style="font-weight:bold">&lt;/node&gt;</span>
+	<span style="font-weight:bold">&lt;cookie&gt;</span>1<span style="font-weight:bold">&lt;/cookie&gt;</span>
+	<span style="font-weight:bold">&lt;flags&gt;</span>SEND_FLOW_REM<span style="font-weight:bold">&lt;/flags&gt;</span>
+	<span style="font-weight:bold">&lt;hard-timeout&gt;</span>0<span style="font-weight:bold">&lt;/hard-timeout&gt;</span>
+	<span style="font-weight:bold">&lt;idle-timeout&gt;</span>0<span style="font-weight:bold">&lt;/idle-timeout&gt;</span>
+	<span style="font-weight:bold">&lt;installHw&gt;</span>false<span style="font-weight:bold">&lt;/installHw&gt;</span>
+	<span style="font-weight:bold">&lt;match&gt;</span>
+		<span style="font-weight:bold">&lt;ethernet-match&gt;</span>
+			<span style="font-weight:bold">&lt;ethernet-type&gt;</span>
+				<span style="font-weight:bold">&lt;type&gt;</span>2048<span style="font-weight:bold">&lt;/type&gt;</span>
+			<span style="font-weight:bold">&lt;/ethernet-type&gt;</span>
+		<span style="font-weight:bold">&lt;/ethernet-match&gt;</span>
+		<span style="font-weight:bold">&lt;ipv4-destination&gt;</span>10.0.0.1/24<span style="font-weight:bold">&lt;/ipv4-destination&gt;</span>
+	<span style="font-weight:bold">&lt;/match&gt;</span>
+	<span style="font-weight:bold">&lt;instructions&gt;</span>
+		<span style="font-weight:bold">&lt;instruction&gt;</span>
+			<span style="font-weight:bold">&lt;order&gt;</span>0<span style="font-weight:bold">&lt;/order&gt;</span>
+			<span style="font-weight:bold">&lt;apply-actions&gt;</span>
+				<span style="font-weight:bold">&lt;action&gt;</span>
+					<span style="font-weight:bold">&lt;output-action&gt;</span>
+						<span style="font-weight:bold">&lt;output-node-connector&gt;</span>openflow:1:2<span style="font-weight:bold">&lt;/output-node-connector&gt;</span>
+					<span style="font-weight:bold">&lt;/output-action&gt;</span>
+					<span style="font-weight:bold">&lt;order&gt;</span>0<span style="font-weight:bold">&lt;/order&gt;</span>
+				<span style="font-weight:bold">&lt;/action&gt;</span>
+			<span style="font-weight:bold">&lt;/apply-actions&gt;</span>
+		<span style="font-weight:bold">&lt;/instruction&gt;</span>
+	<span style="font-weight:bold">&lt;/instructions&gt;</span>
+	<span style="font-weight:bold">&lt;priority&gt;</span>1<span style="font-weight:bold">&lt;/priority&gt;</span>
+	<span style="font-weight:bold">&lt;strict&gt;</span>false<span style="font-weight:bold">&lt;/strict&gt;</span>
+	<span style="font-weight:bold">&lt;table_id&gt;</span>0<span style="font-weight:bold">&lt;/table_id&gt;</span>
+<span style="font-weight:bold">&lt;/input&gt;</span></code></pre></div>
+<p></code></pre>
+</details></p>
+
+<ol>
+<li>流表获取</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th align="left">关键字</th>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Authorization</td>
+<td align="left">BaseAuth, admin/admin</td>
+<td align="left">授权</td>
+</tr>
+
+<tr>
+<td align="left">Method</td>
+<td align="left">GET</td>
+<td align="left">方法</td>
+</tr>
+
+<tr>
+<td align="left">Accept</td>
+<td align="left">application/xml</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">Content-Type</td>
+<td align="left">application/xml</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">URI1</td>
+<td align="left">http://{{controller-ip}}:8181/restconf/operational/opendaylight-inventory:nodes/node/openflow:1/table/0</td>
+<td align="left">向主节点获取流表0</td>
+</tr>
+
+<tr>
+<td align="left">URI2</td>
+<td align="left">http://{{controller-ip}}:8182/restconf/operational/opendaylight-inventory:nodes/node/openflow:1/table/0</td>
+<td align="left">向从节点获取流表0</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>步骤</li>
+</ul>
+
+<ol>
+<li>主节点下流表，主节点获取流表信息</li>
+</ol>
+
+<p>master:</p>
+
+<p><img src="png/cluster_test/flow_m_set_m_get.png" alt="flow_m_set_m_get" /></p>
+
+<ol>
+<li>主节点下流表，从节点获取流表信息</li>
+</ol>
+
+<p>follower1:</p>
+
+<p><img src="png/cluster_test/flow_m_set_f_get_1.png" alt="flow_m_set_f_get_1" /></p>
+
+<p>follower2:</p>
+
+<p><img src="png/cluster_test/flow_m_set_f_get_2.png" alt="flow_m_set_f_get_2" /></p>
+
+<ol>
+<li>从节点下流表，从节点获取流表信息</li>
+</ol>
+
+<p><img src="png/cluster_test/flow_f_set.png" alt="flow_f_set" /></p>
+
+<p><img src="png/cluster_test/flow_f_get.png" alt="flow_f_get" /></p>
+
+<ol>
+<li>从节点下流表，主节点获取流表信息</li>
+</ol>
+
+<p><img src="png/cluster_test/flow_m_get.png" alt="flow_m_get" /></p>
+
+<ol>
+<li>关闭一个从节点</li>
+</ol>
+
+<p><img src="png/cluster_test/follower_stop.png" alt="flow_down" /></p>
+
+<p>5.1 主节点下流表，主节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_f_down_m_set.png" alt="flow_f_down_m_set" /></p>
+
+<p><img src="png/cluster_test/flow_f_down_m_get.png" alt="flow_f_down_m_get" /></p>
+
+<p>5.2 主节点下流表，从节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_f_down_f_get.png" alt="flow_f_down_f_get" /></p>
+
+<p>5.3 从节点下流表，主节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_f_down_f_set.png" alt="flow_f_down_f_set" /></p>
+
+<p><img src="png/cluster_test/flow_f_down_m_get_1.png" alt="flow_f_down_m_get_1" /></p>
+
+<p>5.4 从节点下流表，从节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_f_down_f_get_1.png" alt="flow_f_down_f_get_1" /></p>
+
+<p>5.5 重启关闭的从节点，获取该从节点流表信息</p>
+
+<p><img src="png/cluster_test/follower_start.png" alt="follower_start" /></p>
+
+<p>follower获取30</p>
+
+<p><img src="png/cluster_test/flow_f_up_f_get_30.png" alt="flow_f_up_f_get_30" /></p>
+
+<p>follower获取40</p>
+
+<p><img src="png/cluster_test/flow_f_up_f_get_40.png" alt="flow_f_up_f_get_40" /></p>
+
+<ol>
+<li>关闭主节点</li>
+</ol>
+
+<p><img src="png/cluster_test/master_stop.png" alt="master_stop" /></p>
+
+<p>6.1 查看集群内master主节点选举结果</p>
+
+<p><img src="png/cluster_test/cluster_f_down_f_master.png" alt="cluster_f_down_f_master" /></p>
+
+<p>主节点down后，从两个从节点中重新推举出一个master</p>
+
+<p>6.2 新的主节点下流表，主节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_m_down_m_set.png" alt="flow_m_down_m_set" /></p>
+
+<p><img src="png/cluster_test/flow_m_down_m_get.png" alt="flow_m_down_m_get" /></p>
+
+<p>6.3 从节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_m_down_f_get.png" alt="flow_m_down_f_get" /></p>
+
+<p>6.4 从节点下流表，新主节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_m_down_f_set.png" alt="flow_m_down_f_set" /></p>
+
+<p><img src="png/cluster_test/flow_m_down_m_get_1.png" alt="flow_m_down_m_get_1" /></p>
+
+<p>6.5 从节点获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_m_down_f_get_2.png" alt="flow_m_down_f_get_2" /></p>
+
+<p>6.6 重启关闭的主节点，获取当前节点流表信息</p>
+
+<p><img src="png/cluster_test/master_start.png" alt="master_start" /></p>
+
+<p>6.7 重新查看集群内master主节点选举结果</p>
+
+<p><img src="png/cluster_test/cluster_m_restart_follower.png" alt="cluster_m_restart" /></p>
+
+<p>新启动的原来的主节点重新加入集群后为follower</p>
+
+<p>6.8 新启动的节点上获取流表信息</p>
+
+<p><img src="png/cluster_test/flow_m_restart_f_get.png" alt="flow_m_restart_f_get" /></p>
+
+<h4 id="ovs查看流表结果">OVS查看流表结果</h4>
+
+<p><img src="png/cluster_test/s1_ovs_dump_flows.png" alt="s1_ovs_dump_flows" />
+<img src="png/cluster_test/s2_ovs_dump_flows.png" alt="s2_ovs_dump_flows" /></p>
+
+<h2 id="抓包分析">抓包分析</h2>
+
+<p>openflow_v14.type=14
+openflow_v15.type=15</p>
+
+<h2 id="测试2-半连接模式">测试2 - 半连接模式</h2>
+
+    </div>
+    <div class="post-footer">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

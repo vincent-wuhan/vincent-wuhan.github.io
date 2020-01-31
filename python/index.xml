@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pythons on JiangX</title>
+    <link>https://vincent-wuhan.github.io/python/</link>
+    <description>Recent content in Pythons on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Jan 2020 19:40:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>有效提升Python代码质量的技巧</title>
+      <link>https://vincent-wuhan.github.io/python/%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Fri, 31 Jan 2020 19:40:27 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/python/%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84%E6%8A%80%E5%B7%A7/</guid>
+      <description>有效提升Python代码质量的20个技巧 推导式 推导式是构建列表、字典、集合和生成器便捷方式
+ 格式
+[表达式 for 迭代变量 in 可迭代对象 if 条件] 举例
+# 列表推导式 mylist = [i**2 for i in range(1,11) if i &amp;gt; 5] # 字典推导式 mydict = {i: i*i for i in range(1,6)} # 集合推导式 myset = {i for i in &amp;#39;HarryPotter&amp;#39; if i not in &amp;#39;er&amp;#39;} # 元组推导式要显示使用tuple()，不能直接使用() # ()被生成器占用了 # 生成器 mygenerator = (i for i in range(0,11)) print(mygenerator) print(list(mygenerator)) # 嵌套循环 mylist = [str(i) + j for i in range(1,6) for j in &amp;#39;ABCDE&amp;#39;] # 字典转列表 mydict = {&amp;#39;key1&amp;#39;: &amp;#39;value1&amp;#39;, &amp;#39;key2&amp;#39;: &amp;#39;value2&amp;#39;} mylist = [key + &amp;#39;:&amp;#39; + value for key, value in mydict.</description>
+    </item>
+    
+  </channel>
+</rss>
