@@ -6,10 +6,24 @@
     <description>Recent content on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jan 2020 19:40:27 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jan 2020 20:11:01 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to Use Hugo</title>
+      <link>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</link>
+      <pubDate>Fri, 31 Jan 2020 20:11:01 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</guid>
+      <description> hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
+ 创建博客文章  hugo new path/content.md
+ 本地预览  hugo server &amp;ndash;buildDrafts
+ 编译web格式预发布  hugo base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts 编译生成的文件在blog下的public目录下
+ 发布到github  切换到public目录，初始化本地仓库
+cd public git init git add . git commit -m &amp;#39;message&amp;#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master</description>
+    </item>
     
     <item>
       <title>有效提升Python代码质量的技巧</title>
@@ -179,6 +193,20 @@ deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.19
 组件  Helm客户端  Helm命令行工具，支持用户进行如下操作
 · 在本地开发chart · 管理chart仓库 · 与Tiller服务器交互 · 在远程Kubernetes集群上安装chart · 查看release信息 · 升级或卸载已有release  Tiller服务器  Tiller服务器运行在Kubernetes集群中。
 常见命令    命令名称 说明     helm repo index REPO_PATH 本地仓库index创建    Q&amp;amp;A helm安装提示index.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://vincent-wuhan.github.io/todo/hugo-how-to/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/todo/hugo-how-to/</guid>
+      <description> hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
+ 创建博客文章  hugo new path/content.md
+ 本地预览  hugo server &amp;ndash;buildDrafts
+ 编译web格式预发布  hugo base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts 编译生成的文件在blog下的public目录下
+ 发布到github  切换到public目录，初始化本地仓库
+cd public git init git add . git commit -m &amp;#39;message&amp;#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master</description>
     </item>
     
     <item>

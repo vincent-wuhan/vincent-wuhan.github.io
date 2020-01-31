@@ -151,6 +151,20 @@ deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.19
     
     <item>
       <title></title>
+      <link>https://vincent-wuhan.github.io/todo/hugo-how-to/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/todo/hugo-how-to/</guid>
+      <description> hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
+ 创建博客文章  hugo new path/content.md
+ 本地预览  hugo server &amp;ndash;buildDrafts
+ 编译web格式预发布  hugo base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts 编译生成的文件在blog下的public目录下
+ 发布到github  切换到public目录，初始化本地仓库
+cd public git init git add . git commit -m &amp;#39;message&amp;#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://vincent-wuhan.github.io/todo/java/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
