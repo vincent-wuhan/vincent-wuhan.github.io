@@ -35,7 +35,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/cluster_bugs/</guid>
-      <description>集群测试问题集合 集群环境删节点只剩下一个集群节点时，请求流表时报错，提示没有leader { &amp;#34;errors&amp;#34;: { &amp;#34;error&amp;#34;: [ { &amp;#34;error-type&amp;#34;: &amp;#34;application&amp;#34;, &amp;#34;error-tag&amp;#34;: &amp;#34;operation-failed&amp;#34;, &amp;#34;error-message&amp;#34;: &amp;#34;Error executeRead ReadData for path /(urn:opendaylight:inventory?revision=2013-08-19)nodes/node/node[{(urn:opendaylight:inventory?revision=2013-08-19)id=openflow:1}]/AugmentationIdentifier{childNames=[(urn:opendaylight:flow:inventory?revision=2013-08-19)supported-match-types, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-instructions, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-actions, (urn:opendaylight:flow:inventory?revision=2013-08-19)switch-features, (urn:opendaylight:flow:inventory?revision=2013-08-19)manufacturer, (urn:opendaylight:flow:inventory?revision=2013-08-19)hardware, (urn:opendaylight:flow:inventory?revision=2013-08-19)software, (urn:opendaylight:flow:inventory?revision=2013-08-19)serial-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)description, (urn:opendaylight:flow:inventory?revision=2013-08-19)port-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)ip-address, (urn:opendaylight:flow:inventory?revision=2013-08-19)group, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-group, (urn:opendaylight:flow:inventory?revision=2013-08-19)table, (urn:opendaylight:flow:inventory?revision=2013-08-19)table-features]}/(urn:opendaylight:flow:inventory?revision=2013-08-19)table/table[{(urn:opendaylight:flow:inventory?revision=2013-08-19)id=0}]&amp;#34;, &amp;#34;error-info&amp;#34;: &amp;#34;org.opendaylight.mdsal.common.api.DataStoreUnavailableException: Shard member-2-shard-inventory-operational currently has no leader. Try again later.\n\tat org.opendaylight.controller.cluster.datastore.NoOpTransactionContext.executeRead(NoOpTransactionContext.java:66)\n\tat org.opendaylight.controller.cluster.datastore.TransactionProxy$1.invoke(TransactionProxy.java:95)\n\tat org.opendaylight.controller.cluster.datastore.TransactionContextWrapper.executePriorTransactionOperations(TransactionContextWrapper.java:194)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.onFindPrimaryShardFailure(AbstractTransactionContextFactory.java:109)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.access$100(AbstractTransactionContextFactory.java:37)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:136)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:130)\n\tat akka.dispatch.OnComplete.internal(Future.scala:260)\n\tat akka.dispatch.OnComplete.internal(Future.scala:258)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:188)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:185)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)\n\tat akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:91)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:91)\n\tat akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)\n\tat akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: org.</description>
+      <description>集群测试问题集合 集群环境删节点只剩下一个集群节点时，请求流表时报错，提示没有leader { &amp;quot;errors&amp;quot;: { &amp;quot;error&amp;quot;: [ { &amp;quot;error-type&amp;quot;: &amp;quot;application&amp;quot;, &amp;quot;error-tag&amp;quot;: &amp;quot;operation-failed&amp;quot;, &amp;quot;error-message&amp;quot;: &amp;quot;Error executeRead ReadData for path /(urn:opendaylight:inventory?revision=2013-08-19)nodes/node/node[{(urn:opendaylight:inventory?revision=2013-08-19)id=openflow:1}]/AugmentationIdentifier{childNames=[(urn:opendaylight:flow:inventory?revision=2013-08-19)supported-match-types, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-instructions, (urn:opendaylight:flow:inventory?revision=2013-08-19)supported-actions, (urn:opendaylight:flow:inventory?revision=2013-08-19)switch-features, (urn:opendaylight:flow:inventory?revision=2013-08-19)manufacturer, (urn:opendaylight:flow:inventory?revision=2013-08-19)hardware, (urn:opendaylight:flow:inventory?revision=2013-08-19)software, (urn:opendaylight:flow:inventory?revision=2013-08-19)serial-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)description, (urn:opendaylight:flow:inventory?revision=2013-08-19)port-number, (urn:opendaylight:flow:inventory?revision=2013-08-19)meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-meter, (urn:opendaylight:flow:inventory?revision=2013-08-19)ip-address, (urn:opendaylight:flow:inventory?revision=2013-08-19)group, (urn:opendaylight:flow:inventory?revision=2013-08-19)stale-group, (urn:opendaylight:flow:inventory?revision=2013-08-19)table, (urn:opendaylight:flow:inventory?revision=2013-08-19)table-features]}/(urn:opendaylight:flow:inventory?revision=2013-08-19)table/table[{(urn:opendaylight:flow:inventory?revision=2013-08-19)id=0}]&amp;quot;, &amp;quot;error-info&amp;quot;: &amp;quot;org.opendaylight.mdsal.common.api.DataStoreUnavailableException: Shard member-2-shard-inventory-operational currently has no leader. Try again later.\n\tat org.opendaylight.controller.cluster.datastore.NoOpTransactionContext.executeRead(NoOpTransactionContext.java:66)\n\tat org.opendaylight.controller.cluster.datastore.TransactionProxy$1.invoke(TransactionProxy.java:95)\n\tat org.opendaylight.controller.cluster.datastore.TransactionContextWrapper.executePriorTransactionOperations(TransactionContextWrapper.java:194)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.onFindPrimaryShardFailure(AbstractTransactionContextFactory.java:109)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory.access$100(AbstractTransactionContextFactory.java:37)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:136)\n\tat org.opendaylight.controller.cluster.datastore.AbstractTransactionContextFactory$1.onComplete(AbstractTransactionContextFactory.java:130)\n\tat akka.dispatch.OnComplete.internal(Future.scala:260)\n\tat akka.dispatch.OnComplete.internal(Future.scala:258)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:188)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:185)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)\n\tat akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:91)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)\n\tat scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:91)\n\tat akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)\n\tat akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:43)\n\tat akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)\n\tat akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)\n\tat akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)\n\tat akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)\nCaused by: org.</description>
     </item>
     
     <item>
@@ -44,10 +44,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/cluster_test/</guid>
-      <description>ODL集群测试报告 测试1 - 全连接模式 拓扑 C1(10.190.49.72:6653) C2(10.190.49.72:6654) C3(10.190.49.72:6655) | (3C:1S) | (3C:1S) S1 Openflow:1 - S2 Openflow:2 / \ / \ H1(10.0.0.1) H2(10.0.0.2) H3(10.0.0.3) H4(10.0.0.4) 说明 &amp;gt; C1、C2、C3为同一宿主机上部署的控制器集群，分别使用6653、6654、6655进行流表配置 &amp;gt; S1和S2为两台OVS虚拟交换机，与集群内所有控制器直接建立全链接 &amp;gt; S1、S2下分别下挂有2台宿主机
+      <description>ODL集群测试报告 测试1 - 全连接模式 拓扑 C1(10.190.49.72:6653) C2(10.190.49.72:6654) C3(10.190.49.72:6655) | (3C:1S) | (3C:1S) S1 Openflow:1 - S2 Openflow:2 / \ / \ H1(10.0.0.1) H2(10.0.0.2) H3(10.0.0.3) H4(10.0.0.4)  说明 &amp;gt; C1、C2、C3为同一宿主机上部署的控制器集群，分别使用6653、6654、6655进行流表配置 &amp;gt; S1和S2为两台OVS虚拟交换机，与集群内所有控制器直接建立全链接 &amp;gt; S1、S2下分别下挂有2台宿主机
 在mininet环境，mininet/custom目录下，运行以上topo部署脚本,完成本地ovs与控制器集群的对接
  点击查看mininet部署脚本  
-#!/user/bin/env python # -*- coding:utf-8 -*- # Author: jiangx from mininet.net import Mininet from mininet.node import Controller, OVSKernelSwitch, RemoteController from mininet.cli import CLI from mininet.log import setLogLevel, info # TOPO # C1(10.190.49.72:6653) C2(10.</description>
+#!/user/bin/env python # -*- coding:utf-8 -*- # Author: jiangx from mininet.net import Mininet from mininet.node import Controller, OVSKernelSwitch, RemoteController from mininet.cli import CLI from mininet.log import setLogLevel, info # TOPO # C1(10.</description>
     </item>
     
     <item>
@@ -56,13 +56,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/common/</guid>
-      <description>MANO常用网址    URL 说明     http://MSBIP:30280/iui/usecaseui/resource-management/#/ns uui管理接口        删除所有helm list helm delete --purge $(helm list|grep &amp;#34;dev&amp;#34;|awk &amp;#39;{print $1}&amp;#39;) 下载部署软件 下载安装部署包 curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz 下载oom curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz 常见问题定位手册 带SFC的NS实例化失败问题定位 kubernetes环境，查看nslcm容器日志  检查vnf创建是否成功。vnf创建成功是创建sfc的前提
+      <description>MANO常用网址    URL 说明     http://MSBIP:30280/iui/usecaseui/resource-management/#/ns uui管理接口        删除所有helm list helm delete --purge $(helm list|grep &amp;quot;dev&amp;quot;|awk &#39;{print $1}&#39;)  下载部署软件 下载安装部署包 curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz  下载oom curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz  常见问题定位手册 带SFC的NS实例化失败问题定位 kubernetes环境，查看nslcm容器日志  检查vnf创建是否成功。vnf创建成功是创建sfc的前提
  检查sfcdriver是否注册，sfcdriver的注册路径为： uui-ui-&amp;gt;运维管理-&amp;gt;外部系统注册-&amp;gt;SFC Driver
-URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver 检查sfcdriver注册url是否为api/fhsfcdriver/v1
+URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver  检查sfcdriver注册url是否为api/fhsfcdriver/v1
  检查sfcdriver注册的VIM ID是否正确
   如果上述检查无误，nslcm日志显示sfc中任何一类错误，例如create port chain error等，到第2步
 kubernetes环境，查看sfcdriver容器日志 常见sfc创建失败原因，日志里一般提示很明显，常见错误搜集如下： 1. 流分类规则冲突，错误日志如下：
-resp_body={&amp;#34;error&amp;#34;:&amp;#34;{\&amp;#34;NeutronError\&amp;#34;: {\&amp;#34;message\&amp;#34;: \&amp;#34;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c.</description>
+resp_body={&amp;quot;error&amp;quot;:&amp;quot;{\&amp;quot;NeutronError\&amp;quot;: {\&amp;quot;message\&amp;quot;: \&amp;quot;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c.</description>
     </item>
     
     <item>
@@ -82,12 +82,12 @@ resp_body={&amp;#34;error&amp;#34;:&amp;#34;{\&amp;#34;NeutronError\&amp;#34;: {
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/elasticsearch/</guid>
-      <description>概念 索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间 分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互 总结： 1. 索引内数据是所有主分片内数据的合集 2. 副分片是对所有主分片的数据拷贝和备份 3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互  集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
-green 所有的主分片和副本分片都正常运行。 yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red 有主分片没能正常运行。 文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
+      <description>概念 索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间  分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互 总结： 1. 索引内数据是所有主分片内数据的合集 2. 副分片是对所有主分片的数据拷贝和备份 3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互  集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
+green 所有的主分片和副本分片都正常运行。 yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red 有主分片没能正常运行。  文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
 元数据 关于文档自身的信息 · _index 文档索引，通俗点讲就是文档在哪存放 · _type 文档表示的对象类别 · _id 文档唯一标识
 # 操作
-健康状态获取 curl -X GET &amp;#34;localhost:9200/_cluster/health&amp;#34; ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
-curl -X PUT &amp;#34;localhost:9200/blogs&amp;#34; -H &amp;#39;Content-Type: application/json&amp;#39; -d&amp;#39; { &amp;#34;settings&amp;#34; : { &amp;#34;number_of_shards&amp;#34; : 3, &amp;#34;number_of_replicas&amp;#34; : 1 } } &amp;#39; 查看集群健康状态</description>
+健康状态获取 curl -X GET &amp;quot;localhost:9200/_cluster/health&amp;quot;  ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
+curl -X PUT &amp;quot;localhost:9200/blogs&amp;quot; -H &#39;Content-Type: application/json&#39; -d&#39; { &amp;quot;settings&amp;quot; : { &amp;quot;number_of_shards&amp;quot; : 3, &amp;quot;number_of_replicas&amp;quot; : 1 } } &#39;  查看集群健康状态</description>
     </item>
     
     <item>
@@ -106,7 +106,7 @@ curl -X PUT &amp;#34;localhost:9200/blogs&amp;#34; -H &amp;#39;Content-Type: app
       
       <guid>https://vincent-wuhan.github.io/todo/git/</guid>
       <description>git 常用命令    命令 说明     git config &amp;ndash;global core.editor vim 设置全局编辑器为vim   git config &amp;ndash;global user.name &amp;ldquo;jiangx&amp;rdquo; 设置用户名   git config &amp;ndash;global user.email &amp;ldquo;jiangx@fiberhome.com&amp;rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.190.49.99:8080/a/project.git 设置远程gerrit        日志修改  修改最近一次   git commit &amp;ndash;amend
-  修改历史中的某个记录    当前版本之前的倒数第三次的日志 git rebase -i head~3 输出结果中选择需要修改的那一条，将pick改为edit   pick f9173fc Fix wrong name &amp;#39;path_filename&amp;#39; pick 3fddde0 Change versiton to 0.</description>
+  修改历史中的某个记录    当前版本之前的倒数第三次的日志 git rebase -i head~3 输出结果中选择需要修改的那一条，将pick改为edit   pick f9173fc Fix wrong name &#39;path_filename&#39; pick 3fddde0 Change versiton to 0.</description>
     </item>
     
     <item>
@@ -117,10 +117,9 @@ curl -X PUT &amp;#34;localhost:9200/blogs&amp;#34; -H &amp;#39;Content-Type: app
       <guid>https://vincent-wuhan.github.io/todo/gitlab/</guid>
       <description>GitLab学习笔记 docker安装  ubuntu系统软件源  手动编辑 /etc/apt/sources.list 文件
 14.04
-deb http://10.190.48.88/ubuntu/ trusty main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-updates main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-security main universe multiverse 16.04
-deb http://10.190.48.88/ubuntu/ xenial main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-updates main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-security main universe multiverse 18.04
-deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse  安装
-apt-get install docker.</description>
+deb http://10.190.48.88/ubuntu/ trusty main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-updates main universe multiverse deb http://10.190.48.88/ubuntu/ trusty-security main universe multiverse  16.04
+deb http://10.190.48.88/ubuntu/ xenial main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-updates main universe multiverse deb http://10.190.48.88/ubuntu/ xenial-security main universe multiverse  18.04
+deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse   安装</description>
     </item>
     
     <item>
@@ -131,7 +130,7 @@ apt-get install docker.</description>
       <guid>https://vincent-wuhan.github.io/todo/ha/</guid>
       <description>HA Ubuntu版本 18.04
 Ubuntu更新源 修改文件 /etc/apt/sources.list
-deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse kubectl 安装 # 下载目前最新版 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl # 设置执行权限 chmod +x ./linux-amd64-v1.14.1-kubectl # 将其移动到 /usr/locak/bin/kubectl sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl RKE安装 # 下载目前最新版 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64 # 设置执行权限 chmod +x v0.1.18-rke_linux-amd64 # 将其移动到 /usr/locak/bin/kubectl sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke # 验证安装 rke --version # rke version v0.1.18 Helm安装 # 网络原因，切换到 Rancher 提供的镜像连接 wget https://www.</description>
+deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse  kubectl 安装 # 下载目前最新版 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl # 设置执行权限 chmod +x ./linux-amd64-v1.14.1-kubectl # 将其移动到 /usr/locak/bin/kubectl sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl  RKE安装 # 下载目前最新版 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64 # 设置执行权限 chmod +x v0.1.18-rke_linux-amd64 # 将其移动到 /usr/locak/bin/kubectl sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke # 验证安装 rke --version # rke version v0.1.18  Helm安装 # 网络原因，切换到 Rancher 提供的镜像连接 wget https://www.</description>
     </item>
     
     <item>
@@ -145,7 +144,7 @@ deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.19
 · 在Kubernetes集群中安装和卸载release
 · 更新、回滚和测试release
 组件  Helm客户端  Helm命令行工具，支持用户进行如下操作
-· 在本地开发chart · 管理chart仓库 · 与Tiller服务器交互 · 在远程Kubernetes集群上安装chart · 查看release信息 · 升级或卸载已有release  Tiller服务器  Tiller服务器运行在Kubernetes集群中。
+· 在本地开发chart · 管理chart仓库 · 与Tiller服务器交互 · 在远程Kubernetes集群上安装chart · 查看release信息 · 升级或卸载已有release   Tiller服务器  Tiller服务器运行在Kubernetes集群中。
 常见命令    命令名称 说明     helm repo index REPO_PATH 本地仓库index创建    Q&amp;amp;A helm安装提示index.</description>
     </item>
     
@@ -160,7 +159,7 @@ deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.19
  本地预览  hugo server &amp;ndash;buildDrafts
  编译web格式预发布  hugo base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts 编译生成的文件在blog下的public目录下
  发布到github  切换到public目录，初始化本地仓库
-cd public git init git add . git commit -m &amp;#39;message&amp;#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master</description>
+cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  </description>
     </item>
     
     <item>
@@ -171,8 +170,8 @@ cd public git init git add . git commit -m &amp;#39;message&amp;#39; git remote 
       <guid>https://vincent-wuhan.github.io/todo/java/</guid>
       <description> JAVA 安装 在ubuntu中，java有两种版本，一种是开源版本OpenJDK，另外一种是Oracle版本，两者区别不大，知识Oracle的多了一些商业功能
 安装
-# 安装OpenJDK 10 JDK apt install default-jdk # 安装OpenJDK 8 JDK apt install openjdk-8-jdk # 安装Oracle JAVA # 1.添加新的存储库WebUpd8，可以自动下载并安装Oracle JDK apt install software-properities-common dirmngr add-apt-repository ppa:webupd8team/java apt update # 2.安装java8 apt-get install oracle-java8-installer 设置JAVA_HOME等参数, 打开~/.bashrc,末尾追加
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 export JRE_HOME=${JAVA_HOME}/jre export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib export PATH=${JAVA_HOME}/bin:$PATH </description>
+# 安装OpenJDK 10 JDK apt install default-jdk # 安装OpenJDK 8 JDK apt install openjdk-8-jdk # 安装Oracle JAVA # 1.添加新的存储库WebUpd8，可以自动下载并安装Oracle JDK apt install software-properities-common dirmngr add-apt-repository ppa:webupd8team/java apt update # 2.安装java8 apt-get install oracle-java8-installer  设置JAVA_HOME等参数, 打开~/.bashrc,末尾追加
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 export JRE_HOME=${JAVA_HOME}/jre export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib export PATH=${JAVA_HOME}/bin:$PATH  </description>
     </item>
     
     <item>
@@ -181,7 +180,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 export JRE_HOME=${JAVA_HO
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/kubernetes/</guid>
-      <description>Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx “&amp;mdash;”的作用 一个YAML中定义多个资源，用&amp;rdquo;&amp;mdash;&amp;ldquo;分割
+      <description>Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx  “&amp;mdash;”的作用 一个YAML中定义多个资源，用&amp;rdquo;&amp;mdash;&amp;ldquo;分割
 Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问   NodePort Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过:访问服务   LoadBalancer Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service        回滚设置 默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。</description>
     </item>
     
@@ -193,12 +192,12 @@ Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对�
       <guid>https://vincent-wuhan.github.io/todo/license/</guid>
       <description>License制作及简介 license制作依赖openssl服务
 License制作步骤  1.登陆license服务器
-ssh mano@10.190.49.60 password: 12 2.切换到license制作目录
-cd /home/licenseFactory/  注: 该目录下的公钥文件rsa_public_key.pem 不要动
+ssh mano@10.190.49.60 password: 12  2.切换到license制作目录
+cd /home/licenseFactory/   注: 该目录下的公钥文件rsa_public_key.pem 不要动
  3.创建license输入文件  根据实际需求，将license管理对象填写到输入文件plain.txt
 以制作vnfm license为例:
-echo &amp;#39;{&amp;#34;productId&amp;#34;: &amp;#34;fh_2019_nfvo&amp;#34;,&amp;#34;vimThreshold&amp;#34;:&amp;#34;20&amp;#34;,&amp;#34;vnfmThreshold&amp;#34;:&amp;#34;20&amp;#34;,&amp;#34;licenseType&amp;#34;:&amp;#34;NFVO&amp;#34;}&amp;#39; &amp;gt; plain.txt  4.生成license文件
-openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out license.lsn  参数说明:
+echo &#39;{&amp;quot;productId&amp;quot;: &amp;quot;fh_2019_nfvo&amp;quot;,&amp;quot;vimThreshold&amp;quot;:&amp;quot;20&amp;quot;,&amp;quot;vnfmThreshold&amp;quot;:&amp;quot;20&amp;quot;,&amp;quot;licenseType&amp;quot;:&amp;quot;NFVO&amp;quot;}&#39; &amp;gt; plain.txt   4.生成license文件
+openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out license.lsn   参数说明:
  plain.txt 为欲加密文件 inkey 指定公钥文件 pubin -out 指定加密后文件  License输入文件 下列license的输入文件通过替换上一章License制作步骤的第3步中plain.txt文件中的内容，从而达到生成控制不同对象的license输出
 控制网元数目及类型的控制 参数说明： | 参数| 说明| |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;|:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;| |productId | productId为预导入license系统的vnfmId或nfvoId，如系统id与license中productId不一致将导入失败.licenseType为NFVO时，填nfvoId, licenseType为VNFM时，填vnfmId| |vnfThreshold | vnf阈值，控制实例化的vnf最大数 | |licenseType | license类型, NFVO类型填NFVO, VNFM类型填VNFM.</description>
     </item>
@@ -209,7 +208,7 @@ openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out lice
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/linux/</guid>
-      <description>Linux技巧 Ubuntu common 查看磁盘大文件 du -sh /* 修改网卡名字（如eth0） /etc/udev/rules.d/70-persistent-net.rules Root远程登录设置 #!/bin/bash # setup root access - default login: oom/oom - comment out to restrict access too ssh key only sed -i &amp;#39;s/PermitRootLogin.*/PermitRootLogin yes/&amp;#39; /etc/ssh/sshd_config sed -i &amp;#39;s/PasswordAuthentication.*/PasswordAuthentication yes/&amp;#39; /etc/ssh/sshd_config service sshd restart echo -e &amp;#34;mano2018\nmano2018&amp;#34; | passwd root Root用户密码设置 sudo passwd root 查看apt-get依赖包 cd /var/cache/apt/archives
+      <description>Linux技巧 Ubuntu common 查看磁盘大文件 du -sh /*  修改网卡名字（如eth0） /etc/udev/rules.d/70-persistent-net.rules  Root远程登录设置 #!/bin/bash # setup root access - default login: oom/oom - comment out to restrict access too ssh key only sed -i &#39;s/PermitRootLogin.*/PermitRootLogin yes/&#39; /etc/ssh/sshd_config sed -i &#39;s/PasswordAuthentication.*/PasswordAuthentication yes/&#39; /etc/ssh/sshd_config service sshd restart echo -e &amp;quot;mano2018\nmano2018&amp;quot; | passwd root  Root用户密码设置 sudo passwd root  查看apt-get依赖包 cd /var/cache/apt/archives
 添加用户到docker组 root@mano:~# gpasswd -a sdc docker Adding user sdc to group docker root@mano:~# newgrp docker</description>
     </item>
     
@@ -222,7 +221,7 @@ openssl rsautl -encrypt -in plain.txt -inkey rsa_public_key.pem -pubin -out lice
       <description>Kubernetes日志管理 日志采集方式    采集方式 说明     原生方式 使用 kubectl logs 直接在查看本地保留的日志，或者通过docker engine的 log driver 把日志重定向到文件、syslog、fluentd等系统中。   DaemonSet方式 在K8S的每个node上部署日志agent，由agent采集所有容器的日志到服务端。   Sidecar方式 一个POD中运行一个sidecar的日志agent容器，用于采集该POD主容器产生的日志。    Filebeat sidecar安装方式 resources文件 · filebeat.yml——filebeat配置文件 · logback.xml——日志格式定义
 oom改造  添加filebeat.yml配置文件  路径: oom/kubernetes//resources/config/log/filebeat/filebeat.yml
 一个简单的filebeat.yml配置
-filebeat.prospectors: #it is mandatory, in our case it&amp;#39;s log - input_type: log #This is the canolical path as mentioned in logback.xml, *.* means it will monitor all files in the directory.</description>
+filebeat.prospectors: #it is mandatory, in our case it&#39;s log - input_type: log #This is the canolical path as mentioned in logback.xml, *.* means it will monitor all files in the directory.</description>
     </item>
     
     <item>
@@ -277,7 +276,7 @@ e) block config sub-system?</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://vincent-wuhan.github.io/todo/ovs/</guid>
-      <description> OVS笔记 安装 # 更新 apt-get update # 移除bridge rmmod bridge * 关闭bridge模块。可先通过lsmod | grep bridge 查看，然后用rmmod bridge关闭，若出现bridge正在被另一模块使用导致无法关闭的错误，则需要先关闭正在使用bridge的模块。 # 安装OVS apt-get install openvswitch-switch # 查看安装结果 ovs-vsctl show</description>
+      <description> OVS笔记 安装 # 更新 apt-get update # 移除bridge rmmod bridge * 关闭bridge模块。可先通过lsmod | grep bridge 查看，然后用rmmod bridge关闭，若出现bridge正在被另一模块使用导致无法关闭的错误，则需要先关闭正在使用bridge的模块。 # 安装OVS apt-get install openvswitch-switch # 查看安装结果 ovs-vsctl show  </description>
     </item>
     
     <item>
@@ -296,8 +295,8 @@ e) block config sub-system?</description>
       
       <guid>https://vincent-wuhan.github.io/todo/python/</guid>
       <description>Python学习笔记 pip安装包所在路径查看 有时候pip安装后，不知道python包被安装到何处，可以调用如下命令查看python系统路径帮助排查
-pip -m site Python标识符命名规则 标识符：用于变量、函数、类、模块等的名称。 一般有如下规则：
-1. 区分大小写 2. 第一个字符必须是字母、下划线，其余字符是字母、数字、下划线 3. 不能使用关键字，关键字查询IDLE-&amp;gt;help()-&amp;gt;keywords 4. 以双下划线开头和结尾的名称通常含有特殊含义，尽量避免，如__init__ 如下是约定俗称的命名规则：
+pip -m site  Python标识符命名规则 标识符：用于变量、函数、类、模块等的名称。 一般有如下规则：
+1. 区分大小写 2. 第一个字符必须是字母、下划线，其余字符是字母、数字、下划线 3. 不能使用关键字，关键字查询IDLE-&amp;gt;help()-&amp;gt;keywords 4. 以双下划线开头和结尾的名称通常含有特殊含义，尽量避免，如__init__  如下是约定俗称的命名规则：
    类型 规则 例子     模块和包名 全小写字母，尽量简单，若多个单词之间用下划线 math,os,sys   函数名 全小写，多个单词之间用下划线隔开 phone, my_name   类名 首字母大写，采用驼峰原则，多个单词之间每个单词第一个字母大写，其余部分小写 MyPhone, MyClass, Phone   常量名 全大写字母，多个单词使用下划线隔开 SPEED, MAX_SPEED    Python运算符    运算符 说明 例子 结果     + 加法 3+2 5   - 减法 3-2 1   * 乘法 3*2 6   / 除法 3&amp;frasl;2 1.</description>
     </item>
     
@@ -317,20 +316,17 @@ pip -m site Python标识符命名规则 标识符：用于变量、函数、类�
       
       <guid>https://vincent-wuhan.github.io/todo/%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83/</guid>
       <description>服务器信息  git服务器信息
-10.190.49.96 su: mano2017 mano：mano2017 git: jiangxing dev:12 gerrit平台: gerrit 123321 gitlab平台: gerrit 12344321 
+10.190.49.96 su: mano2017 mano：mano2017 git: jiangxing dev:12 gerrit平台: gerrit 123321 gitlab平台: gerrit 12344321  
  vCenter登陆
-IP: 10.190.49.50 用户： administrator@vsphere.local 密码： `1Qazxcv 
+IP: 10.190.49.50 用户： administrator@vsphere.local 密码： `1Qazxcv  
  VNF csar包制作服务器
-wcl/wcl 10.190.3.198 user/user 10.190.3.71 
+wcl/wcl 10.190.3.198 user/user 10.190.3.71  
  小站
-IP： 10.190.49.55：5555 用户： ghost@ghost.com 密码： manomano2017 
+IP： 10.190.49.55：5555 用户： ghost@ghost.com 密码： manomano2017  
  docker仓库
-IP： 10.190.49.56:8081   招聘
-智联 wlccx002 developIPRAN002 猎聘 wlccx2 developIPRAN   部门代码审查报告地址
-http://10.90.6.59:81/svn/FOSV3R1/fosv3_testcase/Code/code-review 没有用户名的,可以把svn账号发给曹松波. 他帮忙建立账号 账号：wt 密码123 
- 服务器上网
-上网账号
-curl -d &amp;#34;login_type=login&amp;amp;username=dssun5812&amp;amp;password=S%22%3Bz%BD%BC%3F%3E%91+%B3r&amp;#34; http://202.</description>
+IP： 10.190.49.56:8081    招聘
+智联 wlccx002 developIPRAN002 猎聘 wlccx2 developIPRAN    部门代码审查报告地址
+http://10.90.6.59:81/svn/FOSV3R1/fosv3_testcase/Code/code-review 没有用户名的,可以把svn账号发给曹松波. 他帮忙建立账号 账号：wt 密码123</description>
     </item>
     
     <item>
@@ -340,11 +336,11 @@ curl -d &amp;#34;login_type=login&amp;amp;username=dssun5812&amp;amp;password=S%
       
       <guid>https://vincent-wuhan.github.io/todo/%E8%8E%B7%E5%8F%96docker%E5%AE%B9%E5%99%A8%E5%AE%BF%E4%B8%BB%E6%9C%BAveth%E5%8F%A3/</guid>
       <description>获取docker容器对应的宿主机veth*接口 具体思路  查看容器内eth0的iflink接口索引
-docker exec -it ${container_info} bash -c &amp;#39;cat /sys/class/net/eth0/iflink&amp;#39;  注： &amp;gt;&amp;gt; container_info可以是docker容器名称或者docker容器id &amp;gt;&amp;gt; 该命令返回一个iflink索引值，例如791
+docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;   注： &amp;gt;&amp;gt; container_info可以是docker容器名称或者docker容器id &amp;gt;&amp;gt; 该命令返回一个iflink索引值，例如791
  搜索宿主机veth接口
-grep -l 791 /sys/class/net/veth*/ifindex  注： &amp;gt;&amp;gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
+grep -l 791 /sys/class/net/veth*/ifindex   注： &amp;gt;&amp;gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
  截取目录路径中veth*部分的字符
-sed -e &amp;#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &amp;#39;cat /sys/class/net/eth0/iflink&amp;#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &amp;#39;\r&amp;#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &amp;#39;s;^.*net/\(.*\)/ifindex$;\1;&amp;#39;` echo $container:$veth done 压缩成一行,命令行中执行：</description>
+sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1   shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^.</description>
     </item>
     
     <item>
@@ -354,12 +350,12 @@ sed -e &amp;#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for contain
       
       <guid>https://vincent-wuhan.github.io/todo/%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEpostgres%E5%AE%B9%E5%99%A8%E6%B5%81%E9%87%8F%E4%B8%8D%E9%80%9A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</guid>
       <description>容器部署Postgres数据库开放端口映射远程访问遇到的坑 需求场景 默认ansible-awx部署ansible-tower时，是不开放postgres端口5432映射到宿主机的。为了远程访问tower的数据库postgres，在部署完后，手动更改docker-compose文件，添加如下端口映射
-ports: - &amp;#34;5432&amp;#34;:&amp;#34;5432&amp;#34; 然后在docker-compose文件同级目录下，重新执行命令更新容器
-docker-compose up -d 期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
+ports: - &amp;quot;5432&amp;quot;:&amp;quot;5432&amp;quot;  然后在docker-compose文件同级目录下，重新执行命令更新容器
+docker-compose up -d  期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
 但此时却遇到一个坑，不知是否与docker-compose版本有关，在此记录备案.
 现象说明 &amp;ldquo;psql -h localhost -U awx&amp;rdquo;和&amp;rdquo;psql -h 172.31.0.2 -U awx&amp;rdquo;可以登陆数据库成功，&amp;rdquo;psql -h 192.168.100.23 -U awx&amp;rdquo;登陆数据失败
 问题排查过程  确认docker容器映射正常
-# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &amp;#34;docker-entrypoint.s…&amp;#34; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&amp;gt;5432/tcp awx_postgres  查看5432端口也被正常监听
+# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &amp;quot;docker-entrypoint.s…&amp;quot; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&amp;gt;5432/tcp awx_postgres   查看5432端口也被正常监听
 # netstat -apn|grep 5432 tcp6 0 0 :::5432 :::* LISTEN 1650/docker-proxy # ps aux|grep 5432 root 1650 0.</description>
     </item>
     

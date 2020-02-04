@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</loc>
-    <lastmod>2020-01-31T20:11:01+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://vincent-wuhan.github.io/</loc>
-    <lastmod>2020-01-31T20:11:01+08:00</lastmod>
+    <lastmod>2020-02-04T18:15:12+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://vincent-wuhan.github.io/tools/</loc>
+    <lastmod>2020-02-04T18:15:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vincent-wuhan.github.io/tools/how-to-download-and-offline-install-pip-packing/</loc>
+    <lastmod>2020-02-04T18:15:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</loc>
     <lastmod>2020-01-31T20:11:01+08:00</lastmod>
   </url>
   
@@ -23,13 +28,8 @@
   </url>
   
   <url>
-    <loc>https://vincent-wuhan.github.io/python/%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E7%9A%84%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://vincent-wuhan.github.io/python/how-to-improve-python-skills/</loc>
     <lastmod>2020-01-31T19:40:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/onap/msb/</loc>
-    <lastmod>2019-08-24T17:17:38+08:00</lastmod>
   </url>
   
   <url>
@@ -38,8 +38,8 @@
   </url>
   
   <url>
-    <loc>https://vincent-wuhan.github.io/readme/</loc>
-    <priority>0</priority>
+    <loc>https://vincent-wuhan.github.io/onap/msb/</loc>
+    <lastmod>2019-08-24T17:17:38+08:00</lastmod>
   </url>
   
   <url>
@@ -189,10 +189,6 @@
   
   <url>
     <loc>https://vincent-wuhan.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/series/</loc>
   </url>
   
   <url>

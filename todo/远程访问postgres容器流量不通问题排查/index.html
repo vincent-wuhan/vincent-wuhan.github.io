@@ -13,22 +13,22 @@
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
 <meta name="twitter:description" content="容器部署Postgres数据库开放端口映射远程访问遇到的坑 需求场景 默认ansible-awx部署ansible-tower时，是不开放postgres端口5432映射到宿主机的。为了远程访问tower的数据库postgres，在部署完后，手动更改docker-compose文件，添加如下端口映射
-ports: - &#34;5432&#34;:&#34;5432&#34; 然后在docker-compose文件同级目录下，重新执行命令更新容器
-docker-compose up -d 期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
+ports: - &quot;5432&quot;:&quot;5432&quot;  然后在docker-compose文件同级目录下，重新执行命令更新容器
+docker-compose up -d  期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
 但此时却遇到一个坑，不知是否与docker-compose版本有关，在此记录备案.
 现象说明 &ldquo;psql -h localhost -U awx&rdquo;和&rdquo;psql -h 172.31.0.2 -U awx&rdquo;可以登陆数据库成功，&rdquo;psql -h 192.168.100.23 -U awx&rdquo;登陆数据失败
 问题排查过程  确认docker容器映射正常
-# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &#34;docker-entrypoint.s…&#34; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&gt;5432/tcp awx_postgres  查看5432端口也被正常监听
+# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &quot;docker-entrypoint.s…&quot; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&gt;5432/tcp awx_postgres   查看5432端口也被正常监听
 # netstat -apn|grep 5432 tcp6 0 0 :::5432 :::* LISTEN 1650/docker-proxy # ps aux|grep 5432 root 1650 0."/>
 
     <meta property="og:title" content="" />
 <meta property="og:description" content="容器部署Postgres数据库开放端口映射远程访问遇到的坑 需求场景 默认ansible-awx部署ansible-tower时，是不开放postgres端口5432映射到宿主机的。为了远程访问tower的数据库postgres，在部署完后，手动更改docker-compose文件，添加如下端口映射
-ports: - &#34;5432&#34;:&#34;5432&#34; 然后在docker-compose文件同级目录下，重新执行命令更新容器
-docker-compose up -d 期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
+ports: - &quot;5432&quot;:&quot;5432&quot;  然后在docker-compose文件同级目录下，重新执行命令更新容器
+docker-compose up -d  期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
 但此时却遇到一个坑，不知是否与docker-compose版本有关，在此记录备案.
 现象说明 &ldquo;psql -h localhost -U awx&rdquo;和&rdquo;psql -h 172.31.0.2 -U awx&rdquo;可以登陆数据库成功，&rdquo;psql -h 192.168.100.23 -U awx&rdquo;登陆数据失败
 问题排查过程  确认docker容器映射正常
-# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &#34;docker-entrypoint.s…&#34; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&gt;5432/tcp awx_postgres  查看5432端口也被正常监听
+# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &quot;docker-entrypoint.s…&quot; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&gt;5432/tcp awx_postgres   查看5432端口也被正常监听
 # netstat -apn|grep 5432 tcp6 0 0 :::5432 :::* LISTEN 1650/docker-proxy # ps aux|grep 5432 root 1650 0." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/todo/%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEpostgres%E5%AE%B9%E5%99%A8%E6%B5%81%E9%87%8F%E4%B8%8D%E9%80%9A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" />
@@ -38,14 +38,14 @@ docker-compose up -d 期望结果 以宿主机IP为192.168.100.23, 容器IP地�
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -79,10 +79,17 @@ docker-compose up -d 期望结果 以宿主机IP为192.168.100.23, 容器IP地�
 <h2 id="需求场景">需求场景</h2>
 
 <p>默认ansible-awx部署ansible-tower时，是不开放postgres端口5432映射到宿主机的。为了远程访问tower的数据库postgres，在部署完后，手动更改docker-compose文件，添加如下端口映射</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">ports:
-    - <span style="color:#0ff;font-weight:bold">&#34;5432&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;5432&#34;</span></code></pre></div>
+
+<pre><code class="language-yml">ports:
+    - &quot;5432&quot;:&quot;5432&quot;
+</code></pre>
+
 <p>然后在docker-compose文件同级目录下，重新执行命令更新容器</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker-compose up -d</code></pre></div>
+
+<pre><code class="language-shell">
+docker-compose up -d
+</code></pre>
+
 <h2 id="期望结果">期望结果</h2>
 
 <p>以宿主机IP为192.168.100.23,  容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库</p>
@@ -97,56 +104,50 @@ docker-compose up -d 期望结果 以宿主机IP为192.168.100.23, 容器IP地�
 
 <ul>
 <li><p>确认docker容器映射正常</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># docker ps|grep awx-postgres</span>
+
+<pre><code class="language-shell"># docker ps|grep awx-postgres
 $ docker ps
 CONTAINER ID IMAGE       COMMAND                 CREATED        STATUS        PORTS                   NAMES
-a0d0a4d205f0 postgres:10 <span style="color:#0ff;font-weight:bold">&#34;docker-entrypoint.s…&#34;</span>  <span style="color:#ff0;font-weight:bold">7</span> seconds ago  Up <span style="color:#ff0;font-weight:bold">6</span> seconds  <span style="color:#ff0;font-weight:bold">0</span>.0.0.0:5432-&gt;5432/tcp  awx_postgres</code></pre></div></li>
+a0d0a4d205f0 postgres:10 &quot;docker-entrypoint.s…&quot;  7 seconds ago  Up 6 seconds  0.0.0.0:5432-&gt;5432/tcp  awx_postgres
+</code></pre></li>
 </ul>
 
 <p>查看5432端口也被正常监听</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># netstat -apn|grep 5432</span>
-tcp6       <span style="color:#ff0;font-weight:bold">0</span>      <span style="color:#ff0;font-weight:bold">0</span> :::5432                 :::*                    LISTEN      <span style="color:#ff0;font-weight:bold">1650</span>/docker-proxy
 
-<span style="color:#007f7f"># ps aux|grep 5432</span>
-root      <span style="color:#ff0;font-weight:bold">1650</span>  <span style="color:#ff0;font-weight:bold">0</span>.0  <span style="color:#ff0;font-weight:bold">0</span>.0 <span style="color:#ff0;font-weight:bold">190284</span>  <span style="color:#ff0;font-weight:bold">2804</span> ?        Sl   <span style="color:#ff0;font-weight:bold">19</span>:14   <span style="color:#ff0;font-weight:bold">0</span>:00 /usr/bin/docker-proxy -proto tcp -host-ip <span style="color:#ff0;font-weight:bold">0</span>.0.0.0 -host-port <span style="color:#ff0;font-weight:bold">5432</span> -container-ip <span style="color:#ff0;font-weight:bold">172</span>.18.0.2 -container-port <span style="color:#ff0;font-weight:bold">5432</span></code></pre></div>
+<pre><code class="language-shell"># netstat -apn|grep 5432
+tcp6       0      0 :::5432                 :::*                    LISTEN      1650/docker-proxy
+
+# ps aux|grep 5432
+root      1650  0.0  0.0 190284  2804 ?        Sl   19:14   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5432 -container-ip 172.18.0.2 -container-port 5432
+</code></pre>
+
 <ul>
 <li><p>确认宿主机访问容器的端口正常</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># telnet 172.31.0.2 5432</span>
-Trying <span style="color:#ff0;font-weight:bold">172</span>.31.0.2...
-Connected to <span style="color:#ff0;font-weight:bold">172</span>.31.0.2.
-Escape character is <span style="color:#0ff;font-weight:bold">&#39;^]&#39;</span>.</code></pre></div></li>
+
+<pre><code class="language-shell"># telnet 172.31.0.2 5432
+Trying 172.31.0.2...
+Connected to 172.31.0.2.
+Escape character is '^]'.
+
+</code></pre></li>
 
 <li><p>确认使用宿主机IP地址访问端口异常</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># telnet 192.168.100.21 5432</span>
-一直没反应</code></pre></div></li>
+
+<pre><code class="language-shell"># telnet 192.168.100.21 5432
+一直没反应
+</code></pre></li>
 </ul>
 
 <h3 id="问题解决">问题解决</h3>
 
 <p>经过常熟排查均确认无误，但数据库仍然无法访问，此时怀疑是docker服务端口流量转发失效，尝试重启docker服务后，流量竟然通了。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">service docker restart</code></pre></div>
+
+<pre><code class="language-shell">service docker restart
+</code></pre>
+
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

@@ -12,11 +12,11 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割
+<meta name="twitter:description" content="Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx  “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割
 Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问   NodePort Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过:访问服务   LoadBalancer Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service        回滚设置 默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。"/>
 
     <meta property="og:title" content="" />
-<meta property="og:description" content="Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割
+<meta property="og:description" content="Kubernetes kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx  “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割
 Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问   NodePort Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过:访问服务   LoadBalancer Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service        回滚设置 默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/todo/kubernetes/" />
@@ -26,14 +26,14 @@ Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对�
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -65,23 +65,26 @@ Service类型    类型 说明     ClusterIP Service通过Cluster内部的IP对�
 <h1 id="kubernetes">Kubernetes</h1>
 
 <h2 id="kubectl常用命令">kubectl常用命令</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f">#异常pod捕获命令</span>
+
+<pre><code class="language-shell">#异常pod捕获命令
 kubectl get pods -n kube-system | grep -v Running 
-<span style="color:#007f7f"># 查看目前所有的pod</span>
+# 查看目前所有的pod
 kubectl get po 
-<span style="color:#007f7f"># 查看目前所有的replica set</span>
+# 查看目前所有的replica set
 kubectl get rs 
-<span style="color:#007f7f"># 查看目前所有的deployment</span>
+# 查看目前所有的deployment
 kubectl get deployment 
-<span style="color:#007f7f"># 查看my-nginx pod的详细状态</span>
+# 查看my-nginx pod的详细状态
 kubectl describe po my-nginx 
-<span style="color:#007f7f"># 查看my-nginx replica set的详细状态</span>
+# 查看my-nginx replica set的详细状态
 kubectl describe rs my-nginx 
-<span style="color:#007f7f"># 查看my-nginx deployment的详细状态</span>
+# 查看my-nginx deployment的详细状态
 kubectl describe deployment my-nginx 
-<span style="color:#007f7f"># 查看相关事件</span>
+# 查看相关事件
 kubectl get eventskubectl get events
-kubectl delete deployment my-nginx</code></pre></div>
+kubectl delete deployment my-nginx
+</code></pre>
+
 <h2 id="的作用">“&mdash;”的作用</h2>
 
 <p>一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割</p>
@@ -192,36 +195,54 @@ kubectl delete deployment my-nginx</code></pre></div>
 <h4 id="创建secret">创建Secret</h4>
 
 <p>&ndash;from-literal</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create secret generic mysecret --from-literal=username=admin --from-liternam=password=<span style="color:#ff0;font-weight:bold">123456</span></code></pre></div>
+
+<pre><code class="language-shell">kubectl create secret generic mysecret --from-literal=username=admin --from-liternam=password=123456
+</code></pre>
+
 <p>&ndash;from-file</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">echo</span> -n admin &gt; ./username
-<span style="color:#fff;font-weight:bold">echo</span> -n <span style="color:#ff0;font-weight:bold">123456</span> &gt; ./password
-kubectl create secret generic mysecret --from-file=./username --from-file=./password</code></pre></div>
+
+<pre><code class="language-shell">echo -n admin &gt; ./username
+echo -n 123456 &gt; ./password
+kubectl create secret generic mysecret --from-file=./username --from-file=./password
+</code></pre>
+
 <p>&ndash;from-env-file</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat <span style="color:#0ff;font-weight:bold">&lt;&lt; EOF &gt; env.txt
-</span><span style="color:#0ff;font-weight:bold">username=admin
-</span><span style="color:#0ff;font-weight:bold">password=123456
-</span><span style="color:#0ff;font-weight:bold">EOF</span>
-kubectl create secret generic mysecret --from-env-file=env.txt</code></pre></div>
+
+<pre><code class="language-shell">cat &lt;&lt; EOF &gt; env.txt
+username=admin
+password=123456
+EOF
+kubectl create secret generic mysecret --from-env-file=env.txt
+</code></pre>
+
 <p>通过YAML配置</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+
+<pre><code class="language-yaml">apiVersion: v1
 kind: Secret
 metadata: 
     name: mysecret
 data:
     username: YWRtaW4=
-    password: MTIzNDU2</code></pre></div>
+    password: MTIzNDU2
+</code></pre>
+
 <p>注意：文件中的敏感数据必须是通过base64编码后的结果</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">echo</span> -n admin | base64
+
+<pre><code class="language-shell">$ echo -n admin | base64
 YWRtaW4
-$ <span style="color:#fff;font-weight:bold">echo</span> -n <span style="color:#ff0;font-weight:bold">123456</span> | base64
-MTIzNDU2</code></pre></div>
+$ echo -n 123456 | base64
+MTIzNDU2
+</code></pre>
+
 <h4 id="查看secret">查看Secret</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 查看secret</span>
+
+<pre><code class="language-shell"># 查看secret
 kubectl get secret mysecret
 
-<span style="color:#007f7f"># 查看secret详情</span>
-kubectl describe secret mysecret</code></pre></div>
+# 查看secret详情
+kubectl describe secret mysecret
+</code></pre>
+
 <h4 id="secret的使用">Secret的使用</h4>
 
 <p>在Pod中可以通过Volume或环境变量的方式使用Secret
@@ -239,26 +260,7 @@ kubectl describe secret mysecret</code></pre></div>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

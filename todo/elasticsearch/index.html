@@ -12,20 +12,20 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="概念 索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间 分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互 总结： 1. 索引内数据是所有主分片内数据的合集 2. 副分片是对所有主分片的数据拷贝和备份 3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互  集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
-green 所有的主分片和副本分片都正常运行。 yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red 有主分片没能正常运行。 文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
+<meta name="twitter:description" content="概念 索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间  分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互 总结： 1. 索引内数据是所有主分片内数据的合集 2. 副分片是对所有主分片的数据拷贝和备份 3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互  集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
+green 所有的主分片和副本分片都正常运行。 yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red 有主分片没能正常运行。  文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
 元数据 关于文档自身的信息 · _index 文档索引，通俗点讲就是文档在哪存放 · _type 文档表示的对象类别 · _id 文档唯一标识
 # 操作
-健康状态获取 curl -X GET &#34;localhost:9200/_cluster/health&#34; ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
-curl -X PUT &#34;localhost:9200/blogs&#34; -H &#39;Content-Type: application/json&#39; -d&#39; { &#34;settings&#34; : { &#34;number_of_shards&#34; : 3, &#34;number_of_replicas&#34; : 1 } } &#39; 查看集群健康状态"/>
+健康状态获取 curl -X GET &quot;localhost:9200/_cluster/health&quot;  ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
+curl -X PUT &quot;localhost:9200/blogs&quot; -H &#39;Content-Type: application/json&#39; -d&#39; { &quot;settings&quot; : { &quot;number_of_shards&quot; : 3, &quot;number_of_replicas&quot; : 1 } } &#39;  查看集群健康状态"/>
 
     <meta property="og:title" content="" />
-<meta property="og:description" content="概念 索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间 分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互 总结： 1. 索引内数据是所有主分片内数据的合集 2. 副分片是对所有主分片的数据拷贝和备份 3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互  集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
-green 所有的主分片和副本分片都正常运行。 yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red 有主分片没能正常运行。 文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
+<meta property="og:description" content="概念 索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间  分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互 总结： 1. 索引内数据是所有主分片内数据的合集 2. 副分片是对所有主分片的数据拷贝和备份 3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互  集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
+green 所有的主分片和副本分片都正常运行。 yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red 有主分片没能正常运行。  文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
 元数据 关于文档自身的信息 · _index 文档索引，通俗点讲就是文档在哪存放 · _type 文档表示的对象类别 · _id 文档唯一标识
 # 操作
-健康状态获取 curl -X GET &#34;localhost:9200/_cluster/health&#34; ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
-curl -X PUT &#34;localhost:9200/blogs&#34; -H &#39;Content-Type: application/json&#39; -d&#39; { &#34;settings&#34; : { &#34;number_of_shards&#34; : 3, &#34;number_of_replicas&#34; : 1 } } &#39; 查看集群健康状态" />
+健康状态获取 curl -X GET &quot;localhost:9200/_cluster/health&quot;  ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
+curl -X PUT &quot;localhost:9200/blogs&quot; -H &#39;Content-Type: application/json&#39; -d&#39; { &quot;settings&quot; : { &quot;number_of_shards&quot; : 3, &quot;number_of_replicas&quot; : 1 } } &#39;  查看集群健康状态" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/todo/elasticsearch/" />
 
@@ -34,14 +34,14 @@ curl -X PUT &#34;localhost:9200/blogs&#34; -H &#39;Content-Type: application/jso
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -73,9 +73,13 @@ curl -X PUT &#34;localhost:9200/blogs&#34; -H &#39;Content-Type: application/jso
 <h1 id="概念">概念</h1>
 
 <h2 id="索引">索引</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">保存数据的地方，指向一个或多个物理分片的逻辑命名空间</pre></div>
+
+<pre><code>保存数据的地方，指向一个或多个物理分片的逻辑命名空间
+</code></pre>
+
 <h2 id="分片">分片</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">· Elasticsearch底层工作单元，仅保存全部数据中的一部分
+
+<pre><code>· Elasticsearch底层工作单元，仅保存全部数据中的一部分
 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上
 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 
  · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片
@@ -89,16 +93,21 @@ curl -X PUT &#34;localhost:9200/blogs&#34; -H &#39;Content-Type: application/jso
  2. 副分片是对所有主分片的数据拷贝和备份
  3. 所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点
  4. 每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互
- </pre></div>
+ 
+</code></pre>
+
 <h2 id="集群状态">集群状态</h2>
 
 <p>status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">green
+
+<pre><code>green
 所有的主分片和副本分片都正常运行。
 yellow
 所有的主分片都正常运行，但不是所有的副本分片都正常运行。
 red
-有主分片没能正常运行。</pre></div>
+有主分片没能正常运行。
+</code></pre>
+
 <h2 id="文档">文档</h2>
 
 <p>大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID</p>
@@ -113,61 +122,52 @@ red
 <p># 操作</p>
 
 <h2 id="健康状态获取">健康状态获取</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -X GET <span style="color:#0ff;font-weight:bold">&#34;localhost:9200/_cluster/health&#34;</span></code></pre></div>
+
+<pre><code class="language-shell">curl -X GET &quot;localhost:9200/_cluster/health&quot;
+</code></pre>
+
 <p>## 索引建立与分片副本
  单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -X PUT <span style="color:#0ff;font-weight:bold">&#34;localhost:9200/blogs&#34;</span> -H <span style="color:#0ff;font-weight:bold">&#39;Content-Type: application/json&#39;</span> -d<span style="color:#0ff;font-weight:bold">&#39;
-</span><span style="color:#0ff;font-weight:bold">{
-</span><span style="color:#0ff;font-weight:bold">   &#34;settings&#34; : {
-</span><span style="color:#0ff;font-weight:bold">      &#34;number_of_shards&#34; : 3,
-</span><span style="color:#0ff;font-weight:bold">      &#34;number_of_replicas&#34; : 1
-</span><span style="color:#0ff;font-weight:bold">   }
-</span><span style="color:#0ff;font-weight:bold">}
-</span><span style="color:#0ff;font-weight:bold">&#39;</span></code></pre></div>
+
+<pre><code class="language-shell">curl -X PUT &quot;localhost:9200/blogs&quot; -H 'Content-Type: application/json' -d'
+{
+   &quot;settings&quot; : {
+      &quot;number_of_shards&quot; : 3,
+      &quot;number_of_replicas&quot; : 1
+   }
+}
+'
+</code></pre>
+
 <p>查看集群健康状态</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">{
-  <span style="color:#0ff;font-weight:bold">&#34;cluster_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;elasticsearch&#34;</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;status&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;yellow&#34;</span>, 
-  <span style="color:#0ff;font-weight:bold">&#34;timed_out&#34;</span>: false,
-  <span style="color:#0ff;font-weight:bold">&#34;number_of_nodes&#34;</span>: <span style="color:#ff0;font-weight:bold">1</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;number_of_data_nodes&#34;</span>: <span style="color:#ff0;font-weight:bold">1</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;active_primary_shards&#34;</span>: <span style="color:#ff0;font-weight:bold">3</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;active_shards&#34;</span>: <span style="color:#ff0;font-weight:bold">3</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;relocating_shards&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;initializing_shards&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;unassigned_shards&#34;</span>: <span style="color:#ff0;font-weight:bold">3</span>, 
-  <span style="color:#0ff;font-weight:bold">&#34;delayed_unassigned_shards&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;number_of_pending_tasks&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;number_of_in_flight_fetch&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;task_max_waiting_in_queue_millis&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span>,
-  <span style="color:#0ff;font-weight:bold">&#34;active_shards_percent_as_number&#34;</span>: <span style="color:#ff0;font-weight:bold">50</span>
-}</code></pre></div>
+
+<pre><code class="language-shell">{
+  &quot;cluster_name&quot;: &quot;elasticsearch&quot;,
+  &quot;status&quot;: &quot;yellow&quot;, 
+  &quot;timed_out&quot;: false,
+  &quot;number_of_nodes&quot;: 1,
+  &quot;number_of_data_nodes&quot;: 1,
+  &quot;active_primary_shards&quot;: 3,
+  &quot;active_shards&quot;: 3,
+  &quot;relocating_shards&quot;: 0,
+  &quot;initializing_shards&quot;: 0,
+  &quot;unassigned_shards&quot;: 3, 
+  &quot;delayed_unassigned_shards&quot;: 0,
+  &quot;number_of_pending_tasks&quot;: 0,
+  &quot;number_of_in_flight_fetch&quot;: 0,
+  &quot;task_max_waiting_in_queue_millis&quot;: 0,
+  &quot;active_shards_percent_as_number&quot;: 50
+}
+
+</code></pre>
+
 <p>状态为yellow,标识全部主分片工作正常（集群可以正常服务所有请求）,但副本分片没有全部处于正常状态。实际上所有3个副本分片都是unassigned，只有一个节点，没有其余节点可以用于分配副本分片。在同一个节点上既保存原始数据又保存副本是没有意义的，一旦失去这个节点，所有副本数据也丢失。</p>
 
 <p>当新增一个节点，形成双节点的集群时，副本将被分配到新加入的节点，此时集群状态更新为green。</p>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

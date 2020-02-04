@@ -14,12 +14,12 @@
 <meta name="twitter:title" content=""/>
 <meta name="twitter:description" content="HA Ubuntu版本 18.04
 Ubuntu更新源 修改文件 /etc/apt/sources.list
-deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse kubectl 安装 # 下载目前最新版 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl # 设置执行权限 chmod &#43;x ./linux-amd64-v1.14.1-kubectl # 将其移动到 /usr/locak/bin/kubectl sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl RKE安装 # 下载目前最新版 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64 # 设置执行权限 chmod &#43;x v0.1.18-rke_linux-amd64 # 将其移动到 /usr/locak/bin/kubectl sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke # 验证安装 rke --version # rke version v0.1.18 Helm安装 # 网络原因，切换到 Rancher 提供的镜像连接 wget https://www."/>
+deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse  kubectl 安装 # 下载目前最新版 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl # 设置执行权限 chmod &#43;x ./linux-amd64-v1.14.1-kubectl # 将其移动到 /usr/locak/bin/kubectl sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl  RKE安装 # 下载目前最新版 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64 # 设置执行权限 chmod &#43;x v0.1.18-rke_linux-amd64 # 将其移动到 /usr/locak/bin/kubectl sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke # 验证安装 rke --version # rke version v0.1.18  Helm安装 # 网络原因，切换到 Rancher 提供的镜像连接 wget https://www."/>
 
     <meta property="og:title" content="" />
 <meta property="og:description" content="HA Ubuntu版本 18.04
 Ubuntu更新源 修改文件 /etc/apt/sources.list
-deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse kubectl 安装 # 下载目前最新版 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl # 设置执行权限 chmod &#43;x ./linux-amd64-v1.14.1-kubectl # 将其移动到 /usr/locak/bin/kubectl sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl RKE安装 # 下载目前最新版 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64 # 设置执行权限 chmod &#43;x v0.1.18-rke_linux-amd64 # 将其移动到 /usr/locak/bin/kubectl sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke # 验证安装 rke --version # rke version v0.1.18 Helm安装 # 网络原因，切换到 Rancher 提供的镜像连接 wget https://www." />
+deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse  kubectl 安装 # 下载目前最新版 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl # 设置执行权限 chmod &#43;x ./linux-amd64-v1.14.1-kubectl # 将其移动到 /usr/locak/bin/kubectl sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl  RKE安装 # 下载目前最新版 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64 # 设置执行权限 chmod &#43;x v0.1.18-rke_linux-amd64 # 将其移动到 /usr/locak/bin/kubectl sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke # 验证安装 rke --version # rke version v0.1.18  Helm安装 # 网络原因，切换到 Rancher 提供的镜像连接 wget https://www." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/todo/ha/" />
 
@@ -28,14 +28,14 @@ deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.19
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -73,66 +73,81 @@ deb http://10.190.48.88/ubuntu/ bionic main universe multiverse deb http://10.19
 <h2 id="ubuntu更新源">Ubuntu更新源</h2>
 
 <p>修改文件 /etc/apt/sources.list</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">deb http://10.190.48.88/ubuntu/ bionic main universe multiverse
+
+<pre><code class="language-txt">deb http://10.190.48.88/ubuntu/ bionic main universe multiverse
 deb http://10.190.48.88/ubuntu/ bionic-updates main universe multiverse
-deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse</code></pre></div>
+deb http://10.190.48.88/ubuntu/ bionic-security main universe multiverse
+</code></pre>
+
 <h2 id="kubectl-安装">kubectl 安装</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 下载目前最新版</span>
+
+<pre><code class="language-shell"># 下载目前最新版
 wget https://www.cnrancher.com/download/kubernetes/linux-amd64-v1.14.1-kubectl
-<span style="color:#007f7f"># 设置执行权限</span>
+# 设置执行权限
 chmod +x ./linux-amd64-v1.14.1-kubectl 
-<span style="color:#007f7f"># 将其移动到 /usr/locak/bin/kubectl</span> 
-sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl</code></pre></div>
+# 将其移动到 /usr/locak/bin/kubectl 
+sudo mv ./linux-amd64-v1.14.1-kubectl /usr/local/bin/kubectl
+</code></pre>
+
 <h2 id="rke安装">RKE安装</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 下载目前最新版</span>
+
+<pre><code class="language-shell"># 下载目前最新版
 wget https://www.cnrancher.com/download/rke/v0.1.18-rke_linux-amd64
-<span style="color:#007f7f"># 设置执行权限</span>
+# 设置执行权限
 chmod +x v0.1.18-rke_linux-amd64
-<span style="color:#007f7f"># 将其移动到 /usr/locak/bin/kubectl</span> 
+# 将其移动到 /usr/locak/bin/kubectl 
 sudo cp v0.1.18-rke_linux-amd64 /usr/local/bin/rke
-<span style="color:#007f7f"># 验证安装</span>
-rke --version <span style="color:#007f7f"># rke version v0.1.18</span></code></pre></div>
+# 验证安装
+rke --version # rke version v0.1.18
+</code></pre>
+
 <h2 id="helm安装">Helm安装</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 网络原因，切换到 Rancher 提供的镜像连接</span>
+
+<pre><code class="language-shell"># 网络原因，切换到 Rancher 提供的镜像连接
 wget https://www.cnrancher.com/download/helm/helm-v2.13.1-linux-amd64.tar.gz
-<span style="color:#007f7f"># 解压</span>
+# 解压
 tar -zxvf helm-v2.0.0-linux-amd64.tgz
-<span style="color:#007f7f"># 移动到 /usr/local/bin/helm</span>
-mv linux-amd64/helm /usr/local/bin/helm</code></pre></div>
+# 移动到 /usr/local/bin/helm
+mv linux-amd64/helm /usr/local/bin/helm
+</code></pre>
+
 <h2 id="docker-ce安装">docker-ce安装</h2>
 
 <p>版本：docker-ce:18.09.6</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># 删除旧版本docker</span>
+
+<pre><code class="language-shell"># 删除旧版本docker
 sudo apt-get remove docker docker-engine docker.io containerd runc
 
-<span style="color:#007f7f"># 更新 apt</span> 
+# 更新 apt 
 $ sudo apt-get update
 
-<span style="color:#007f7f"># 安装工具包</span>
-$ sudo apt-get install <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>    apt-transport-https <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>    ca-certificates <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>    curl <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>    gnupg-agent <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>    software-properties-common
+# 安装工具包
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
 
-<span style="color:#007f7f"># 添加Docker官方 GPG key(执行失败)</span>
+# 添加Docker官方 GPG key(执行失败)
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-<span style="color:#007f7f"># 添加 stable apt 源(执行失败)</span>
-$ sudo add-apt-repository <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>   <span style="color:#0ff;font-weight:bold">&#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-</span><span style="color:#0ff;font-weight:bold">   </span><span style="color:#fff;font-weight:bold">$(</span>lsb_release -cs<span style="color:#fff;font-weight:bold">)</span><span style="color:#0ff;font-weight:bold"> \
-</span><span style="color:#0ff;font-weight:bold">   stable&#34;</span>
+# 添加 stable apt 源(执行失败)
+$ sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
 
-<span style="color:#007f7f"># 安装 Docker CE</span>
+# 安装 Docker CE
 $ sudo apt-get update
 
-<span style="color:#007f7f">#执行失败，使用apt install docker.io安装了18.09.5版本</span>
+#执行失败，使用apt install docker.io安装了18.09.5版本
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-<span style="color:#007f7f"># 将当前用户加入&#34;docker&#34;用户组，加入到该用户组的账号在随后安装过程会用到。用于节点访问的SSH用户必须是节点上docker组的成员：</span>
-$ sudo usermod -aG docker $USER</code></pre></div>
+# 将当前用户加入&quot;docker&quot;用户组，加入到该用户组的账号在随后安装过程会用到。用于节点访问的SSH用户必须是节点上docker组的成员：
+$ sudo usermod -aG docker $USER
+</code></pre>
+
 <h2 id="安装nginx">安装Nginx</h2>
 
 <h3 id="设置nginx之前规划网络">设置Nginx之前规划网络</h3>
@@ -192,42 +207,37 @@ $ sudo usermod -aG docker $USER</code></pre></div>
 </table>
 
 <h2 id="get-nodes">Get Nodes</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">export</span> KUBECONFIG=/root/kube_config_rancher-cluster.yml</code></pre></div>
+
+<pre><code class="language-shell">export KUBECONFIG=/root/kube_config_rancher-cluster.yml
+</code></pre>
+
 <h2 id="docker配置">Docker配置</h2>
 
 <p>/etc/docker/daemon.json</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="font-weight:bold">&#34;registry-mirrors&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;http://10.190.48.88:5000&#34;</span>],
-    <span style="font-weight:bold">&#34;insecure-registries&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;http://10.190.49.56:10001&#34;</span>]
-}</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload
-systemctl restart docker</code></pre></div>
+
+<pre><code class="language-json">{
+    &quot;registry-mirrors&quot;: [&quot;http://10.190.48.88:5000&quot;],
+    &quot;insecure-registries&quot;: [&quot;http://10.190.49.56:10001&quot;]
+}
+
+</code></pre>
+
+<pre><code class="language-shell">systemctl daemon-reload
+systemctl restart docker
+</code></pre>
+
 <h2 id="生成互通ssh-key">生成互通ssh-key</h2>
 
 <p>rancher-server 10.190.49.26</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh-keygen
-ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.190.49.31</code></pre></div>
+
+<pre><code class="language-shell">ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.190.49.31
+
+</code></pre>
+
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

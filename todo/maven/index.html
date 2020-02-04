@@ -24,14 +24,14 @@
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -177,12 +177,15 @@ url|应该是只是写明开发团队的网站</p>
 <h2 id="maven源设置">Maven源设置</h2>
 
 <p>在maven安装目录下找到settings.xml配置文件,在&lt;cirrors&gt;标签内添加阿里国内源</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"> <span style="font-weight:bold">&lt;mirror&gt;</span>
-     <span style="font-weight:bold">&lt;id&gt;</span>alimaven<span style="font-weight:bold">&lt;/id&gt;</span>
-     <span style="font-weight:bold">&lt;mirrorOf&gt;</span>central<span style="font-weight:bold">&lt;/mirrorOf&gt;</span>
-     <span style="font-weight:bold">&lt;name&gt;</span>aliyun maven<span style="font-weight:bold">&lt;/name&gt;</span>
-     <span style="font-weight:bold">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/repositories/central/<span style="font-weight:bold">&lt;/url&gt;</span>
- <span style="font-weight:bold">&lt;/mirror&gt;</span></code></pre></div>
+
+<pre><code class="language-xml"> &lt;mirror&gt;
+     &lt;id&gt;alimaven&lt;/id&gt;
+     &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+     &lt;name&gt;aliyun maven&lt;/name&gt;
+     &lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;
+ &lt;/mirror&gt;
+</code></pre>
+
 <h2 id="maven应用">Maven应用</h2>
 
 <h3 id="编译选项">编译选项</h3>
@@ -247,13 +250,15 @@ url|应该是只是写明开发团队的网站</p>
 <li>如果多模块项目各自都引用了，那么单独编译子模块的pom.xml文件会直接报错，解决方法就是编译父项目pom.xml。</li>
 
 <li><p>如果编译父项目，那么可能会造成编译时间很慢，其中有些项目也不需要编译，解决方法如下：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">1 切换到工程的根目录
+
+<pre><code class="language-txt">1 切换到工程的根目录
 
 2 单独构建模块jsoft-web，同时会构建jsoft-web模块依赖的其他模块
 mvn install -pl jsoft-web -am
 
 3 单独构建模块jsoft-common，同时构建依赖模块jsoft-common的其他模块 
-mvn install -pl jsoft-common -am -amd</code></pre></div></li>
+mvn install -pl jsoft-common -am -amd
+</code></pre></li>
 </ul>
 
 <h3 id="docker镜像生成">Docker镜像生成</h3>
@@ -300,170 +305,177 @@ feature子pom集成父pom编译生成kar和docker镜像</p>
 |maven-resources-plugin| 拷贝kar包|</p>
 
 <p>父pom编译选项 -Pkar</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="font-weight:bold">&lt;profile&gt;</span>
-    <span style="font-weight:bold">&lt;id&gt;</span>kar<span style="font-weight:bold">&lt;/id&gt;</span>
-    <span style="font-weight:bold">&lt;build&gt;</span>
-        <span style="font-weight:bold">&lt;plugins&gt;</span>
-            <span style="font-weight:bold">&lt;plugin&gt;</span>
-                <span style="font-weight:bold">&lt;groupId&gt;</span>org.apache.karaf.tooling<span style="font-weight:bold">&lt;/groupId&gt;</span>
-                <span style="font-weight:bold">&lt;artifactId&gt;</span>karaf-maven-plugin<span style="font-weight:bold">&lt;/artifactId&gt;</span>
-                <span style="font-weight:bold">&lt;version&gt;</span>4.1.7<span style="font-weight:bold">&lt;/version&gt;</span>
-                <span style="font-weight:bold">&lt;extensions&gt;</span>true<span style="font-weight:bold">&lt;/extensions&gt;</span>
-                <span style="font-weight:bold">&lt;executions&gt;</span>
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>features-generate-descriptor<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>verify<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>features-generate-descriptor<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                        <span style="font-weight:bold">&lt;configuration&gt;</span>
-                            <span style="font-weight:bold">&lt;inputFile&gt;</span>feature.xml<span style="font-weight:bold">&lt;/inputFile&gt;</span>
-                            <span style="font-weight:bold">&lt;ignoreScopeProvided&gt;</span>true<span style="font-weight:bold">&lt;/ignoreScopeProvided&gt;</span>
-                        <span style="font-weight:bold">&lt;/configuration&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>features-create-kar<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>verify<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>kar<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
-                <span style="font-weight:bold">&lt;/executions&gt;</span>
-            <span style="font-weight:bold">&lt;/plugin&gt;</span>
-        <span style="font-weight:bold">&lt;/plugins&gt;</span>
-    <span style="font-weight:bold">&lt;/build&gt;</span>
-<span style="font-weight:bold">&lt;/profile&gt;</span></code></pre></div>
+
+<pre><code class="language-xml">&lt;profile&gt;
+    &lt;id&gt;kar&lt;/id&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.karaf.tooling&lt;/groupId&gt;
+                &lt;artifactId&gt;karaf-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;4.1.7&lt;/version&gt;
+                &lt;extensions&gt;true&lt;/extensions&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;features-generate-descriptor&lt;/id&gt;
+                        &lt;phase&gt;verify&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;features-generate-descriptor&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;inputFile&gt;feature.xml&lt;/inputFile&gt;
+                            &lt;ignoreScopeProvided&gt;true&lt;/ignoreScopeProvided&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;features-create-kar&lt;/id&gt;
+                        &lt;phase&gt;verify&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;kar&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/profile&gt;
+
+</code></pre>
+
 <p>父pom编译选项 -Pdocker</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="font-weight:bold">&lt;profile&gt;</span>
-    <span style="font-weight:bold">&lt;id&gt;</span>docker<span style="font-weight:bold">&lt;/id&gt;</span>
-    <span style="font-weight:bold">&lt;activation&gt;</span>
-        <span style="font-weight:bold">&lt;activeByDefault&gt;</span>false<span style="font-weight:bold">&lt;/activeByDefault&gt;</span>
-    <span style="font-weight:bold">&lt;/activation&gt;</span>
-    <span style="font-weight:bold">&lt;dependencies&gt;</span>
-        <span style="font-weight:bold">&lt;dependency&gt;</span>
-            <span style="font-weight:bold">&lt;groupId&gt;</span>com.fiberhome.sdn.base<span style="font-weight:bold">&lt;/groupId&gt;</span>
-            <span style="font-weight:bold">&lt;artifactId&gt;</span>docker-config<span style="font-weight:bold">&lt;/artifactId&gt;</span>
-            <span style="font-weight:bold">&lt;version&gt;</span>1.0.0<span style="font-weight:bold">&lt;/version&gt;</span>
-        <span style="font-weight:bold">&lt;/dependency&gt;</span>
-    <span style="font-weight:bold">&lt;/dependencies&gt;</span>
-    <span style="font-weight:bold">&lt;build&gt;</span>
-        <span style="font-weight:bold">&lt;plugins&gt;</span>
-            <span style="font-weight:bold">&lt;plugin&gt;</span>
-                <span style="font-weight:bold">&lt;groupId&gt;</span>org.apache.maven.plugins<span style="font-weight:bold">&lt;/groupId&gt;</span>
-                <span style="font-weight:bold">&lt;artifactId&gt;</span>maven-dependency-plugin<span style="font-weight:bold">&lt;/artifactId&gt;</span>
-                <span style="font-weight:bold">&lt;version&gt;</span>3.0.1<span style="font-weight:bold">&lt;/version&gt;</span>
-                <span style="font-weight:bold">&lt;executions&gt;</span>
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>unpack-dependencies<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>verify<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>unpack<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                        <span style="font-weight:bold">&lt;configuration&gt;</span>
-                            <span style="font-weight:bold">&lt;artifactItems&gt;</span>
-                                <span style="font-weight:bold">&lt;artifactItem&gt;</span>
-                                    <span style="font-weight:bold">&lt;groupId&gt;</span>com.fiberhome.sdn.base<span style="font-weight:bold">&lt;/groupId&gt;</span>
-                                    <span style="font-weight:bold">&lt;artifactId&gt;</span>docker-config<span style="font-weight:bold">&lt;/artifactId&gt;</span>
-                                    <span style="font-weight:bold">&lt;version&gt;</span>1.0.0<span style="font-weight:bold">&lt;/version&gt;</span>
-                                    <span style="font-weight:bold">&lt;outputDirectory&gt;</span>${project.build.directory}/docker<span style="font-weight:bold">&lt;/outputDirectory&gt;</span>
-                                    <span style="font-weight:bold">&lt;includes&gt;</span>docker/**<span style="font-weight:bold">&lt;/includes&gt;</span>
-                                <span style="font-weight:bold">&lt;/artifactItem&gt;</span>
-                            <span style="font-weight:bold">&lt;/artifactItems&gt;</span>
-                        <span style="font-weight:bold">&lt;/configuration&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
-                <span style="font-weight:bold">&lt;/executions&gt;</span>
-            <span style="font-weight:bold">&lt;/plugin&gt;</span>
-            <span style="font-weight:bold">&lt;plugin&gt;</span>
-                <span style="font-weight:bold">&lt;artifactId&gt;</span>maven-resources-plugin<span style="font-weight:bold">&lt;/artifactId&gt;</span>
-                <span style="font-weight:bold">&lt;version&gt;</span>3.0.2<span style="font-weight:bold">&lt;/version&gt;</span>
-                <span style="font-weight:bold">&lt;executions&gt;</span>
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>copy-resources-feature<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>verify<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>copy-resources<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                        <span style="font-weight:bold">&lt;configuration&gt;</span>
-                            <span style="font-weight:bold">&lt;outputDirectory&gt;</span>${project.build.directory}/docker/docker<span style="font-weight:bold">&lt;/outputDirectory&gt;</span>
-                            <span style="font-weight:bold">&lt;resources&gt;</span>
-                                <span style="font-weight:bold">&lt;resource&gt;</span>
-                                    <span style="font-weight:bold">&lt;directory&gt;</span>${project.build.directory}<span style="font-weight:bold">&lt;/directory&gt;</span>
-                                    <span style="font-weight:bold">&lt;includes&gt;</span>
-                                        <span style="font-weight:bold">&lt;include&gt;</span>*.kar<span style="font-weight:bold">&lt;/include&gt;</span>
-                                    <span style="font-weight:bold">&lt;/includes&gt;</span>
-                                <span style="font-weight:bold">&lt;/resource&gt;</span>
-                            <span style="font-weight:bold">&lt;/resources&gt;</span>
-                        <span style="font-weight:bold">&lt;/configuration&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
-                <span style="font-weight:bold">&lt;/executions&gt;</span>
-            <span style="font-weight:bold">&lt;/plugin&gt;</span>
-            <span style="font-weight:bold">&lt;plugin&gt;</span>
-                <span style="font-weight:bold">&lt;groupId&gt;</span>io.fabric8<span style="font-weight:bold">&lt;/groupId&gt;</span>
-                <span style="font-weight:bold">&lt;artifactId&gt;</span>docker-maven-plugin<span style="font-weight:bold">&lt;/artifactId&gt;</span>
-                <span style="font-weight:bold">&lt;version&gt;</span>${fabric8.version}<span style="font-weight:bold">&lt;/version&gt;</span>
 
-                <span style="font-weight:bold">&lt;configuration&gt;</span>
-                    <span style="font-weight:bold">&lt;verbose&gt;</span>true<span style="font-weight:bold">&lt;/verbose&gt;</span>
-                    <span style="font-weight:bold">&lt;apiVersion&gt;</span>1.23<span style="font-weight:bold">&lt;/apiVersion&gt;</span>
-                    <span style="font-weight:bold">&lt;registry&gt;</span>10.190.49.56:10081<span style="font-weight:bold">&lt;/registry&gt;</span>
-                    <span style="font-weight:bold">&lt;authConfig&gt;</span>
-                        <span style="font-weight:bold">&lt;pull&gt;</span>
-                            <span style="font-weight:bold">&lt;username&gt;</span>docker<span style="font-weight:bold">&lt;/username&gt;</span>
-                            <span style="font-weight:bold">&lt;password&gt;</span>docker<span style="font-weight:bold">&lt;/password&gt;</span>
-                        <span style="font-weight:bold">&lt;/pull&gt;</span>
-                    <span style="font-weight:bold">&lt;/authConfig&gt;</span>
-                    <span style="font-weight:bold">&lt;images&gt;</span>
+<pre><code class="language-xml">&lt;profile&gt;
+    &lt;id&gt;docker&lt;/id&gt;
+    &lt;activation&gt;
+        &lt;activeByDefault&gt;false&lt;/activeByDefault&gt;
+    &lt;/activation&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fiberhome.sdn.base&lt;/groupId&gt;
+            &lt;artifactId&gt;docker-config&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.0.1&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;unpack-dependencies&lt;/id&gt;
+                        &lt;phase&gt;verify&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;unpack&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;artifactItems&gt;
+                                &lt;artifactItem&gt;
+                                    &lt;groupId&gt;com.fiberhome.sdn.base&lt;/groupId&gt;
+                                    &lt;artifactId&gt;docker-config&lt;/artifactId&gt;
+                                    &lt;version&gt;1.0.0&lt;/version&gt;
+                                    &lt;outputDirectory&gt;${project.build.directory}/docker&lt;/outputDirectory&gt;
+                                    &lt;includes&gt;docker/**&lt;/includes&gt;
+                                &lt;/artifactItem&gt;
+                            &lt;/artifactItems&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.0.2&lt;/version&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;copy-resources-feature&lt;/id&gt;
+                        &lt;phase&gt;verify&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;copy-resources&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;outputDirectory&gt;${project.build.directory}/docker/docker&lt;/outputDirectory&gt;
+                            &lt;resources&gt;
+                                &lt;resource&gt;
+                                    &lt;directory&gt;${project.build.directory}&lt;/directory&gt;
+                                    &lt;includes&gt;
+                                        &lt;include&gt;*.kar&lt;/include&gt;
+                                    &lt;/includes&gt;
+                                &lt;/resource&gt;
+                            &lt;/resources&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;io.fabric8&lt;/groupId&gt;
+                &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;${fabric8.version}&lt;/version&gt;
 
-                        <span style="color:#007f7f">&lt;!-- Build  image --&gt;</span>
-                        <span style="font-weight:bold">&lt;image&gt;</span>
-                            <span style="font-weight:bold">&lt;name&gt;</span>fiberhome/${project.artifactId}<span style="font-weight:bold">&lt;/name&gt;</span>
-                            <span style="font-weight:bold">&lt;alias&gt;</span>odl<span style="font-weight:bold">&lt;/alias&gt;</span>
-                            <span style="font-weight:bold">&lt;build&gt;</span>
-                                <span style="font-weight:bold">&lt;cleanup&gt;</span>try<span style="font-weight:bold">&lt;/cleanup&gt;</span>
-                                <span style="font-weight:bold">&lt;dockerFileDir&gt;</span>${project.build.directory}/docker/docker<span style="font-weight:bold">&lt;/dockerFileDir&gt;</span>
-                                <span style="font-weight:bold">&lt;tags&gt;</span>
-                                    <span style="font-weight:bold">&lt;tag&gt;</span>${docker.tag}<span style="font-weight:bold">&lt;/tag&gt;</span>
-                                <span style="font-weight:bold">&lt;/tags&gt;</span>
-                            <span style="font-weight:bold">&lt;/build&gt;</span>
-                        <span style="font-weight:bold">&lt;/image&gt;</span>
-                    <span style="font-weight:bold">&lt;/images&gt;</span>
-                <span style="font-weight:bold">&lt;/configuration&gt;</span>
-                <span style="font-weight:bold">&lt;executions&gt;</span>
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>clean-images<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>pre-clean<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>remove<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                        <span style="font-weight:bold">&lt;configuration&gt;</span>
-                            <span style="font-weight:bold">&lt;removeAll&gt;</span>true<span style="font-weight:bold">&lt;/removeAll&gt;</span>
-                            <span style="font-weight:bold">&lt;image&gt;</span>fiberhome/${project.artifactId}<span style="font-weight:bold">&lt;/image&gt;</span>
-                        <span style="font-weight:bold">&lt;/configuration&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
+                &lt;configuration&gt;
+                    &lt;verbose&gt;true&lt;/verbose&gt;
+                    &lt;apiVersion&gt;1.23&lt;/apiVersion&gt;
+                    &lt;registry&gt;10.190.49.56:10081&lt;/registry&gt;
+                    &lt;authConfig&gt;
+                        &lt;pull&gt;
+                            &lt;username&gt;docker&lt;/username&gt;
+                            &lt;password&gt;docker&lt;/password&gt;
+                        &lt;/pull&gt;
+                    &lt;/authConfig&gt;
+                    &lt;images&gt;
 
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>generate-images<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>install<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>build<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
+                        &lt;!-- Build  image --&gt;
+                        &lt;image&gt;
+                            &lt;name&gt;fiberhome/${project.artifactId}&lt;/name&gt;
+                            &lt;alias&gt;odl&lt;/alias&gt;
+                            &lt;build&gt;
+                                &lt;cleanup&gt;try&lt;/cleanup&gt;
+                                &lt;dockerFileDir&gt;${project.build.directory}/docker/docker&lt;/dockerFileDir&gt;
+                                &lt;tags&gt;
+                                    &lt;tag&gt;${docker.tag}&lt;/tag&gt;
+                                &lt;/tags&gt;
+                            &lt;/build&gt;
+                        &lt;/image&gt;
+                    &lt;/images&gt;
+                &lt;/configuration&gt;
+                &lt;executions&gt;
+                    &lt;execution&gt;
+                        &lt;id&gt;clean-images&lt;/id&gt;
+                        &lt;phase&gt;pre-clean&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;remove&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;removeAll&gt;true&lt;/removeAll&gt;
+                            &lt;image&gt;fiberhome/${project.artifactId}&lt;/image&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
 
-                    <span style="font-weight:bold">&lt;execution&gt;</span>
-                        <span style="font-weight:bold">&lt;id&gt;</span>push-images<span style="font-weight:bold">&lt;/id&gt;</span>
-                        <span style="font-weight:bold">&lt;phase&gt;</span>deploy<span style="font-weight:bold">&lt;/phase&gt;</span>
-                        <span style="font-weight:bold">&lt;goals&gt;</span>
-                            <span style="font-weight:bold">&lt;goal&gt;</span>push<span style="font-weight:bold">&lt;/goal&gt;</span>
-                        <span style="font-weight:bold">&lt;/goals&gt;</span>
-                        <span style="font-weight:bold">&lt;configuration&gt;</span>
-                            <span style="font-weight:bold">&lt;image&gt;</span>fiberhome/${project.artifactId}<span style="font-weight:bold">&lt;/image&gt;</span>
-                        <span style="font-weight:bold">&lt;/configuration&gt;</span>
-                    <span style="font-weight:bold">&lt;/execution&gt;</span>
-                <span style="font-weight:bold">&lt;/executions&gt;</span>
-            <span style="font-weight:bold">&lt;/plugin&gt;</span>
-        <span style="font-weight:bold">&lt;/plugins&gt;</span>
-    <span style="font-weight:bold">&lt;/build&gt;</span>
-<span style="font-weight:bold">&lt;/profile&gt;</span></code></pre></div>
+                    &lt;execution&gt;
+                        &lt;id&gt;generate-images&lt;/id&gt;
+                        &lt;phase&gt;install&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;build&lt;/goal&gt;
+                        &lt;/goals&gt;
+                    &lt;/execution&gt;
+
+                    &lt;execution&gt;
+                        &lt;id&gt;push-images&lt;/id&gt;
+                        &lt;phase&gt;deploy&lt;/phase&gt;
+                        &lt;goals&gt;
+                            &lt;goal&gt;push&lt;/goal&gt;
+                        &lt;/goals&gt;
+                        &lt;configuration&gt;
+                            &lt;image&gt;fiberhome/${project.artifactId}&lt;/image&gt;
+                        &lt;/configuration&gt;
+                    &lt;/execution&gt;
+                &lt;/executions&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/profile&gt;
+</code></pre>
+
 <ul>
 <li>执行</li>
 </ul>
@@ -474,26 +486,7 @@ feature子pom集成父pom编译生成kar和docker镜像</p>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

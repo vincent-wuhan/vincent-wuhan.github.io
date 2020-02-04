@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <title>Msb // JiangX</title>
+    <title>ONAP微服务之NFVO与VNFM两种部署模式 // JiangX</title>
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.57.2" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,13 +11,13 @@
 
     
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Msb"/>
+<meta name="twitter:title" content="ONAP微服务之NFVO与VNFM两种部署模式"/>
 <meta name="twitter:description" content="微服务 微服务路由 路由发现是微服务体系中一个重要组成，直白的讲，“路由”是指根据请求URL，把请求分配到对应的处理程序
-从服务发现工作流程理解一次服务请求的过程  请求来之前需要服务提供者工作正常 服务提供者启动时，将服务名称、服务器地址注册到服务配置中心 服务消费者将请求发送给服务配置中心，服务配置中心根据请求URL获取匹配需要调度的服务机器列表 一次请求到来，经过路由分发定位到一组服务，再通过负载均衡算法后，选择一台服务器调用响应请求  负载均衡算法  轮询法，将请求按顺序轮流地分配到后端服务器上，它均衡地对待后端的每一台服务器，而不关心服务器实际的连接数和当前的系统负载 随机发，通过系统的随机算法，根据后端服务器的列表大小值来随机选取其中的一台服务器进行访问。由概率统计理论可以得知，随着客户端调用服务端的次数增多，其实际效果越来越接近于平均分配调用量到后端的每一台服务器，也就是轮询的结果 加权轮询法，不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端 最小连接数法，最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器 源地址哈希法，源地址哈希的思想是根据获取客户端的IP地址，通过哈希函数计算得到的一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是客服端要访问服务器的序号。采用源地址哈希法进行负载均衡，同一IP地址的客户端，当后端服务器列表不变时，它每次都会映射到同一台后端服务器进行访问  部署方式 NFVO和VNFM解耦部署 NFVO_SERVER（a_ip:a_port/nfvo_uri） |________________ | MSB(O_IP:O_PORT)========================== | MSB(M_IP:M_PORT)=============== |________ | VNFM_SERVER (c_ip:c_port/vnfm_uri)  参数说明     模块 说明     NFVO_SERVER O层微服务模块   VNFM_SERVER M层微服务模块   MSB(O_IP:O_PORT) O层微服务总线，O_IP为O层微服务总线IP地址，O_PORT为总线端口   MSB(M_IP:M_PORT) M层微服务总线，M_IP为M层微服务总线IP地址，M_PORT为总线端口   a_ip:a_port/nfvo_uri O层微服务模块提供的服务API内部url, a_ip为集群ip，外部不可访问   c_ip:c_port/vnfm_uri M层微服务模块提供的服务API内部url, c_ip为集群ip，外部不可访问   O_IP:O_PORT/nfvo_uri O层微服务API在O层MSB总线上暴露的访问URL   M_IP:M_PORT/vnfm_uri M层微服务API在M层MSB总线上暴露的访问URL         一条MSB上访问微服务内部api的转换过程  原理是，请求发送到微服务总线后，微服务总线根据请求uri在服务注册中心列表中查找匹配路由，然后将请求转发给找到的服务器地址处理"/>
+从服务发现工作流程理解一次服务请求的过程  请求来之前需要服务提供者工作正常 服务提供者启动时，将服务名称、服务器地址注册到服务配置中心 服务消费者将请求发送给服务配置中心，服务配置中心根据请求URL获取匹配需要调度的服务机器列表 一次请求到来，经过路由分发定位到一组服务，再通过负载均衡算法后，选择一台服务器调用响应请求  负载均衡算法  轮询法，将请求按顺序轮流地分配到后端服务器上，它均衡地对待后端的每一台服务器，而不关心服务器实际的连接数和当前的系统负载 随机发，通过系统的随机算法，根据后端服务器的列表大小值来随机选取其中的一台服务器进行访问。由概率统计理论可以得知，随着客户端调用服务端的次数增多，其实际效果越来越接近于平均分配调用量到后端的每一台服务器，也就是轮询的结果 加权轮询法，不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端 最小连接数法，最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器 源地址哈希法，源地址哈希的思想是根据获取客户端的IP地址，通过哈希函数计算得到的一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是客服端要访问服务器的序号。采用源地址哈希法进行负载均衡，同一IP地址的客户端，当后端服务器列表不变时，它每次都会映射到同一台后端服务器进行访问  部署方式 NFVO和VNFM解耦部署 NFVO_SERVER（a_ip:a_port/nfvo_uri） |________________ | MSB(O_IP:O_PORT)========================== | MSB(M_IP:M_PORT)=============== |________ | VNFM_SERVER (c_ip:c_port/vnfm_uri)   参数说明     模块 说明     NFVO_SERVER O层微服务模块   VNFM_SERVER M层微服务模块   MSB(O_IP:O_PORT) O层微服务总线，O_IP为O层微服务总线IP地址，O_PORT为总线端口   MSB(M_IP:M_PORT) M层微服务总线，M_IP为M层微服务总线IP地址，M_PORT为总线端口   a_ip:a_port/nfvo_uri O层微服务模块提供的服务API内部url, a_ip为集群ip，外部不可访问   c_ip:c_port/vnfm_uri M层微服务模块提供的服务API内部url, c_ip为集群ip，外部不可访问   O_IP:O_PORT/nfvo_uri O层微服务API在O层MSB总线上暴露的访问URL   M_IP:M_PORT/vnfm_uri M层微服务API在M层MSB总线上暴露的访问URL         一条MSB上访问微服务内部api的转换过程  原理是，请求发送到微服务总线后，微服务总线根据请求uri在服务注册中心列表中查找匹配路由，然后将请求转发给找到的服务器地址处理"/>
 
-    <meta property="og:title" content="Msb" />
+    <meta property="og:title" content="ONAP微服务之NFVO与VNFM两种部署模式" />
 <meta property="og:description" content="微服务 微服务路由 路由发现是微服务体系中一个重要组成，直白的讲，“路由”是指根据请求URL，把请求分配到对应的处理程序
-从服务发现工作流程理解一次服务请求的过程  请求来之前需要服务提供者工作正常 服务提供者启动时，将服务名称、服务器地址注册到服务配置中心 服务消费者将请求发送给服务配置中心，服务配置中心根据请求URL获取匹配需要调度的服务机器列表 一次请求到来，经过路由分发定位到一组服务，再通过负载均衡算法后，选择一台服务器调用响应请求  负载均衡算法  轮询法，将请求按顺序轮流地分配到后端服务器上，它均衡地对待后端的每一台服务器，而不关心服务器实际的连接数和当前的系统负载 随机发，通过系统的随机算法，根据后端服务器的列表大小值来随机选取其中的一台服务器进行访问。由概率统计理论可以得知，随着客户端调用服务端的次数增多，其实际效果越来越接近于平均分配调用量到后端的每一台服务器，也就是轮询的结果 加权轮询法，不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端 最小连接数法，最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器 源地址哈希法，源地址哈希的思想是根据获取客户端的IP地址，通过哈希函数计算得到的一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是客服端要访问服务器的序号。采用源地址哈希法进行负载均衡，同一IP地址的客户端，当后端服务器列表不变时，它每次都会映射到同一台后端服务器进行访问  部署方式 NFVO和VNFM解耦部署 NFVO_SERVER（a_ip:a_port/nfvo_uri） |________________ | MSB(O_IP:O_PORT)========================== | MSB(M_IP:M_PORT)=============== |________ | VNFM_SERVER (c_ip:c_port/vnfm_uri)  参数说明     模块 说明     NFVO_SERVER O层微服务模块   VNFM_SERVER M层微服务模块   MSB(O_IP:O_PORT) O层微服务总线，O_IP为O层微服务总线IP地址，O_PORT为总线端口   MSB(M_IP:M_PORT) M层微服务总线，M_IP为M层微服务总线IP地址，M_PORT为总线端口   a_ip:a_port/nfvo_uri O层微服务模块提供的服务API内部url, a_ip为集群ip，外部不可访问   c_ip:c_port/vnfm_uri M层微服务模块提供的服务API内部url, c_ip为集群ip，外部不可访问   O_IP:O_PORT/nfvo_uri O层微服务API在O层MSB总线上暴露的访问URL   M_IP:M_PORT/vnfm_uri M层微服务API在M层MSB总线上暴露的访问URL         一条MSB上访问微服务内部api的转换过程  原理是，请求发送到微服务总线后，微服务总线根据请求uri在服务注册中心列表中查找匹配路由，然后将请求转发给找到的服务器地址处理" />
+从服务发现工作流程理解一次服务请求的过程  请求来之前需要服务提供者工作正常 服务提供者启动时，将服务名称、服务器地址注册到服务配置中心 服务消费者将请求发送给服务配置中心，服务配置中心根据请求URL获取匹配需要调度的服务机器列表 一次请求到来，经过路由分发定位到一组服务，再通过负载均衡算法后，选择一台服务器调用响应请求  负载均衡算法  轮询法，将请求按顺序轮流地分配到后端服务器上，它均衡地对待后端的每一台服务器，而不关心服务器实际的连接数和当前的系统负载 随机发，通过系统的随机算法，根据后端服务器的列表大小值来随机选取其中的一台服务器进行访问。由概率统计理论可以得知，随着客户端调用服务端的次数增多，其实际效果越来越接近于平均分配调用量到后端的每一台服务器，也就是轮询的结果 加权轮询法，不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端 最小连接数法，最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器 源地址哈希法，源地址哈希的思想是根据获取客户端的IP地址，通过哈希函数计算得到的一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是客服端要访问服务器的序号。采用源地址哈希法进行负载均衡，同一IP地址的客户端，当后端服务器列表不变时，它每次都会映射到同一台后端服务器进行访问  部署方式 NFVO和VNFM解耦部署 NFVO_SERVER（a_ip:a_port/nfvo_uri） |________________ | MSB(O_IP:O_PORT)========================== | MSB(M_IP:M_PORT)=============== |________ | VNFM_SERVER (c_ip:c_port/vnfm_uri)   参数说明     模块 说明     NFVO_SERVER O层微服务模块   VNFM_SERVER M层微服务模块   MSB(O_IP:O_PORT) O层微服务总线，O_IP为O层微服务总线IP地址，O_PORT为总线端口   MSB(M_IP:M_PORT) M层微服务总线，M_IP为M层微服务总线IP地址，M_PORT为总线端口   a_ip:a_port/nfvo_uri O层微服务模块提供的服务API内部url, a_ip为集群ip，外部不可访问   c_ip:c_port/vnfm_uri M层微服务模块提供的服务API内部url, c_ip为集群ip，外部不可访问   O_IP:O_PORT/nfvo_uri O层微服务API在O层MSB总线上暴露的访问URL   M_IP:M_PORT/vnfm_uri M层微服务API在M层MSB总线上暴露的访问URL         一条MSB上访问微服务内部api的转换过程  原理是，请求发送到微服务总线后，微服务总线根据请求uri在服务注册中心列表中查找匹配路由，然后将请求转发给找到的服务器地址处理" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/onap/msb/" />
 <meta property="article:published_time" content="2019-08-24T17:17:38+08:00" />
@@ -27,14 +27,14 @@
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -43,7 +43,7 @@
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Msb</h1>
+      <h1 class ="post-title">ONAP微服务之NFVO与VNFM两种部署模式</h1>
       <div class="post-meta">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
@@ -91,7 +91,8 @@
 <h2 id="部署方式">部署方式</h2>
 
 <h3 id="nfvo和vnfm解耦部署">NFVO和VNFM解耦部署</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">NFVO_SERVER（a_ip:a_port/nfvo_uri）
+
+<pre><code class="language-txt">NFVO_SERVER（a_ip:a_port/nfvo_uri）
     |________________
                      |
 MSB(O_IP:O_PORT)==========================
@@ -99,7 +100,9 @@ MSB(O_IP:O_PORT)==========================
         MSB(M_IP:M_PORT)===============
                            |________
                                     |
-        VNFM_SERVER (c_ip:c_port/vnfm_uri)</code></pre></div>
+        VNFM_SERVER (c_ip:c_port/vnfm_uri)
+</code></pre>
+
 <ul>
 <li>参数说明</li>
 </ul>
@@ -165,46 +168,36 @@ MSB(O_IP:O_PORT)==========================
 </ul>
 
 <p>原理是，请求发送到微服务总线后，微服务总线根据请求uri在服务注册中心列表中查找匹配路由，然后将请求转发给找到的服务器地址处理</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">REQ(O_IP:O_PORT/nfvo_uri)---&gt;MSB(O_IP:O_PORT)----&gt;服务注册中心列表查询注册路由----&gt;服务跳转(a_ip:a_port/nfvo_uri)---&gt;NFVO_SERVER响应处理</code></pre></div>
+
+<pre><code class="language-txt">REQ(O_IP:O_PORT/nfvo_uri)---&gt;MSB(O_IP:O_PORT)----&gt;服务注册中心列表查询注册路由----&gt;服务跳转(a_ip:a_port/nfvo_uri)---&gt;NFVO_SERVER响应处理
+</code></pre>
+
 <ul>
 <li>跨MSB总线的微服务api访问过程</li>
 </ul>
 
 <p>原理一样，但前提是需要源总线上注册有目的MSB总线上的服务URL，也就是说源MSB总线上需要能够通过请求uri匹配到到目标MSB总线服务器地址，然后将请求转发给目的MSB总线服务器处理</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">REQ(O_IP:O_PORT/vnfm_uri)---&gt;MSB(O_IP:O_PORT)---&gt;服务注册中心列表查询注册路由-----&gt;服务跳转(M_IP:MPORT/vnfm_uri)---&gt;MSB(M_IP:M_PORT)---&gt;服务注册中心列表查询注册路由---&gt;服务跳转(c_ip:c_port/vnfm_uri)---&gt;VNFM_SERVER响应处理</code></pre></div>
+
+<pre><code class="language-txt">REQ(O_IP:O_PORT/vnfm_uri)---&gt;MSB(O_IP:O_PORT)---&gt;服务注册中心列表查询注册路由-----&gt;服务跳转(M_IP:MPORT/vnfm_uri)---&gt;MSB(M_IP:M_PORT)---&gt;服务注册中心列表查询注册路由---&gt;服务跳转(c_ip:c_port/vnfm_uri)---&gt;VNFM_SERVER响应处理
+</code></pre>
+
 <h3 id="nfvo和vnfm同一msb总线部署">NFVO和VNFM同一MSB总线部署</h3>
 
 <p>如果上面的解耦部署理解了，那么对于在同一MSB总线部署就很简单，也就是需要注意NFVO_SERVER和VNFM_SERVER的URI冲突问题，也就是避免vnfm_uri和nfvo_uri一模一样，导致路由匹配结果不唯一不知道该把请求服务转发给谁。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">NFVO_SERVER（a_ip:a_port/nfvo_uri）
+
+<pre><code class="language-txt">NFVO_SERVER（a_ip:a_port/nfvo_uri）
     |________________
                      |
 MSB(O_IP:O_PORT)======================
                        |
                         —————
                              |
-        VNFM_SERVER (c_ip:c_port/vnfm_uri)</code></pre></div>
+        VNFM_SERVER (c_ip:c_port/vnfm_uri)
+</code></pre>
+
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

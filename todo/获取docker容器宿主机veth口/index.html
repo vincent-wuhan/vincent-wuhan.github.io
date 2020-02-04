@@ -13,19 +13,19 @@
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
 <meta name="twitter:description" content="获取docker容器对应的宿主机veth*接口 具体思路  查看容器内eth0的iflink接口索引
-docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;  注： &gt;&gt; container_info可以是docker容器名称或者docker容器id &gt;&gt; 该命令返回一个iflink索引值，例如791
+docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;   注： &gt;&gt; container_info可以是docker容器名称或者docker容器id &gt;&gt; 该命令返回一个iflink索引值，例如791
  搜索宿主机veth接口
-grep -l 791 /sys/class/net/veth*/ifindex  注： &gt;&gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
+grep -l 791 /sys/class/net/veth*/ifindex   注： &gt;&gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
  截取目录路径中veth*部分的字符
-sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1;&#39;` echo $container:$veth done 压缩成一行,命令行中执行："/>
+sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1   shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^."/>
 
     <meta property="og:title" content="" />
 <meta property="og:description" content="获取docker容器对应的宿主机veth*接口 具体思路  查看容器内eth0的iflink接口索引
-docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;  注： &gt;&gt; container_info可以是docker容器名称或者docker容器id &gt;&gt; 该命令返回一个iflink索引值，例如791
+docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;   注： &gt;&gt; container_info可以是docker容器名称或者docker容器id &gt;&gt; 该命令返回一个iflink索引值，例如791
  搜索宿主机veth接口
-grep -l 791 /sys/class/net/veth*/ifindex  注： &gt;&gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
+grep -l 791 /sys/class/net/veth*/ifindex   注： &gt;&gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
  截取目录路径中veth*部分的字符
-sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1;&#39;` echo $container:$veth done 压缩成一行,命令行中执行：" />
+sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1   shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/todo/%E8%8E%B7%E5%8F%96docker%E5%AE%B9%E5%99%A8%E5%AE%BF%E4%B8%BB%E6%9C%BAveth%E5%8F%A3/" />
 
@@ -34,14 +34,14 @@ sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container i
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -76,7 +76,9 @@ sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container i
 
 <ul>
 <li><p>查看容器内eth0的iflink接口索引</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker <span style="color:#fff;font-weight:bold">exec</span> -it <span style="color:#0ff;font-weight:bold">${</span>container_info<span style="color:#0ff;font-weight:bold">}</span> bash -c <span style="color:#0ff;font-weight:bold">&#39;cat /sys/class/net/eth0/iflink&#39;</span></code></pre></div></li>
+
+<pre><code class="language-shell">docker exec -it ${container_info} bash -c 'cat /sys/class/net/eth0/iflink'
+</code></pre></li>
 </ul>
 
 <p>注：
@@ -85,7 +87,9 @@ sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container i
 
 <ul>
 <li><p>搜索宿主机veth接口</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">grep -l <span style="color:#ff0;font-weight:bold">791</span> /sys/class/net/veth*/ifindex</code></pre></div></li>
+
+<pre><code class="language-shell">grep -l 791 /sys/class/net/veth*/ifindex
+</code></pre></li>
 </ul>
 
 <p>注：
@@ -93,45 +97,34 @@ sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1  shell脚本 #!/bin/bash for container i
 
 <ul>
 <li><p>截取目录路径中veth*部分的字符</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sed -e <span style="color:#f00">&#39;</span>s;^.*net/<span style="color:#0ff;font-weight:bold">\(</span>.*<span style="color:#0ff;font-weight:bold">\)</span>/ifindex$;<span style="color:#0ff;font-weight:bold">\1</span></code></pre></div></li>
+
+<pre><code class="language-shell">sed -e 's;^.*net/\(.*\)/ifindex$;\1
+</code></pre></li>
 </ul>
 
 <h2 id="shell脚本">shell脚本</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/bin/bash
-</span><span style="color:#0f0;font-weight:bold"></span><span style="color:#fff;font-weight:bold">for</span> container in <span style="color:#fff;font-weight:bold">$(</span>docker ps -q<span style="color:#fff;font-weight:bold">)</span>
-  <span style="color:#fff;font-weight:bold">do</span>
-  iflink=<span style="color:#0ff;font-weight:bold">`</span>docker <span style="color:#fff;font-weight:bold">exec</span> -it $container bash -c <span style="color:#0ff;font-weight:bold">&#39;cat /sys/class/net/eth0/iflink&#39;</span><span style="color:#0ff;font-weight:bold">`</span>
-  <span style="color:#007f7f"># 打印结果并删除windows文件造成的^M字符</span>
-  <span style="color:#007f7f"># tr命令为翻译字符命令</span>
-  iflink=<span style="color:#0ff;font-weight:bold">`</span><span style="color:#fff;font-weight:bold">echo</span> $iflink|tr -d <span style="color:#0ff;font-weight:bold">&#39;\r&#39;</span><span style="color:#0ff;font-weight:bold">`</span>
-  veth=<span style="color:#0ff;font-weight:bold">`</span>grep -l $iflink /sys/class/net/veth*/ifindex<span style="color:#0ff;font-weight:bold">`</span>
-  veth=<span style="color:#0ff;font-weight:bold">`</span><span style="color:#fff;font-weight:bold">echo</span> $veth|sed -e <span style="color:#0ff;font-weight:bold">&#39;s;^.*net/\(.*\)/ifindex$;\1;&#39;</span><span style="color:#0ff;font-weight:bold">`</span>
-  <span style="color:#fff;font-weight:bold">echo</span> $container:$veth
-<span style="color:#fff;font-weight:bold">done</span></code></pre></div>
+
+<pre><code class="language-shell">#!/bin/bash
+for container in $(docker ps -q)
+  do
+  iflink=`docker exec -it $container bash -c 'cat /sys/class/net/eth0/iflink'`
+  # 打印结果并删除windows文件造成的^M字符
+  # tr命令为翻译字符命令
+  iflink=`echo $iflink|tr -d '\r'`
+  veth=`grep -l $iflink /sys/class/net/veth*/ifindex`
+  veth=`echo $veth|sed -e 's;^.*net/\(.*\)/ifindex$;\1;'`
+  echo $container:$veth
+done
+</code></pre>
+
 <p>压缩成一行,命令行中执行：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">for</span> container in <span style="color:#fff;font-weight:bold">$(</span>docker ps -q<span style="color:#fff;font-weight:bold">)</span>; <span style="color:#fff;font-weight:bold">do</span> iflink=<span style="color:#0ff;font-weight:bold">`</span>docker <span style="color:#fff;font-weight:bold">exec</span> -it $container bash -c <span style="color:#0ff;font-weight:bold">&#39;cat /sys/class/net/eth0/iflink&#39;</span><span style="color:#0ff;font-weight:bold">`</span>; iflink=<span style="color:#0ff;font-weight:bold">`</span><span style="color:#fff;font-weight:bold">echo</span> $iflink|tr -d <span style="color:#0ff;font-weight:bold">&#39;\r&#39;</span><span style="color:#0ff;font-weight:bold">`</span>; veth=<span style="color:#0ff;font-weight:bold">`</span>grep -l $iflink /sys/class/net/veth*/ifindex<span style="color:#0ff;font-weight:bold">`</span>; veth=<span style="color:#0ff;font-weight:bold">`</span><span style="color:#fff;font-weight:bold">echo</span> $veth|sed -e <span style="color:#0ff;font-weight:bold">&#39;s;^.*net/\(.*\)/ifindex$;\1;&#39;</span><span style="color:#0ff;font-weight:bold">`</span>; <span style="color:#fff;font-weight:bold">echo</span> $container:$veth; <span style="color:#fff;font-weight:bold">done</span></code></pre></div>
+
+<pre><code class="language-shell">for container in $(docker ps -q); do iflink=`docker exec -it $container bash -c 'cat /sys/class/net/eth0/iflink'`; iflink=`echo $iflink|tr -d '\r'`; veth=`grep -l $iflink /sys/class/net/veth*/ifindex`; veth=`echo $veth|sed -e 's;^.*net/\(.*\)/ifindex$;\1;'`; echo $container:$veth; done
+</code></pre>
+
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

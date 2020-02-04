@@ -30,14 +30,14 @@ filebeat.prospectors: #it is mandatory, in our case it&#39;s log - input_type: l
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -112,72 +112,81 @@ filebeat.prospectors: #it is mandatory, in our case it&#39;s log - input_type: l
 <p>路径: oom/kubernetes/<component>/resources/config/log/filebeat/filebeat.yml</p>
 
 <p>一个简单的filebeat.yml配置</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">filebeat.prospectors:
-<span style="color:#007f7f">#it is mandatory, in our case it&#39;s log</span>
+
+<pre><code class="language-yaml">filebeat.prospectors:
+#it is mandatory, in our case it's log
 - input_type: log
-  <span style="color:#007f7f">#This is the canolical path as mentioned in logback.xml, *.* means it will monitor all files in the directory.</span>
+  #This is the canolical path as mentioned in logback.xml, *.* means it will monitor all files in the directory.
   paths:
-    - /var/log/onap/<span style="color:#0f0;font-weight:bold">*/*/*/*.log</span>
-    - /var/log/onap/<span style="color:#0f0;font-weight:bold">*/*/*.log</span>
-    - /var/log/onap/<span style="color:#0f0;font-weight:bold">*/*.log</span>
-  <span style="color:#007f7f">#Files older than this should be ignored.In our case it will be 48 hours i.e. 2 days. It is a helping flag for clean_inactive</span>
+    - /var/log/onap/*/*/*/*.log
+    - /var/log/onap/*/*/*.log
+    - /var/log/onap/*/*.log
+  #Files older than this should be ignored.In our case it will be 48 hours i.e. 2 days. It is a helping flag for clean_inactive
   ignore_older: 48h
-  <span style="color:#007f7f"># Remove the registry entry for a file that is more than the specified time. In our case it will be 96 hours, i.e. 4 days. It will help to keep registry records with in limit</span>
+  # Remove the registry entry for a file that is more than the specified time. In our case it will be 96 hours, i.e. 4 days. It will help to keep registry records with in limit
   clean_inactive: 96h
 
 
-<span style="color:#007f7f"># Name of the registry file. If a relative path is used, it is considered relative to the</span>
-<span style="color:#007f7f"># data path. Else full qualified file name.</span>
-<span style="color:#007f7f">#filebeat.registry_file: ${path.data}/registry</span>
+# Name of the registry file. If a relative path is used, it is considered relative to the
+# data path. Else full qualified file name.
+#filebeat.registry_file: ${path.data}/registry
 
 output.logstash:
-  <span style="color:#007f7f">#List of logstash server ip addresses with port number.</span>
-  <span style="color:#007f7f">#But, in our case, this will be the loadbalancer IP address.</span>
-  <span style="color:#007f7f">#For the below property to work the loadbalancer or logstash should expose 5044 port to listen the filebeat events or port in the property should be changed appropriately.</span>
-  hosts: [<span style="color:#0ff;font-weight:bold">&#34;{{.Values.config.logstashServiceName}}.{{.Release.Namespace}}:{{.Values.config.logstashPort}}&#34;</span>]
-  <span style="color:#007f7f">#If enable will do load balancing among availabe Logstash, automatically.</span>
-  loadbalance: <span style="color:#fff;font-weight:bold">true</span>
+  #List of logstash server ip addresses with port number.
+  #But, in our case, this will be the loadbalancer IP address.
+  #For the below property to work the loadbalancer or logstash should expose 5044 port to listen the filebeat events or port in the property should be changed appropriately.
+  hosts: [&quot;{{.Values.config.logstashServiceName}}.{{.Release.Namespace}}:{{.Values.config.logstashPort}}&quot;]
+  #If enable will do load balancing among availabe Logstash, automatically.
+  loadbalance: true
 
-<span style="color:#007f7f">#The list of root certificates for server verifications.</span>
-<span style="color:#007f7f">#If certificate_authorities is empty or not set, the trusted</span>
-<span style="color:#007f7f">#certificate authorities of the host system are used.</span>
-<span style="color:#007f7f">#ssl.certificate_authorities: $ssl.certificate_authorities</span>
+#The list of root certificates for server verifications.
+#If certificate_authorities is empty or not set, the trusted
+#certificate authorities of the host system are used.
+#ssl.certificate_authorities: $ssl.certificate_authorities
 
-<span style="color:#007f7f">#The path to the certificate for SSL client authentication. If the certificate is not specified,</span>
-<span style="color:#007f7f">#client authentication is not available.</span>
-<span style="color:#007f7f">#ssl.certificate: $ssl.certificate</span>
+#The path to the certificate for SSL client authentication. If the certificate is not specified,
+#client authentication is not available.
+#ssl.certificate: $ssl.certificate
 
-<span style="color:#007f7f">#The client certificate key used for client authentication.</span>
-<span style="color:#007f7f">#ssl.key: $ssl.key</span>
+#The client certificate key used for client authentication.
+#ssl.key: $ssl.key
 
-<span style="color:#007f7f">#The passphrase used to decrypt an encrypted key stored in the configured key file</span>
-<span style="color:#007f7f">#ssl.key_passphrase: $ssl.key_passphrase</span></code></pre></div>
+#The passphrase used to decrypt an encrypted key stored in the configured key file
+#ssl.key_passphrase: $ssl.key_passphrase
+</code></pre>
+
 <ol>
 <li><p>deployment.yaml中添加Filebeat容器部署</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#007f7f"># Filebeat sidecar container</span>
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.name&#34;</span> . }}-filebeat-onap
-image: <span style="color:#0ff;font-weight:bold">&#34;{{ .Values.global.loggingRepository }}/{{ .Values.global.loggingImage }}&#34;</span>
+
+<pre><code class="language-yaml"># Filebeat sidecar container
+- name: {{ include &quot;common.name&quot; . }}-filebeat-onap
+image: &quot;{{ .Values.global.loggingRepository }}/{{ .Values.global.loggingImage }}&quot;
 imagePullPolicy: {{ .Values.global.pullPolicy | default .Values.pullPolicy }}
 volumeMounts:
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-filebeat-conf
+- name: {{ include &quot;common.fullname&quot; . }}-filebeat-conf
 mountPath: /usr/share/filebeat/filebeat.yml
 subPath: filebeat.yml
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-data-filebeat
+- name: {{ include &quot;common.fullname&quot; . }}-data-filebeat
 mountPath: /usr/share/filebeat/data
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-logs
-mountPath: /var/log/onap</code></pre></div></li>
+- name: {{ include &quot;common.fullname&quot; . }}-logs
+mountPath: /var/log/onap
+</code></pre></li>
 
 <li><p>Filebeat部署配置</p></li>
 </ol>
 
 <p>路径: kubernetes/<component>/templates/configmap.yaml</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+
+<pre><code class="language-yaml">apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-&lt;component&gt;-filebeat-configmap
-  namespace: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.namespace&#34;</span> . }}
+  namespace: {{ include &quot;common.namespace&quot; . }}
 data:
-{{ tpl (.Files.Glob <span style="color:#0ff;font-weight:bold">&#34;resources/config/log/filebeat/filebeat.yml&#34;</span>).AsConfig . | indent <span style="color:#ff0;font-weight:bold">2</span> }}</code></pre></div>
+{{ tpl (.Files.Glob &quot;resources/config/log/filebeat/filebeat.yml&quot;).AsConfig . | indent 2 }}
+
+</code></pre>
+
 <p>其中<component>为实际组件名称</p>
 
 <ol>
@@ -185,14 +194,17 @@ data:
 </ol>
 
 <p>路径: oom/kubernetes/<component>/values.yaml</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">global:
+
+<pre><code>global:
   loggingRepository: docker.elastic.co
   loggingImage: beats/filebeat:5.5.0
  
 # application configuration
 config:
   logstashServiceName: log-ls
-  logstashPort: 5044</pre></div>
+  logstashPort: 5044
+</code></pre>
+
 <ol>
 <li>添加logback.xml配置文件</li>
 </ol>
@@ -203,61 +215,51 @@ config:
 <li><p>为容器添加日志configmap
 路径：
 oom/kubernetes/<component>/charts/<microservice>/templates/configmap.yaml</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+
+<pre><code class="language-yaml">
+apiVersion: v1
 kind: ConfigMap
 metadata:
-name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-log
-namespace: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.namespace&#34;</span> . }}
+name: {{ include &quot;common.fullname&quot; . }}-log
+namespace: {{ include &quot;common.namespace&quot; . }}
 data:
-{{ tpl (.Files.Glob <span style="color:#0ff;font-weight:bold">&#34;resources/config/logback.xml&#34;</span>).AsConfig . | indent <span style="color:#ff0;font-weight:bold">2</span> }}</code></pre></div></li>
+{{ tpl (.Files.Glob &quot;resources/config/logback.xml&quot;).AsConfig . | indent 2 }}
+
+</code></pre></li>
 
 <li><p>为微服务容器添加日志配置路径</p></li>
 </ol>
 
 <p>路径: oom/kubernetes/<component>/charts/<microservice>/templates/deployment.yaml</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">volumeMounts:
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-logs
+
+<pre><code class="language-yaml">volumeMounts:
+- name: {{ include &quot;common.fullname&quot; . }}-logs
   mountPath: /var/log/onap
 - mountPath: /opt/ajsc/etc/config/logback.xml
-  name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-log-conf
-  subPath: logback.xml</code></pre></div>
+  name: {{ include &quot;common.fullname&quot; . }}-log-conf
+  subPath: logback.xml
+</code></pre>
+
 <ol>
 <li><p>添加日志存储卷信息</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">volumes:
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-log-conf
+
+<pre><code class="language-yaml">volumes:
+- name: {{ include &quot;common.fullname&quot; . }}-log-conf
 configMap:
-  name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-log
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-filebeat-conf
+  name: {{ include &quot;common.fullname&quot; . }}-log
+- name: {{ include &quot;common.fullname&quot; . }}-filebeat-conf
 configMap:
   name: {{ .Release.Name }}-&lt;component&gt;-filebeat-configmap
-- name: {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-data-filebeat
+- name: {{ include &quot;common.fullname&quot; . }}-data-filebeat
 emptyDir: {}
-- name:  {{ include <span style="color:#0ff;font-weight:bold">&#34;common.fullname&#34;</span> . }}-logs
-emptyDir: {}</code></pre></div></li>
+- name:  {{ include &quot;common.fullname&quot; . }}-logs
+emptyDir: {}
+</code></pre></li>
 </ol>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

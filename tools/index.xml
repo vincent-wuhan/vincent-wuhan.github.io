@@ -6,13 +6,28 @@
     <description>Recent content in Tools on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jan 2020 20:11:01 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 04 Feb 2020 18:15:12 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>How to Use Hugo</title>
+      <title>如何pip下载和离线安装第三方包</title>
+      <link>https://vincent-wuhan.github.io/tools/how-to-download-and-offline-install-pip-packing/</link>
+      <pubDate>Tue, 04 Feb 2020 18:15:12 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/tools/how-to-download-and-offline-install-pip-packing/</guid>
+      <description> PiP离线包下载安装说明 下载依赖包  PIP为存放离线包的路径，也是安装离线包时的仓库路径
+  创建目录
+mkdir -p PIP  下载离线pip包
+pip download docker-py -d &amp;quot;PIP&amp;quot; -i https://pypi.tuna.tsinghua.edu.cn/simple/    -d 指定下载目录 -i 指定python源
+ 安装依赖包  拷贝离线包到指定Host 安装离线包   以要安装的pip包为docker-py为例
+ pip install --no-index --find-links=/home/mano/docker-py/ docker-py   &amp;ndash;no-index忽略包索引 &amp;ndash;find-links仅从链接地址中寻找依赖 docker-py为安装的离线包
+ </description>
+    </item>
+    
+    <item>
+      <title>hugo使用笔记</title>
       <link>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</link>
       <pubDate>Fri, 31 Jan 2020 20:11:01 +0800</pubDate>
       
@@ -22,7 +37,7 @@
  本地预览  hugo server &amp;ndash;buildDrafts
  编译web格式预发布  hugo base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts 编译生成的文件在blog下的public目录下
  发布到github  切换到public目录，初始化本地仓库
-cd public git init git add . git commit -m &amp;#39;message&amp;#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master</description>
+cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  </description>
     </item>
     
   </channel>

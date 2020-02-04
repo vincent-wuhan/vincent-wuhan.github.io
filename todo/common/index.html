@@ -12,22 +12,22 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="MANO常用网址    URL 说明     http://MSBIP:30280/iui/usecaseui/resource-management/#/ns uui管理接口        删除所有helm list helm delete --purge $(helm list|grep &#34;dev&#34;|awk &#39;{print $1}&#39;) 下载部署软件 下载安装部署包 curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz 下载oom curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz 常见问题定位手册 带SFC的NS实例化失败问题定位 kubernetes环境，查看nslcm容器日志  检查vnf创建是否成功。vnf创建成功是创建sfc的前提
+<meta name="twitter:description" content="MANO常用网址    URL 说明     http://MSBIP:30280/iui/usecaseui/resource-management/#/ns uui管理接口        删除所有helm list helm delete --purge $(helm list|grep &quot;dev&quot;|awk &#39;{print $1}&#39;)  下载部署软件 下载安装部署包 curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz  下载oom curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz  常见问题定位手册 带SFC的NS实例化失败问题定位 kubernetes环境，查看nslcm容器日志  检查vnf创建是否成功。vnf创建成功是创建sfc的前提
  检查sfcdriver是否注册，sfcdriver的注册路径为： uui-ui-&gt;运维管理-&gt;外部系统注册-&gt;SFC Driver
-URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver 检查sfcdriver注册url是否为api/fhsfcdriver/v1
+URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver  检查sfcdriver注册url是否为api/fhsfcdriver/v1
  检查sfcdriver注册的VIM ID是否正确
   如果上述检查无误，nslcm日志显示sfc中任何一类错误，例如create port chain error等，到第2步
 kubernetes环境，查看sfcdriver容器日志 常见sfc创建失败原因，日志里一般提示很明显，常见错误搜集如下： 1. 流分类规则冲突，错误日志如下：
-resp_body={&#34;error&#34;:&#34;{\&#34;NeutronError\&#34;: {\&#34;message\&#34;: \&#34;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c."/>
+resp_body={&quot;error&quot;:&quot;{\&quot;NeutronError\&quot;: {\&quot;message\&quot;: \&quot;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c."/>
 
     <meta property="og:title" content="" />
-<meta property="og:description" content="MANO常用网址    URL 说明     http://MSBIP:30280/iui/usecaseui/resource-management/#/ns uui管理接口        删除所有helm list helm delete --purge $(helm list|grep &#34;dev&#34;|awk &#39;{print $1}&#39;) 下载部署软件 下载安装部署包 curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz 下载oom curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz 常见问题定位手册 带SFC的NS实例化失败问题定位 kubernetes环境，查看nslcm容器日志  检查vnf创建是否成功。vnf创建成功是创建sfc的前提
+<meta property="og:description" content="MANO常用网址    URL 说明     http://MSBIP:30280/iui/usecaseui/resource-management/#/ns uui管理接口        删除所有helm list helm delete --purge $(helm list|grep &quot;dev&quot;|awk &#39;{print $1}&#39;)  下载部署软件 下载安装部署包 curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz  下载oom curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz  常见问题定位手册 带SFC的NS实例化失败问题定位 kubernetes环境，查看nslcm容器日志  检查vnf创建是否成功。vnf创建成功是创建sfc的前提
  检查sfcdriver是否注册，sfcdriver的注册路径为： uui-ui-&gt;运维管理-&gt;外部系统注册-&gt;SFC Driver
-URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver 检查sfcdriver注册url是否为api/fhsfcdriver/v1
+URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver  检查sfcdriver注册url是否为api/fhsfcdriver/v1
  检查sfcdriver注册的VIM ID是否正确
   如果上述检查无误，nslcm日志显示sfc中任何一类错误，例如create port chain error等，到第2步
 kubernetes环境，查看sfcdriver容器日志 常见sfc创建失败原因，日志里一般提示很明显，常见错误搜集如下： 1. 流分类规则冲突，错误日志如下：
-resp_body={&#34;error&#34;:&#34;{\&#34;NeutronError\&#34;: {\&#34;message\&#34;: \&#34;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c." />
+resp_body={&quot;error&quot;:&quot;{\&quot;NeutronError\&quot;: {\&quot;message\&quot;: \&quot;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/todo/common/" />
 
@@ -36,14 +36,14 @@ resp_body={&#34;error&#34;:&#34;{\&#34;NeutronError\&#34;: {\&#34;message\&#34;:
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="https://vincent-wuhan.github.io/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/johndoe/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
 </svg></a>
         
       </div>
@@ -96,13 +96,22 @@ resp_body={&#34;error&#34;:&#34;{\&#34;NeutronError\&#34;: {\&#34;message\&#34;:
 </table>
 
 <h1 id="删除所有helm-list">删除所有helm list</h1>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm delete --purge <span style="color:#fff;font-weight:bold">$(</span>helm list|grep <span style="color:#0ff;font-weight:bold">&#34;dev&#34;</span>|awk <span style="color:#0ff;font-weight:bold">&#39;{print $1}&#39;</span><span style="color:#fff;font-weight:bold">)</span></code></pre></div>
+
+<pre><code class="language-shell">helm delete --purge $(helm list|grep &quot;dev&quot;|awk '{print $1}')
+</code></pre>
+
 <h1 id="下载部署软件">下载部署软件</h1>
 
 <h2 id="下载安装部署包">下载安装部署包</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz</code></pre></div>
+
+<pre><code class="language-shell">curl -O http://10.190.49.48/installRel/2.1.9-new/install-2019-05-06T104533.tar.gz
+</code></pre>
+
 <h2 id="下载oom">下载oom</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz</code></pre></div>
+
+<pre><code class="language-shell">curl -O http://10.190.49.48/installRel/2.1.9-new/oom.tar.gz
+</code></pre>
+
 <h1 id="常见问题定位手册">常见问题定位手册</h1>
 
 <h2 id="带sfc的ns实例化失败问题定位">带SFC的NS实例化失败问题定位</h2>
@@ -114,7 +123,9 @@ resp_body={&#34;error&#34;:&#34;{\&#34;NeutronError\&#34;: {\&#34;message\&#34;:
 
 <li><p>检查sfcdriver是否注册，sfcdriver的注册路径为：
 uui-ui-&gt;运维管理-&gt;外部系统注册-&gt;SFC Driver</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver</code></pre></div></li>
+
+<pre><code class="language-txt">URL地址为 MSB_IP:30280/iui/usecaseui/resource-management/#/esr-sfc-driver
+</code></pre></li>
 
 <li><p>检查sfcdriver注册url是否为api/fhsfcdriver/v1</p></li>
 
@@ -127,48 +138,32 @@ uui-ui-&gt;运维管理-&gt;外部系统注册-&gt;SFC Driver</p>
 
 <p>常见sfc创建失败原因，日志里一般提示很明显，常见错误搜集如下：
 1. 流分类规则冲突，错误日志如下：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-log" data-lang="log">resp_body={&#34;error&#34;:&#34;{\&#34;NeutronError\&#34;: {\&#34;message\&#34;: \&#34;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c.\&#34;, \&#34;type\&#34;: \&#34;PortChainFlowClassifierInConflict\&#34;, \&#34;detail\&#34;: \&#34;\&#34;}}&#34;}
 
-2019-05-07 02:42:03,461:[sfcdriver.pub.utils.restcall]:[restcall.py]-[81] [DEBUG]:[b13ab050-7071-11e9-b020-02f38520b84b]ret=[1, u&#39;{&#34;error&#34;:&#34;{\\&#34;NeutronError\\&#34;: {\\&#34;message\\&#34;: \\&#34;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c.\\&#34;, \\&#34;type\\&#34;: \\&#34;PortChainFlowClassifierInConflict\\&#34;, \\&#34;detail\\&#34;: \\&#34;\\&#34;}}&#34;}&#39;, &#39;400&#39;]
+<pre><code class="language-log">resp_body={&quot;error&quot;:&quot;{\&quot;NeutronError\&quot;: {\&quot;message\&quot;: \&quot;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c.\&quot;, \&quot;type\&quot;: \&quot;PortChainFlowClassifierInConflict\&quot;, \&quot;detail\&quot;: \&quot;\&quot;}}&quot;}
 
-2019-05-07 02:42:03,461:[sfcdriver.pub.nfvi.vim.vimadaptor]:[vimadaptor.py]-[57] [INFO]:[create_port_chain]ret=[1, &#39;&#39;]
+2019-05-07 02:42:03,461:[sfcdriver.pub.utils.restcall]:[restcall.py]-[81] [DEBUG]:[b13ab050-7071-11e9-b020-02f38520b84b]ret=[1, u'{&quot;error&quot;:&quot;{\\&quot;NeutronError\\&quot;: {\\&quot;message\\&quot;: \\&quot;Flow Classifier a2dc725e-93c7-4a0f-ae5f-0041f3d8b73c conflicts with Flow Classifier 391c6be6-a562-4273-8134-e01ca4a98719 in port chain 61a06874-61c6-4dd2-aa9b-39acf7f2d65c.\\&quot;, \\&quot;type\\&quot;: \\&quot;PortChainFlowClassifierInConflict\\&quot;, \\&quot;detail\\&quot;: \\&quot;\\&quot;}}&quot;}', '400']
+
+2019-05-07 02:42:03,461:[sfcdriver.pub.nfvi.vim.vimadaptor]:[vimadaptor.py]-[57] [INFO]:[create_port_chain]ret=[1, '']
 
 2019-05-07 02:42:03,461:[sfcdriver.sfc.views]:[views.py]-[145] [ERROR]:Traceback (most recent call last):
-  File &#34;/service/sfcdriver/sfcdriver/sfc/views.py&#34;, line 143, in post
+  File &quot;/service/sfcdriver/sfcdriver/sfc/views.py&quot;, line 143, in post
     port_chain_id = CreatePortChain(vim_id, request.data).do_biz()
-  File &#34;/service/sfcdriver/sfcdriver/sfc/portchain_create.py&#34;, line 40, in do_biz
+  File &quot;/service/sfcdriver/sfcdriver/sfc/portchain_create.py&quot;, line 40, in do_biz
     return self.create_port_chain()
-  File &#34;/service/sfcdriver/sfcdriver/sfc/portchain_create.py&#34;, line 64, in create_port_chain
-    raise VimException(&#34;create port chain error&#34;)
+  File &quot;/service/sfcdriver/sfcdriver/sfc/portchain_create.py&quot;, line 64, in create_port_chain
+    raise VimException(&quot;create port chain error&quot;)
 VimException: create port chain error
 
-2019-05-07 02:42:03,461:[sfcdriver.sfc.views]:[views.py]-[146] [ERROR]:Exception in CreateSFC: create port chain error</code></pre></div>
+2019-05-07 02:42:03,461:[sfcdriver.sfc.views]:[views.py]-[146] [ERROR]:Exception in CreateSFC: create port chain error
+</code></pre>
+
 <ol>
 <li>TBD (后续收集整理补充)</li>
 </ol>
 
     </div>
     <div class="post-footer">
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "Jiang Xing" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     </div>
   </article>
 

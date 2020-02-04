@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>有效提升Python代码质量的技巧 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="有效提升Python代码质量的技巧"/>
+<meta name="twitter:description" content="有效提升Python代码质量的20个技巧 推导式 推导式是构建列表、字典、集合和生成器便捷方式
+ 格式
+[表达式 for 迭代变量 in 可迭代对象 if 条件]  举例
+# 列表推导式 mylist = [i**2 for i in range(1,11) if i &gt; 5] # 字典推导式 mydict = {i: i*i for i in range(1,6)} # 集合推导式 myset = {i for i in &#39;HarryPotter&#39; if i not in &#39;er&#39;} # 元组推导式要显示使用tuple()，不能直接使用() # ()被生成器占用了 # 生成器 mygenerator = (i for i in range(0,11)) print(mygenerator) print(list(mygenerator)) # 嵌套循环 mylist = [str(i) &#43; j for i in range(1,6) for j in &#39;ABCDE&#39;] # 字典转列表 mydict = {&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;} mylist = [key &#43; &#39;:&#39; &#43; value for key, value in mydict."/>
+
+    <meta property="og:title" content="有效提升Python代码质量的技巧" />
+<meta property="og:description" content="有效提升Python代码质量的20个技巧 推导式 推导式是构建列表、字典、集合和生成器便捷方式
+ 格式
+[表达式 for 迭代变量 in 可迭代对象 if 条件]  举例
+# 列表推导式 mylist = [i**2 for i in range(1,11) if i &gt; 5] # 字典推导式 mydict = {i: i*i for i in range(1,6)} # 集合推导式 myset = {i for i in &#39;HarryPotter&#39; if i not in &#39;er&#39;} # 元组推导式要显示使用tuple()，不能直接使用() # ()被生成器占用了 # 生成器 mygenerator = (i for i in range(0,11)) print(mygenerator) print(list(mygenerator)) # 嵌套循环 mylist = [str(i) &#43; j for i in range(1,6) for j in &#39;ABCDE&#39;] # 字典转列表 mydict = {&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: &#39;value2&#39;} mylist = [key &#43; &#39;:&#39; &#43; value for key, value in mydict." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/python/how-to-improve-python-skills/" />
+<meta property="article:published_time" content="2020-01-31T19:40:27+08:00" />
+<meta property="article:modified_time" content="2020-01-31T19:40:27+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">有效提升Python代码质量的技巧</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 31, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="有效提升python代码质量的20个技巧">有效提升Python代码质量的20个技巧</h1>
+
+<h2 id="推导式">推导式</h2>
+
+<p>推导式是构建列表、字典、集合和生成器便捷方式</p>
+
+<ul>
+<li><p>格式</p>
+
+<pre><code class="language-txt">[表达式 for 迭代变量 in 可迭代对象 if 条件]
+</code></pre></li>
+
+<li><p>举例</p>
+
+<pre><code class="language-python"># 列表推导式
+mylist = [i**2 for i in range(1,11) if i &gt; 5]
+
+# 字典推导式
+mydict = {i: i*i for i in range(1,6)}
+
+# 集合推导式
+myset = {i for i in 'HarryPotter' if i not in 'er'}
+
+# 元组推导式要显示使用tuple()，不能直接使用()
+# ()被生成器占用了
+# 生成器
+mygenerator = (i for i in range(0,11))
+print(mygenerator)
+print(list(mygenerator))
+
+# 嵌套循环
+mylist = [str(i) + j for i in range(1,6) for j in 'ABCDE']
+
+# 字典转列表
+mydict = {'key1': 'value1', 'key2': 'value2'}
+mylist = [key + ':' + value for key, value in mydict.items()]
+
+# 字段key和value互换
+{value: key for key, value in mydict.items()}
+
+</code></pre></li>
+</ul>
+
+<h2 id="字符串">字符串</h2>
+
+<ul>
+<li><p>字符串连接</p>
+
+<pre><code class="language-python">
+'time' + 'geekbang' + 'org'
+'%s %s %s' % ('time', 'geekbang', 'org')
+mylist = ['time', 'geekbang', 'org']
+'.'.join(mylist)
+</code></pre></li>
+
+<li><p>字符串拆分</p>
+
+<pre><code class="language-python">mystring = 'time.geekbang.org'
+print(mystring.split('.')[0])
+
+var1,var2 = mystring.split('.')[1:3]
+print(var1, var2)
+</code></pre></li>
+
+<li><p>格式化字符串</p></li>
+</ul>
+
+<p>三种常用的格式化字符串方式</p>
+
+<blockquote>
+<p>%操作符 &ndash; printf风格的字符串格式化</p>
+</blockquote>
+
+<pre><code class="language-python">import math
+print('Pi is %5.3f.' % math.pi)
+</code></pre>
+
+<p>好处: 格式定义清晰
+坏处: 参数多的时候比较混乱</p>
+
+<blockquote>
+<p>.format &ndash; 更加灵活</p>
+</blockquote>
+
+<pre><code class="language-python">print('{1} and {0}'.format('spam', 'eggs'))
+print('{value1} and {value2}'.format(value1='tom', value2='jerry'))
+
+</code></pre>
+
+<blockquote>
+<p>f-string: Python3.6引入，该方法源于PEP498，唯一区别就是在字符串前面加了个&rsquo;f&rsquo;</p>
+</blockquote>
+
+<pre><code class="language-python"># 三种比较
+
+firstname = 'yin'
+lastname = 'wilson'
+print('Hello, %s %s.'%(lastname, firstname))
+print('Hello, {name1} {name2}'.format(name1=lastname, name2=firstname))
+print(f'Hello, {lastname} {firstname}.')
+
+</code></pre>
+
+<p>优点: 性能更好，易读性好</p>
+
+<blockquote>
+<p>f-sting还可以做的事情，支持类的格式化，前提是类中实现了string的方法</p>
+</blockquote>
+
+<pre><code class="language-python"># 表达式
+f'{2*5}'
+# 类格式化
+class Persion:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def __str__(self):
+        return f'hello, {self.first_name} {slef.last_name}.'
+
+    def __repr__(self):
+        return f'hello, {self.first_name} {slef.last_name}.'
+
+me = Person('yin', 'wilson')
+print(f'{me}')
+</code></pre>
+
+<h2 id="colloections扩展内置数据类型">Colloections扩展内置数据类型</h2>
+
+<p><strong><a href="https://docs.python.org/zh-cn/3.6/library/collections.html">https://docs.python.org/zh-cn/3.6/library/collections.html</a></strong></p>
+
+<pre><code class="language-python"># namedtuple -- 带命名的元组
+import collections
+Point = collections.namedtuple('Point', ['x', 'y'])
+p = Point(11, y=22)
+print(p[0] + p[1])
+x,y = p
+print(p.x + p.y)
+print(p)
+
+# deque 双向队列
+# Counter 计数器
+
+</code></pre>
+
+<h2 id="函数的可变长参数">函数的可变长参数</h2>
+
+<p>一般可变长参数</p>
+
+<pre><code class="language-txt">def func(*args, **kargs)
+    pass
+
+kargs 获取关键字参数
+args 获取其他参数
+
+示例：
+def func(*args, **kargs)
+    print(f'args: {args}')
+    print(f'kargs: {kargs}')
+
+func(123, 'xyz', name='xvalue')
+
+结果：
+args: (123, 'xyz')
+kargs: {'name': 'xvalue'}
+</code></pre>
+
+<h2 id="lambda表达式">Lambda表达式</h2>
+
+<p>Lambda知识表达式，不是所有的函数逻辑都能封装进去</p>
+
+<p>k = lambda x:x+1
+print(k(1))</p>
+
+<ul>
+<li>Lambda表达式后面只能有一个表达式</li>
+<li>实现简单函数的时候可以使用Lambda表达式替代</li>
+<li>使用高阶函数的时候一般使用Lambda表达式</li>
+</ul>
+
+<h2 id="高阶函数">高阶函数</h2>
+
+<p>高阶：参数是函数、返回值是函数</p>
+
+<p>常见的高阶函数： map、reduce、filter、apply
+apply在python2.3被移除，reduce被放到functools包中
+推导式和生成器表达式可以代替map和filter函数</p>
+
+<h3 id="map-filter-函数-序列">map/filter(函数, 序列)</h3>
+
+<p>map(函数, 序列)将序列中每个值传入函数，处理完成返回为map对象</p>
+
+<p>filter(函数，序列)将序列中每个值传入函数，符合函数条件的返回为filter对象</p>
+
+<pre><code class="language-python">number = list(range(11))
+def square(x):
+    return x**2
+
+print(list(map(square, number)))
+
+# 推导式
+
+[i**2 for i in range(11)]
+
+</code></pre>
+
+<p>如果square函数比较长，使用高阶函数会更好,如果square函数比较短，用推导式更方便</p>
+
+<h2 id="生成器">生成器</h2>
+
+<ol>
+<li>yield关键字在函数中使用，可以实现生成器</li>
+<li>yield和return不同，return返回后，函数状态终止，yield保持函数的执行状态，返回后，函数回到之前保存的状态继续执行</li>
+<li>函数被yield会暂停，局部变量也会被保存</li>
+<li>迭代器终止时，会抛出Stoplteration异常</li>
+</ol>
+
+<h2 id="装饰器">装饰器</h2>
+
+<ol>
+<li>装饰器函数的参数是被装饰函数</li>
+<li>装饰器函数处理被装饰函数，处理完成后返回被装饰函数或替换为另一个函数</li>
+<li>装饰器不用入侵函数内部</li>
+
+<li><p>装饰器强调定义态，而非运行态</p>
+
+<pre><code class="language-python">def decorate(func):
+def inner()
+    print('in decorate)
+    func()
+return inner
+
+@decorate
+def target():
+print('do somethimg')
+
+target()
+
+</code></pre></li>
+</ol>
+
+<h2 id="魔术方法">魔术方法</h2>
+
+<p>系统提供的，系统提供了多少就只能用多少。</p>
+
+<ol>
+<li>魔术方法以2个下划线开头，2个下划线结束</li>
+<li>魔术方法类似其他语言的接口</li>
+<li>自定义类实现自带的数据类型</li>
+
+<li><p>如：</p>
+
+<pre><code class="language-txt">__call__() 允许类的实例称为可调用对象
+__str__() 被str()调用时的行为
+__getitem__()使用[key]调用时的行为
+__iter__()被迭代时的行为
+</code></pre></li>
+
+<li><p>鸭子类型</p></li>
+</ol>
+
+<h3 id="属性描述符property">属性描述符property</h3>
+
+<p>描述符： 实现特定协议的类
+property类需要实现<strong>get</strong>、<strong>set</strong>、<strong>delete</strong>方法</p>
+
+<pre><code class="language-python">class Teacher:
+    def __init__(self, name):
+        self.name = name
+    
+    def __get__(self):
+        return self.name
+
+    def __set__(self, value):
+        self.name = value
+
+pythonteacher = Teacher('yin')
+pythonteacher.name = 'wilson'
+print(pythonteacher.name)
+</code></pre>
+
+<h2 id="抽象基类">抽象基类</h2>
+
+<ul>
+<li>抽象基类(Abstract Base Class, ABC)</li>
+<li>抽象基类提供逻辑和实现解耦的能力</li>
+<li>父类可以定义，不用实现</li>
+<li>子类必须实现，否则保存</li>
+</ul>
+
+<p>类似于java中的接口</p>
+
+<pre><code class="language-python">from abc import ABC
+
+class MyABC(ABC):
+    pass
+
+MyABC.register(tuple)
+
+assert issubclass(tuple, MyABC)
+assert isinstane((), MyABC)
+
+</code></pre>
+
+<h2 id="orm">ORM</h2>
+
+<p>ORM是把数据库实例化
+ORM让Python不用写原生SQL语句
+使用sqlalchemy定义模型，扩展pymysql的功能</p>
+
+<p>依赖:</p>
+
+<blockquote>
+<p>pip install SQLAlchemy</p>
+</blockquote>
+
+<h2 id="运行性能">运行性能</h2>
+
+<ul>
+<li>python代码由Python虚拟机运行</li>
+<li>Python虚拟机执行的是字节码</li>
+<li>Python代码运行前会被编译成字节码</li>
+
+<li><p>dis模块可以对Python代码进行生成字节码操作</p>
+
+<pre><code class="language-python">import dis
+
+def func():
+a = list('123')
+b = ['123']
+
+print(dis.dis(func))
+
+# 生成函数的字节码打印
+</code></pre></li>
+</ul>
+
+<h2 id="异常捕获">异常捕获</h2>
+
+<p>参考 <strong><a href="https://docs.python.org/zh-cn/3.6/library/exceptions.html">https://docs.python.org/zh-cn/3.6/library/exceptions.html</a></strong></p>
+
+<pre><code class="language-python">gennumber = (i for i range(0,2))
+print(next(gennumber))
+print(next(gennumber))
+
+try:
+    print(next(gennumber))
+except StopIteration:
+    print('The Last')
+</code></pre>
+
+<h2 id="上下文管理器">上下文管理器</h2>
+
+<ul>
+<li>with语句从Python2.5引入</li>
+<li>with语句实现上下文管理协议，实现了<strong>enter</strong>()和<strong>exit</strong>()方法</li>
+
+<li><p>支持上下文管理协议对象，实现上下文管理器</p>
+
+<pre><code class="language-python"># 不用上下文
+file1 = open('a.txt', encoding='utf8')
+try:
+data = file1.read()
+finally:
+file1.close()
+
+# 用上下文
+with open('a.txt', encoding='utf8') as file2:
+data = file2.read()
+
+</code></pre></li>
+</ul>
+
+<h2 id="代码风格">代码风格</h2>
+
+<ul>
+<li><p>pylint是python代码分析工具，分析python代码中错误和代码风格</p>
+
+<pre><code class="language-txt">pip install pylint
+</code></pre></li>
+
+<li><p>pep8和autopep8</p>
+
+<pre><code class="language-txt">pip install autopep8
+</code></pre></li>
+</ul>
+
+<p>vscode默认使用pylint检查python代码</p>
+
+<h2 id="设计模式">设计模式</h2>
+
+<ul>
+<li>单例模式是设计模式的一种</li>
+<li>单例模式确保类只有一个对象被创建</li>
+<li>提供一个全局访问该对象的方式</li>
+
+<li><p>扩展共享资源的并行访问</p>
+
+<pre><code class="language-python">class Singleton(object):
+def __new__(cls):
+    if not hasattr(cls, 'instance'):
+        cls.instance = super(Singleton, cls).__new__(cls)
+        return cls.instance
+
+s1 = Singleton()
+print(s1)
+
+s2 = Singleton()
+print(s2)
+</code></pre></li>
+</ul>
+
+<h2 id="venv">venv</h2>
+
+<p>Python3.3自带ven，PEP-405
+venv解决版本冲突问题</p>
+
+<p>用法:</p>
+
+<pre><code class="language-shell">python3 -m venv myvenv
+source ./myvenv/bin/activate
+deactivate
+</code></pre>
+
+<h2 id="pip安装加速">pip安装加速</h2>
+
+<p>pypi python模块包管理</p>
+
+<p>国内源：</p>
+
+<ul>
+<li>豆瓣: <a href="http://pypi.doubanio.com/simple/">http://pypi.doubanio.com/simple/</a></li>
+<li>清华: <a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">https://mirrors.tuna.tsinghua.edu.cn/help/pypi/</a></li>
+</ul>
+
+<p>升级pip大于10.0.0</p>
+
+<pre><code class="language-shell">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
+
+</code></pre>
+
+<p>临时设置</p>
+
+<pre><code class="language-shell">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre>
+
+<p>永久设置</p>
+
+<ul>
+<li>windws: C:\Users\xxx\pip\pip.ini</li>
+<li>Linux: ~/.pip/pip.conf</li>
+</ul>
+
+<p>配置文件格式</p>
+
+<pre><code class="language-ini">[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
