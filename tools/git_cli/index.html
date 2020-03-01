@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Git_cli // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git_cli"/>
+<meta name="twitter:description" content="常用命令 典型应用场景  日志修改 Git review配置   常用命令    命令 说明     git config &ndash;global core.editor vim 设置全局编辑器为vim   git config &ndash;global user.name &ldquo;user&rdquo; 设置用户名   git config &ndash;global user.email &ldquo;user@email.com&rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.10.10.10:8080/a/project.git 设置远程gerrit        典型应用场景 日志修改  修改最近一次   git commit &ndash;amend
+  修改历史中的某个记录   1."/>
+
+    <meta property="og:title" content="Git_cli" />
+<meta property="og:description" content="常用命令 典型应用场景  日志修改 Git review配置   常用命令    命令 说明     git config &ndash;global core.editor vim 设置全局编辑器为vim   git config &ndash;global user.name &ldquo;user&rdquo; 设置用户名   git config &ndash;global user.email &ldquo;user@email.com&rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.10.10.10:8080/a/project.git 设置远程gerrit        典型应用场景 日志修改  修改最近一次   git commit &ndash;amend
+  修改历史中的某个记录   1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/tools/git_cli/" />
+<meta property="article:published_time" content="2020-03-01T13:00:48+08:00" />
+<meta property="article:modified_time" content="2020-03-01T13:00:48+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Git_cli</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 1, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4">常用命令</a></li>
+<li><a href="#%e5%85%b8%e5%9e%8b%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">典型应用场景</a>
+
+<ul>
+<li><a href="#%e6%97%a5%e5%bf%97%e4%bf%ae%e6%94%b9">日志修改</a></li>
+<li><a href="#git-review%e9%85%8d%e7%bd%ae">Git review配置</a></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="常用命令">常用命令</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">git config &ndash;global core.editor vim</td>
+<td align="left">设置全局编辑器为vim</td>
+</tr>
+
+<tr>
+<td align="left">git config &ndash;global user.name &ldquo;user&rdquo;</td>
+<td align="left">设置用户名</td>
+</tr>
+
+<tr>
+<td align="left">git config &ndash;global user.email &ldquo;user@email.com&rdquo;</td>
+<td align="left">设置用户邮箱</td>
+</tr>
+
+<tr>
+<td align="left">git remote add gerrit <a href="http://user:password@10.10.10.10:8080/a/project.git">http://user:password@10.10.10.10:8080/a/project.git</a></td>
+<td align="left">设置远程gerrit</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="典型应用场景">典型应用场景</h2>
+
+<h3 id="日志修改">日志修改</h3>
+
+<ul>
+<li>修改最近一次</li>
+</ul>
+
+<blockquote>
+<p>git commit &ndash;amend</p>
+</blockquote>
+
+<ul>
+<li>修改历史中的某个记录</li>
+</ul>
+
+<blockquote>
+<p>1.当前版本之前的倒数第三次的日志
+git rebase -i head~3
+2.输出结果中选择需要修改的那一条，将pick改为edit</p>
+</blockquote>
+
+<pre><code class="language-txt">pick f9173fc Fix wrong name 'path_filename'
+pick 3fddde0 Change versiton to 0.2:   Add share option
+pick 5962845 Change platform section name from [arch-platform-name] to [name:platform]
+...
+</code></pre>
+
+<blockquote>
+<p>3.修改commit</p>
+</blockquote>
+
+<p>git commit &ndash;amend</p>
+
+<blockquote>
+<p>4.提交</p>
+</blockquote>
+
+<p>git rebase &ndash;continue</p>
+
+<ul>
+<li>修改远程服务器上修改</li>
+</ul>
+
+<blockquote>
+<p>git push -f origin master</p>
+</blockquote>
+
+<h3 id="git-review配置">Git review配置</h3>
+
+<ul>
+<li>change-id生成</li>
+</ul>
+
+<p>存放路径
+&gt;.git/hooks/</p>
+
+<p>添加如下shell脚本</p>
+
+<p><details>
+<summary>commit-msg</summary></p>
+
+<pre><code class="language-shell">#!/bin/sh
+# From Gerrit Code Review 2.10
+#
+# Part of Gerrit Code Review (http://code.google.com/p/gerrit/)
+#
+# Copyright (C) 2009 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+unset GREP_OPTIONS
+
+CHANGE_ID_AFTER=&quot;Bug|Issue&quot;
+MSG=&quot;$1&quot;
+
+# Check for, and add if missing, a unique Change-Id
+#
+add_ChangeId() {
+    clean_message=`sed -e '
+        /^diff --git .*/{
+            s///
+            q
+        }
+        /^Signed-off-by:/d
+        /^#/d
+    ' &quot;$MSG&quot; | git stripspace`
+    if test -z &quot;$clean_message&quot;
+    then
+        return
+    fi
+
+    if test &quot;false&quot; = &quot;`git config --bool --get gerrit.createChangeId`&quot;
+    then
+        return
+    fi
+
+    # Does Change-Id: already exist? if so, exit (no change).
+    ###grep参数-i, --ignore-case 忽略大小写方式查找以“Change-Id:”开头字符串###
+    if grep -i '^Change-Id:' &quot;$MSG&quot; &gt;/dev/null
+    then
+        return
+    fi
+
+    id=`_gen_ChangeId`
+
+    ###$$：Shell本身的PID（ProcessID）###
+    T=&quot;$MSG.tmp.$$&quot;
+    AWK=awk
+    if [ -x /usr/xpg4/bin/awk ]; then
+        # Solaris AWK is just too broken
+        AWK=/usr/xpg4/bin/awk
+    fi
+
+    # How this works:
+    # - parse the commit message as (textLine+ blankLine*)*
+    # - assume textLine+ to be a footer until proven otherwise
+    # - exception: the first block is not footer (as it is the title)
+    # - read textLine+ into a variable
+    # - then count blankLines
+    # - once the next textLine appears, print textLine+ blankLine* as these
+    #   aren't footer
+    # - in END, the last textLine+ block is available for footer parsing
+    $AWK '
+    BEGIN {
+        # while we start with the assumption that textLine+
+        # is a footer, the first block is not.
+        isFooter = 0
+        footerComment = 0
+        blankLines = 0
+    }
+
+    # Skip lines starting with &quot;#&quot; without any spaces before it.
+    ###awk的next用法在处理逐行读取文本方面很强大，next逐行读取文本###
+    /^#/ { next }
+
+    # Skip the line starting with the diff command and everything after it,
+    # up to the end of the file, assuming it is only patch data.
+    # If more than one line before the diff was empty, strip all but one.
+    /^diff --git / {
+        blankLines = 0
+        while (getline) { }
+        next
+    }
+
+    # Count blank lines outside footer comments
+    /^$/ &amp;&amp; (footerComment == 0) {
+        blankLines++
+        next
+    }
+
+    # Catch footer comment
+    /^\[[a-zA-Z0-9-]+:/ &amp;&amp; (isFooter == 1) {
+        footerComment = 1
+    }
+
+    /]$/ &amp;&amp; (footerComment == 1) {
+        footerComment = 2
+    }
+
+    # We have a non-blank line after blank lines. Handle this.
+    (blankLines &gt; 0) {
+        print lines
+        for (i = 0; i &lt; blankLines; i++) {
+            print &quot;&quot;
+        }
+
+        lines = &quot;&quot;
+        blankLines = 0
+        isFooter = 1
+        footerComment = 0
+    }
+
+    # Detect that the current block is not the footer
+    (footerComment == 0) &amp;&amp; (!/^\[?[a-zA-Z0-9-]+:/ || /^[a-zA-Z0-9-]+:\/\//) {
+        isFooter = 0
+    }
+
+    {
+        # We need this information about the current last comment line
+        if (footerComment == 2) {
+            footerComment = 0
+        }
+        if (lines != &quot;&quot;) {
+            lines = lines &quot;\n&quot;;
+        }
+        lines = lines $0
+    }
+
+    # Footer handling:
+    # If the last block is considered a footer, splice in the Change-Id at the
+    # right place.
+    # Look for the right place to inject Change-Id by considering
+    # CHANGE_ID_AFTER. Keys listed in it (case insensitive) come first,
+    # then Change-Id, then everything else (eg. Signed-off-by:).
+    #
+    # Otherwise just print the last block, a new line and the Change-Id as a
+    # block of its own.
+    END {
+        unprinted = 1
+        if (isFooter == 0) {
+            print lines &quot;\n&quot;
+            lines = &quot;&quot;
+        }
+        changeIdAfter = &quot;^(&quot; tolower(&quot;'&quot;$CHANGE_ID_AFTER&quot;'&quot;) &quot;):&quot;
+        numlines = split(lines, footer, &quot;\n&quot;)
+        for (line = 1; line &lt;= numlines; line++) {
+            if (unprinted &amp;&amp; match(tolower(footer[line]), changeIdAfter) != 1) {
+                unprinted = 0
+                print &quot;Change-Id: I'&quot;$id&quot;'&quot;
+            }
+            print footer[line]
+        }
+        if (unprinted) {
+            print &quot;Change-Id: I'&quot;$id&quot;'&quot;
+        }
+    }' &quot;$MSG&quot; &gt; &quot;$T&quot; &amp;&amp; mv &quot;$T&quot; &quot;$MSG&quot; || rm -f &quot;$T&quot;
+}
+_gen_ChangeIdInput() {
+    echo &quot;tree `git write-tree`&quot;
+    if parent=`git rev-parse &quot;HEAD^0&quot; 2&gt;/dev/null`
+    then
+        echo &quot;parent $parent&quot;
+    fi
+    echo &quot;author `git var GIT_AUTHOR_IDENT`&quot;
+    echo &quot;committer `git var GIT_COMMITTER_IDENT`&quot;
+    echo
+    printf '%s' &quot;$clean_message&quot;
+}
+_gen_ChangeId() {
+    _gen_ChangeIdInput |
+    git hash-object -t commit --stdin
+}
+
+
+add_ChangeId
+
+</code></pre>
+
+<p></details></p>
+
+<ul>
+<li>可能遇到的问题</li>
+</ul>
+
+<p>git review提交失败，提示找不到gerrit
+错误信息类似如下内容：</p>
+
+<pre><code class="language-shell">ubuntu@ubuntu:~/file/MANO_GIT/project$ git review
+Could not connect to gerrit.
+Enter your gerrit username: user
+Trying again with ssh://user@10.10.10.10:29418/project.git
+&lt;traceback object at 0x7f6d21311ef0&gt;
+We don't know where your gerrit is. Please manually create a remote
+named &quot;gerrit&quot; and try again.
+Could not connect to gerrit at ssh://user@10.10.10.10:29418/project.git
+Traceback (most recent call last):
+  File &quot;/usr/bin/git-review&quot;, line 10, in &lt;module&gt;
+    sys.exit(main())
+  File &quot;/usr/lib/python2.7/dist-packages/git_review/cmd.py&quot;, line 1534, in main
+    sys.exit(e.EXIT_CODE)
+AttributeError: 'GitReviewException' object has no attribute 'EXIT_CODE'
+</code></pre>
+
+<p>解决办法：提示远程gerrit未设置，参考使用如下命令添加远程gerrit设置重新git review问题解决</p>
+
+<pre><code class="language-shell">git remote add gerrit http://user:passwd@10.10.10.10:8080/a/project.git
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

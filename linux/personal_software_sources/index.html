@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>CentOS私有Yum源 Pip源搭建方法 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CentOS私有Yum源 Pip源搭建方法"/>
+<meta name="twitter:description" content="本文档中所有操作默认采用ROOT权限操作 本文档中使用的变量列表如下
+    变量 举例 说明     REPO_ROOT /home/centos/ 私有源服务器安装目录   YUM_REPO /home/centos/yumRepo yum私有仓库目录   PIP_REPO /home/centos/pipRepo pip私有仓库目录   SERVER_IP 172.30.0.24 私有源服务器地址   CLIENT_IP 172.30.0.10 客户测试机地址   YUM_PORT 10084 yum私有源服务器监听端口   PIP_PORT 10085 pip私有源服务器监听端口   RPM_SOFT_NAME docker-ce RPM软件包名   PIP_SOFT_NAME docker-compose PIP软件包名   PIP_SOFT_VERSION 1.24.0 PIP软件包版本   YUM_REPO_URL http://172.30.0.24:10084 私有YUM源地址   PIP_REPO_URL http://172."/>
+
+    <meta property="og:title" content="CentOS私有Yum源 Pip源搭建方法" />
+<meta property="og:description" content="本文档中所有操作默认采用ROOT权限操作 本文档中使用的变量列表如下
+    变量 举例 说明     REPO_ROOT /home/centos/ 私有源服务器安装目录   YUM_REPO /home/centos/yumRepo yum私有仓库目录   PIP_REPO /home/centos/pipRepo pip私有仓库目录   SERVER_IP 172.30.0.24 私有源服务器地址   CLIENT_IP 172.30.0.10 客户测试机地址   YUM_PORT 10084 yum私有源服务器监听端口   PIP_PORT 10085 pip私有源服务器监听端口   RPM_SOFT_NAME docker-ce RPM软件包名   PIP_SOFT_NAME docker-compose PIP软件包名   PIP_SOFT_VERSION 1.24.0 PIP软件包版本   YUM_REPO_URL http://172.30.0.24:10084 私有YUM源地址   PIP_REPO_URL http://172." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/linux/personal_software_sources/" />
+<meta property="article:published_time" content="2020-03-01T12:50:22+08:00" />
+<meta property="article:modified_time" content="2020-03-01T12:50:22+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">CentOS私有Yum源 Pip源搭建方法</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 1, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<blockquote>
+<p>本文档中所有操作默认采用ROOT权限操作
+本文档中使用的变量列表如下</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th align="left">变量</th>
+<th align="left">举例</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">REPO_ROOT</td>
+<td align="left">/home/centos/</td>
+<td align="left">私有源服务器安装目录</td>
+</tr>
+
+<tr>
+<td align="left">YUM_REPO</td>
+<td align="left">/home/centos/yumRepo</td>
+<td align="left">yum私有仓库目录</td>
+</tr>
+
+<tr>
+<td align="left">PIP_REPO</td>
+<td align="left">/home/centos/pipRepo</td>
+<td align="left">pip私有仓库目录</td>
+</tr>
+
+<tr>
+<td align="left">SERVER_IP</td>
+<td align="left">172.30.0.24</td>
+<td align="left">私有源服务器地址</td>
+</tr>
+
+<tr>
+<td align="left">CLIENT_IP</td>
+<td align="left">172.30.0.10</td>
+<td align="left">客户测试机地址</td>
+</tr>
+
+<tr>
+<td align="left">YUM_PORT</td>
+<td align="left">10084</td>
+<td align="left">yum私有源服务器监听端口</td>
+</tr>
+
+<tr>
+<td align="left">PIP_PORT</td>
+<td align="left">10085</td>
+<td align="left">pip私有源服务器监听端口</td>
+</tr>
+
+<tr>
+<td align="left">RPM_SOFT_NAME</td>
+<td align="left">docker-ce</td>
+<td align="left">RPM软件包名</td>
+</tr>
+
+<tr>
+<td align="left">PIP_SOFT_NAME</td>
+<td align="left">docker-compose</td>
+<td align="left">PIP软件包名</td>
+</tr>
+
+<tr>
+<td align="left">PIP_SOFT_VERSION</td>
+<td align="left">1.24.0</td>
+<td align="left">PIP软件包版本</td>
+</tr>
+
+<tr>
+<td align="left">YUM_REPO_URL</td>
+<td align="left"><a href="http://172.30.0.24:10084">http://172.30.0.24:10084</a></td>
+<td align="left">私有YUM源地址</td>
+</tr>
+
+<tr>
+<td align="left">PIP_REPO_URL</td>
+<td align="left"><a href="http://172.30.0.24:10085/simple">http://172.30.0.24:10085/simple</a></td>
+<td align="left">私有PIP仓库地址</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="环境准备">环境准备</h2>
+
+<h3 id="服务器准备">服务器准备</h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">主机名</th>
+<th align="left">主机地址</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Server</td>
+<td align="left">{SERVER_IP}</td>
+<td align="left">私有源服务器</td>
+</tr>
+
+<tr>
+<td align="left">Client</td>
+<td align="left">{CLIENT_IP}</td>
+<td align="left">客户测试机</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="准备仓库环境-server机">准备仓库环境(Server机)</h3>
+
+<blockquote>
+<p>本文档中nginx采用docker-compose方式搭建
+Server机操作</p>
+</blockquote>
+
+<ul>
+<li>软件列表</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">软件</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">yum-utils</td>
+<td align="left">yum软件管理工具</td>
+</tr>
+
+<tr>
+<td align="left">createrepo</td>
+<td align="left">yum仓库管理命令</td>
+</tr>
+
+<tr>
+<td align="left">device-mapper-persistent-data</td>
+<td align="left">docker依赖</td>
+</tr>
+
+<tr>
+<td align="left">lvm2</td>
+<td align="left">docker依赖</td>
+</tr>
+
+<tr>
+<td align="left">docker-ce</td>
+<td align="left">docker服务</td>
+</tr>
+
+<tr>
+<td align="left">epel-release</td>
+<td align="left">yum软件仓库扩展包</td>
+</tr>
+
+<tr>
+<td align="left">python-pip</td>
+<td align="left">pip工具</td>
+</tr>
+
+<tr>
+<td align="left">docker-compose</td>
+<td align="left">docker-compose服务</td>
+</tr>
+
+<tr>
+<td align="left">pip2pi</td>
+<td align="left">pip源管理工具</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><p>安装包管理和仓库管理工具</p>
+
+<pre><code class="language-txt">yum -y install yum-utils createrepo
+</code></pre></li>
+
+<li><p>安装docker软件</p>
+
+<pre><code class="language-txt">yum -y install device-mapper-persistent-data lvm2
+yum-config-manager --add-repo  https://download.docker.com/linux/centos/docker-ce.repo
+yum -y install docker-ce
+systemctl start docker
+systemctl enable docker
+</code></pre></li>
+
+<li><p>安装docker-compose软件</p>
+
+<pre><code class="language-txt">yum -y install docker-ce
+yum -y install epel-release
+yum -y install python-pip
+pip install docker-compose
+</code></pre></li>
+
+<li><p>安装pip2pi</p>
+
+<pre><code class="language-txt">pip install pip2pi
+</code></pre></li>
+
+<li><p>仓库列表</p></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">仓库名</th>
+<th align="left">仓库标识</th>
+<th align="left">仓库目录</th>
+<th align="left">仓库地址</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">yum仓库</td>
+<td align="left">YUM_REPO_URL</td>
+<td align="left">{REPO_ROOT}/yumRepo</td>
+<td align="left">http://{SERVER_IP}:{YUM_PORT}</td>
+<td align="left"><a href="http://172.30.0.24:10084">http://172.30.0.24:10084</a></td>
+</tr>
+
+<tr>
+<td align="left">pip仓库</td>
+<td align="left">PIP_REPO_URL</td>
+<td align="left">{REPO_ROOT}/pipRepo</td>
+<td align="left">http://{SERVER_IP}:{PIP_PORT}/simple/</td>
+<td align="left"><a href="http://172.30.0.24:10085/simple/">http://172.30.0.24:10085/simple/</a></td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>docker-compose启动准备文件</li>
+</ul>
+
+<p>nginx采用docker-compose方式搭建，nginx docker-compose相关文件可从<a href="http://10.190.48.88:10084/releases/tools/nginx获取，文件用途和安装目录说明如下：">http://10.190.48.88:10084/releases/tools/nginx获取，文件用途和安装目录说明如下：</a></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">文件</th>
+<th align="left">文件用途</th>
+<th align="left">安装目录</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">docker-compose.yml</td>
+<td align="left">docker compose模板</td>
+<td align="left">{REPO_ROOT}/</td>
+</tr>
+
+<tr>
+<td align="left">nginx.conf</td>
+<td align="left">nginx代理配置</td>
+<td align="left">{REPO_ROOT}/nginx/</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>Nginx服务启动</li>
+</ul>
+
+<p>把docker-compose启动准备文件按照安装目录放好后,在\${REPO_ROOT}目录下运行如下启动命令:</p>
+
+<pre><code class="language-txt">docker-compose pull
+docker-compose up -d
+</code></pre>
+
+<h3 id="centos-yum源-server机">CentOS yum源(Server机)</h3>
+
+<ul>
+<li>下载RPM软件包</li>
+</ul>
+
+<p>将需要的RPM软件包{RPM_SOFT_NAME}用yumdownloader下载到仓库{YUM_REPO}目录</p>
+
+<pre><code class="language-txt">yumdownloader --resolve --destdir={YUM_REPO} {RPM_SOFT_NAME}
+</code></pre>
+
+<p>例如,下载epel-release、python-pip、docker-ce和相关依赖软件包到仓库</p>
+
+<pre><code class="language-txt">yumdownloader --resolve --destdir=/home/centos/yumRepo epel-release python-pip device-mapper-persistent-data lvm2 container-selinux containerd.io docker-ce-cli docker-ce
+</code></pre>
+
+<ul>
+<li>创建索引</li>
+</ul>
+
+<p>创建yum仓库的repodata目录和repomd.xml文件，repomd.xml是核心配置文件，指明了仓库中拥有的rpm包，该文件不存在时，目录将不能被识别为yum仓库</p>
+
+<pre><code class="language-txt">createrepo -pdo {YUM_REPO} {YUM_REPO}
+</code></pre>
+
+<p>例如:</p>
+
+<pre><code class="language-txt">createrepo -pdo /home/centos/yumRepo /home/centos/yumRepo
+</code></pre>
+
+<ul>
+<li>更新索引</li>
+</ul>
+
+<p>当仓库中RPM包更新时，需要升级yum仓库索引</p>
+
+<pre><code class="language-txt">createrepo --update ${YUM_REPO}
+</code></pre>
+
+<p>例如:</p>
+
+<pre><code class="language-txt">createrepo --update /home/centos/yumRepo
+</code></pre>
+
+<h3 id="pip源-server机">Pip源 (Server机)</h3>
+
+<ul>
+<li>下载软件包</li>
+</ul>
+
+<p>单独下载软件包的方法：</p>
+
+<p>下载某个版本{PIP_SOFT_VERSION}的软件包{PIP_SOFT_NAME}到PIP仓库{PIP_REPO}</p>
+
+<pre><code class="language-txt">pip2tgz {PIP_REPO} {PIP_SOFT_NAME}=={PIP_SOFT_VERSION}
+</code></pre>
+
+<p>例如，下载docker-compose的pip软件包</p>
+
+<pre><code class="language-txt">pip2tgz /home/centos/pipRepo docker-compose==1.24.0
+</code></pre>
+
+<p>批量下载软件包的方法：</p>
+
+<p>根据requirements.txt中的软件包清单下载</p>
+
+<pre><code class="language-txt">pip2tgz {PIP_REPO} -r requirements.txt
+</code></pre>
+
+<ul>
+<li>创建索引</li>
+</ul>
+
+<p>使用dir2pi生成索引，该命令会在PIP仓库{PIP_REPO}目录下生成simple目录</p>
+
+<pre><code class="language-txt">dir2pi -n {PIP_REPO}
+</code></pre>
+
+<p>例如:</p>
+
+<pre><code class="language-txt">dir2pi -n /home/centos/pipRepo
+</code></pre>
+
+<blockquote>
+<p>{PIP_REPO}仓库中软件包下载更新后，需要重新创建索引</p>
+</blockquote>
+
+<h2 id="私有源软件安装-client机">私有源软件安装(Client机)</h2>
+
+<h3 id="使用私有源yum安装软件">使用私有源yum安装软件</h3>
+
+<h4 id="更换yum安装源仓库">更换yum安装源仓库</h4>
+
+<ul>
+<li><p>修改yum软件安装源前，请备份yum原始源,原始源文件夹为/etc/yum.repos.d</p>
+
+<pre><code class="language-txt">cp -r /etc/yum.repos.d /etc/yum.repos.d.bk
+</code></pre></li>
+
+<li><p>更换yum安装源为私有仓库</p>
+
+<pre><code class="language-txt"># 删除CentOS源文件
+cd /etc/yum.repos.d
+rm CentOS*.repo
+
+# 新建私有仓库源文件LocalRepository.repo，其中baseurl填写{YUM_REPO_URL}
+cat &gt;/etc/yum.repos.d/LocalRepository.repo&lt;&lt;EOF
+[LocalRepository]
+name=LocalRepository
+baseurl=http://172.30.0.10:10084
+enable=1
+gpgcheck=0
+EOF
+
+# 刷新yum仓库列表
+yum clean all
+yum makecache faster
+
+# 查看仓库更新结果
+yum repolist
+
+</code></pre></li>
+</ul>
+
+<h4 id="安装软件">安装软件</h4>
+
+<pre><code class="language-txt">yum -y install {YUM_SOFT_NAME}
+</code></pre>
+
+<p>例如:</p>
+
+<pre><code class="language-txt">yum -y install epel-release
+yum -y install python-pip device-mapper-persistent-data lvm2 docker-ce
+</code></pre>
+
+<h3 id="使用私有源pip安装软件">使用私有源PIP安装软件</h3>
+
+<p>命令行格式：</p>
+
+<pre><code class="language-txt">pip install -i {PIP_REPO_URL} --trusted-host {SERVER_IP} {PIP_SOFT_NAME}=={PIP_SOFT_VERSION}
+</code></pre>
+
+<p>选项说明：
+&gt;-i: 私有pip源仓库地址{PIP_REPO_URL}
+&gt;&ndash;trusted-host: 放行私有仓库服务器ip地址
+&gt;{PIP_SOFT_VERSION}版本号可选</p>
+
+<p>例如，从私有仓库安装docker-compose可以使用如下命令:</p>
+
+<pre><code class="language-txt">pip install -i http://172.30.0.24:10085/simple  --trusted-host 172.30.0.24 docker-compose
+或
+pip install -i http://172.30.0.24:10085/simple  --trusted-host 172.30.0.24 docker-compose==1.24.0
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

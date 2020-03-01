@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javas on JiangX</title>
+    <link>https://vincent-wuhan.github.io/java/</link>
+    <description>Recent content in Javas on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 14:06:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Maven笔记</title>
+      <link>https://vincent-wuhan.github.io/java/maven-how-to/</link>
+      <pubDate>Sun, 01 Mar 2020 14:06:08 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/java/maven-how-to/</guid>
+      <description>常用命令 POM文件 Maven源设置  常用命令    命令 说明     mvn -version 查看maven的版本及配置信息   mvn archetype:create -DgroupId= DartifactId= 构建java项目   mvn archetype:create -DgroupId= DartifactId= -DarchetypeArtifactId=maven-archetype-webapp 创建web项目   mvn compile 编译项目代码   mvn package 打包项目   mvn package -Dmaven.test.skip=true 打包项目时跳过单元测试   mvn test 运行单元测试   mvn clean 清除编译产生的target文件夹内容，可以配合相应命令一起使用，如mvn clean package， mvn clean test   mvn install 打包后将其安装在本地仓库   mvn deploy 打包后将其安装到pom文件中配置的远程仓库   mvn eclipse:eclipse 将maven生成eclipse项目结构   mvn eclipse:clean 清除maven项目中eclipse的项目结构   mvn site 生成站点目录   mvn dependency:list 显示所有已经解析的所有依赖   mvn dependency:tree 以树的结构展示项目中的依赖   mvn dependency:analyze 对项目中的依赖进行分析，依赖未使用，使用单未引入   mvn tomcat:run 启动tomcat    POM文件 pom文件是maven中最重要的文件，以上命令的也需要根据pom文件进行运行。一般在构建完maven项目后需要修改pom文件添加诸如依赖关系，打包机制及一些项目的详细信息。一般的pom包含如下一些基本的信息： | 标签 | 说明| |:&amp;mdash;&amp;mdash;-|:&amp;mdash;| groupId|项目或者组织的唯一标志 artifactId|项目的名称 version|项目的版本 packaging|打包机制 name|用户描述项目的名称 url|应该是只是写明开发团队的网站</description>
+    </item>
+    
+    <item>
+      <title>Java Env搭建</title>
+      <link>https://vincent-wuhan.github.io/java/java-env/</link>
+      <pubDate>Sun, 01 Mar 2020 13:51:48 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/java/java-env/</guid>
+      <description> 安装 在ubuntu中，java有两种版本，一种是开源版本OpenJDK，另外一种是Oracle版本，两者区别不大，知识Oracle的多了一些商业功能
+安装
+# 安装OpenJDK 10 JDK apt install default-jdk # 安装OpenJDK 8 JDK apt install openjdk-8-jdk # 安装Oracle JAVA # 1.添加新的存储库WebUpd8，可以自动下载并安装Oracle JDK apt install software-properities-common dirmngr add-apt-repository ppa:webupd8team/java apt update # 2.安装java8 apt-get install oracle-java8-installer  设置JAVA_HOME等参数, 打开~/.bashrc,末尾追加
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 export JRE_HOME=${JAVA_HOME}/jre export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib export PATH=${JAVA_HOME}/bin:$PATH  </description>
+    </item>
+    
+  </channel>
+</rss>

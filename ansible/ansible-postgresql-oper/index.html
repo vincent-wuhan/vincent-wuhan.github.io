@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Ansible Postgresql常用操作 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ansible Postgresql常用操作"/>
+<meta name="twitter:description" content="背景 Ansible postgresql管理模块 Ansible Tower Postgres信息查询语句  获取客户机IP地址列表 获取部署仓库代码列表 获取仓库版本列表 获取仓库地址 获取仓库分支 获取客户机CPU信息 获取内存地址 获取客户机IP地址列表 获取客户机磁盘信息列表 获取客户机设备信息 获取硬盘大小 获取默认IPV4详情 获取默认IPV6详情   背景 最近应开发需求,使用Grafana面板进行AnsibleTower信息采集显示.Grafana数据采集源为AnsibleTower后台数据库Postgresql,开发过程中需要使用python的ansible开发库进行postgresql数据库的操作.涉及一些知识点记录下来,以备查看.
+Ansible postgresql管理模块 postgresql_copy – Copy data between a file/program and a PostgreSQL table postgresql_db – Add or remove PostgreSQL databases from a remote host postgresql_ext – Add or remove PostgreSQL extensions from a database postgresql_idx – Create or drop indexes from a PostgreSQL database postgresql_info – Gather information about PostgreSQL servers postgresql_lang – Adds, removes or changes procedural languages with a PostgreSQL database postgresql_membership – Add or remove PostgreSQL roles from groups postgresql_owner – Change an owner of PostgreSQL database object postgresql_ping – Check remote PostgreSQL server availability postgresql_privs – Grant or revoke privileges on PostgreSQL database objects postgresql_publication – Add, update, or remove PostgreSQL publication postgresql_query – Run PostgreSQL queries postgresql_schema – Add or remove PostgreSQL schema postgresql_sequence – Create, drop, or alter a PostgreSQL sequence postgresql_set – Change a PostgreSQL server configuration parameter postgresql_slot – Add or remove replication slots from a PostgreSQL database postgresql_table – Create, drop, or modify a PostgreSQL table postgresql_tablespace – Add or remove PostgreSQL tablespaces from remote hosts postgresql_user – Add or remove a user (role) from a PostgreSQL server instance"/>
+
+    <meta property="og:title" content="Ansible Postgresql常用操作" />
+<meta property="og:description" content="背景 Ansible postgresql管理模块 Ansible Tower Postgres信息查询语句  获取客户机IP地址列表 获取部署仓库代码列表 获取仓库版本列表 获取仓库地址 获取仓库分支 获取客户机CPU信息 获取内存地址 获取客户机IP地址列表 获取客户机磁盘信息列表 获取客户机设备信息 获取硬盘大小 获取默认IPV4详情 获取默认IPV6详情   背景 最近应开发需求,使用Grafana面板进行AnsibleTower信息采集显示.Grafana数据采集源为AnsibleTower后台数据库Postgresql,开发过程中需要使用python的ansible开发库进行postgresql数据库的操作.涉及一些知识点记录下来,以备查看.
+Ansible postgresql管理模块 postgresql_copy – Copy data between a file/program and a PostgreSQL table postgresql_db – Add or remove PostgreSQL databases from a remote host postgresql_ext – Add or remove PostgreSQL extensions from a database postgresql_idx – Create or drop indexes from a PostgreSQL database postgresql_info – Gather information about PostgreSQL servers postgresql_lang – Adds, removes or changes procedural languages with a PostgreSQL database postgresql_membership – Add or remove PostgreSQL roles from groups postgresql_owner – Change an owner of PostgreSQL database object postgresql_ping – Check remote PostgreSQL server availability postgresql_privs – Grant or revoke privileges on PostgreSQL database objects postgresql_publication – Add, update, or remove PostgreSQL publication postgresql_query – Run PostgreSQL queries postgresql_schema – Add or remove PostgreSQL schema postgresql_sequence – Create, drop, or alter a PostgreSQL sequence postgresql_set – Change a PostgreSQL server configuration parameter postgresql_slot – Add or remove replication slots from a PostgreSQL database postgresql_table – Create, drop, or modify a PostgreSQL table postgresql_tablespace – Add or remove PostgreSQL tablespaces from remote hosts postgresql_user – Add or remove a user (role) from a PostgreSQL server instance" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/ansible/ansible-postgresql-oper/" />
+<meta property="article:published_time" content="2020-03-01T14:17:37+08:00" />
+<meta property="article:modified_time" content="2020-03-01T14:17:37+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Ansible Postgresql常用操作</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 1, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#背景">背景</a></li>
+<li><a href="#ansible-postgresql管理模块">Ansible postgresql管理模块</a></li>
+<li><a href="#ansible-tower-postgres信息查询语句">Ansible Tower Postgres信息查询语句</a>
+
+<ul>
+<li><a href="#获取客户机ip地址列表">获取客户机IP地址列表</a></li>
+<li><a href="#获取部署仓库代码列表">获取部署仓库代码列表</a></li>
+<li><a href="#获取仓库版本列表">获取仓库版本列表</a></li>
+<li><a href="#获取仓库地址">获取仓库地址</a></li>
+<li><a href="#获取仓库分支">获取仓库分支</a></li>
+<li><a href="#获取客户机cpu信息">获取客户机CPU信息</a></li>
+<li><a href="#获取内存地址">获取内存地址</a></li>
+<li><a href="#获取客户机ip地址列表">获取客户机IP地址列表</a></li>
+<li><a href="#获取客户机磁盘信息列表">获取客户机磁盘信息列表</a></li>
+<li><a href="#获取客户机设备信息">获取客户机设备信息</a></li>
+<li><a href="#获取硬盘大小">获取硬盘大小</a></li>
+<li><a href="#获取默认ipv4详情">获取默认IPV4详情</a></li>
+<li><a href="#获取默认ipv6详情">获取默认IPV6详情</a></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="背景">背景</h2>
+
+<p>最近应开发需求,使用Grafana面板进行AnsibleTower信息采集显示.Grafana数据采集源为AnsibleTower后台数据库Postgresql,开发过程中需要使用python的ansible开发库进行postgresql数据库的操作.涉及一些知识点记录下来,以备查看.</p>
+
+<h2 id="ansible-postgresql管理模块">Ansible postgresql管理模块</h2>
+
+<p>postgresql_copy – Copy data between a file/program and a PostgreSQL table
+postgresql_db – Add or remove PostgreSQL databases from a remote host
+postgresql_ext – Add or remove PostgreSQL extensions from a database
+postgresql_idx – Create or drop indexes from a PostgreSQL database
+postgresql_info – Gather information about PostgreSQL servers
+postgresql_lang – Adds, removes or changes procedural languages with a PostgreSQL database
+postgresql_membership – Add or remove PostgreSQL roles from groups
+postgresql_owner – Change an owner of PostgreSQL database object
+postgresql_ping – Check remote PostgreSQL server availability
+postgresql_privs – Grant or revoke privileges on PostgreSQL database objects
+postgresql_publication – Add, update, or remove PostgreSQL publication
+postgresql_query – Run PostgreSQL queries
+postgresql_schema – Add or remove PostgreSQL schema
+postgresql_sequence – Create, drop, or alter a PostgreSQL sequence
+postgresql_set – Change a PostgreSQL server configuration parameter
+postgresql_slot – Add or remove replication slots from a PostgreSQL database
+postgresql_table – Create, drop, or modify a PostgreSQL table
+postgresql_tablespace – Add or remove PostgreSQL tablespaces from remote hosts
+postgresql_user – Add or remove a user (role) from a PostgreSQL server instance</p>
+
+<h2 id="ansible-tower-postgres信息查询语句">Ansible Tower Postgres信息查询语句</h2>
+
+<h3 id="获取客户机ip地址列表">获取客户机IP地址列表</h3>
+
+<pre><code class="language-sql">select distinct
+  ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}' as ipv4
+from (
+    select distinct
+      ansible_facts
+    from main_host
+    where not ansible_facts = '{}'
+  ) ANSIBLE_FACTS;
+
+</code></pre>
+
+<h3 id="获取部署仓库代码列表">获取部署仓库代码列表</h3>
+
+<pre><code class="language-sql">select
+  scm_type as 类型,
+  scm_url as 仓库地址,
+  scm_branch as 分支,
+  substring(scm_revision, 0, 11) as 版本,
+  playbook_files as 部署脚本列表
+from
+  main_project
+</code></pre>
+
+<h3 id="获取仓库版本列表">获取仓库版本列表</h3>
+
+<pre><code class="language-sql">select
+    substring(scm_revision, 0, 11) as revision 
+from  
+    main_project
+where
+    not scm_revision = '' and scm_url like '%$project%'
+</code></pre>
+
+<h3 id="获取仓库地址">获取仓库地址</h3>
+
+<pre><code class="language-sql">select
+  scm_url as url
+from
+  main_project
+where
+  scm_revision like '%$revision%'
+and
+  scm_url like '%$project%'
+</code></pre>
+
+<h3 id="获取仓库分支">获取仓库分支</h3>
+
+<pre><code class="language-sql">select
+  scm_url as url
+from
+  main_project
+where
+  scm_revision like '%$revision%'
+and
+  scm_url like '%$project%'
+</code></pre>
+
+<h3 id="获取客户机cpu信息">获取客户机CPU信息</h3>
+
+<pre><code class="language-sql">select
+  regexp_split_to_table(
+    regexp_replace(
+          regexp_replace(trim(both E'[\]\]&quot;,]' from ansible_facts-&gt;&gt;'ansible_processor'), E'(&quot;\\d+)&quot;,\\s+&quot;', '~@~\1 ', 'g'),
+    E'[&quot;,\\s+&quot;,]', ' ', 'g'),
+  E'~@~')  
+  as 处理器
+from
+  (
+    select distinct
+      ansible_facts,
+      modified
+    from
+      main_host
+    where
+      ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}'  = '$ip' and
+      not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS
+</code></pre>
+
+<h3 id="获取内存地址">获取内存地址</h3>
+
+<pre><code class="language-sql">select
+  mem_info-&gt;&gt;'key' as 类型,
+  mem_info#&gt;'{value, free}' as 剩余,
+  mem_info#&gt;'{value, used}' as 已使用,
+  mem_info#&gt;'{value, total}' as 总量
+from
+(select
+  row_to_json(jsonb_each(ansible_facts-&gt;'ansible_memory_mb')) as mem_info
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where 
+      ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}' = '$ip' and
+      not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES
+</code></pre>
+
+<h3 id="获取客户机ip地址列表-1">获取客户机IP地址列表</h3>
+
+<pre><code class="language-sql">select distinct
+  regexp_split_to_table(regexp_replace(trim(both E'[]' from ansible_facts-&gt;&gt;'ansible_all_ipv4_addresses'), E'&quot;','','g'), E',') as ip地址列表
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where
+      ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}'  = '$ip' and
+      not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS;
+
+</code></pre>
+
+<h3 id="获取客户机磁盘信息列表">获取客户机磁盘信息列表</h3>
+
+<pre><code class="language-sql">select
+  disk_info::jsonb-&gt;&gt;'device' as device,
+  disk_info::jsonb-&gt;&gt;'fstype' as fstype,
+  disk_info::jsonb-&gt;&gt;'size_total' as total_size,
+  disk_info::jsonb-&gt;&gt;'size_available' as available_size
+from
+(select
+  jsonb_array_elements(ansible_facts-&gt;'ansible_mounts') as disk_info
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where
+        ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}'  = '$ip' and
+        not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS)ANSIBLE_DISKS
+
+
+</code></pre>
+
+<h3 id="获取客户机设备信息">获取客户机设备信息</h3>
+
+<pre><code class="language-sql">select
+  disk_info-&gt;&gt;'key' as 设备名,
+  disk_info#&gt;&gt;'{value, size}' as 大小,
+  disk_info#&gt;&gt;'{value, model}' as 类型,
+  disk_info#&gt;&gt;'{value, host}' as 信息
+from
+(select
+  row_to_json(jsonb_each(ansible_facts-&gt;'ansible_devices')) as disk_info
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where
+        ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}'  = '$ip'  and
+        not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES
+
+</code></pre>
+
+<h3 id="获取硬盘大小">获取硬盘大小</h3>
+
+<pre><code class="language-sql">select
+  disk_info-&gt;&gt;'key' as 设备名,
+  disk_info#&gt;&gt;'{value, size}' as 大小
+from
+(select
+  row_to_json(jsonb_each(ansible_facts-&gt;'ansible_devices')) as disk_info
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where
+        ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}' = '$ip' and 
+        not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES
+where
+  (disk_info-&gt;&gt;'key') ~ 'sd'
+and
+  disk_info#&gt;&gt;'{value, model}' &lt;&gt; ''
+</code></pre>
+
+<h3 id="获取默认ipv4详情">获取默认IPV4详情</h3>
+
+<pre><code class="language-sql">select 
+  ip_info-&gt;&gt;'key' as 属性,
+  ip_info-&gt;&gt;'value' as 值
+from
+(select
+  row_to_json(jsonb_each(ansible_facts-&gt;'ansible_default_ipv4')) as ip_info
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where
+        ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}' = '$ip' and
+        not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES
+</code></pre>
+
+<h3 id="获取默认ipv6详情">获取默认IPV6详情</h3>
+
+<pre><code class="language-sql">select
+  ip_info-&gt;&gt;'key' as 属性,
+  ip_info-&gt;&gt;'value' as 值
+from
+(select
+  row_to_json(jsonb_each(ansible_facts-&gt;'ansible_default_ipv6')) as ip_info
+from (
+    select distinct
+      ansible_facts,
+      modified
+    from main_host
+    where
+        ansible_facts#&gt;&gt;'{ansible_default_ipv4, address}' = '$ip' and
+        not ansible_facts = '{}'
+    order by modified desc
+    limit 1
+  ) ANSIBLE_FACTS)ANSIBLE_DEVICES
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

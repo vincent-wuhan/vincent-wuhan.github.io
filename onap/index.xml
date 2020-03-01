@@ -6,10 +6,20 @@
     <description>Recent content in Onaps on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Aug 2019 17:17:38 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 14:08:22 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/onap/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ONAP 离线安装</title>
+      <link>https://vincent-wuhan.github.io/onap/onap-offline-install/</link>
+      <pubDate>Sun, 01 Mar 2020 14:08:22 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/onap/onap-offline-install/</guid>
+      <description>环境准备  硬件环境 软件条件  安装目录结构 安装前提 docker安装 文件服务器  nginx配置 文件服务器启动脚本  安装说明 docker镜像仓库  镜像仓库启动脚本 启动仓库  rancher安装 下载rancher.sh  安装rancher  k8s安装  下载k8s-node.sh 安装k8s  rancher&amp;amp;Kubernetes API  kubernetes template获取 rancher env添加 rancher host添加 kubectl token获取  helm私有仓库http服务器搭建 Chart仓库管理基础环境安装  helm安装helm-push插件 kubeapps要求  安装脚本 tiller需要获取超级权限 token获取   主动重启  重启前删除所有部署 启动后重新安装部署  Q&amp;amp;A TODO  环境准备 19年应公司需求做了一个ONAP离线安装的工具, 这里不细说代码,只说明实现框架
+硬件环境    RAM HD vCores Ports     128G 160G 32 0.</description>
+    </item>
     
     <item>
       <title>ONAP微服务之NFVO与VNFM两种部署模式</title>

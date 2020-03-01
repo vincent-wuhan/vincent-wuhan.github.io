@@ -6,10 +6,37 @@
     <description>Recent content in Dockers on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Mar 2020 11:48:43 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 12:55:00 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Common_skills</title>
+      <link>https://vincent-wuhan.github.io/docker/common_skills/</link>
+      <pubDate>Sun, 01 Mar 2020 12:55:00 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/docker/common_skills/</guid>
+      <description>常用命令 Dockerfile  ADD路径说明 COPY路径说明  常见问题  常用命令  镜像导出   docker save 镜像:TAG &amp;gt; tar包名称
+  镜像导入   docker load &amp;lt; tar包名称
+  删除镜像    删除所有容器 docker rm docker ps -a -q 删除所有镜像 docker rmi docker images -q 删除没有打标签的镜像 docker rmi docker images -q | awk &#39;/^&amp;lt;none&amp;gt;/ { print $3 }&#39; 删除包含关键词的镜像 docker rmi &amp;ndash;force docker images | grep 关键词 | awk &#39;{print $3}&#39; 5.</description>
+    </item>
+    
+    <item>
+      <title>远程访问容器内postgresql数据库不通问题排查</title>
+      <link>https://vincent-wuhan.github.io/docker/connect_postgresql_fail/</link>
+      <pubDate>Sun, 01 Mar 2020 12:44:17 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/docker/connect_postgresql_fail/</guid>
+      <description>需求场景 默认ansible-awx部署ansible-tower时，是不开放postgres端口5432映射到宿主机的。为了远程访问tower的数据库postgres，在部署完后，手动更改docker-compose文件，添加如下端口映射
+ports: - &amp;quot;5432&amp;quot;:&amp;quot;5432&amp;quot;  然后在docker-compose文件同级目录下，重新执行命令更新容器
+docker-compose up -d  期望结果 以宿主机IP为192.168.100.23, 容器IP地址为172.31.0.2为例，正常情况使用psql -h 192.168.100.23 -U awx可登陆postgres数据库
+但此时却遇到一个坑，不知是否与docker-compose版本有关，在此记录备案.
+现象说明 &amp;ldquo;psql -h localhost -U awx&amp;rdquo;和&amp;rdquo;psql -h 172.31.0.2 -U awx&amp;rdquo;可以登陆数据库成功，&amp;rdquo;psql -h 192.168.100.23 -U awx&amp;rdquo;登陆数据失败
+问题排查过程  确认docker容器映射正常
+# docker ps|grep awx-postgres $ docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES a0d0a4d205f0 postgres:10 &amp;quot;docker-entrypoint.s…&amp;quot; 7 seconds ago Up 6 seconds 0.0.0.0:5432-&amp;gt;5432/tcp awx_postgres   查看5432端口也被正常监听
+# netstat -apn|grep 5432 tcp6 0 0 :::5432 :::* LISTEN 1650/docker-proxy # ps aux|grep 5432 root 1650 0.</description>
+    </item>
     
     <item>
       <title>获取docker容器对应宿主机网络接口的方法</title>

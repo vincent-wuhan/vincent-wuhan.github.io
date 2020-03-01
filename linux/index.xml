@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linuxes on JiangX</title>
+    <link>https://vincent-wuhan.github.io/linux/</link>
+    <description>Recent content in Linuxes on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 13:53:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux常用技巧</title>
+      <link>https://vincent-wuhan.github.io/linux/linux_skills/</link>
+      <pubDate>Sun, 01 Mar 2020 13:53:30 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/linux/linux_skills/</guid>
+      <description>查看磁盘大文件
+du -sh /*  修改网卡名字（如eth0）
+/etc/udev/rules.d/70-persistent-net.rules  Root远程登录设置
+#!/bin/bash # setup root access - default login: oom/oom - comment out to restrict access too ssh key only sed -i &#39;s/PermitRootLogin.*/PermitRootLogin yes/&#39; /etc/ssh/sshd_config sed -i &#39;s/PasswordAuthentication.*/PasswordAuthentication yes/&#39; /etc/ssh/sshd_config service sshd restart echo -e &amp;quot;mano2018\nmano2018&amp;quot; | passwd root  Root用户密码设置
+sudo passwd root  查看apt-get依赖包
+  cd /var/cache/apt/archives
+ 添加用户到docker组  root@mano:~# gpasswd -a sdc docker Adding user sdc to group docker root@mano:~# newgrp docker</description>
+    </item>
+    
+    <item>
+      <title>CentOS私有Yum源 Pip源搭建方法</title>
+      <link>https://vincent-wuhan.github.io/linux/personal_software_sources/</link>
+      <pubDate>Sun, 01 Mar 2020 12:50:22 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/linux/personal_software_sources/</guid>
+      <description>本文档中所有操作默认采用ROOT权限操作 本文档中使用的变量列表如下
+    变量 举例 说明     REPO_ROOT /home/centos/ 私有源服务器安装目录   YUM_REPO /home/centos/yumRepo yum私有仓库目录   PIP_REPO /home/centos/pipRepo pip私有仓库目录   SERVER_IP 172.30.0.24 私有源服务器地址   CLIENT_IP 172.30.0.10 客户测试机地址   YUM_PORT 10084 yum私有源服务器监听端口   PIP_PORT 10085 pip私有源服务器监听端口   RPM_SOFT_NAME docker-ce RPM软件包名   PIP_SOFT_NAME docker-compose PIP软件包名   PIP_SOFT_VERSION 1.24.0 PIP软件包版本   YUM_REPO_URL http://172.30.0.24:10084 私有YUM源地址   PIP_REPO_URL http://172.</description>
+    </item>
+    
+  </channel>
+</rss>

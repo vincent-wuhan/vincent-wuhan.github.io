@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Kubernetes学习笔记 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Kubernetes学习笔记"/>
+<meta name="twitter:description" content="kubectl常用命令 “&mdash;”的作用 Service类型 回滚设置 Health Check  容器默认健康检查 Liveness探测 Readiness探测  数据管理  emptyDir hostPath PV &amp; PVC （PersistentVolume &amp; PersistentVolumeClaim） Secret 作用 创建Secret 查看Secret Secret的使用 ConfigMap  常见问题  手动删除pods的步骤   kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx  “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割"/>
+
+    <meta property="og:title" content="Kubernetes学习笔记" />
+<meta property="og:description" content="kubectl常用命令 “&mdash;”的作用 Service类型 回滚设置 Health Check  容器默认健康检查 Liveness探测 Readiness探测  数据管理  emptyDir hostPath PV &amp; PVC （PersistentVolume &amp; PersistentVolumeClaim） Secret 作用 创建Secret 查看Secret Secret的使用 ConfigMap  常见问题  手动删除pods的步骤   kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx  “&mdash;”的作用 一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/kubernetes/kubernetes-how-to-use/" />
+<meta property="article:published_time" content="2020-03-01T13:49:47+08:00" />
+<meta property="article:modified_time" content="2020-03-01T13:49:47+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Kubernetes学习笔记</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 1, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#kubectl%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4">kubectl常用命令</a></li>
+<li><a href="#%e7%9a%84%e4%bd%9c%e7%94%a8">“&mdash;”的作用</a></li>
+<li><a href="#service%e7%b1%bb%e5%9e%8b">Service类型</a></li>
+<li><a href="#%e5%9b%9e%e6%bb%9a%e8%ae%be%e7%bd%ae">回滚设置</a></li>
+<li><a href="#health-check">Health Check</a>
+
+<ul>
+<li><a href="#%e5%ae%b9%e5%99%a8%e9%bb%98%e8%ae%a4%e5%81%a5%e5%ba%b7%e6%a3%80%e6%9f%a5">容器默认健康检查</a></li>
+<li><a href="#liveness%e6%8e%a2%e6%b5%8b">Liveness探测</a></li>
+<li><a href="#readiness%e6%8e%a2%e6%b5%8b">Readiness探测</a></li>
+</ul></li>
+<li><a href="#%e6%95%b0%e6%8d%ae%e7%ae%a1%e7%90%86">数据管理</a>
+
+<ul>
+<li><a href="#emptydir">emptyDir</a></li>
+<li><a href="#hostpath">hostPath</a></li>
+<li><a href="#pv--pvc-persistentvolume--persistentvolumeclaim">PV &amp; PVC （PersistentVolume &amp; PersistentVolumeClaim）</a></li>
+<li><a href="#secret">Secret</a></li>
+<li><a href="#%e4%bd%9c%e7%94%a8">作用</a></li>
+<li><a href="#%e5%88%9b%e5%bb%basecret">创建Secret</a></li>
+<li><a href="#%e6%9f%a5%e7%9c%8bsecret">查看Secret</a></li>
+<li><a href="#secret%e7%9a%84%e4%bd%bf%e7%94%a8">Secret的使用</a></li>
+<li><a href="#configmap">ConfigMap</a></li>
+</ul></li>
+<li><a href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98">常见问题</a>
+
+<ul>
+<li><a href="#%e6%89%8b%e5%8a%a8%e5%88%a0%e9%99%a4pods%e7%9a%84%e6%ad%a5%e9%aa%a4">手动删除pods的步骤</a></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="kubectl常用命令">kubectl常用命令</h2>
+
+<pre><code class="language-shell">#异常pod捕获命令
+kubectl get pods -n kube-system | grep -v Running 
+# 查看目前所有的pod
+kubectl get po 
+# 查看目前所有的replica set
+kubectl get rs 
+# 查看目前所有的deployment
+kubectl get deployment 
+# 查看my-nginx pod的详细状态
+kubectl describe po my-nginx 
+# 查看my-nginx replica set的详细状态
+kubectl describe rs my-nginx 
+# 查看my-nginx deployment的详细状态
+kubectl describe deployment my-nginx 
+# 查看相关事件
+kubectl get eventskubectl get events
+kubectl delete deployment my-nginx
+</code></pre>
+
+<h2 id="的作用">“&mdash;”的作用</h2>
+
+<p>一个YAML中定义多个资源，用&rdquo;&mdash;&ldquo;分割</p>
+
+<h2 id="service类型">Service类型</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">ClusterIP</td>
+<td align="left">Service通过Cluster内部的IP对外提供服务，服务只有Cluster内的节点和Pod可以访问</td>
+</tr>
+
+<tr>
+<td align="left">NodePort</td>
+<td align="left">Service通过Cluster节点的静态端口对外提供服务。Cluster外部可以通过<NodeIP>:<NodePort>访问服务</td>
+</tr>
+
+<tr>
+<td align="left">LoadBalancer</td>
+<td align="left">Service利用Cloud Provider特有的load balancer对外提供服务，Cloud Provider负责将load balancer的流量导向Service</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="回滚设置">回滚设置</h2>
+
+<p>默认配置下，Kubernetes只会保留最近几个revision，可以在Deployment配置文件中通过revisionHistoryLimit属性添加revision数量。</p>
+
+<h2 id="health-check">Health Check</h2>
+
+<h3 id="容器默认健康检查">容器默认健康检查</h3>
+
+<p>每个容器启动时由CMD/ENTRYPOINT指定执行一个进程，进程退出返回码非0则认为容器发生故障。容器发生故障，Kubernetes则重启容器</p>
+
+<h3 id="liveness探测">Liveness探测</h3>
+
+<p>对于一些容器发生故障默认进程不退出的情况，比如WEB服务500错误、系统超载和资源死锁等，则需要采用Liveness探测的方式帮助Kubernetes感知容器状态。</p>
+
+<p>Liveness探测可以让用户自定义判断容器是否健康的条件，如果探测失败，Kubernetes就会重启容器。</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">initialDelaySeconds</td>
+<td align="left">设置容器启动后多久开始执行Liveness探测</td>
+</tr>
+
+<tr>
+<td align="left">periodSeconds</td>
+<td align="left">Liveness探测的周期</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="readiness探测">Readiness探测</h3>
+
+<p>用户通过Liveness探测告诉Kubernetes通过重启容器实现自愈;Readiness则告诉Kubernetes什么时候可以将容器加入到Service负载均衡池中，对外提供服务。</p>
+
+<h2 id="数据管理">数据管理</h2>
+
+<h3 id="emptydir">emptyDir</h3>
+
+<p>emptyDir Volume与Pod的生命周期是一致的。</p>
+
+<h3 id="hostpath">hostPath</h3>
+
+<p>hostPath Volume的作用是将Docker Host文件系统中已经存在的目录mount给Pod容器。因为这种方式会增加Pod与节点的耦合，所有一般不会使用hostPath。
+尽管hostPath的持久性比emptyDir强，不过一旦Host崩溃，hostPath也就无法访问了。</p>
+
+<h3 id="pv-pvc-persistentvolume-persistentvolumeclaim">PV &amp; PVC （PersistentVolume &amp; PersistentVolumeClaim）</h3>
+
+<blockquote>
+<p>· PV 是外部系统的一块存储空间，由管理员创建和维护，与Volume一样，PV具有持久性，生命周期独立于Pod
+· PVC 是对PV的申请(Claim)。PVC通常由普通用户创建和维护。需要为Pod分配存储资源时，指明存储资源的容量大小和访问模式等信息，Kubernetes会查找并提供满足条件的PV。</p>
+</blockquote>
+
+<h3 id="secret">Secret</h3>
+
+<h4 id="作用">作用</h4>
+
+<p>以密文的形式存储数据，避免直接在配置文件中保存敏感信息</p>
+
+<h4 id="创建secret">创建Secret</h4>
+
+<p>&ndash;from-literal</p>
+
+<pre><code class="language-shell">kubectl create secret generic mysecret --from-literal=username=admin --from-liternam=password=123456
+</code></pre>
+
+<p>&ndash;from-file</p>
+
+<pre><code class="language-shell">echo -n admin &gt; ./username
+echo -n 123456 &gt; ./password
+kubectl create secret generic mysecret --from-file=./username --from-file=./password
+</code></pre>
+
+<p>&ndash;from-env-file</p>
+
+<pre><code class="language-shell">cat &lt;&lt; EOF &gt; env.txt
+username=admin
+password=123456
+EOF
+kubectl create secret generic mysecret --from-env-file=env.txt
+</code></pre>
+
+<p>通过YAML配置</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Secret
+metadata: 
+    name: mysecret
+data:
+    username: YWRtaW4=
+    password: MTIzNDU2
+</code></pre>
+
+<p>注意：文件中的敏感数据必须是通过base64编码后的结果</p>
+
+<pre><code class="language-shell">$ echo -n admin | base64
+YWRtaW4
+$ echo -n 123456 | base64
+MTIzNDU2
+</code></pre>
+
+<h4 id="查看secret">查看Secret</h4>
+
+<pre><code class="language-shell"># 查看secret
+kubectl get secret mysecret
+
+# 查看secret详情
+kubectl describe secret mysecret
+</code></pre>
+
+<h4 id="secret的使用">Secret的使用</h4>
+
+<p>在Pod中可以通过Volume或环境变量的方式使用Secret
+环境变量的方式虽然方便，但是无法支撑Secret的动态变化。</p>
+
+<h3 id="configmap">ConfigMap</h3>
+
+<p>对于一些非敏感信息，比如应用配置信息，可以用ConfigMap。ConfigMap以明文的形式存放。</p>
+
+<h2 id="常见问题">常见问题</h2>
+
+<h3 id="手动删除pods的步骤">手动删除pods的步骤</h3>
+
+<p>有时候删除pods发现pod重启了，这种情况需要使用kubectl get deployments检查一下是否存在部署，先使用kubectl delete deployment $name删除部署后再删除pods往往能够成功并且不再重启pod</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -6,10 +6,34 @@
     <description>Recent content in Tools on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Feb 2020 18:15:12 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 13:10:41 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/tools/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GitLab环境搭建</title>
+      <link>https://vincent-wuhan.github.io/tools/gitlab_env_install/</link>
+      <pubDate>Sun, 01 Mar 2020 13:10:41 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/tools/gitlab_env_install/</guid>
+      <description>docker安装 gitlab安装 gitlab-runner安装 配置gitlab runner支持dind gitlab-ci dind gitlab常用配置 gitlab集成kubernetes gitlab-ci 中docker命令失败问题处理  docker安装  安装
+apt-get install docker.io   gitlab安装  image   docker pull beginor/gitlab-ce:11.3.0-ce.0
+  pre-run  gitlab外挂卷，用于保存gitlab平台的持久化存储配置(etc),日志(log),数据(data)
+ sudo mkdir -p /mnt/sda1/gitlab/etc sudo mkdir -p /mnt/sda1/gitlab/log sudo mkdir -p /mnt/sda1/gitlab/data
+  run
+docker run \ --detach \ --publish 8443:443 \ --publish 8080:80 \ --name gitlab \ --restart unless-stopped \ --volume /mnt/sda1/gitlab/etc:/etc/gitlab \ --volume /mnt/sda1/gitlab/log:/var/log/gitlab \ --volume /mnt/sda1/gitlab/data:/var/opt/gitlab \ beginor/gitlab-ce:11.</description>
+    </item>
+    
+    <item>
+      <title>Git_cli</title>
+      <link>https://vincent-wuhan.github.io/tools/git_cli/</link>
+      <pubDate>Sun, 01 Mar 2020 13:00:48 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/tools/git_cli/</guid>
+      <description>常用命令 典型应用场景  日志修改 Git review配置   常用命令    命令 说明     git config &amp;ndash;global core.editor vim 设置全局编辑器为vim   git config &amp;ndash;global user.name &amp;ldquo;user&amp;rdquo; 设置用户名   git config &amp;ndash;global user.email &amp;ldquo;user@email.com&amp;rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.10.10.10:8080/a/project.git 设置远程gerrit        典型应用场景 日志修改  修改最近一次   git commit &amp;ndash;amend
+  修改历史中的某个记录   1.</description>
+    </item>
     
     <item>
       <title>如何pip下载和离线安装第三方包</title>

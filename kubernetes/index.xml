@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on JiangX</title>
+    <link>https://vincent-wuhan.github.io/kubernetes/</link>
+    <description>Recent content in Kubernetes on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 13:58:24 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes微服务日志采集适配</title>
+      <link>https://vincent-wuhan.github.io/kubernetes/kubernetes-logging-mgmt/</link>
+      <pubDate>Sun, 01 Mar 2020 13:58:24 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/kubernetes/kubernetes-logging-mgmt/</guid>
+      <description>日志采集方式 Filebeat sidecar安装方式  resources文件 oom改造(helm)   日志采集方式    采集方式 说明     原生方式 使用 kubectl logs 直接在查看本地保留的日志，或者通过docker engine的 log driver 把日志重定向到文件、syslog、fluentd等系统中。   DaemonSet方式 在K8S的每个node上部署日志agent，由agent采集所有容器的日志到服务端。   Sidecar方式 一个POD中运行一个sidecar的日志agent容器，用于采集该POD主容器产生的日志。    Filebeat sidecar安装方式 resources文件 · filebeat.yml——filebeat配置文件 · logback.xml——日志格式定义
+oom改造(helm)  添加filebeat.yml配置文件  路径: oom/kubernetes//resources/config/log/filebeat/filebeat.yml
+一个简单的filebeat.yml配置
+filebeat.prospectors: #it is mandatory, in our case it&#39;s log - input_type: log #This is the canolical path as mentioned in logback.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes学习笔记</title>
+      <link>https://vincent-wuhan.github.io/kubernetes/kubernetes-how-to-use/</link>
+      <pubDate>Sun, 01 Mar 2020 13:49:47 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/kubernetes/kubernetes-how-to-use/</guid>
+      <description>kubectl常用命令 “&amp;mdash;”的作用 Service类型 回滚设置 Health Check  容器默认健康检查 Liveness探测 Readiness探测  数据管理  emptyDir hostPath PV &amp;amp; PVC （PersistentVolume &amp;amp; PersistentVolumeClaim） Secret 作用 创建Secret 查看Secret Secret的使用 ConfigMap  常见问题  手动删除pods的步骤   kubectl常用命令 #异常pod捕获命令 kubectl get pods -n kube-system | grep -v Running # 查看目前所有的pod kubectl get po # 查看目前所有的replica set kubectl get rs # 查看目前所有的deployment kubectl get deployment # 查看my-nginx pod的详细状态 kubectl describe po my-nginx # 查看my-nginx replica set的详细状态 kubectl describe rs my-nginx # 查看my-nginx deployment的详细状态 kubectl describe deployment my-nginx # 查看相关事件 kubectl get eventskubectl get events kubectl delete deployment my-nginx  “&amp;mdash;”的作用 一个YAML中定义多个资源，用&amp;rdquo;&amp;mdash;&amp;ldquo;分割</description>
+    </item>
+    
+    <item>
+      <title>Helm学习笔记</title>
+      <link>https://vincent-wuhan.github.io/kubernetes/helm-how-to-use/</link>
+      <pubDate>Sun, 01 Mar 2020 13:46:41 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/kubernetes/helm-how-to-use/</guid>
+      <description>基础知识 基本概念    关键词 说明     chart 创建一个应用的信息集合，包括各种Kubernetes对象的配置模板、参数定义、依赖关系、文档说明等。Chart是应用部署的自包含逻辑单元，可以将chart想象成apt、yum中的软件安装包   release chart的运行实例，代表了一个正在运行的应用。当chart被安装到Kubernetes集群，就生成一个release。chart能够多次安装到同一个集群，每次安装都是一个release    功能 · 从零创建新chart
+· 与存储chart的仓库交互，拉取、保存和更新chart
+· 在Kubernetes集群中安装和卸载release
+· 更新、回滚和测试release
+组件  Helm客户端  Helm命令行工具，支持用户进行如下操作
+· 在本地开发chart · 管理chart仓库 · 与Tiller服务器交互 · 在远程Kubernetes集群上安装chart · 查看release信息 · 升级或卸载已有release   Tiller服务器  Tiller服务器运行在Kubernetes集群中。
+常见命令    命令名称 说明     helm repo index REPO_PATH 本地仓库index创建    Q&amp;amp;A helm安装提示index.</description>
+    </item>
+    
+  </channel>
+</rss>
