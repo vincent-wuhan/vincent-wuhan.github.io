@@ -6,10 +6,23 @@
     <description>Recent content on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Mar 2020 14:27:26 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 20:37:31 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ovs 安装</title>
+      <link>https://vincent-wuhan.github.io/tools/ovs-install/</link>
+      <pubDate>Sun, 01 Mar 2020 20:37:31 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/tools/ovs-install/</guid>
+      <description> 移除bridge rmmod bridge
+ 关闭bridge模块。可先通过lsmod | grep bridge 查看，然后用rmmod bridge关闭，若出现bridge正在被另一模块使用导致无法关闭的错误，则需要先关闭正在使用bridge的模块。
+ 安装OVS apt-get install openvswitch-switch
+ 查看安装结果 ovs-vsctl show
+  </description>
+    </item>
     
     <item>
       <title>Elasticsearch学习笔记</title>
