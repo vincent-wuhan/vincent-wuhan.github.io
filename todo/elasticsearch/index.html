@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Jiang Xing" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+    <link rel="stylesheet" href="http://example.org/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
 
     
     <meta name="twitter:card" content="summary"/>
@@ -27,14 +27,14 @@ green 所有的主分片和副本分片都正常运行。 yellow 所有的主分
 健康状态获取 curl -X GET &quot;localhost:9200/_cluster/health&quot;  ## 索引建立与分片副本 单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)
 curl -X PUT &quot;localhost:9200/blogs&quot; -H &#39;Content-Type: application/json&#39; -d&#39; { &quot;settings&quot; : { &quot;number_of_shards&quot; : 3, &quot;number_of_replicas&quot; : 1 } } &#39;  查看集群健康状态" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://vincent-wuhan.github.io/todo/elasticsearch/" />
+<meta property="og:url" content="http://example.org/todo/elasticsearch/" />
 
 
 
   </head>
   <body>
     <header class="app-header">
-      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <a href="http://example.org/"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
       <h1>JiangX</h1>
       <p>Xing&#39;s personal website</p>
       <div class="app-header-social">

@@ -148,65 +148,11 @@
   </url>
   
   <url>
-    <loc>https://vincent-wuhan.github.io/todo/cluster_bugs/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/elasticsearch/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/faq/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/ha/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/license/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/markdown%E8%AF%AD%E6%B3%95%E7%9F%A5%E8%AF%86/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/opendaylight/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/ovs/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/python/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://vincent-wuhan.github.io/categories/</loc>
   </url>
   
   <url>
     <loc>https://vincent-wuhan.github.io/tags/</loc>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/todo/</loc>
   </url>
   
 </urlset>
