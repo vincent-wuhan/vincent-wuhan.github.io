@@ -15,16 +15,18 @@
 <meta name="twitter:description" content=" hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
  创建博客文章  hugo new path/content.md
  本地预览  hugo server &ndash;buildDrafts
- 编译web格式预发布  hugo base-url=&ldquo;http://vincnet-wuhan.github.io&quot; &ndash;buildDrafts 编译生成的文件在blog下的public目录下
- 发布到github  切换到public目录，初始化本地仓库
+ 编译web格式预发布  hugo &ndash;theme=m10c &ndash;base-url=&ldquo;http://vincnet-wuhan.github.io&quot; &ndash;buildDrafts
+ 编译生成的文件在blog下的public目录下
+  发布到github  切换到public目录，初始化本地仓库
 cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  "/>
 
     <meta property="og:title" content="hugo使用笔记" />
 <meta property="og:description" content=" hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
  创建博客文章  hugo new path/content.md
  本地预览  hugo server &ndash;buildDrafts
- 编译web格式预发布  hugo base-url=&ldquo;http://vincnet-wuhan.github.io&quot; &ndash;buildDrafts 编译生成的文件在blog下的public目录下
- 发布到github  切换到public目录，初始化本地仓库
+ 编译web格式预发布  hugo &ndash;theme=m10c &ndash;base-url=&ldquo;http://vincnet-wuhan.github.io&quot; &ndash;buildDrafts
+ 编译生成的文件在blog下的public目录下
+  发布到github  切换到public目录，初始化本地仓库
 cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://vincent-wuhan.github.io/tools/how-to-use-hugo/" />
@@ -96,8 +98,11 @@ hugo new site blog</li>
 <li>编译web格式预发布</li>
 </ul>
 
-<p>hugo base-url=&ldquo;<a href="http://vincnet-wuhan.github.io&quot;">http://vincnet-wuhan.github.io&quot;</a> &ndash;buildDrafts
-编译生成的文件在blog下的public目录下</p>
+<p>hugo &ndash;theme=m10c &ndash;base-url=&ldquo;<a href="http://vincnet-wuhan.github.io&quot;">http://vincnet-wuhan.github.io&quot;</a> &ndash;buildDrafts</p>
+
+<blockquote>
+<p>编译生成的文件在blog下的public目录下</p>
+</blockquote>
 
 <ul>
 <li>发布到github</li>

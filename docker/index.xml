@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockers on JiangX</title>
+    <link>https://vincent-wuhan.github.io/docker/</link>
+    <description>Recent content in Dockers on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2020 11:48:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>获取docker容器对应宿主机网络接口的方法</title>
+      <link>https://vincent-wuhan.github.io/docker/get_container_host_nic/</link>
+      <pubDate>Sun, 01 Mar 2020 11:48:43 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/docker/get_container_host_nic/</guid>
+      <description>具体思路  查看容器内eth0的iflink接口索引
+docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;   注： &amp;gt; container_info可以是docker容器名称或者docker容器id &amp;gt; 该命令返回一个iflink索引值，例如791
+ 搜索宿主机veth接口
+grep -l 791 /sys/class/net/veth*/ifindex   注： &amp;gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
+ 截取目录路径中veth*部分的字符
+sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1   shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1;&#39;` echo $container:$veth done  压缩成一行,命令行中执行：</description>
+    </item>
+    
+  </channel>
+</rss>

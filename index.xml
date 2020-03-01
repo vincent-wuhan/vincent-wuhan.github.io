@@ -6,10 +6,24 @@
     <description>Recent content on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Feb 2020 18:15:12 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 11:48:43 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>获取docker容器对应宿主机网络接口的方法</title>
+      <link>https://vincent-wuhan.github.io/docker/get_container_host_nic/</link>
+      <pubDate>Sun, 01 Mar 2020 11:48:43 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/docker/get_container_host_nic/</guid>
+      <description>具体思路  查看容器内eth0的iflink接口索引
+docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;   注： &amp;gt; container_info可以是docker容器名称或者docker容器id &amp;gt; 该命令返回一个iflink索引值，例如791
+ 搜索宿主机veth接口
+grep -l 791 /sys/class/net/veth*/ifindex   注： &amp;gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
+ 截取目录路径中veth*部分的字符
+sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1   shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1;&#39;` echo $container:$veth done  压缩成一行,命令行中执行：</description>
+    </item>
     
     <item>
       <title>如何pip下载和离线安装第三方包</title>
@@ -35,8 +49,9 @@ pip download docker-py -d &amp;quot;PIP&amp;quot; -i https://pypi.tuna.tsinghua.
       <description> hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
  创建博客文章  hugo new path/content.md
  本地预览  hugo server &amp;ndash;buildDrafts
- 编译web格式预发布  hugo base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts 编译生成的文件在blog下的public目录下
- 发布到github  切换到public目录，初始化本地仓库
+ 编译web格式预发布  hugo &amp;ndash;theme=m10c &amp;ndash;base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts
+ 编译生成的文件在blog下的public目录下
+  发布到github  切换到public目录，初始化本地仓库
 cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  </description>
     </item>
     
@@ -379,20 +394,6 @@ IP： 10.190.49.55：5555 用户： ghost@ghost.com 密码： manomano2017
 IP： 10.190.49.56:8081    招聘
 智联 wlccx002 developIPRAN002 猎聘 wlccx2 developIPRAN    部门代码审查报告地址
 http://10.90.6.59:81/svn/FOSV3R1/fosv3_testcase/Code/code-review 没有用户名的,可以把svn账号发给曹松波. 他帮忙建立账号 账号：wt 密码123</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://vincent-wuhan.github.io/todo/%E8%8E%B7%E5%8F%96docker%E5%AE%B9%E5%99%A8%E5%AE%BF%E4%B8%BB%E6%9C%BAveth%E5%8F%A3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://vincent-wuhan.github.io/todo/%E8%8E%B7%E5%8F%96docker%E5%AE%B9%E5%99%A8%E5%AE%BF%E4%B8%BB%E6%9C%BAveth%E5%8F%A3/</guid>
-      <description>获取docker容器对应的宿主机veth*接口 具体思路  查看容器内eth0的iflink接口索引
-docker exec -it ${container_info} bash -c &#39;cat /sys/class/net/eth0/iflink&#39;   注： &amp;gt;&amp;gt; container_info可以是docker容器名称或者docker容器id &amp;gt;&amp;gt; 该命令返回一个iflink索引值，例如791
- 搜索宿主机veth接口
-grep -l 791 /sys/class/net/veth*/ifindex   注： &amp;gt;&amp;gt; 该命令返回一个目录路径，”/sys/class/net/vethae7eed8/ifindex“
- 截取目录路径中veth*部分的字符
-sed -e &#39;s;^.*net/\(.*\)/ifindex$;\1   shell脚本 #!/bin/bash for container in $(docker ps -q) do iflink=`docker exec -it $container bash -c &#39;cat /sys/class/net/eth0/iflink&#39;` # 打印结果并删除windows文件造成的^M字符 # tr命令为翻译字符命令 iflink=`echo $iflink|tr -d &#39;\r&#39;` veth=`grep -l $iflink /sys/class/net/veth*/ifindex` veth=`echo $veth|sed -e &#39;s;^.</description>
     </item>
     
     <item>
