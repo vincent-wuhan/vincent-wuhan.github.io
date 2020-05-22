@@ -6,10 +6,27 @@
     <description>Recent content in Dockers on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Mar 2020 12:55:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2020 07:52:27 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker容器健康检查实现方法</title>
+      <link>https://vincent-wuhan.github.io/docker/docker_health_check/</link>
+      <pubDate>Fri, 22 May 2020 07:52:27 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/docker/docker_health_check/</guid>
+      <description>Docker原生健康检查 Dockerfile健康检查 Docker自1.12版本后,支持健康检查指令HEALTHCHECK.
+HEALTHCHECK指令格式:
+ HEALTHCHECK [OPTION] CMD &amp;lt;命令&amp;gt; 设置检查容器健康状态命令 HEALTHCHECK NONE 关闭基础镜像原有健康检查指令  HEALTHCHECK选项:
+ &amp;ndash;interval=&amp;lt;时间&amp;gt; 健康检查间隔时间,默认30秒 &amp;ndash;timeout=&amp;lt;时间&amp;gt; 健康检查命令超时时间,超时则视为健康检查失败,默认30秒 &amp;ndash;retries=&amp;lt;间隔&amp;gt; 连续检查失败次数后,视容器unhealthy,默认3次 &amp;ndash;start-period=&amp;lt;间隔&amp;gt; 应用的启动初始化时间,在启动过程中的健康检查失效不计入,默认0秒(docker 17.05以上支持)  HEALTHCHECK [OPTION] CMD后面的命令格式和ENTRYPOINT一样,分为shell和exec格式.
+命令的返回值:
+ 0 成功 1 失败 2 保留字段  使用HEALTHCHECK指令构建的镜像,启动容器后会根据健康状态命令完成容器健康检查.
+Dockerfile举例:
+FROM elasticsearch:5.5 HEALTHCHECK --interval=5s --timeout=2s --retries=10 \ CMD curl --silent --fail localhost:9200/_cluster/health || exit 1  Docker命令健康检查 Docker命令使用--health-cmd指明健康检查策略
+docker rm -rm -d \ --name=tomcat --health-cmd=&amp;quot;curl --silent --fail localhost:9200/_cluster/health || exit 1&amp;quot; \ --health-interval=5s \ --health-retries=12 \ --health-timeout=2s \ elasticsearch:5.</description>
+    </item>
     
     <item>
       <title>Common_skills</title>

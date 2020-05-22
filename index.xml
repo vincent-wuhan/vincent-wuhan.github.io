@@ -6,10 +6,47 @@
     <description>Recent content on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Apr 2020 16:36:38 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2020 07:52:27 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker容器健康检查实现方法</title>
+      <link>https://vincent-wuhan.github.io/docker/docker_health_check/</link>
+      <pubDate>Fri, 22 May 2020 07:52:27 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/docker/docker_health_check/</guid>
+      <description>Docker原生健康检查 Dockerfile健康检查 Docker自1.12版本后,支持健康检查指令HEALTHCHECK.
+HEALTHCHECK指令格式:
+ HEALTHCHECK [OPTION] CMD &amp;lt;命令&amp;gt; 设置检查容器健康状态命令 HEALTHCHECK NONE 关闭基础镜像原有健康检查指令  HEALTHCHECK选项:
+ &amp;ndash;interval=&amp;lt;时间&amp;gt; 健康检查间隔时间,默认30秒 &amp;ndash;timeout=&amp;lt;时间&amp;gt; 健康检查命令超时时间,超时则视为健康检查失败,默认30秒 &amp;ndash;retries=&amp;lt;间隔&amp;gt; 连续检查失败次数后,视容器unhealthy,默认3次 &amp;ndash;start-period=&amp;lt;间隔&amp;gt; 应用的启动初始化时间,在启动过程中的健康检查失效不计入,默认0秒(docker 17.05以上支持)  HEALTHCHECK [OPTION] CMD后面的命令格式和ENTRYPOINT一样,分为shell和exec格式.
+命令的返回值:
+ 0 成功 1 失败 2 保留字段  使用HEALTHCHECK指令构建的镜像,启动容器后会根据健康状态命令完成容器健康检查.
+Dockerfile举例:
+FROM elasticsearch:5.5 HEALTHCHECK --interval=5s --timeout=2s --retries=10 \ CMD curl --silent --fail localhost:9200/_cluster/health || exit 1  Docker命令健康检查 Docker命令使用--health-cmd指明健康检查策略
+docker rm -rm -d \ --name=tomcat --health-cmd=&amp;quot;curl --silent --fail localhost:9200/_cluster/health || exit 1&amp;quot; \ --health-interval=5s \ --health-retries=12 \ --health-timeout=2s \ elasticsearch:5.</description>
+    </item>
+    
+    <item>
+      <title>Keepalived非抢占模式设置守护进程</title>
+      <link>https://vincent-wuhan.github.io/keepalived/keepalived_daemon/</link>
+      <pubDate>Thu, 21 May 2020 08:18:32 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/keepalived/keepalived_daemon/</guid>
+      <description> Keepalived </description>
+    </item>
+    
+    <item>
+      <title>Haproxy Http模式健康检查配置</title>
+      <link>https://vincent-wuhan.github.io/haproxy/haproxy-healthy-check/</link>
+      <pubDate>Wed, 20 May 2020 08:07:31 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/haproxy/haproxy-healthy-check/</guid>
+      <description>img{ width: 100%; }  需求 Haproxy是一款提供高可用、负载均衡以及基于TCP(四层)和HTTP(七层)应用的代理软件.在实际生产中,需要往往需要感知代理服务后端的可服务性将发送到Haproxy前端的请求转发后端处理,通过Haproxy健康检查的设置,可以快速检查服务的健康状态,从而做出正确的请求转发.
+方法 设置Haproxy配置文件,/etc/haproxy/haproxy.cfg
+frontend http_fd # 前端入口 bind 10.10.10.15:8181 use_backend http_bds backend http_bds # 在使用cookie定向时,一旦后端某server宕机,会将会话重定向到其他可用服务器 option redispatch # 健康检查, 向后端服务发送Get请求, URI 后端服务IP:8181/healthy option httpchk GET /healthy # 检查返回状态码,200表示健康 http-check expect status 200 # 间隔5s检查一次,2次成功服务up,3次失败服务down server bd-1 10.10.10.11:8181 check inter 5s rise 2 fall 3 server bd-2 10.10.10.12:8181 check inter 5s rise 2 fall 3 server bd-3 10.10.10.13:8181 check inter 5s rise 2 fall 3  效果  检查到后端异常,服务状态从up切换为down   3次检查失败后,服务状态down  服务恢复时,检测到服务恢复尝试切换服务down切up</description>
+    </item>
     
     <item>
       <title>Git合并冲突问题处理</title>
@@ -255,13 +292,14 @@ pip download docker-py -d &amp;quot;PIP&amp;quot; -i https://pypi.tuna.tsinghua.
       <pubDate>Fri, 31 Jan 2020 20:11:01 +0800</pubDate>
       
       <guid>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</guid>
-      <description> hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
+      <description>hugo博客设置  创建blog hugo new site blog  blog为博客存放目录
  创建博客文章  hugo new path/content.md
  本地预览  hugo server &amp;ndash;buildDrafts
  编译web格式预发布  hugo &amp;ndash;theme=m10c &amp;ndash;base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts
  编译生成的文件在blog下的public目录下
   发布到github  切换到public目录，初始化本地仓库
-cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  </description>
+cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  博文写作  Markdown插入图片   config.toml中配置baseurl. 图片的路径是相对于baseurl而言 markdown图片存放路径跟目录为static  例如: baseurl为https://vincent-wuhan.github.io/,图片位置为/static/images/demo.png,markdown中图片写法如下:
+![demo](/images/demo.png)   Markdown图片控制  在Markdown文章开头定义image样式,定义语法如下:</description>
     </item>
     
     <item>

@@ -176,7 +176,16 @@ root@mano:~# newgrp docker</p>
 
 <pre><code class="language-shell">gzip -dc *.tar.gz |tar tvf -
 </code></pre></li>
+
+<li><p>awk查询获取除第一行外的其他行</p></li>
 </ul>
+
+<p>以获取docker运行的容器id为例</p>
+
+<pre><code class="language-shell">docker ps|awk 'NR == 1 {next} {print $1}'
+</code></pre>
+
+<p>NR == 1指不打印第一行</p>
 
     </div>
     <div class="post-footer">

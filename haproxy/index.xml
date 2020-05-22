@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haproxies on JiangX</title>
+    <link>https://vincent-wuhan.github.io/haproxy/</link>
+    <description>Recent content in Haproxies on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 May 2020 08:07:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/haproxy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Haproxy Http模式健康检查配置</title>
+      <link>https://vincent-wuhan.github.io/haproxy/haproxy-healthy-check/</link>
+      <pubDate>Wed, 20 May 2020 08:07:31 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/haproxy/haproxy-healthy-check/</guid>
+      <description>img{ width: 100%; }  需求 Haproxy是一款提供高可用、负载均衡以及基于TCP(四层)和HTTP(七层)应用的代理软件.在实际生产中,需要往往需要感知代理服务后端的可服务性将发送到Haproxy前端的请求转发后端处理,通过Haproxy健康检查的设置,可以快速检查服务的健康状态,从而做出正确的请求转发.
+方法 设置Haproxy配置文件,/etc/haproxy/haproxy.cfg
+frontend http_fd # 前端入口 bind 10.10.10.15:8181 use_backend http_bds backend http_bds # 在使用cookie定向时,一旦后端某server宕机,会将会话重定向到其他可用服务器 option redispatch # 健康检查, 向后端服务发送Get请求, URI 后端服务IP:8181/healthy option httpchk GET /healthy # 检查返回状态码,200表示健康 http-check expect status 200 # 间隔5s检查一次,2次成功服务up,3次失败服务down server bd-1 10.10.10.11:8181 check inter 5s rise 2 fall 3 server bd-2 10.10.10.12:8181 check inter 5s rise 2 fall 3 server bd-3 10.10.10.13:8181 check inter 5s rise 2 fall 3  效果  检查到后端异常,服务状态从up切换为down   3次检查失败后,服务状态down  服务恢复时,检测到服务恢复尝试切换服务down切up</description>
+    </item>
+    
+  </channel>
+</rss>

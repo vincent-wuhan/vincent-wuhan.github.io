@@ -83,13 +83,14 @@ pip download docker-py -d &amp;quot;PIP&amp;quot; -i https://pypi.tuna.tsinghua.
       <pubDate>Fri, 31 Jan 2020 20:11:01 +0800</pubDate>
       
       <guid>https://vincent-wuhan.github.io/tools/how-to-use-hugo/</guid>
-      <description> hugo 博客操作  创建blog hugo new site blog  blog为博客存放目录
+      <description>hugo博客设置  创建blog hugo new site blog  blog为博客存放目录
  创建博客文章  hugo new path/content.md
  本地预览  hugo server &amp;ndash;buildDrafts
  编译web格式预发布  hugo &amp;ndash;theme=m10c &amp;ndash;base-url=&amp;ldquo;http://vincnet-wuhan.github.io&amp;quot; &amp;ndash;buildDrafts
  编译生成的文件在blog下的public目录下
   发布到github  切换到public目录，初始化本地仓库
-cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  </description>
+cd public git init git add . git commit -m &#39;message&#39; git remote add origin https://github.com/vincent-wuhan/vincent-wuhan.github.io.git git push -u origin master  博文写作  Markdown插入图片   config.toml中配置baseurl. 图片的路径是相对于baseurl而言 markdown图片存放路径跟目录为static  例如: baseurl为https://vincent-wuhan.github.io/,图片位置为/static/images/demo.png,markdown中图片写法如下:
+![demo](/images/demo.png)   Markdown图片控制  在Markdown文章开头定义image样式,定义语法如下:</description>
     </item>
     
   </channel>
