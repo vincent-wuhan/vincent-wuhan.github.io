@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>微服务介绍 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="微服务介绍"/>
+<meta name="twitter:description" content="img{ width: 80%; padding-left: 0%; }   微服务简介  微服务架构演进 单体架构  三层架构的演变 三层架构 三层架构优势 单体架构应用 单体架构优缺点  SOA(面向服务架构) 微服务架构  什么是微服务架构 微服务本质 微服务架构带来的问题  微服务相关技术  微服务之服务监控 微服务之链路跟踪 微服务之日志分析 微服务之API Gateway 微服务之降级、熔断、限流  微服务架构设计模式  聚合器微服务设计模式 代理微服务设计模式 链式微服务设计模式 分支微服务设计模式 数据共享微服务设计模式 异步消息传递微服务设计模式 微服务部署  部署要求 部署粒度 解决方案  典型微服务框架介绍  SpringCloud Dubbo gRPC   联系方式 参考   微服务简介 微服务架构演进 单体架构 三层架构的演变  一层架构  &gt;面向过程的设计印记较重,所有逻辑代码无明显区别,代码间调用相互交错,错综复杂."/>
+
+    <meta property="og:title" content="微服务介绍" />
+<meta property="og:description" content="img{ width: 80%; padding-left: 0%; }   微服务简介  微服务架构演进 单体架构  三层架构的演变 三层架构 三层架构优势 单体架构应用 单体架构优缺点  SOA(面向服务架构) 微服务架构  什么是微服务架构 微服务本质 微服务架构带来的问题  微服务相关技术  微服务之服务监控 微服务之链路跟踪 微服务之日志分析 微服务之API Gateway 微服务之降级、熔断、限流  微服务架构设计模式  聚合器微服务设计模式 代理微服务设计模式 链式微服务设计模式 分支微服务设计模式 数据共享微服务设计模式 异步消息传递微服务设计模式 微服务部署  部署要求 部署粒度 解决方案  典型微服务框架介绍  SpringCloud Dubbo gRPC   联系方式 参考   微服务简介 微服务架构演进 单体架构 三层架构的演变  一层架构  &gt;面向过程的设计印记较重,所有逻辑代码无明显区别,代码间调用相互交错,错综复杂." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/msb/microservice_introduce/" />
+<meta property="article:published_time" content="2020-06-01T13:44:04+08:00" />
+<meta property="article:modified_time" content="2020-06-01T13:44:04+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">微服务介绍</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 1, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<style>
+img{
+    width: 80%;
+    padding-left: 0%;
+}
+</style>
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AE%80%E4%BB%8B">微服务简介</a>
+
+<ul>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B">微服务架构演进</a></li>
+<li><a href="#%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84">单体架构</a>
+
+<ul>
+<li><a href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8F%98">三层架构的演变</a></li>
+<li><a href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84">三层架构</a></li>
+<li><a href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E4%BC%98%E5%8A%BF">三层架构优势</a></li>
+<li><a href="#%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E5%BA%94%E7%94%A8">单体架构应用</a></li>
+<li><a href="#%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E4%BC%98%E7%BC%BA%E7%82%B9">单体架构优缺点</a></li>
+</ul></li>
+<li><a href="#soa%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84">SOA(面向服务架构)</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84">微服务架构</a>
+
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84">什么是微服务架构</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9C%AC%E8%B4%A8">微服务本质</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98">微服务架构带来的问题</a></li>
+</ul></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF">微服务相关技术</a>
+
+<ul>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7">微服务之服务监控</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA">微服务之链路跟踪</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90">微服务之日志分析</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8Bapi-gateway">微服务之API Gateway</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%99%8D%E7%BA%A7%E7%86%94%E6%96%AD%E9%99%90%E6%B5%81">微服务之降级、熔断、限流</a></li>
+</ul></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">微服务架构设计模式</a>
+
+<ul>
+<li><a href="#%E8%81%9A%E5%90%88%E5%99%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">聚合器微服务设计模式</a></li>
+<li><a href="#%E4%BB%A3%E7%90%86%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">代理微服务设计模式</a></li>
+<li><a href="#%E9%93%BE%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">链式微服务设计模式</a></li>
+<li><a href="#%E5%88%86%E6%94%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">分支微服务设计模式</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">数据共享微服务设计模式</a></li>
+<li><a href="#%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">异步消息传递微服务设计模式</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2">微服务部署</a>
+
+<ul>
+<li><a href="#%E9%83%A8%E7%BD%B2%E8%A6%81%E6%B1%82">部署要求</a></li>
+<li><a href="#%E9%83%A8%E7%BD%B2%E7%B2%92%E5%BA%A6">部署粒度</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
+</ul></li>
+<li><a href="#%E5%85%B8%E5%9E%8B%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D">典型微服务框架介绍</a>
+
+<ul>
+<li><a href="#springcloud">SpringCloud</a></li>
+<li><a href="#dubbo">Dubbo</a></li>
+<li><a href="#grpc">gRPC</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F">联系方式</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h1 id="微服务简介">微服务简介</h1>
+
+<h2 id="微服务架构演进">微服务架构演进</h2>
+
+<p><img src="/image/msb/changing.png" alt="changing" /></p>
+
+<h2 id="单体架构">单体架构</h2>
+
+<h3 id="三层架构的演变">三层架构的演变</h3>
+
+<ul>
+<li>一层架构</li>
+</ul>
+
+<p><img src="/image/msb/1-level.png" alt="1-level" />
+&gt;面向过程的设计印记较重,所有逻辑代码无明显区别,代码间调用相互交错,错综复杂.</p>
+
+<ul>
+<li>二层架构</li>
+</ul>
+
+<p><img src="/image/msb/2-level.png" alt="2-level" /></p>
+
+<blockquote>
+<p>数据访问部分代码逐渐结构情绪,逻辑和业务层依然交错.</p>
+</blockquote>
+
+<ul>
+<li>三层架构</li>
+</ul>
+
+<p><img src="/image/msb/3-level.png" alt="3-level" />
+&gt;从用户应用角度出发组织软件结构,系统不同职责部分采用分层设计,并对每一层负责的功能具体化、细致化描述,形成了软件三层架构.</p>
+
+<h3 id="三层架构">三层架构</h3>
+
+<p>三层架构通常包括:</p>
+
+<ul>
+<li><code>表示层(UI)</code> 应用层与用户的交互层</li>
+<li><code>业务逻辑层(BLL)</code> UI层和DAL层的桥梁,实现业务逻辑(验证、计算、业务规则等)</li>
+<li><code>数据访问层(DAL)</code> 为业务逻辑层提供数据管理接口(增、删、改、查)</li>
+</ul>
+
+<p><img src="/image/msb/3-level-arches.png" alt="3-levels" /></p>
+
+<h3 id="三层架构优势">三层架构优势</h3>
+
+<ul>
+<li>解决了系统间调用复杂、职责不清的局面</li>
+<li>各层间定义接口,并将接口与实现分离,降低了层间依赖</li>
+<li>标准化复杂系统逻辑划分,一定程度上帮助企业有效解决了技术人员组织结构管理问题</li>
+</ul>
+
+<h3 id="单体架构应用">单体架构应用</h3>
+
+<blockquote>
+<p>所谓单体架构应用,就是功能集中、代码中心化、一个发布包、部署后运行在同一进程的应用程序</p>
+</blockquote>
+
+<p>以一个web容器的单体架构为例:</p>
+
+<p><img src="/image/msb/single-arch.png" alt="single-arch" /></p>
+
+<ul>
+<li>应用架构分为三层</li>
+<li>开发团队对不通层代码实现</li>
+<li>编译、打包、部署(不考虑负载均衡、水平扩展情况)运行在同一台机器的同一个进程内</li>
+</ul>
+
+<blockquote>
+<p>软件三层架构在单体架构应用中只是体现在逻辑上分层,并没有在物理上分层</p>
+</blockquote>
+
+<h3 id="单体架构优缺点">单体架构优缺点</h3>
+
+<ul>
+<li><p>优点</p>
+
+<ul>
+<li>易于开发(本地开发调试)</li>
+<li>易于测试(进程启动即可开展测试)</li>
+<li>易于部署(软件包安装)</li>
+<li>易于水平伸缩(多新实例+负载均衡完成水平伸缩,负载分发策略需要保障有效分发)</li>
+</ul></li>
+
+<li><p>缺点</p>
+
+<ul>
+<li>随应用功能的增长维护成本越来越大(修改或开发功能引入其他缺陷风险增加)</li>
+<li>持续交付周期长(整个应用程序编译、构建、验证、部署流水线周期伴随软件体量增长)</li>
+<li>新人培养周期长(应用产品体量庞大后,学习成本巨大)</li>
+<li>技术选型成本高(框架、技术固化,切换新框架、技术风险高,受历史原因束缚技术选型选择面狭窄)</li>
+<li>可扩展性差(垂直面硬件性能扩容烧钱;水平面集群+负载均衡器,有的功能是CPU密集型、有的则是内存密集型的,但对单体架构而言需同时满足所有性能要求,扩展成本高)</li>
+</ul></li>
+</ul>
+
+<h2 id="soa-面向服务架构">SOA(面向服务架构)</h2>
+
+<blockquote>
+<p>SOA阐述了“对于复杂的企业IT系统,应按照不通的、可重用的粒度划分,将功能相关的一组功能提供者组织在一起为消费者提供服务”,其目的是为解决企业内部不同IT资源之间无法互联而导致的信息孤岛问题.</p>
+</blockquote>
+
+<p>微服务算是传统SOA的定义的一个子集,但是从实现而言,相比传统SOA服务更具灵活性、可实施性以及可扩张性,是一种更容易帮助企业或组织有效并成功实施服务架构的实践</p>
+
+<p><center>SOA与微服务区别</center></p>
+
+<table>
+<thead>
+<tr>
+<th>SOA实现</th>
+<th>微服务架构实现</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>企业级,自顶向下开展实施</td>
+<td>团队级,自底向上开展实施</td>
+</tr>
+
+<tr>
+<td>服务由多个子系统组成,粒度大</td>
+<td>一个系统被拆分成多个服务,粒度细</td>
+</tr>
+
+<tr>
+<td>企业服务总线,集中式服务架构</td>
+<td>无集中式总线,松散的服务架构</td>
+</tr>
+
+<tr>
+<td>集成方式复杂(ESB/WS/SOAP)</td>
+<td>集成方式简单(HTTP/REST/JSON)</td>
+</tr>
+
+<tr>
+<td>单块架构系统,相互依赖,部署复杂</td>
+<td>服务能独立部署</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="微服务架构">微服务架构</h2>
+
+<blockquote>
+<ul>
+<li>ESB(Enterprise Service Bus,企业微服务总线),传统中间件技术与XML、Web服务等技术结合的产物。ESB提供了网络中最基本的连接中枢，是构筑企业神经系统的必要元素</li>
+<li>WebService是一个平台独立的，低耦合的，自包含的、基于可编程的web的应用程序，可使用开放的XML（标准通用标记语言下的一个子集）标准来描述、发布、发现、协调和配置这些应用程序，用于开发分布式的交互操作的应用程序。</li>
+<li>SOAP一种简单的基于XML的协议</li>
+</ul>
+</blockquote>
+
+<h3 id="什么是微服务架构">什么是微服务架构</h3>
+
+<blockquote>
+<p>马丁·福勒: &ldquo;微服务架构是一种架构模式,它提倡将单一应用程序划分程一组小的服务,服务之间互相协调、互相配合,为用户提供最终价值.每个服务运行在其独立的进程中,服务与服务间采用轻量级的通信机制互相沟通(通常基于HTTP的RESTful API).每个服务都围绕着具体业务进行构建,并且能备独立的部署到生成环境、类生产环境等.另外,应尽量避免统一的、集中式的服务管理机制,对具体的一个服务而言,应根据业务上下文,选择合适的语言、工具对其进行构建.&rdquo;</p>
+</blockquote>
+
+<ul>
+<li><p>多“微”才够“微”</p>
+
+<ul>
+<li>业务独立性
+
+<ul>
+<li>微服务是具备业务独立性的单元</li>
+</ul></li>
+<li>团队自主性
+
+<ul>
+<li>微服务开发团队不超过10人,超过10人沟通、协作成本增加</li>
+<li>团队中应该由不通技能、不通角色的成员组成,是一个全功能团队</li>
+</ul></li>
+</ul></li>
+
+<li><p>单一职责</p>
+
+<ul>
+<li>微服务架构中每个服务,都是具有业务逻辑的,符合高内聚、低耦合原则以及单一职责原则的单元,不通的服务通过”管道“的方式灵活组合,从而构建出庞大的系统.</li>
+</ul></li>
+
+<li><p>轻量级通信</p>
+
+<ul>
+<li>微服务架构中微服务之间,通过语言无关、平台无关的轻量级通信机制,标准化服务之间的协作,服务内部实现团队可自主选择适合的语言、平台、工具开发.</li>
+<li><code>RPC(远程过程调用)</code> 采用客户端/服务端模式,耦合度高,灵活性差</li>
+<li><code>REST(表述性状态传递)</code> 语义层面将响应结果定义为资源,使用HTTP标准动词映射操作资源</li>
+<li><code>HAL</code> 一种轻量级超文本应用描述协议,基于REST,解决REST中资源结构标准化和资源链接如何有效定义的问题.</li>
+<li><code>消息队列</code> 发送消息的一端为发布者,接收消息的一端为消费者.发布者将消息放入消息队列中保存,消费者在将来某个时间点获取消息并处理.</li>
+<li><code>后台任务处理系统</code> 请求服务被定义成任务送入任务队列,执行器定时执行任务队列中任务,并回调相关的服务处理.</li>
+</ul></li>
+</ul>
+
+<p><center>服务间通信机制</center></p>
+
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>RPC</th>
+<th>REST</th>
+<th>HAL</th>
+<th>消息队列</th>
+<th>后台任务系统</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>通信方式</td>
+<td>同步通信</td>
+<td>同步/异步</td>
+<td>同步/异步</td>
+<td>异步</td>
+<td>异步</td>
+</tr>
+
+<tr>
+<td>平台依赖性</td>
+<td>强</td>
+<td>平台无关</td>
+<td>平台无关</td>
+<td>强</td>
+<td>弱</td>
+</tr>
+
+<tr>
+<td>语言支持</td>
+<td>好</td>
+<td>语言无关</td>
+<td>语言无关</td>
+<td>好</td>
+<td>中</td>
+</tr>
+
+<tr>
+<td>学习成本</td>
+<td>高</td>
+<td>低</td>
+<td>低</td>
+<td>高</td>
+<td>低</td>
+</tr>
+
+<tr>
+<td>维护成本</td>
+<td>高</td>
+<td>低</td>
+<td>低</td>
+<td>高</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><p>独立性</p>
+
+<ul>
+<li>独立性体现在应用的交付过程中,开发、测试以及部署独立.</li>
+</ul></li>
+</ul>
+
+<p><img src="/image/msb/traditional.png" alt="traditional" />
+<center>单体架构开发、测试、部署耦合性高</center></p>
+
+<p><img src="/image/msb/msb.png" alt="msb" />
+<center>微服务开发、测试、部署独立性高</center></p>
+
+<ul>
+<li>进程隔离</li>
+</ul>
+
+<p><img src="/image/msb/t_process.png" alt="t_process" />
+<center>单体架构应用运行示意图</center></p>
+
+<ul>
+<li>所有功能运行在同一进程</li>
+<li>逻辑上分层,物理上未分层</li>
+<li>功能模块无法独立部署</li>
+</ul>
+
+<p><img src="/image/msb/m_process.png" alt="m_process" />
+<center>微服务架构应用运行示意图</center></p>
+
+<ul>
+<li>所有服务运行在不同节点不同进程</li>
+<li>服务具备高度自治独立性</li>
+<li>各个服务独立部署,相互之间互不干扰</li>
+</ul>
+
+<blockquote>
+<p>微服务架构是将单一应用程序划分为一组小的服务,每个服务都具有业务属性的独立单元,同时各个独立单元能够被独立开发、独立运行、独立测试以及独立部署.</p>
+</blockquote>
+
+<h3 id="微服务本质">微服务本质</h3>
+
+<ul>
+<li>服务作为组件</li>
+</ul>
+
+<p><img src="/image/msb/server_is_component.png" alt="server-is-component" /></p>
+
+<ul>
+<li>服务以松散的方式构建可独立化部署的模块化应用</li>
+<li>服务即组件,组件间通过语言无关、平台无关的清晰接口交互</li>
+<li>围绕业务组织团队</li>
+<li>关注产品而非项目
+
+<ul>
+<li>产品模式构建,团队负责整个服务的生命周期(分析、开发、测试、部署、运维)</li>
+<li>成员个人目标和团队目标一致</li>
+</ul></li>
+</ul>
+
+<p><img src="/image/msb/m_team.png" alt="m-team" />
+<center>微服务开发团队</center></p>
+
+<ul>
+<li>技术多样性
+
+<ul>
+<li>针对不通的业务特征选择适合的技术方案</li>
+</ul></li>
+<li>业务数据独立</li>
+<li>基础设施自动化
+
+<ul>
+<li>每个服务独立部署</li>
+<li>服务部署涉及的健康监控、错误回滚、日志分析等需求增加</li>
+<li>对持续交付和部署流水线要求较高</li>
+</ul></li>
+<li>演进式架构
+
+<ul>
+<li>应用软件可以随着业务发展不断演进软件架构</li>
+<li>不需要的服务(业务)摒弃</li>
+<li>需要的服务(业务)升级
+<br /></li>
+</ul></li>
+</ul>
+
+<h3 id="微服务架构带来的问题">微服务架构带来的问题</h3>
+
+<ul>
+<li><p>分布式系统的复杂度
+微服务架构是一种分布式系统,具备分布式系统开发的复杂度.</p>
+
+<ul>
+<li><code>性能</code> (多服务组件间调用涉及跨进程、跨网络,必然有网络延迟受带宽影响,需要考虑响应时间、性能对系统的影响)</li>
+<li><code>可靠性</code> (远程调用受网络、带宽、节点可靠性等因素影响,可能会失败,如何提高系统可靠性成为挑战;一个服务故障可能产生雪崩效用,导致整个系统崩塌,稳定性下降)</li>
+<li><code>异步</code> (异步网络通信机制增加了功能实现复杂度,增加了定位、调试问题的难度)</li>
+<li><code>数据一致性</code> (分布式事务管理涉及跨节点保证数据瞬时一致性)</li>
+</ul></li>
+
+<li><p>运维成本</p>
+
+<ul>
+<li>每个服务都有配置、部署、监控、告警、日志的运维需求</li>
+<li>服务数量多,定位故障点非常困难</li>
+</ul></li>
+
+<li><p>部署自动化</p>
+
+<ul>
+<li>每个服务的修改都需要独立部署,部署管理工作量大</li>
+<li>需求不断更新,微服务交付频繁,部署频率越来越高</li>
+<li>需要有效构建自动化部署流水线,降低部署成本</li>
+</ul></li>
+
+<li><p>DevOps与组织架构</p>
+
+<ul>
+<li>按需调整组织架构,构建全功能团队</li>
+<li>新型组织模型中开发人员需要承担起服务整个生命周期的责任,包括部署和监控</li>
+</ul></li>
+
+<li><p>服务间的依赖测试</p></li>
+
+<li><p>服务间的依赖管理</p></li>
+</ul>
+
+<h2 id="微服务相关技术">微服务相关技术</h2>
+
+<h3 id="微服务之服务监控">微服务之服务监控</h3>
+
+<p>高并发场景下,故障经常是突然间雪崩式爆发,需要建立完善监控体系,尽早甄别故障征兆.微服务架构中组件繁多,各组件监控指标不一,要实现一个大而全的监控系统来监控各个组件几乎不可能.</p>
+
+<ul>
+<li>典型实施</li>
+</ul>
+
+<p><img src="/image/msb/grafana_prometheus_and_exporter.jpg" alt="Grafana_Prometheus_Exporters" /></p>
+
+<ul>
+<li>各服务组件提供状态监控接口(metrics接口)</li>
+<li>metrics接口输出格式统一标准化</li>
+<li>部署一个指标采集器服务组件,定时获取被监控服务组件状态</li>
+<li>采集器服务组件提供查询服务接口</li>
+<li>指标存储服务组件通过采集器查询接口查询采集指标进行存储</li>
+<li>指标显示服务组件查询指标存储组件进行监控告警显示</li>
+</ul>
+
+<h3 id="微服务之链路跟踪">微服务之链路跟踪</h3>
+
+<p>微服务架构中,用户请求往往涉及多个跨服务调用,为了方便定位故障,需要记录每个用户请求在微服务内部产生了多少服务调用以及调用关系,即所谓的链路跟踪.</p>
+
+<ul>
+<li>典型实施</li>
+</ul>
+
+<p>Istio提供了对整个服务网格的行为洞察和操作控制能力,以及一个完整的满足微服务应用各种需求的解决方案.通过负载均衡、服务间的身份认证、监控等方法,Istio可以轻松地创建一个已经部署了服务的网络.</p>
+
+<p><img src="/image/msb/Service-mesh.jpg" alt="Service Mesh" /></p>
+
+<p>通过在整个环境中,部署一个特殊的sidecar代理为服务添加Istio支持,sidecar代理用于拦截微服务之间的所有网络通信.</p>
+
+<p><img src="/image/msb/Istio-arch.svg" alt="Istio" /></p>
+
+<p>Istio提供的功能包括:
+  * 为HTTP、gRPC、WebSocket和TCP流量自动负载均衡
+  * 通过丰富的路由规则、重试、故障转移和故障诸如对流量行为进行细粒度控制
+  * 可插拔的策略层和配置API,支持访问控制、速度限制和配额
+  * 集群内(包括集群的入口和出口)所有流量的自动化度量、日志记录和追逐
+  * 强大的基于身份验证和授权保障集群中服务间通信安全</p>
+
+<h3 id="微服务之日志分析">微服务之日志分析</h3>
+
+<p>随着微服务组件的规模增多,和运行时间的增长,服务日志膨胀,并且分散在不通服务器上,获取日志文件以及查询日志信息成为一项枯燥且工作量巨大的工程.</p>
+
+<ul>
+<li>典型实施</li>
+</ul>
+
+<p>ELK是Elasticsearch、Logstash、Kibana三大开源框架首字母大写的简称.</p>
+
+<ul>
+<li><code>Elasticsearch</code>是一个基于Lucene、分布式、通过RESTful方式进行交互的近实时搜索平台框架</li>
+<li><code>Logstash</code>是ELK的中央数据流引擎,用于从不通目标(文件/数据存储/MQ)收集的不同格式数据,经过过滤后输出到不同目的地(文件/MQ/redis/elasticsearch/kafaka等).</li>
+<li><code>Kibana</code>为elasticsearch的数据提供UI界面和实时分析能力</li>
+</ul>
+
+<p><img src="/image/msb/elk-arch.png" alt="ELK" />
+<center>服务器性能要求较高适用于试验环境</center></p>
+
+<p><img src="/image/msb/elk-beat-arch.png" alt="ELK-beat" />
+<center>数据安全行高、服务器性能要求不高,适用于生产环境</center></p>
+
+<ul>
+<li>Beats将搜集到的数据发送Logstash</li>
+<li>Logstash解析、过滤发送ES存储</li>
+<li>Kibana显示</li>
+</ul>
+
+<h3 id="微服务之api-gateway">微服务之API Gateway</h3>
+
+<p>微服务网关的出现是出于对服务接口的访问权限控制和安全管理考虑,提供一个统一的服务访问入口.</p>
+
+<p>一般微服务架构中都会有两层API网关:
+* 外部API网关,用于用户访问系统
+* 内部API网关,负责服务发现和服务注册
+* 服务发现也有两种实现方案:
+  * 客户端发现</p>
+
+<p><img src="/image/msb/client-find.jpg" alt="client-find" />
+  客户端主动去注册中心查询服务实例列表
+  * 服务端发现</p>
+
+<p><img src="/image/msb/server-find.jpg" alt="server-find" />
+  添加LoadBalance模块,客户端把请求发向LB,由LB根据负载均衡策略选择服务实例</p>
+
+<ul>
+<li>服务注册的典型实施ETCD
+ETCD是一种分布式KV存储设施,具备一致性、高性能、高可用.
+应用场景:
+
+<ul>
+<li>配置管理</li>
+<li>服务注册与发现</li>
+<li>选主</li>
+<li>应用调度</li>
+<li>分布式队列</li>
+<li>分布式锁
+<br /></li>
+</ul></li>
+</ul>
+
+<p>ETCD使用Raft协议维护集群内各个节点状态一致性,是一个分布式系统,由多个节点互相通信构成整体对外服务,每个节点都存储了完整的数据,并且通过Raft协议保证每个节点维护的数据是一致的.</p>
+
+<p><img src="/image/msb/etcd-work.png" alt="etcd-work" /></p>
+
+<p><img src="/image/msb/etcd-arch.jpeg" alt="etcd-arch" />
+<center>ETCD架构图</center></p>
+
+<ul>
+<li>网络层(HTTP): 提供网络数据读写,监听服务端口,完成集群间数据通信,收发客户端数据</li>
+<li>raft模块: 实现Raft协议,根据接受的raft消息进行状态转移,调用各状态下的动作</li>
+<li>wal复制状态机(transport): 状态机的数据维护在内存中,定期持久化到磁盘,每次写请求会持久化存储到WAL文件,并根据写请求修改状态及数据</li>
+<li>kv数据存储(Kvstore): kv数据的存储引擎</li>
+</ul>
+
+<h3 id="微服务之降级-熔断-限流">微服务之降级、熔断、限流</h3>
+
+<ul>
+<li>所谓服务降级,指当服务器压力剧增时,根据当前业务情况以及流量,对一些服务有策略降级,以此缓解服务器资源压力和保障核心服务的正常运行,同时也保证了大部分客户能得到正常响应.</li>
+</ul>
+
+<p>降级一般通过修改配置中心配置完成降级切换.</p>
+
+<p><img src="/image/msb/downgrade.png" alt="downgrade" /></p>
+
+<p>当配置中心中某个服务被降级时,API网关会直接将前端请求拒绝,不往内部服务转发,将流量挡回去.如果是Docker容器运行的服务,则可直接停掉被降级的服务所有容器以释放资源,等待切换恢复服务后重新启动容器.</p>
+
+<ul>
+<li><p>所谓服务熔断,指当某个服务处理服务因调用慢或者大量超时等原因停止响应时,通过熔断该服务的调用,对后续调用请求不在提供服务,直接返回,快速释放资源.当被熔断的服务状态好转则恢复调用.</p></li>
+
+<li><p>所谓限流,是为了防止服务因瞬间网络流量过大导致服务不断挂死重启而设定特定的限流策略丢弃多余请求,对下游服务的一种自我保护机制.</p></li>
+</ul>
+
+<p>无论是服务降级、服务熔断还是服务限流,都是服务容错的范畴,对于服务容错的实践,关于服务容错的选型大概可参考如下:</p>
+
+<ul>
+<li><p>针对 Java 技术栈，Netflix 的 Hystrix（github 12.4k stars）把熔断、隔离、限流和降级等能力封装成组件，任何依赖调用（数据库，服务，缓存）都可以封装在 Hystrix Command 之内，封装后自动具备容错能力。Hystrix 起源于 Netflix 的弹性工程项目，经过 Netflix 大规模生产验证，目前是容错组件的社区标准，GitHub 上有超 12k 星。其它语言栈也有类似 Hystrix 的简化版本组件。Hystrix 一般需要在应用端或者框架内埋点，有一定的使用门槛。</p></li>
+
+<li><p>对于采用集中式反向代理（边界和内部）做服务路由的公司，则可以集中在反向代理上做熔断限流，例如采用 Nginx（GitHub 5.1k stars）或者 Kong（GitHub 11.4k stars）这类反向代理，它们都插件支持灵活的限流容错配置。</p></li>
+
+<li><p>Zuul 网关也可以集成 Hystrix 实现网关层集中式限流容错。集中式反向代理则需要有一定的研发和运维能力，但是可以对限流容错进行集中治理，可以简化客户端。</p></li>
+</ul>
+
+<h2 id="微服务架构设计模式">微服务架构设计模式</h2>
+
+<h3 id="聚合器微服务设计模式">聚合器微服务设计模式</h3>
+
+<p><img src="/image/msb/design-1.png" alt="design-1" /></p>
+
+<p>最常用也是最简单的设计模式,聚合器调用多个服务实现应用程序所需功能.聚合器可以是一个Web页面将检索到的数据进行处理展示,也可以是一个更高层次的组合微服务,对检索到的数据添加业务逻辑后进一步发布成一个新的微服务.</p>
+
+<h3 id="代理微服务设计模式">代理微服务设计模式</h3>
+
+<p><img src="/image/msb/design-2.png" alt="design-2" /></p>
+
+<p>是聚合起模式的变种,客户端不聚合数据,仅仅委派请求完成数据交换工作.</p>
+
+<h3 id="链式微服务设计模式">链式微服务设计模式</h3>
+
+<p><img src="/image/msb/design-3.png" alt="design-3" /></p>
+
+<p>收到服务请求后会产生一个经过合并的响应,所有服务都使用同步消息传递,客户端会有一直阻塞,服务调用链不宜过长避免客户端长时间等待.</p>
+
+<h3 id="分支微服务设计模式">分支微服务设计模式</h3>
+
+<p><img src="/image/msb/design-4.png" alt="design-4" /></p>
+
+<p>是聚合器模式的扩展,允许同时调用两个微服务链.</p>
+
+<h3 id="数据共享微服务设计模式">数据共享微服务设计模式</h3>
+
+<p><img src="/image/msb/design-5.png" alt="design-5" /></p>
+
+<p>重构现有单体应用时,SQL数据在未完成拆解为服务自治的情况下的过渡阶段,可以使用该设计模式过渡.部分服务可能会共享缓存和数据库存储.</p>
+
+<h3 id="异步消息传递微服务设计模式">异步消息传递微服务设计模式</h3>
+
+<p><img src="/image/msb/design-6.png" alt="design-6" /></p>
+
+<p>尽管REST设计模式非常流行,但它是同步的,会造成阻塞.因此选择使用消息队列代替REST请求/响应的微服务架构设计参考异步消息传递设计模式.</p>
+
+<h3 id="微服务部署">微服务部署</h3>
+
+<h4 id="部署要求">部署要求</h4>
+
+<ul>
+<li>部署速率(每个服务都有持续部署的要求,服务部署支持秒级)</li>
+<li>部署自动化(微服务有自动化部署与运维工具,并实现自动扩所容)</li>
+</ul>
+
+<h4 id="部署粒度">部署粒度</h4>
+
+<ul>
+<li>VM, 部署系统管理的是VM生命周期,粒度粗,支撑不了微服务部署,除非一个服务占用一个VM</li>
+<li>App, 管理应用的生命周期及部署形态</li>
+<li>Container,相比APP,容器有更好的隔离性和移植性</li>
+</ul>
+
+<p>微服务,要么APP,要么容器</p>
+
+<h4 id="解决方案">解决方案</h4>
+
+<ul>
+<li>TOSCA</li>
+</ul>
+
+<p>TOSCA（Topology and Orchestration Specification for Cloud Applications）,云应用的拓扑编排规范，通俗的讲就是制定一个规范，用于描述应用在云平台上面的拓扑结构，目前支持XML和YAML两种格式。TOSCA目前被广泛应用到NFV的编排领域，其规范组织OASIS还给出了《TOSCA Simple Profile for Network Functions Virtualization (NFV) Version 1.0》，掌握TOSCA模型对理解模型驱动有很大的帮助.</p>
+
+<ul>
+<li>Kubernetes</li>
+</ul>
+
+<p>Google开源的容器管理系统,提出了Pod/Service/Labels等概念,以ETCD为中心.</p>
+
+<p>架构:</p>
+
+<p><img src="/image/msb/k8s_arch.jpg" alt="k8s" /></p>
+
+<p>Kubernetes集群包含有节点代理kubelet和Master组件(APIs, scheduler, etc)，一切都基于分布式的存储系统。</p>
+
+<p>Kubernetes节点有运行应用容器必备的服务，而这些都是受Master的控制。</p>
+
+<p>每次个节点上当然都要运行Docker。Docker来负责所有具体的映像下载和容器运行。</p>
+
+<p>Kubernetes主要由以下几个核心组件组成：</p>
+
+<ol>
+<li>etcd保存了整个集群的状态；</li>
+<li>apiserver提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现等机制；</li>
+<li>controller manager负责维护集群的状态，比如故障检测、自动扩展、滚动更新等；</li>
+<li>scheduler负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上；</li>
+<li>kubelet负责维护容器的生命周期，同时也负责Volume（CVI）和网络（CNI）的管理；</li>
+<li>Container runtime负责镜像管理以及Pod和容器的真正运行（CRI）；</li>
+<li>kube-proxy负责为Service提供cluster内部的服务发现和负载均衡；
+<br /></li>
+</ol>
+
+<p>除了核心组件，还有一些推荐的Add-ons：</p>
+
+<ol>
+<li>kube-dns负责为整个集群提供DNS服务</li>
+<li>Ingress Controller为服务提供外网入口</li>
+<li>Heapster提供资源监控</li>
+<li>Dashboard提供GUI</li>
+<li>Federation提供跨可用区的集群</li>
+<li>Fluentd-elasticsearch提供集群日志采集、存储与查询</li>
+</ol>
+
+<ul>
+<li>Mesosphere</li>
+</ul>
+
+<p>功能特点:
+1. 可扩展到超过10,000个节点
+2. Linux容器的任务的资源隔离
+3. 高效的CPU和内存感知资源调度
+4. Apache ZooKeeper高可用
+5. 有监控集群状态的Web UI</p>
+
+<p>架构:</p>
+
+<p><img src="/image/msb/mesos_architecture.png" alt="mesos" /></p>
+
+<p>Mesos有一个由主从守护进程和框架组成的体系结构:</p>
+
+<ol>
+<li>主守护进程(LEADER) ：运行在主节点上并管理从后台程序</li>
+<li>从守护程序(STANDBY) ：运行在主节点上，并运行属于框架任务</li>
+<li>Framework ：又称Mesos应用程序，由一个调度程序 ，它与主注册接受资源计划书 ，以及一个或多个执行者 ，这将启动对Minion的任务 。 Mesos框架的示例包括Marathon，Chronos和Hadoop</li>
+<li>OFFER ：从属节点的可用的CPU和内存资源列表。所有从节点向主机发送报价，主机向已注册的框架提供OFFER</li>
+<li>TASK ：由一个框架预定的，和从属节点上执行的工作单元。任务可以是从bash命令或脚本到SQL查询到Hadoop作业的任何内容</li>
+<li>Apache的ZooKeeper(ZK)：用于协调主节点软件</li>
+</ol>
+
+<h3 id="典型微服务框架介绍">典型微服务框架介绍</h3>
+
+<h4 id="springcloud">SpringCloud</h4>
+
+<p><img src="/image/msb/springcloud-arch.png" alt="SpringCloud-arch" /></p>
+
+<p><center>SpringCloud架构图</center></p>
+
+<p>Springcloud是微服务架构的集大成者,将一些列优秀的组件进行了整合,基于springboot构建,对熟悉spring的程序员上手很快.</p>
+
+<p><img src="/image/msb/spring-components.jpeg" alt="spring-components" /></p>
+
+<p><center>Spring组件图</center></p>
+
+<p>常用的组件介绍:</p>
+
+<ul>
+<li>服务发现——Netflix Eureka</li>
+</ul>
+
+<p><img src="/image/msb/Eureka.png" alt="Eureka" /></p>
+
+<ol>
+<li>主要实现服务治理(服务注册、服务发现),</li>
+<li>由Eureka服务端和Eureka客户端组成</li>
+<li>服务端作为服务注册中心,支持集群部署</li>
+<li>客户端用于处理服务注册和发现.</li>
+</ol>
+
+<ul>
+<li>客服端负载均衡——Netflix Ribbon</li>
+</ul>
+
+<p><img src="/image/msb/ribbon.png" alt="ribbon" /></p>
+
+<ol>
+<li>基于HTTP和TCP的客户端负载均衡工具</li>
+<li>将服务REST请求转换成客户端负载均衡的服务调用</li>
+</ol>
+
+<ul>
+<li>断路器——Netflix Hystrix</li>
+</ul>
+
+<p><img src="/image/msb/hystrix.png" alt="hystrix" /></p>
+
+<ol>
+<li>作用是保护系统,控制故障范围,防止雪崩</li>
+<li>服务调用超时,达到超时次数且失败率超过预设门限时,服务断路器开启返回一个设定的fallback.</li>
+<li>fallback可以是另一个由Hystrix保护的服务调用,也可以是固定值</li>
+</ol>
+
+<ul>
+<li>服务网关——Netflix Zuul</li>
+</ul>
+
+<p><img src="/image/msb/zuul-arch.png" alt="zuul-arch" /></p>
+
+<ol>
+<li>提供静态路由,监控,弹性,安全等边缘服务</li>
+</ol>
+
+<ul>
+<li>分布式配置中心——Spring Cloud Config</li>
+</ul>
+
+<p><img src="/image/msb/config-center.jpeg" alt="config-center" /></p>
+
+<ol>
+<li>提供服务端和客户端</li>
+<li>利用消息队列建立Spring Cloud Bus</li>
+<li>服务端存储通过git实现</li>
+<li>利用bus总线动态更新配置文件配置</li>
+</ol>
+
+<ul>
+<li>分布式追踪Zipkin&amp;Sleuth</li>
+</ul>
+
+<p><img src="/image/msb/sleuth.png" alt="sleuth" /></p>
+
+<ol>
+<li>Zipkin负责数据收集和信息显示</li>
+<li>Sleuth提供链路追踪</li>
+<li>结合ZipKin和Sleuth可以实现链路追踪、错误可视化,分析耗时,优化链路</li>
+</ol>
+
+<h4 id="dubbo">Dubbo</h4>
+
+<p>Dubbo是阿里巴巴开源的基于Java的高性能RPC分布式服务框架,致力于提供高性能、轻量级、透明化的RPC远程服务调用方案以及SOA服务致力方案.它提供了三大核心能力:</p>
+
+<ul>
+<li>面向接口的远程方法调用</li>
+<li>智能容错和负载均衡</li>
+<li>服务自动注册和发现</li>
+</ul>
+
+<p>Dubbo服务注册于发现流程图</p>
+
+<p><img src="/image/msb/dubbo-arch.png" alt="dubbo" /></p>
+
+<p>Dubbo和Spring Cloud的区别
+* Dubbo使用RPC通信;Spring Cloud使用HTTP RESTful
+* Dubbo服务中心Zookeeper,服务监控中心dubbo-monitor,无消息总线,服务跟踪、批量任务等组件
+* Spring-Cloud服务中心为Enruka,监控中心Spring-boot admin,有消息总线、数据流、服务追踪、批量任务等</p>
+
+<p>Zookeeper是一个开源的分布式协调服务,由雅虎创建,是Google Chubby的开源实现.主要用来解决分布式应用中经常遇到的一些数据管理问题,比如,统一命名服务、状态同步服务、集群管理、分布式应用配置项管理等,简言之类似文件系统+监听通知机制的组合.
+  * Zookeeper唯一一个类文件系统对服务注册和配置信息进行管理
+  * 客户端注册监听文件系统目录节点,目录中数据变化时,Zookeeper通知客户端配置变化.</p>
+
+<p><img src="/image/msb/zookeeper-center.png" alt="zookeeper-center" /></p>
+
+<h4 id="grpc">gRPC</h4>
+
+<p>gRPC是谷歌开源的rpc框架,基于http2实现.框架提供了负载均衡,跟踪,智能监控,身份验证等功能,可以实现系统间高效链接,广泛应用于分布式系统中,实现移动社会,浏览器等和服务器的连接.
+gRPC开源库支持诸如C++,C#,Dart,Go,Java,Node,Ojbective-C,PHP,Python,Ruby,WebJS等多种语言,开发者可以自行在gRPC的github主页库选择查看到对应的语言支持.</p>
+
+<p><img src="/image/msb/grpc-arch.png" alt="grpc" /></p>
+
+<p>gRPC中默认的数据格式化方式为protocol buffers.</p>
+
+<h2 id="联系方式">联系方式</h2>
+
+<p>jiangxing2005@163.com</p>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li>《微服务架构与时间》 王磊 著</li>
+<li><a href="https://www.zhihu.com/question/65502802/answer/802678798">什么是微服务架构 知乎</a></li>
+<li><a href="https://istio.io/zh/docs/concepts/what-is-istio/">Istio中文官网</a></li>
+<li><a href="https://www.jianshu.com/p/d66bfe7e9127">ELK-概念</a></li>
+<li><a href="https://www.jianshu.com/p/6f5b1095d749">服务降级与服务熔断</a></li>
+<li>Spring组件图@王璐-Louise</li>
+<li><a href="https://baijiahao.baidu.com/s?id=1623004854011062838&amp;wfr=spider&amp;for=pc">断路器Hystrix全面解析</a></li>
+<li><a href="https://baijiahao.baidu.com/s?id=1621651597363566701&amp;wfr=spider&amp;for=pc">SpringCloud间接与5大常用组件</a></li>
+<li><a href="https://www.jianshu.com/p/9c453fc468a0">springcloud之Sleuth和Zpkin及原理</a></li>
+<li><a href="https://www.jianshu.com/p/3090d63e9cb3">Dubbo</a></li>
+<li><a href="http://dubbo.apache.org/zh-cn/">Dubbo 官网</a></li>
+<li><a href="https://blog.csdn.net/java_66666/article/details/81015302">ZooKeeper入门看这篇就够了</a></li>
+<li><a href="https://www.kubernetes.org.cn/kubernetes%e8%ae%be%e8%ae%a1%e6%9e%b6%e6%9e%84">Kubernetes中文文档</a></li>
+<li><a href="https://www.sdnlab.com/22904.html">ONAP架构分析以及TOSCA模型简介</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

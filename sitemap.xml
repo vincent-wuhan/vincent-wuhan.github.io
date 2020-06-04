@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://vincent-wuhan.github.io/</loc>
+    <lastmod>2020-06-01T13:44:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vincent-wuhan.github.io/msb/</loc>
+    <lastmod>2020-06-01T13:44:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vincent-wuhan.github.io/msb/microservice_introduce/</loc>
+    <lastmod>2020-06-01T13:44:04+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://vincent-wuhan.github.io/docker/</loc>
     <lastmod>2020-05-22T07:52:27+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://vincent-wuhan.github.io/docker/docker_health_check/</loc>
-    <lastmod>2020-05-22T07:52:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://vincent-wuhan.github.io/</loc>
     <lastmod>2020-05-22T07:52:27+08:00</lastmod>
   </url>
   
