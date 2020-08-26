@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elasticstacks on JiangX</title>
+    <link>https://vincent-wuhan.github.io/elasticstack/</link>
+    <description>Recent content in Elasticstacks on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Aug 2020 14:35:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/elasticstack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Elasticsearch重要配置说明</title>
+      <link>https://vincent-wuhan.github.io/elasticstack/elasticsearch_config/</link>
+      <pubDate>Mon, 17 Aug 2020 14:35:08 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/elasticstack/elasticsearch_config/</guid>
+      <description>Cluster Update Settings API(集群更新配置接口)  GET /_cluster/settings  Circuit Breaker Settings(断路器设置) Elasticsearch使用各种类型的断路器来规避内存溢出.每种断路器本质是为与之对应类别的操作预设一个内存开销值
+ Elasticsearch的断路器通过Elasticsearch的集群设置更新接口API进行更新.
+  Parent circuit breaker  父级断路器限制的是所有断路器总共能使用的内存开销.
+indices.breaker.total.use_real_memory
+父级断路器内存使用开销计算方式,true表示通过实际内存使用率计算,false表示通过子级断路器内存开销计算总和, 默认使用实际内存使用率计算.
+indices.breaker.total.limit
+设置父类断路器的触发条件.
+indices.breaker.total.use_real_memory置为false, 父级断路器启动条件是JVM堆内存的70%. indices.breaker.total.use_real_memory置为true, 父级断路器启动条件默认是JVM堆内存使用可达95%.
+ Field data Circuit breaker  Fielddata断路器,估算内存加载的Fileddata的最大值.该断路器能避免加载Fielddata导致内存溢出.默认最大值是JVM堆内存40%
+indices.breaker.fielddata.limit Fielddata断路器最大限制,默认是JVM堆的40% indices.breaker.fielddata.overhead 评估值,默认是1.03,计算算法是所有FieldData评估值相乘得到综合值.
+ Request Circuit Breaker  请求断路器,避免请求数据块过大超出内存限制引起内存溢出.
+indices.breaker.request.limit 默认值是JVM堆的60% indices.breaker.request.overhead 所有请求断路器系数相乘得到最终的估算值,默认是1</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch学习笔记</title>
+      <link>https://vincent-wuhan.github.io/elasticstack/elasticsearch-base/</link>
+      <pubDate>Sun, 01 Mar 2020 14:27:26 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/elasticstack/elasticsearch-base/</guid>
+      <description>索引 分片 集群状态 文档 元数据 操作  索引 保存数据的地方，指向一个或多个物理分片的逻辑命名空间
+分片 · Elasticsearch底层工作单元，仅保存全部数据中的一部分 · Elasticsearch利用分片将数据分发到集群各处，分片是数据的容器，文档保存在分片内，分片由被分配到集群内的各个节点上 · 当集群规模扩大或缩小时，Elasticsearch会自动在各节点中迁移分片，始终使数据均匀分布在集群内 · 分片有主分片和副分片之分，但索引内任意一个文档都会归属一个主分片 · 主分片的数量决定了索引能保存的最大数据量 · 副分片只是主分片的拷贝，用于数据冗余保护备份，但也提供搜索和返回文档的服务 · 分片是一个Lucene的实例，是一个完整的搜索引擎 · 文档被存储和索引到分片内，但应用程序是直接与索引交互而不是与分片交互
+总结： 1.索引内数据是所有主分片内数据的合集 2.副分片是对所有主分片的数据拷贝和备份 3.所有分片始终作为数据的保存容器被均匀分布到Elasticsearch集群的各个节点 4.每个分片都能提供文档搜索和返回文档服务，但应用程序是直接与索引交互检索而不是与分片交互
+集群状态 status 字段指示着当前集群在总体上是否工作正常。它的三种颜色含义如下：
+green - 所有的主分片和副本分片都正常运行。 yellow - 所有的主分片都正常运行，但不是所有的副本分片都正常运行。 red - 有主分片没能正常运行。
+文档 大多数应用中，多数实体或对象序列化为包含键值对的JSON对象。在Elasticsearch中，文档指最顶层或根对象，这个根对象呗序列化成JSON存储在Elasticsearch中，并指定了唯一ID
+元数据 关于文档自身的信息 · _index 文档索引，通俗点讲就是文档在哪存放 · _type 文档表示的对象类别 · _id 文档唯一标识
+操作  健康状态获取
+curl -X GET &amp;quot;localhost:9200/_cluster/health&amp;quot;  索引建立与分片副本
+  单节点上创建一个名为blogs的索引，分配个3个主分片和一份副本(每个朱分片拥有一个副本分片)</description>
+    </item>
+    
+  </channel>
+</rss>

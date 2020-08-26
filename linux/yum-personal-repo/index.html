@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Yum私有仓库搭建 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Yum私有仓库搭建"/>
+<meta name="twitter:description" content="img{ width: 80%; padding-left: 0%; }  场景 最近开发了RPM自动化构建工具链,实现了RPM构建代码自动生成和RPM自动化打包发布流水线.最终生成的RPM包需要上传到搭建的私有仓库中.
+私有仓库软件版本: Sonatype Nexus Repository Manager OSS 3.26.0-04
+实施  Repositries创建  登录Nexus后台,点击齿轮切换到设置页面,点击Create repository创建仓库.
+选择repo类型yum-hosted
+设置repo属性
+ RPM包上载  界面提供了上载功能,支持web页面手动上传 处于自动化需求,使用curl进行包上传功能集成
+curl -v --user &#39;USER:PASSWORD&#39; --upload-file RPM_FILE REPO_URL/RPM_PATH/RPM_FILE   USER 仓库登录用户 PASSWORD 仓库登录密码 RPM_FILE 本地待上传的RPM文件 REPO_NAME 创建的仓库名称 REPO_URL 仓库地址  通过页面查看仓库地址REPO_URL
+ YUM Client Repo设置  在/etc/yum.repo.d/目录下,新建*.repo的文件,名称随意.
+文件内容参考
+[nexusrepo] name=Nexus Repository baseurl=REPO_URL/SUBPATH/ enabled=1 gpkcheck=0 priority=1   REPO_URL 参考上一章节填写 SUBPATH 路径为repodata目录的目录路径  参考下方获得SUBPATH的路径,点击HTML View方便获取路径"/>
+
+    <meta property="og:title" content="Yum私有仓库搭建" />
+<meta property="og:description" content="img{ width: 80%; padding-left: 0%; }  场景 最近开发了RPM自动化构建工具链,实现了RPM构建代码自动生成和RPM自动化打包发布流水线.最终生成的RPM包需要上传到搭建的私有仓库中.
+私有仓库软件版本: Sonatype Nexus Repository Manager OSS 3.26.0-04
+实施  Repositries创建  登录Nexus后台,点击齿轮切换到设置页面,点击Create repository创建仓库.
+选择repo类型yum-hosted
+设置repo属性
+ RPM包上载  界面提供了上载功能,支持web页面手动上传 处于自动化需求,使用curl进行包上传功能集成
+curl -v --user &#39;USER:PASSWORD&#39; --upload-file RPM_FILE REPO_URL/RPM_PATH/RPM_FILE   USER 仓库登录用户 PASSWORD 仓库登录密码 RPM_FILE 本地待上传的RPM文件 REPO_NAME 创建的仓库名称 REPO_URL 仓库地址  通过页面查看仓库地址REPO_URL
+ YUM Client Repo设置  在/etc/yum.repo.d/目录下,新建*.repo的文件,名称随意.
+文件内容参考
+[nexusrepo] name=Nexus Repository baseurl=REPO_URL/SUBPATH/ enabled=1 gpkcheck=0 priority=1   REPO_URL 参考上一章节填写 SUBPATH 路径为repodata目录的目录路径  参考下方获得SUBPATH的路径,点击HTML View方便获取路径" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/linux/yum-personal-repo/" />
+<meta property="article:published_time" content="2020-08-26T11:15:35+08:00" />
+<meta property="article:modified_time" content="2020-08-26T11:15:35+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Yum私有仓库搭建</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 26, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<style>
+img{
+    width: 80%;
+    padding-left: 0%;
+}
+</style>
+
+<h2 id="场景">场景</h2>
+
+<p>最近开发了RPM自动化构建工具链,实现了RPM构建代码自动生成和RPM自动化打包发布流水线.最终生成的RPM包需要上传到搭建的私有仓库中.</p>
+
+<p>私有仓库软件版本: Sonatype Nexus Repository Manager OSS 3.26.0-04</p>
+
+<h2 id="实施">实施</h2>
+
+<ul>
+<li>Repositries创建</li>
+</ul>
+
+<p>登录Nexus后台,点击<code>齿轮</code>切换到设置页面,点击<code>Create repository</code>创建仓库.</p>
+
+<p><img src="/image/linux/create-repo.jpg" alt="creat-repo" /></p>
+
+<p>选择repo类型<code>yum-hosted</code></p>
+
+<p><img src="/image/linux/repo-type.png" alt="repo-type" /></p>
+
+<p>设置repo属性</p>
+
+<p><img src="/image/linux/repo-set.jpg" alt="repo-set" /></p>
+
+<ul>
+<li>RPM包上载</li>
+</ul>
+
+<p>界面提供了上载功能,支持web页面手动上传
+处于自动化需求,使用curl进行包上传功能集成</p>
+
+<pre><code class="language-shell">curl -v --user 'USER:PASSWORD' --upload-file RPM_FILE REPO_URL/RPM_PATH/RPM_FILE
+</code></pre>
+
+<ul>
+<li>USER 仓库登录用户</li>
+<li>PASSWORD 仓库登录密码</li>
+<li>RPM_FILE 本地待上传的RPM文件</li>
+<li>REPO_NAME 创建的仓库名称</li>
+<li>REPO_URL 仓库地址</li>
+</ul>
+
+<p>通过页面查看仓库地址<code>REPO_URL</code></p>
+
+<p><img src="/image/linux/repo-url.jpg" alt="repo-url" /></p>
+
+<ul>
+<li>YUM Client Repo设置</li>
+</ul>
+
+<p>在<code>/etc/yum.repo.d/</code>目录下,新建<code>*.repo</code>的文件,名称随意.</p>
+
+<p>文件内容参考</p>
+
+<pre><code class="language-ini">[nexusrepo]
+name=Nexus Repository
+baseurl=REPO_URL/SUBPATH/
+enabled=1
+gpkcheck=0
+priority=1
+</code></pre>
+
+<ul>
+<li>REPO_URL 参考上一章节填写</li>
+<li>SUBPATH 路径为repodata目录的目录路径</li>
+</ul>
+
+<p>参考下方获得SUBPATH的路径,点击<code>HTML View</code>方便获取路径</p>
+
+<p><img src="/image/linux/base-url.jpg" alt="base-url" /></p>
+
+<h2 id="安装">安装</h2>
+
+<ul>
+<li><p>查看本地yum仓库</p>
+
+<pre><code class="language-shell">yum repolist
+
+</code></pre></li>
+
+<li><p>安装</p>
+
+<pre><code class="language-shell"># 假设RPM_NAME为仓库中RPM的名称
+# 由于没有设置gpk,所以安装选项里需要加上--nogpgcheck选项
+yum install  RPM_NAME --nogpgcheck
+</code></pre></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -187,6 +187,52 @@ root@mano:~# newgrp docker</p>
 
 <p>NR == 1指不打印第一行</p>
 
+<ul>
+<li>vcenter 命令行启动虚拟机</li>
+</ul>
+
+<p>1.用命令列出虚拟机的ID:vim-cmd vmsvc/getallvms |grep <vm name> 此命令输出的第一行为vmid
+2.用命令查看虚拟机启动状态:vim-cmd vmsvc/power.getstate <vmid>
+3.用命令启动虚拟机:vim-cmd vmsvc/power.on <vmid></p>
+
+<ul>
+<li><p>字符串截取</p>
+
+<pre><code class="language-shell">${varible##*string} 从左向右截取最后一个string后的字符串
+${varible#*string}从左向右截取第一个string后的字符串
+${varible%%string*}从右向左截取最后一个string后的字符串
+${varible%string*}从右向左截取第一个string后的字符串
+
+</code></pre></li>
+
+<li><p>sed范围匹配多行替换</p></li>
+</ul>
+
+<p>根据配置特征字段<code>portal-fe</code>和<code>portal-fe-end</code>替换两个标示字段之间的内容</p>
+
+<pre><code class="language-txt">local /portal-fe/ {
+    http://localhost:8202
+}
+# portal-fe-end
+
+local /portal-be/ {
+    http://localhost:8202
+}
+
+</code></pre>
+
+<pre><code class="language-shell">sed -i  '/local \/portal-fe\//{:a;n;s@http://.*:\(.*\)@http://newworld:\1@g;/portal-fe-end/!ba}' test.log
+</code></pre>
+
+<p>参数说明:</p>
+
+<p>n 读取下一行
+:a 设置跳转标签a</p>
+
+<p>/portal-fe-end/!ba 若当前行匹配不上portal-fe-end,则跳转到标签a处继续执行,构成一个循环,若匹配到了,则退出循环, sed重新堆读入的每行匹配/portal-fe-end/</p>
+
+<p>sed没有-n静默选项,默认堆每行处理后打印</p>
+
     </div>
     <div class="post-footer">
       

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gits on JiangX</title>
+    <link>https://vincent-wuhan.github.io/git/</link>
+    <description>Recent content in Gits on JiangX</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Aug 2020 17:10:25 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincent-wuhan.github.io/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git Submodule 操作</title>
+      <link>https://vincent-wuhan.github.io/git/git-submodule-oper/</link>
+      <pubDate>Tue, 25 Aug 2020 17:10:25 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/git/git-submodule-oper/</guid>
+      <description>Git submodule常用操作 CI配置 .gitlab-ci.yml中global或者job的variables设置GIT_SUBMODULE_STRATEGY属性
+variables: GIT_SUBMODULE_STRATEGY: OPTION  GIT_SUBMODULE_STRATEGY有三种OPTION:
+ none fetch项目代码不被包含submodule
+ normal fetch项目代码只包含submodule顶层目录 recurisve fetch项目代码时递归获取submodule所有代码,该特性在git版本1.8.1以上支持  normal选项对应的git操作如下:
+git submodule sync git submodule update --init  recursive选项对应的git操作如下:
+git submodule sync --recursive git submodule update --init --recursive  同时需要设置.gitmodules配置,.gitmodules配置支持两种URL获取submodules:
+ 可通过公网访问的submodule HTTP(S)URL仓库(可能需要配置仓库授权) 同一台gitlab服务器上的仓库,可直接使用相对路径设置(同一服务器推荐使用,配置简单)  submodule add 子模块添加
+git submodule add -b [BRANCH] [GIT_REPO] [DIR]   BRANCH 分支名 GIT_REPO git仓库地址 DIR submodule在当前项目的存放路径名  例如:
+git submodule add -b develop http://192.</description>
+    </item>
+    
+    <item>
+      <title>Git合并冲突问题处理</title>
+      <link>https://vincent-wuhan.github.io/git/git_merge_conflict_fixed/</link>
+      <pubDate>Wed, 22 Apr 2020 16:36:38 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/git/git_merge_conflict_fixed/</guid>
+      <description>Gitlab分支合并请求冲突问题解决方法  问题  Gitlab上多个开发分支并行开发时,难免出现gitlab平台无法自动合入目标分支的情形,此时需要手动合并.
+例如:
+gitlab分支: remotes/origin/master remotes/origin/dev/A dev/A合入master时自动合并失败   解决方法   本地checkout出该待合并的开发分支dev/A
+git checkout -b dev/A remotes/origin/dev/A  本地开发分支合并目标分支,并手动修改冲突
+git merge --no-ff origin/master  合并后的分支重新提交待合并的开发分支
+git push origin dev/A  Gitlab重新处理合并请求,完成合并</description>
+    </item>
+    
+    <item>
+      <title>GitLab环境搭建</title>
+      <link>https://vincent-wuhan.github.io/git/gitlab_env_install/</link>
+      <pubDate>Sun, 01 Mar 2020 13:10:41 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/git/gitlab_env_install/</guid>
+      <description>docker安装 gitlab安装 gitlab-runner安装 配置gitlab runner支持dind gitlab-ci dind gitlab常用配置 gitlab集成kubernetes gitlab-ci 中docker命令失败问题处理  docker安装  安装
+apt-get install docker.io   gitlab安装  image   docker pull beginor/gitlab-ce:11.3.0-ce.0
+  pre-run  gitlab外挂卷，用于保存gitlab平台的持久化存储配置(etc),日志(log),数据(data)
+ sudo mkdir -p /mnt/sda1/gitlab/etc sudo mkdir -p /mnt/sda1/gitlab/log sudo mkdir -p /mnt/sda1/gitlab/data
+  run
+docker run \ --detach \ --publish 8443:443 \ --publish 8080:80 \ --name gitlab \ --restart unless-stopped \ --volume /mnt/sda1/gitlab/etc:/etc/gitlab \ --volume /mnt/sda1/gitlab/log:/var/log/gitlab \ --volume /mnt/sda1/gitlab/data:/var/opt/gitlab \ beginor/gitlab-ce:11.</description>
+    </item>
+    
+    <item>
+      <title>Git_cli</title>
+      <link>https://vincent-wuhan.github.io/git/git_cli/</link>
+      <pubDate>Sun, 01 Mar 2020 13:00:48 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/git/git_cli/</guid>
+      <description>常用命令 典型应用场景  日志修改 Git review配置   常用命令    命令 说明     git config &amp;ndash;global core.editor vim 设置全局编辑器为vim   git config &amp;ndash;global user.name &amp;ldquo;user&amp;rdquo; 设置用户名   git config &amp;ndash;global user.email &amp;ldquo;user@email.com&amp;rdquo; 设置用户邮箱   git remote add gerrit http://user:password@10.10.10.10:8080/a/project.git 设置远程gerrit        典型应用场景 日志修改  修改最近一次   git commit &amp;ndash;amend
+  修改历史中的某个记录   1.</description>
+    </item>
+    
+  </channel>
+</rss>

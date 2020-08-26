@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>GitLab环境搭建 // JiangX</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Jiang Xing" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://vincent-wuhan.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GitLab环境搭建"/>
+<meta name="twitter:description" content="docker安装 gitlab安装 gitlab-runner安装 配置gitlab runner支持dind gitlab-ci dind gitlab常用配置 gitlab集成kubernetes gitlab-ci 中docker命令失败问题处理  docker安装  安装
+apt-get install docker.io   gitlab安装  image   docker pull beginor/gitlab-ce:11.3.0-ce.0
+  pre-run  gitlab外挂卷，用于保存gitlab平台的持久化存储配置(etc),日志(log),数据(data)
+ sudo mkdir -p /mnt/sda1/gitlab/etc sudo mkdir -p /mnt/sda1/gitlab/log sudo mkdir -p /mnt/sda1/gitlab/data
+  run
+docker run \ --detach \ --publish 8443:443 \ --publish 8080:80 \ --name gitlab \ --restart unless-stopped \ --volume /mnt/sda1/gitlab/etc:/etc/gitlab \ --volume /mnt/sda1/gitlab/log:/var/log/gitlab \ --volume /mnt/sda1/gitlab/data:/var/opt/gitlab \ beginor/gitlab-ce:11."/>
+
+    <meta property="og:title" content="GitLab环境搭建" />
+<meta property="og:description" content="docker安装 gitlab安装 gitlab-runner安装 配置gitlab runner支持dind gitlab-ci dind gitlab常用配置 gitlab集成kubernetes gitlab-ci 中docker命令失败问题处理  docker安装  安装
+apt-get install docker.io   gitlab安装  image   docker pull beginor/gitlab-ce:11.3.0-ce.0
+  pre-run  gitlab外挂卷，用于保存gitlab平台的持久化存储配置(etc),日志(log),数据(data)
+ sudo mkdir -p /mnt/sda1/gitlab/etc sudo mkdir -p /mnt/sda1/gitlab/log sudo mkdir -p /mnt/sda1/gitlab/data
+  run
+docker run \ --detach \ --publish 8443:443 \ --publish 8080:80 \ --name gitlab \ --restart unless-stopped \ --volume /mnt/sda1/gitlab/etc:/etc/gitlab \ --volume /mnt/sda1/gitlab/log:/var/log/gitlab \ --volume /mnt/sda1/gitlab/data:/var/opt/gitlab \ beginor/gitlab-ce:11." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://vincent-wuhan.github.io/git/gitlab_env_install/" />
+<meta property="article:published_time" content="2020-03-01T13:10:41+08:00" />
+<meta property="article:modified_time" content="2020-03-01T13:10:41+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://vincent-wuhan.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Jiang Xing" /></a>
+      <h1>JiangX</h1>
+      <p>Xing&#39;s personal website</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/vincent-wuhan/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">GitLab环境搭建</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 1, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#docker%e5%ae%89%e8%a3%85">docker安装</a></li>
+<li><a href="#gitlab%e5%ae%89%e8%a3%85">gitlab安装</a></li>
+<li><a href="#gitlab-runner%e5%ae%89%e8%a3%85">gitlab-runner安装</a></li>
+<li><a href="#%e9%85%8d%e7%bd%aegitlab-runner%e6%94%af%e6%8c%81dind">配置gitlab runner支持dind</a></li>
+<li><a href="#gitlab-ci-dind">gitlab-ci dind</a></li>
+<li><a href="#gitlab%e5%b8%b8%e7%94%a8%e9%85%8d%e7%bd%ae">gitlab常用配置</a></li>
+<li><a href="#gitlab%e9%9b%86%e6%88%90kubernetes">gitlab集成kubernetes</a></li>
+<li><a href="#gitlab-ci-%e4%b8%addocker%e5%91%bd%e4%bb%a4%e5%a4%b1%e8%b4%a5%e9%97%ae%e9%a2%98%e5%a4%84%e7%90%86">gitlab-ci 中docker命令失败问题处理</a></li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="docker安装">docker安装</h2>
+
+<ul>
+<li><p>安装</p>
+
+<pre><code class="language-shell">apt-get install docker.io
+</code></pre></li>
+</ul>
+
+<h2 id="gitlab安装">gitlab安装</h2>
+
+<ul>
+<li>image</li>
+</ul>
+
+<blockquote>
+<p>docker pull beginor/gitlab-ce:11.3.0-ce.0</p>
+</blockquote>
+
+<ul>
+<li>pre-run</li>
+</ul>
+
+<p>gitlab外挂卷，用于保存gitlab平台的持久化存储配置(etc),日志(log),数据(data)</p>
+
+<blockquote>
+<p>sudo mkdir -p  /mnt/sda1/gitlab/etc
+sudo mkdir -p  /mnt/sda1/gitlab/log
+sudo mkdir -p  /mnt/sda1/gitlab/data</p>
+</blockquote>
+
+<ul>
+<li><p>run</p>
+
+<pre><code class="language-shell">docker run \
+--detach \
+--publish 8443:443 \
+--publish 8080:80 \
+--name gitlab \
+--restart unless-stopped \
+--volume /mnt/sda1/gitlab/etc:/etc/gitlab \
+--volume /mnt/sda1/gitlab/log:/var/log/gitlab \
+--volume /mnt/sda1/gitlab/data:/var/opt/gitlab \
+beginor/gitlab-ce:11.3.0-ce.0
+</code></pre></li>
+
+<li><p>升级维护</p></li>
+</ul>
+
+<blockquote>
+<ol>
+<li>docker stop gitlab</li>
+<li>docker rm gitlab</li>
+<li>docker pull beginor/gitlab-ce:latest</li>
+<li>docker run &hellip;</li>
+<li>docker exec -it gitlab bash</li>
+<li>gitlab-ctl reconfigure</li>
+<li>gitlab-ctl restart</li>
+</ol>
+</blockquote>
+
+<h2 id="gitlab-runner安装">gitlab-runner安装</h2>
+
+<ul>
+<li>image</li>
+</ul>
+
+<blockquote>
+<p>docker pull gitlab/gitlab-runner</p>
+</blockquote>
+
+<ul>
+<li>pre-run</li>
+</ul>
+
+<blockquote>
+<p>sudo mkdir -p /srv/gitlab-runner/config</p>
+</blockquote>
+
+<ul>
+<li><p>run</p>
+
+<pre><code class="language-shell">docker run -d --name gitlab-runner --restart always \
+-v /srv/gitlab-runner/config:/etc/gitlab-runner \
+-v /var/run/docker.sock:/var/run/docker.sock \
+gitlab/gitlab-runner:latest
+</code></pre></li>
+</ul>
+
+<h2 id="配置gitlab-runner支持dind">配置gitlab runner支持dind</h2>
+
+<ul>
+<li><p>注册gitlab runner到gitlab中</p>
+
+<pre><code class="language-shell">sudo docker exec -it gitlab-runner gitlab-ci-multi-runner register
+</code></pre></li>
+
+<li><p>配置
+执行上述注册命令后，命令行交互需要填入一些参数，说明如下：</p></li>
+</ul>
+
+<ol>
+<li>gitlab-ci coordinator 和gitlab-ci token获取</li>
+</ol>
+
+<blockquote>
+<p>从项目设置-&gt;CI/CD-&gt;Runner-&gt;专用Runner-&gt;Setup a specific Runner manually
+URL和注册令牌分别对应URL和token</p>
+</blockquote>
+
+<ol>
+<li>tags，如果是使用dind，填写docker</li>
+<li>executor，选择docker</li>
+<li>image填写docker:stable</li>
+</ol>
+
+<p>执行结果如下：</p>
+
+<pre><code class="language-shell">Runtime platform                                    arch=amd64 os=linux pid=13 revision=0e5417a3 version=12.0.1
+Running in system-mode.                            
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+http://gitlaburl/
+Please enter the gitlab-ci token for this runner:
+s_WdBjhM23Xv1P4d16mC
+Please enter the gitlab-ci description for this runner:
+[336923b1823e]: docker
+Please enter the gitlab-ci tags for this runner (comma separated):
+docker
+Registering runner... succeeded                     runner=s_WdBjhM
+Please enter the executor: docker, parallels, shell, docker+machine, docker-ssh+machine, docker-ssh, ssh, virtualbox, kubernetes:
+docker
+Please enter the default Docker image (e.g. ruby:2.6):
+docker:stable
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+
+</code></pre>
+
+<h2 id="gitlab-ci-dind">gitlab-ci dind</h2>
+
+<ul>
+<li>CICD中添加变量</li>
+</ul>
+
+<p>为了保障gitlab-ci runner能够从私有仓库获取镜像，需要在GITLAB页面每个项目的settings-&gt;CI-&gt;CI/CD settings-&gt;Variables中添加变量DOCKER_AUTH_CONFIG,值设置内容如下：</p>
+
+<pre><code class="language-json">{
+    &quot;auths&quot;: {
+            &quot;dockerhuburl&quot;: {
+                    &quot;auth&quot;: &quot;amxgegshlkZIamlhbmd4MjAxOQ==&quot;
+            }
+    }
+}  
+</code></pre>
+
+<p>在runner的config.toml中添加envrionment字段并设置DOCKER_AUTH_CONFIG</p>
+
+<pre><code class="language-txt">[[runners]]
+  executor = &quot;docker&quot;
+  environment = [&quot;DOCKER_AUTH_CONFIG={\&quot;auths\&quot;:{\&quot;dockerhuburl\&quot;:{\&quot;auth\&quot;:\&quot;amlhbmd4OkZIamlhbmd4MjAxOQ==\&quot;}}}&quot;]
+</code></pre>
+
+<p>内容获取可以从两种途径获得：</p>
+
+<ol>
+<li>echo -n username:password | base64</li>
+<li>cat ~/.docker/cofnig.json</li>
+</ol>
+
+<ul>
+<li>docker私有仓库登陆</li>
+</ul>
+
+<p>编辑gitlab-ci中在script时执行前登陆私有仓库, 其中变量名称与DOCKER_AUT_CONFIG的设置方式相同,在Gitlab的页面设置</p>
+
+<pre><code class="language-yml">script:
+   - docker login $DOCKER_REPO -u$DOCKER_USERNAME -p$DOCKER_PASSWORD
+</code></pre>
+
+<ul>
+<li>dind中使用启动maven镜像进行编译</li>
+</ul>
+
+<p>由于dind中使用的maven配置需要带入到docker in docker的容器中，因此，在运行docker run之前准备存储卷下载maven配置后，使用-v进行存储卷的映射带入容器中
+同时，为了保证该job能在配置了dind的gitlab-runner上运行，在job的选项中指定tags将job固定到配置好的runner上运行，完整的gitlab-ci的脚本如下</p>
+
+<pre><code class="language-yml">variables:
+  # when running from the dind line.
+  MAVEN_DIND_IMAGE: &quot;dockerhuburl/deployment/maven:3.6.0-jdk-8&quot;
+  MAVEN_DIND_DEPLOY: &quot;-f /usr/src/fitdc-aggregator/pom.xml -s /usr/src/.m2/settings.xml clean deploy -DskipTests -Pkar -Pdocker&quot;
+
+docker:
+  stage: deploy
+  script:
+    - docker login -u &quot;$DOCKER_USER_NAME&quot; -p &quot;$DOCKER_PASSWD&quot; $DOCKER_REPO
+    - mkdir -p $root_folder/.m2/
+    - if [ ! -f $root_folder/.m2/settings.xml ]; then wget http://10.190.16.240/common/raoxing/settings.xml -O $root_folder/.m2/settings.xml; fi
+    - docker run --privileged --rm -v $root_folder:/usr/src/ -v /var/run/docker.sock:/var/run/docker.sock $MAVEN_DIND_IMAGE mvn $MAVEN_CLI_OPTS $MAVEN_DIND_DEPLOY
+  only:
+    - master
+  tags:
+    - docker
+</code></pre>
+
+<ul>
+<li>gitlab-runner共享daemon.json配置</li>
+</ul>
+
+<p>在公司往往需要使用私有仓库，此时如果gitlab runner的image没有从host机获取docker的deamon配置，往往出现类似如下的错误提示
+&gt; Error response from daemon: Get <a href="https://dockerhuburl/v2/:">https://dockerhuburl/v2/:</a> http: server gave HTTP response to HTTPS client
+大概意思是指私服docker仓库没有加入到docker的非安全仓库中，在gitlab-runner中的解决方法为，修改runner配置中的volumes选项，将host机中的daemon.json共享到runner的容器内,添加外部daemon.json到内层的映射共享存储卷</p>
+
+<pre><code class="language-txt">[[runners]]
+  name = &quot;tar&quot;
+  output_limit = 8192
+  url = &quot;http://gitlaburl/&quot;
+  token = &quot;23dbbb421d16d3f3e340f51231d02b&quot;
+  executor = &quot;docker&quot;
+  environment = [&quot;DOCKER_AUTH_CONFIG={\&quot;auths\&quot;:{\&quot;dockerhuburl\&quot;:{\&quot;auth\&quot;:\&quot;ZG9ja2VyOkRvY2tlcjIwMTk=\&quot;}}}&quot;]
+  [runners.custom_build_dir]
+  [runners.docker]
+    tls_verify = false
+    image = &quot;docker:stable&quot;
+    privileged = true
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    disable_cache = false
+    volumes = [&quot;/cache&quot;, &quot;/etc/docker/daemon.json:/etc/docker/daemon.json&quot;]
+    shm_size = 0
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
+
+</code></pre>
+
+<h2 id="gitlab常用配置">gitlab常用配置</h2>
+
+<ul>
+<li>修改项目ip</li>
+</ul>
+
+<p>在gitlab中创建项目后，项目的ssh和http的ip地址和端口为一堆乱码或者为127.0.0.1，并不是node的ip地址。如果是前者，无法从外部下载项目代码。此时需要修改配置，修改方法如下:</p>
+
+<ol>
+<li>进入gitlab容器</li>
+
+<li><p>gitlab配置中修改gitlab.yml</p>
+
+<pre><code class="language-shell">vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+
+production: &amp;base
+gitlab:
+    host: NODEIP
+    port: NODEPORT
+    https: false
+</code></pre></li>
+
+<li><p>重启服务
+gitlab-ctl restart</p></li>
+</ol>
+
+<ul>
+<li>gitlab-runner docker:dind启动权限提示非root</li>
+</ul>
+
+<p>这种情况原因往往是host机上无root权限，此时修改gitlab-runner配置 <strong>/etc/gitlab-runner/config/config.toml</strong> 找到runner的privileged为true</p>
+
+<ul>
+<li>流水线配置
+<br /></li>
+</ul>
+
+<p>场景: 假设两个项目A和B，项目A的CI Job执行完毕，触发项目B的CI Job
+流水线搭建：</p>
+
+<ol>
+<li>项目B设置流水线触发器</li>
+</ol>
+
+<blockquote>
+<p>设置-&gt;CI/CD-&gt;流水线触发器-&gt;增加触发器
+获得TOKEN</p>
+</blockquote>
+
+<ol>
+<li><p>项目A的gitlab-ci.yml添加触发条件</p>
+
+<pre><code class="language-yml">trigger_build:
+stage: deploy
+script:
+- &quot;curl -X POST -F token=TOKEN -F ref=REF_NAME http://gitlaburl/api/v4/projects/88/trigger/pipeline&quot;
+
+</code></pre></li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">TOKEN</td>
+<td align="left">项目B中触发器的TOKCN</td>
+</tr>
+
+<tr>
+<td align="left">REF_NAME</td>
+<td align="left">启动触发器的分支名称</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li>定时启动触发器</li>
+</ol>
+
+<p>00:30定时启动</p>
+
+<pre><code class="language-shell">30 0 * * * curl --request POST --form token=TOKEN --form ref=master https://gitlab.example.com/api/v4/projects/9/trigger/pipeline
+</code></pre>
+
+<h2 id="gitlab集成kubernetes">gitlab集成kubernetes</h2>
+
+<ul>
+<li>配置</li>
+</ul>
+
+<p>运维-&gt;kubernetes-&gt;新增kubernetes</p>
+
+<ul>
+<li><p>获取API地址</p>
+
+<pre><code class="language-shell">kubectl cluster-info | grep 'Kubernetes master' | awk '/http/ {print $NF}'
+</code></pre></li>
+</ul>
+
+<blockquote>
+<p><a href="https://kubernetesurl/r/projects/1a7/kubernetes:6443">https://kubernetesurl/r/projects/1a7/kubernetes:6443</a></p>
+</blockquote>
+
+<ul>
+<li><p>获取TOKEN</p>
+
+<pre><code class="language-shell">kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab-admin | awk '{print $1}')
+</code></pre></li>
+
+<li><p>获取CA证书</p></li>
+</ul>
+
+<p>获取secret列表</p>
+
+<pre><code class="language-shell">kubectl get secrets
+</code></pre>
+
+<blockquote>
+<p>NAME                  TYPE                                  DATA      AGE
+default-token-87p6z   kubernetes.io/service-account-token   3         5h</p>
+</blockquote>
+
+<p>获取CA</p>
+
+<pre><code class="language-shell">kubectl get secret &lt;secret name&gt; -o jsonpath=&quot;{['data']['ca\.crt']}&quot;
+</code></pre>
+
+<h2 id="gitlab-ci-中docker命令失败问题处理">gitlab-ci 中docker命令失败问题处理</h2>
+
+<ul>
+<li>现象</li>
+</ul>
+
+<p>gitlab ci runner容器中运行docker命令时提示, Cannot connect to Docker daemon at tcp://docker:2375. Is the docker daemon running?</p>
+
+<ul>
+<li>定位过程
+<br /></li>
+</ul>
+
+<blockquote>
+<p>查看gitlab-ci.yml配置，service docker:dind已经启动
+查看gitlab-runner配置中，环境变量Auths已经添加
+查看gitlab-runner配置中，privileged=true，支持root权限
+查看gitlab-runner配置中，daemon.json已经挂载
+查看gitlab-runner配置，docker.sock未挂载进容器</p>
+</blockquote>
+
+<ul>
+<li>解决方法：
+<br /></li>
+</ul>
+
+<p>gitlab-runner配置config.toml中，volumes中添加docker.socke的挂载</p>
+
+<blockquote>
+<p>&rdquo;/var/run/docker.sock:/var/run/docker.sock&rdquo;</p>
+</blockquote>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

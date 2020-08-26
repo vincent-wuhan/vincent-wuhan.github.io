@@ -6,10 +6,38 @@
     <description>Recent content in Linuxes on JiangX</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Mar 2020 13:53:30 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2020 11:15:35 +0800</lastBuildDate>
     
 	<atom:link href="https://vincent-wuhan.github.io/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Yum私有仓库搭建</title>
+      <link>https://vincent-wuhan.github.io/linux/yum-personal-repo/</link>
+      <pubDate>Wed, 26 Aug 2020 11:15:35 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/linux/yum-personal-repo/</guid>
+      <description>img{ width: 80%; padding-left: 0%; }  场景 最近开发了RPM自动化构建工具链,实现了RPM构建代码自动生成和RPM自动化打包发布流水线.最终生成的RPM包需要上传到搭建的私有仓库中.
+私有仓库软件版本: Sonatype Nexus Repository Manager OSS 3.26.0-04
+实施  Repositries创建  登录Nexus后台,点击齿轮切换到设置页面,点击Create repository创建仓库.
+选择repo类型yum-hosted
+设置repo属性
+ RPM包上载  界面提供了上载功能,支持web页面手动上传 处于自动化需求,使用curl进行包上传功能集成
+curl -v --user &#39;USER:PASSWORD&#39; --upload-file RPM_FILE REPO_URL/RPM_PATH/RPM_FILE   USER 仓库登录用户 PASSWORD 仓库登录密码 RPM_FILE 本地待上传的RPM文件 REPO_NAME 创建的仓库名称 REPO_URL 仓库地址  通过页面查看仓库地址REPO_URL
+ YUM Client Repo设置  在/etc/yum.repo.d/目录下,新建*.repo的文件,名称随意.
+文件内容参考
+[nexusrepo] name=Nexus Repository baseurl=REPO_URL/SUBPATH/ enabled=1 gpkcheck=0 priority=1   REPO_URL 参考上一章节填写 SUBPATH 路径为repodata目录的目录路径  参考下方获得SUBPATH的路径,点击HTML View方便获取路径</description>
+    </item>
+    
+    <item>
+      <title>RPM包制作方法</title>
+      <link>https://vincent-wuhan.github.io/linux/rpm_package_build/</link>
+      <pubDate>Fri, 19 Jun 2020 15:19:17 +0800</pubDate>
+      
+      <guid>https://vincent-wuhan.github.io/linux/rpm_package_build/</guid>
+      <description>环境准备 OS CentOS
+RPM-Build安装 yum install rpm-build</description>
+    </item>
     
     <item>
       <title>Linux常用技巧</title>
